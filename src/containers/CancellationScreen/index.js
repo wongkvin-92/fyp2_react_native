@@ -22,13 +22,14 @@ import {LecturerAPI} from '../../API';
 
 import { Calendar, CalendarList, Agenda } from 'react-native-calendars';
 
+/*
 const sampleData = [
   {title: "bit200", subName:"IT & Entrepre", type:"lecture1", day:"monday" , duration:"2"},
   {title:"bit306", subName:"Web Tech", type:"lecture1",  day:"tuesday", duration:"2"},
   {title:"bit208", subName:"Data Struct", type:"lecture1", day:"wednesday", duration:"2"},
   {title:"bit301", subName:"IT Proj Mgmt", type:"lecture1",  day:"thursday",duration:"2"},
   {title:"bit103", subName:"Intro DB", type:"lecture1", day:"friday", duration:"2"}
-];
+];*/
 
 class HomeView extends React.Component{
 
@@ -52,47 +53,48 @@ class HomeView extends React.Component{
         <View style={styles.containers}>
              {this.state.redirect?<Redirect to="/login" />:<View/>}
 
-           <ScrollView >
-           <View style={styles.titleStlye}>
-            <Text style={styles.titleTextStyle}>Class Lesson</Text>
-          </View>
-          <Calendar />
-
-           <Card>
-             <Picker
-              selectedValue={this.state.language}
-              style={styles.pickerStyle}
-              onValueChange={(itemValue, itemIndex) => this.setState({language: itemValue})}
-              itemStyle={styles.pickerItemStyle}
-              >
-              <Picker.Item label="All" value="all" />
-              <Picker.Item label="Monday" value="monday" />
-              <Picker.Item label="Tuesday" value="tuesday" />
-              <Picker.Item label="Wednesday" value="wednesday" />
-              <Picker.Item label="Thursday" value="thursday" />
-              <Picker.Item label="Friday" value="friday" />
-            </Picker>
-          </Card>
-
-            {
-              this.state.data.map( (e,key) =>
-                <LessonCard
-                  key={key}
-                  {...e}
-                />
-              )
-            }
-            <View style={styles.logoutBtnBackground}>
-              <Button rounded
-                 title="Logout"
-                 onPress={this.logout.bind(this)}
-                 buttonStyle= {styles.logoutBtnStyle}
-                 textStyle = {styles.btnTextStyle}
-                 fontWeight="bold"
-               />
+             <ScrollView >
+             <View style={styles.titleStlye}>
+              <Text style={styles.titleTextStyle}>Class Lesson</Text>
              </View>
 
-          </ScrollView>
+
+             <Card>
+               <Picker
+                selectedValue={this.state.language}
+                style={styles.pickerStyle}
+                onValueChange={(itemValue, itemIndex) => this.setState({language: itemValue})}
+                itemStyle={styles.pickerItemStyle}
+                >
+                <Picker.Item label="All" value="all" />
+                <Picker.Item label="Monday" value="monday" />
+                <Picker.Item label="Tuesday" value="tuesday" />
+                <Picker.Item label="Wednesday" value="wednesday" />
+                <Picker.Item label="Thursday" value="thursday" />
+                <Picker.Item label="Friday" value="friday" />
+              </Picker>
+             </Card>
+
+              {
+                this.state.data.map( (e,key) =>
+                  <LessonCard
+                    key={key}
+                    {...e}
+                  />
+                )
+              }
+              <View style={styles.logoutBtnBackground}>
+                <Button rounded
+                   title="Logout"
+                   onPress={this.logout.bind(this)}
+                   buttonStyle= {styles.logoutBtnStyle}
+                   textStyle = {styles.btnTextStyle}
+                   fontWeight="bold"
+                 />
+               </View>
+
+             </ScrollView>
+
 
 
         </View>

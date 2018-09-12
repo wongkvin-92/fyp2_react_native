@@ -25,7 +25,7 @@ import {Redirect} from 'react-router-native';
 
 class LoginView extends React.Component{
   state={
-    email: "anithav@help.edu.my",
+    email: "seethal@help.edu.my",
     password: "123456",
     loginState: "NONE",
     redirect: false
