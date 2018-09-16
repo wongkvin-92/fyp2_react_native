@@ -17,7 +17,7 @@ import {
 
 import LessonCard from './components/lessonCardView';
 
-import {Redirect} from 'react-router-native';
+import {Redirect, Link} from 'react-router-native';
 import {LecturerAPI} from '../../API';
 
 import { Calendar, CalendarList, Agenda } from 'react-native-calendars';
@@ -35,10 +35,6 @@ class HomeView extends React.Component{
 
   state={redirect:false, data: []};
 
-  logout(){
-      this.props.logout ();
-      this.setState({redirect: true});
-  }
 
   componentDidMount(){
     new LecturerAPI().displayLessonList(
@@ -55,7 +51,16 @@ class HomeView extends React.Component{
 
              <ScrollView >
              <View style={styles.titleStlye}>
-              <Text style={styles.titleTextStyle}>Class Lesson</Text>
+               <Link
+                     to="/home"
+                     component={Button}
+                     rounded
+                     icon={{name: 'arrow-left', type: 'font-awesome'}}
+                     buttonStyle= {styles.backBtnStyle}
+                 />
+                 <View style={styles.titleCenterStyle}>
+                <Text style={styles.titleTextStyle}>Class Lesson</Text>
+                </View>
              </View>
 
 
@@ -83,15 +88,6 @@ class HomeView extends React.Component{
                   />
                 )
               }
-              <View style={styles.logoutBtnBackground}>
-                <Button rounded
-                   title="Logout"
-                   onPress={this.logout.bind(this)}
-                   buttonStyle= {styles.logoutBtnStyle}
-                   textStyle = {styles.btnTextStyle}
-                   fontWeight="bold"
-                 />
-               </View>
 
              </ScrollView>
 
@@ -106,11 +102,20 @@ class HomeView extends React.Component{
 
 export default HomeView;
 
+/*
+<Button
+  rounded
+  title="Back"
+  icon={{name: 'visibility'}}
+  buttonStyle= {styles.cancelBtnStyle}
+  textStyle = {styles.cancelBtnTextStyle}
+  />*/
 
 const styles = StyleSheet.create({
   containers: {
     height: "100%",
     backgroundColor: 'rgba(243,129,129,0.9)',
+  
   },
 
   bodyStyle: {
@@ -125,33 +130,29 @@ const styles = StyleSheet.create({
     fontSize:20,
   },
   titleStlye:{
-    paddingTop:20,
-    paddingLeft:20,
+    paddingTop: 16,
     paddingBottom:16,
     backgroundColor: 'white',
     elevation:4,
+
   },
   titleTextStyle:{
     fontSize:19,
     fontWeight:"bold",
     color:"black",
-        letterSpacing: 2,
+    letterSpacing: 2,
+
   },
-  logoutBtnStyle:{
-    marginTop: 30,
-    marginBottom: 30,
-    backgroundColor: 'rgba(243,129,129,0.9)',
-    elevation: 2,
+  titleCenterStyle: {
+
+    alignSelf: 'center'
   },
-  btnTextStyle:{
-    fontFamily: "Roboto",
-    textShadowColor:"red",
-    letterSpacing: 3,
-    textShadowOffset: {width: 2, height: 2},
-  },
-  logoutBtnBackground: {
-    marginTop:20,
-    backgroundColor: 'rgba(252, 227, 138, 0.9)',
+  backBtnStyle : {
+      position:'absolute',
+      padding:5,
+      paddingLeft:10,
+      paddingRight:0,
+
   }
 
 })

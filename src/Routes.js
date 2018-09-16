@@ -1,25 +1,27 @@
 
 import HomeScreen from './containers/HomeScreen';
-import LessonScreen from './containers/CancellationScreen';
-import CancellationRecordScreen from './containers/CancellationRecordScreen';
+import CancellationScreen from './containers/CancellationScreen';
+import LessonScreen from './containers/LessonScreen';
 import LecturerTabLayout from './containers/HomeScreen/components/TabNavigation';
 import LoginScreen from './containers/LoginScreen';
 import SplashScreen from './containers/SplashScreen';
+import ProfileScreen from './containers/ProfileScreen';
 
 import React from 'react';
 import {Text} from 'react-native';
 
 export const tabRoutes = [
-  {id: "home", label: "Home", component: HomeScreen, logo:"home"},
-  {id: "Lesson", label: "Lesson", component: LessonScreen, logo:"description"},
-  {id: "Cancellation", label: "Cancellation", component: CancellationRecordScreen, logo:"assignment"}
+  {id: "home", label: "Home", component: LessonScreen, logo:"home"},
+  {id: "lesson", label: "Lesson", component: LessonScreen, logo:"assignment"},
+  {id: "profile", label: "Profile", component: ProfileScreen, logo:"face"}
 ];
 
 
 export const commonRoutes = [
   {path: "/", component: SplashScreen},
   {path: "/login", component: LoginScreen},
-  {path: "/home", component: LecturerTabLayout}
+  {path: "/home", component: LecturerTabLayout},
+  {path: "/lessons", component: CancellationScreen}
 ];
 
 /*

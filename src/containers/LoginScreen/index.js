@@ -7,12 +7,10 @@ import {
   Image,
   Platform,
   StyleSheet,
-  KeyboardAvoidingView} from 'react-native';
+  KeyboardAvoidingView,
+  Animated} from 'react-native';
 
   import {RedirectTo, NativeRouter, Route, Link} from 'react-router-native';
-
-
-
 
 import {
   Button,
@@ -28,7 +26,9 @@ class LoginView extends React.Component{
     email: "seethal@help.edu.my",
     password: "123456",
     loginState: "NONE",
-    redirect: false
+    redirect: false,
+    fadeAnim: new Animated.Value(0),
+  //  springAnim: new Animated.Value(0)
   };
 
  /*
@@ -47,6 +47,24 @@ class LoginView extends React.Component{
     {this.props.isLoggedIn==false?<View />:<Redirect to="/home" />}
 
 */
+componentDidMount() {
+
+    Animated.timing(                  // Animate over time
+      this.state.fadeAnim,            // The animated value to drive
+      {
+        toValue: 1,                   // Animate to opacity: 1 (opaque)
+        duration: 1700,              // Make it take a while
+      }
+    ).start();
+/*
+    Animated.spring(
+      this.state.springAnim,{
+        toValue: 1,
+        friction: 0.8
+      }).start();                    // Starts the animation
+      */
+  }
+
 
   render (){
     return (
@@ -62,74 +80,79 @@ class LoginView extends React.Component{
 
 
         {this.state.redirect?<Redirect to="/home" />:<View/>}
-      <View style={styles.formStyle}>
-        <KeyboardAvoidingView behavior="padding"  >
-        <View style={styles.logoContainer}>
-          <Image
-                style={styles.logo}
-                source={require('../../images/loginLogo_1.png')}
-          />
 
-        </View>
-          <FormLabel >Email</FormLabel>
+       <Animated.View
+          style={[styles.formStyle,
+          {opacity: this.state.fadeAnim}]}
+          //{transform:[{scale: this.state.springAnim}]}
+      >
+        <View>
+          <KeyboardAvoidingView behavior="padding">
+            <View style={styles.logoContainer}>
+              <Image
+                    style={styles.logo}
+                    source={require('../../images/loginLogo_1.png')}
+              />
+            </View>
 
-          <FormInput
-           returnKeyType="next"
-            keyboardType="email-address"
-            textInputRef='email'
+            <FormLabel >Email</FormLabel>
+            <FormInput
+             returnKeyType="next"
+              keyboardType="email-address"
+              textInputRef='email'
 
-            onChangeText={ t=> this.setState({email: t}) }
-            value={this.state.email}
-            containerStyle= {{
-              'borderWidth': 0.5,
-              'borderColor': 'white',
-              'borderBottomColor': 'black',
-            }}
-           />
+              onChangeText={ t=> this.setState({email: t}) }
+              value={this.state.email}
+              containerStyle= {{
+                'borderWidth': 0.5,
+                'borderColor': 'white',
+                'borderBottomColor': 'black',
+              }}
+             />
 
-          <FormLabel>Password</FormLabel>
-          <FormInput
-            returnKeyType="go"
-            secureTextEntry={true}
-            textInputRef='password'
+            <FormLabel>Password</FormLabel>
+            <FormInput
+              returnKeyType="go"
+              secureTextEntry={true}
+              textInputRef='password'
 
-            onChangeText={ t=> this.setState({password: t}) }
-            value={this.state.password}
-            containerStyle= {{
-              'borderWidth': 0.5,
-              'borderColor': 'white',
-              'borderBottomColor': 'black'
-            }}
-           />
+              onChangeText={ t=> this.setState({password: t}) }
+              value={this.state.password}
+              containerStyle= {{
+                'borderWidth': 0.5,
+                'borderColor': 'white',
+                'borderBottomColor': 'black'
+              }}
+             />
 
-           <View style={styles.loginBtnContainer}>
-          <Button
-            title="Login"
-            onPress = {
-              () => {
-                new LecturerAPI().login(
-                  this.state.email,
-                  this.state.password,
-                  (r) => {
-                    alert(r.msg);
-                    this.props.login();
-                    this.setState({redirect:true})
+            <View style={styles.loginBtnContainer}>
+              <Button
+                title="Login"
+                onPress = {
+                  () => {
+                    new LecturerAPI().login(
+                      this.state.email,
+                      this.state.password,
+                      (r) => {
+                        alert(r.msg);
+                        this.props.login();
+                        this.setState({redirect:true})
+                      }
+                    )
                   }
-                )
-              }
-            }
+                }
 
-            rounded
-            icon={{name: 'input'}}
-            buttonStyle= {styles.loginBtnStyle}
-           textStyle = {styles.btnTextStyle}
-           fontWeight="bold"
-          />
-          </View>
+                rounded
+                icon={{name: 'input'}}
+                buttonStyle= {styles.loginBtnStyle}
+               textStyle = {styles.btnTextStyle}
+               fontWeight="bold"
+              />
+            </View>
           </KeyboardAvoidingView>
         </View>
-
-      </View>
+      </Animated.View>
+    </View>
 
     );
   }

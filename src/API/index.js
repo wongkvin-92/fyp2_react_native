@@ -1,4 +1,4 @@
-const host = "192.168.0.189";
+const host = "192.168.1.91";
 const port = 80;
 const path = "fypBackEnd";
 
@@ -59,8 +59,7 @@ export class LecturerAPI extends API{
     displayLessonList(onSuccess){
       this.getRequest("lessons/").
           then(r=>onSuccess(r))
-          .catch( err => alert(err) )
-          ;
+          .catch( err => alert(err) );
     }
 
     logout(success){

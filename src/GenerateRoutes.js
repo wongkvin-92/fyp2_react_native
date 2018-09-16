@@ -14,7 +14,7 @@ return (
        exact
        path={el.path}
        render={()=><el.component {...props}/>}
-       />
+      />
     )}
 
   </View>)

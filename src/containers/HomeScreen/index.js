@@ -8,7 +8,9 @@ import {
   Image,
   Platform,
   StyleSheet,
-  Picker
+  Picker,
+  Animated,
+  Modal
 } from 'react-native';
 
 
@@ -17,68 +19,99 @@ import {
 } from 'react-native-elements';
 
 
-import {Redirect} from 'react-router-native';
+import {Redirect, Link} from 'react-router-native';
 
 
 class HomeView extends React.Component{
 
-  state={redirect:false};
+  state={
 
-  logout(){
-      this.props.logout ();
-      this.setState({redirect: true});
-  }
+    fadeAnim: new Animated.Value(0),
+    fadeAnim2: new Animated.Value(0)
+  };
+
+
+  componentDidMount() {
+
+      Animated.timing(                  // Animate over time
+        this.state.fadeAnim,            // The animated value to drive
+        {
+          toValue: 1,                   // Animate to opacity: 1 (opaque)
+          duration: 2000,              // Make it take a while
+        }
+      ).start();
+
+      Animated.timing(                  // Animate over time
+        this.state.fadeAnim2,            // The animated value to drive
+        {
+          toValue: 1,                   // Animate to opacity: 1 (opaque)
+          duration: 4000,              // Make it take a while
+        }
+      ).start();
+
+    }
 
   render () {
 
     return  (
 
         <View style={styles.containers}>
-             {this.state.redirect?<Redirect to="/login" />:<View/>}
-
-           <ScrollView >
-           <View style={styles.titleStlye}>
-            <Text style={styles.titleTextStyle}>Home</Text>
-          </View>
-          <PricingCard
-            color='#4f9deb'
-            title="Today's Class"
-            price='3'
-            info={['BIT310 at 2pm', 'BIT200 at 4pm']}
-            button={{buttonStyle: styles.cardBtn1Style}}
-            containerStyle={styles.pricingCardStyle}
-          />
-          <PricingCard
-            color='#4f9deb'
-            title='Cancellation'
-            price='10'
-            info={['Number of Cancellation', 'Reminder']}
-            button={{ title: 'Go', icon: 'flight-takeoff' }}
-            containerStyle={styles.pricingCardStyle}
-          />
-          <PricingCard
-            color='#4f9deb'
-            title='Reschedule'
-            price='10'
-            info={['Reschedule Records']}
-            button={{ title: 'Go', icon: 'flight-takeoff' }}
-            containerStyle={styles.pricingCardStyle}
-          />
 
 
-            <View style={styles.logoutBtnBackground}>
-              <Button rounded
-                 title="Logout"
-                 onPress={this.logout.bind(this)}
-                 buttonStyle= {styles.logoutBtnStyle}
-                 textStyle = {styles.btnTextStyle}
-                 fontWeight="bold"
-               />
-             </View>
+         <View style={styles.titleStlye}>
+          <Text style={styles.titleTextStyle}>Home</Text>
+         </View>
 
-          </ScrollView>
+          <Animated.View style={[{opacity: this.state.fadeAnim}]}>
+            <Card
+              title="Cancellation"
+              titleStyle={styles.cardTitleStyle}
+              containerStyle={styles.cardStyle}
+                wrapperStyle={styles.innerCardStyle}
+            >
+              <Text style={styles.cardContentContainerStyle}>
+                <Text style={styles.cardContentTitleStyle}> No. of Cancellation: </Text>
+                <Text style={styles.cardContentTitle2Style}>7 </Text>
 
+              </Text>
+              <View style={styles.viewBtnContainer}>
+                <Link
+                      to="/lessons"
+                      component={Button}
+                      title="View"
+                      rounded
+                      icon={{name: 'visibility'}}
+                      buttonStyle= {styles.viewBtnStyle}
+                      textStyle = {styles.viewBtnTextStyle}
+                /  >
+              </View>
+            </Card>
+          </Animated.View>
 
+          <Animated.View style={[{opacity: this.state.fadeAnim2}]}>
+            <Card
+              title="Reminder"
+              titleStyle={styles.cardTitleStyle}
+              containerStyle={styles.cardStyle2}
+              wrapperStyle={styles.innerCardStyle2}
+            >
+
+              <Text style={styles.cardContentContainerStyle}>
+                <Text style={styles.cardContentTitleStyle}> No. of Reschedule: </Text>
+                <Text style={styles.cardContentTitle2Style}>7 </Text>
+              </Text>
+
+              <View style={styles.viewBtnContainer}>
+                <Button
+                  rounded
+                  title="View"
+                  icon={{name: 'visibility'}}
+                  buttonStyle= {styles.viewBtnStyle}
+                  textStyle = {styles.viewBtnTextStyle}
+                />
+              </View>
+            </Card>
+          </Animated.View>
         </View>
 
   );
@@ -86,6 +119,15 @@ class HomeView extends React.Component{
   }
 }
 
+/*
+<Button
+
+  title="View"
+  icon={{name: 'visibility'}}
+  buttonStyle= {styles.cancelBtnStyle}
+  textStyle = {styles.cancelBtnTextStyle}
+  />
+  */
 
 export default HomeView;
 //export default TabNavigator;
@@ -94,11 +136,13 @@ const styles = StyleSheet.create({
   containers: {
     height: "100%",
     backgroundColor: 'rgba(243,129,129,0.9)',
+    flexDirection: 'column'
   },
 
   bodyStyle: {
     width: "100%",
   },
+
   titleStlye:{
     paddingTop:20,
     paddingLeft:20,
@@ -106,33 +150,59 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     elevation:4,
   },
+
   titleTextStyle:{
     fontSize:19,
     fontWeight:"bold",
     color:"black",
         letterSpacing: 2,
   },
+
   cardBtn1Style:{
     display: 'none'
   },
-  pricingCardStyle:{
+
+  cardStyle:{
     elevation: 8,
+    marginTop: 20,
+    marginBottom: 10
   },
-  logoutBtnStyle:{
-    marginTop: 30,
-    marginBottom: 30,
-    backgroundColor: 'rgba(243,129,129,0.9)',
-    elevation: 2,
+
+  cardStyle2:{
+    elevation: 8,
+    marginBottom: 10
   },
+
   btnTextStyle:{
     fontFamily: "Roboto",
     textShadowColor:"red",
     letterSpacing: 3,
     textShadowOffset: {width: 2, height: 2},
   },
-  logoutBtnBackground: {
-    marginTop:20,
-    backgroundColor: 'rgba(252, 227, 138, 0.9)',
-  }
+  cardTitleStyle:{
+    fontSize:18,
+    color: '#4f9deb',
+  },
+  cardContentContainerStyle:{
+      fontSize:16,
+      marginBottom:10,
+  },
+  viewBtnContainer:{
+
+  },
+  viewBtnStyle:{
+    marginTop: 10,
+    marginBottom: 10,
+    backgroundColor: '#4f9deb',
+    elevation: 4,
+
+  },
+  viewBtnTextStyle:{
+    fontFamily: "Roboto",
+    textShadowColor:"grey",
+    letterSpacing: 3,
+    textShadowOffset: {width: 2, height: 2},
+    fontWeight:"900",
+  },
 
 })

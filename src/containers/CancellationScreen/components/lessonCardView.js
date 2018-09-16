@@ -17,6 +17,7 @@ export const LessonCard = ({title, subName, type, day, time, duration} ) => (
   <Card
     title={title}
     titleStyle={styles.lessonCardStyle}
+    containerStyle={styles.cardStyle}
   >
 
     <Text style={styles.cardContentContainerStyle}>
@@ -37,7 +38,7 @@ export const LessonCard = ({title, subName, type, day, time, duration} ) => (
     <View style={styles.canceBtnContainer}>
       <Button
         rounded
-        title="Cancel"
+        title="Reschedule"
         icon={{name: 'cancel'}}
         buttonStyle= {styles.cancelBtnStyle}
         textStyle = {styles.cancelBtnTextStyle}
@@ -51,8 +52,12 @@ export default LessonCard;
 
 
 const styles = StyleSheet.create({
+  cardStyle: {
+    elevation: 8,
+      marginBottom:10
+  },
   lessonCardStyle:{
-    fontSize:18
+    fontSize:18,
   },
   cardContentContainerStyle:{
       fontSize:16,
@@ -65,7 +70,7 @@ const styles = StyleSheet.create({
     alignItems: "flex-end",
   },
   cancelBtnStyle:{
-    marginTop: 30,
+    marginTop: 10,
     marginBottom: 10,
     backgroundColor: 'rgba(252, 227, 138, 0.9)',
     elevation: 2,
