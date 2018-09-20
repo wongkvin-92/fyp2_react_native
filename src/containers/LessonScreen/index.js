@@ -1,5 +1,6 @@
 import React from 'react';
 import {
+  Alert,
   Text,
   View,
   TouchableHighlight,
@@ -20,27 +21,125 @@ import CardView from './components/CardView';
 import {Redirect} from 'react-router-native';
 
 import { Calendar, CalendarList, Agenda } from 'react-native-calendars';
+import {LecturerAPI} from "../../API";
 
-/*
-const sampleData = [
-  {title: "bit200", subName:"IT & Entrepre", type:"lecture1", day:"monday" , duration:"2"},
-  {title:"bit306", subName:"Web Tech", type:"lecture1",  day:"tuesday", duration:"2"},
-  {title:"bit208", subName:"Data Struct", type:"lecture1", day:"wednesday", duration:"2"},
-  {title:"bit301", subName:"IT Proj Mgmt", type:"lecture1",  day:"thursday",duration:"2"},
-  {title:"bit103", subName:"Intro DB", type:"lecture1", day:"friday", duration:"2"}
-];
-*/
+
+const cancelLesson = (classId, date) => {
+  new LecturerAPI().cancelLesson(classId, date, (r) => {
+    alert(r.msg);
+  });
+};
+
+
+const confirmCancel = (classId, date) => {
+  Alert.alert(
+  'Confirm Cancel',
+  'Are you sure you want to cancel class',
+  [
+    {text: 'No', onPress: () => console.log('OK Pressed'), style: 'cancel'},
+    {text: 'Yes', onPress: ()=>cancelLesson(classId, date) },
+  ],
+  { cancelable: false }
+  );
+}
+
+const DailyScheduleItem = (props) => (
+    <View style={[styles.item, {height: props.height}]}>
+
+      <Text>{props.subjectID} - {props.subjectName}</Text>
+      <Text>{props.type}</Text>
+      <Text>From {props.startTime} to {props.endTime}</Text>
+      <View style={styles.canceBtnContainer}>
+
+      {props.isCancelled=="0"?
+        <Button
+         title="Cancel"
+           rounded
+           icon={{name: 'cancel'}}
+           buttonStyle= {styles.cancelBtnStyle}
+           textStyle = {styles.cancelBtnTextStyle}
+           onPress={()=> confirmCancel(props.classID, props.curDate) }
+        />
+        :
+        <Text>
+        Subject cancelled for this day
+        </Text>
+      }
+      </View>
+    </View>
+);
 
 class HomeView extends React.Component{
 
-  state={redirect:false, items: {}};
+  state={redirect:false, items: {}, selectedDate: "2018-09-16"};
 
   logout(){
       this.props.logout ();
       this.setState({redirect: true});
+
   }
 
-  loadItems(day) {
+  getWeekStart(today){
+    let sundayDate = today.getDate() - today.getDay();
+    today.setDate(sundayDate);
+    return today;
+  }
+
+  formatDate(date){
+    let fixZero = e => Math.floor(e / 10) == 0? "0"+e:e+""
+    let m = date.getMonth()+1;
+    let month = fixZero(m);
+    return [date.getFullYear(), month,  fixZero(date.getDate()) ].join("-");
+  }
+
+  loadWeek(date){
+    for(let i=0; i< 7; i++){
+      let weekDay = this.getWeekStart(date);
+      weekDay.setDate(weekDay.getDate()+i);
+      this.fetchSchedule(this.formatDate(weekDay));
+
+    }
+  }
+
+  componentWillMount(){
+    this.loadWeek(new Date());
+
+  }
+
+  truncateDateString(str){
+    let date = new Date(str);
+
+    return this.formatDate(date);
+  }
+
+  fetchSchedule(day){
+    let obj = this.state.items;
+    obj[day] = [];
+    this.setState({items: obj});
+    new LecturerAPI().fetchSchedule(day, (r) => {
+        let obj = this.state.items;
+
+        let curDay = this.formatDate(new Date(day));
+        console.log(curDay);
+
+        obj[day] =r;
+        this.setState({items: obj});
+    });
+  }
+
+  loadItems(dayObj) {
+    this.loadWeek(new Date(dayObj.dateString));
+    //this.fetchSchedule(dayObj.dateString);
+    //let obj = this.state.items;
+    /*obj[day.dateString] = [
+      {name: "Class 1"+day.dateString + " 12:00:00", height: 100},
+      {name: "Class 2 "+day.dateString + " 09:00:00", height: 100},
+      {name: "Class 3"+day.dateString + " 14:00:00", height: 100}
+    ]
+      ;*/
+
+    //this.setState({items: obj});
+
     /*
     const time = day.timestamp + 0 * 24 * 60 * 60 * 1000;
     const strTime = this.timeToString(time);
@@ -55,6 +154,7 @@ class HomeView extends React.Component{
         ]
       }
     });*/
+    /*
     setTimeout(() => {
       for (let i = -15; i < 30; i++) {
         const time = day.timestamp + i * 24 * 60 * 60 * 1000;
@@ -76,15 +176,10 @@ class HomeView extends React.Component{
       this.setState({
         items: newItems
       });
-    }, 1000);
-    
-    // console.log(`Load Items for ${day.year}-${day.month}`);
-  }
+    }, 1000);*/
 
-  renderItem(item) {
-    return (
-      <View style={[styles.item, {height: item.height}]}><Text>{item.name}</Text></View>
-    );
+
+    // console.log(`Load Items for ${day.year}-${day.month}`);
   }
 
   renderEmptyDate() {
@@ -113,44 +208,44 @@ class HomeView extends React.Component{
              {this.state.redirect?<Redirect to="/login" />:<View/>}
 
              <Agenda
-             items={this.state.items}
-             loadItemsForMonth={this.loadItems.bind(this)}
-             selected={'2018-08-27'}
-             // Minimum date that can be selected, dates before minDate will be grayed out. Default = undefined
-             minDate={'2018-08-01'}
-             // Maximum date that can be selected, dates after maxDate will be grayed out. Default = undefined
-             maxDate={'2018-11-30'}
-             renderItem={this.renderItem.bind(this)}
-             renderEmptyDate={this.renderEmptyDate.bind(this)}
-             rowHasChanged={this.rowHasChanged.bind(this)}
-             // markingType={'period'}
-             markingType={'multi-dot'}
-             markedDates={{
-             //    '2017-05-08': {textColor: '#666'},
-             //    '2017-05-09': {textColor: '#666'},
-             //    '2017-05-14': {startingDay: true, endingDay: true, color: 'blue'},
+               items={this.state.items}
+               loadItemsForMonth={this.loadItems.bind(this)}
+               selected={this.state.selectedDate}
+               // Minimum date that can be selected, dates before minDate will be grayed out. Default = undefined
+               minDate={'2018-08-01'}
+               // Maximum date that can be selected, dates after maxDate will be grayed out. Default = undefined
+               maxDate={'2018-11-30'}
+               renderItem={(props) => <DailyScheduleItem {...props} /> }
+               renderEmptyDate={this.renderEmptyDate.bind(this)}
+               rowHasChanged={this.rowHasChanged.bind(this)}
+               // markingType={'period'}
+               markingType={'multi-dot'}
+               markedDates={{
+               //    '2017-05-08': {textColor: '#666'},
+               //    '2017-05-09': {textColor: '#666'},
+               //    '2017-05-14': {startingDay: true, endingDay: true, color: 'blue'},
 
+  /*
+                 '2018-08-28': {
+                   dots: [vacation, massage, workout],
+                 },
+                 '2018-08-29': {
+                   dots: [massage, workout]
+                 },*/
 
-               '2018-08-28': {
-                 dots: [vacation, massage, workout],
-               },
-               '2018-08-29': {
-                 dots: [massage, workout]
-               },
+               //    '2017-05-22': {endingDay: true, color: 'gray'},
+               //    '2017-05-24': {startingDay: true, color: 'gray'},
+               //    '2017-05-25': {color: 'gray'},
+               //    '2017-05-26': {endingDay: true, color: 'gray'}}}
+                // monthFormat={'yyyy'}
 
-             //    '2017-05-22': {endingDay: true, color: 'gray'},
-             //    '2017-05-24': {startingDay: true, color: 'gray'},
-             //    '2017-05-25': {color: 'gray'},
-             //    '2017-05-26': {endingDay: true, color: 'gray'}}}
-              // monthFormat={'yyyy'}
-
-            // renderDay={(day, item) => (<Text>{day ? day.day: 'item'}</Text>)}
-          }}
-          theme={{
-            backgroundColor: 'rgba(243,129,129,0.9)',
-            agendaDayTextColor: 'black',
-            agendaDayNumColor: 'black',
-          }}
+              // renderDay={(day, item) => (<Text>{day ? day.day: 'item'}</Text>)}
+            }}
+            theme={{
+              backgroundColor: 'rgba(243,129,129,0.9)',
+              agendaDayTextColor: 'black',
+              agendaDayNumColor: 'black',
+            }}
          />
         </View>
   );
@@ -251,14 +346,34 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     flex: 1,
     borderRadius: 5,
-    padding: 10,
+    padding: 20,
     marginRight: 10,
-    marginTop: 17
+    marginTop: 10,
+    justifyContent: 'center',
+    elevation: 10,
+    marginBottom:10
   },
   emptyDate: {
     height: 15,
     flex:1,
     paddingTop: 30
-  }
+  },
+  canceBtnContainer:{
+    alignItems: "flex-end",
+  },
+  cancelBtnStyle:{
+    marginTop: 30,
+    marginBottom: 10,
+    backgroundColor: 'rgba(252, 227, 138, 0.9)',
+    elevation: 2,
+
+  },
+  cancelBtnTextStyle:{
+    fontFamily: "Roboto",
+    textShadowColor:"orange",
+    letterSpacing: 3,
+    textShadowOffset: {width: 2, height: 2},
+    fontWeight:"900",
+  },
 
 })

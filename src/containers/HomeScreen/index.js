@@ -102,13 +102,15 @@ class HomeView extends React.Component{
               </Text>
 
               <View style={styles.viewBtnContainer}>
-                <Button
-                  rounded
-                  title="View"
-                  icon={{name: 'visibility'}}
-                  buttonStyle= {styles.viewBtnStyle}
-                  textStyle = {styles.viewBtnTextStyle}
-                />
+              <Link
+                    to="/reschedule"
+                    component={Button}
+                    title="View"
+                    rounded
+                    icon={{name: 'visibility'}}
+                    buttonStyle= {styles.viewBtnStyle}
+                    textStyle = {styles.viewBtnTextStyle}
+              /  >
               </View>
             </Card>
           </Animated.View>

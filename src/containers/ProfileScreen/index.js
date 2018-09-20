@@ -21,18 +21,26 @@ import {
 
 import {Redirect, Link} from 'react-router-native';
 
+import {LecturerAPI} from "../../API";
 
 class HomeView extends React.Component{
 
   state={
     redirect:false,
     fadeAnim: new Animated.Value(0),
-    fadeAnim2: new Animated.Value(0)
+    fadeAnim2: new Animated.Value(0),
+    lecturerName: "Loading"
   };
 
   logout(){
       this.props.logout ();
       this.setState({redirect: true});
+  }
+
+  componentWillMount(){
+      new LecturerAPI().fetchProfile( (r) => {
+          this.setState({lecturerName: r.lecturerName});
+      });
   }
 
   componentDidMount() {
@@ -74,7 +82,7 @@ class HomeView extends React.Component{
             >
               <Text style={styles.cardContentContainerStyle}>
                 <Text style={styles.cardContentTitleStyle}> Lecturer Name: </Text>
-                <Text style={styles.cardContentTitle2Style}>Seetha </Text>
+                <Text style={styles.cardContentTitle2Style}>{this.state.lecturerName} </Text>
               </Text>
             </Card>
           </Animated.View>

@@ -12,13 +12,14 @@ import {
   Card, Button
 } from 'react-native-elements'
 
-export const CardView = ({title, subName, type, day, time, duration, isCancelled} ) => (
+export const LessonCard = ({title, subName, type, day, time, duration} ) => (
 <View>
   <Card
     title={title}
     titleStyle={styles.lessonCardStyle}
+    containerStyle={styles.cardStyle}
   >
-    {isCancelled=="1"?<Text> Class is cancelled.</Text>:""}
+
     <Text style={styles.cardContentContainerStyle}>
       <Text style={styles.cardContentTitleStyle}>Subject Name: </Text>{subName}
     </Text>
@@ -34,25 +35,21 @@ export const CardView = ({title, subName, type, day, time, duration, isCancelled
     <Text style={styles.cardContentContainerStyle2}>
       <Text style={styles.cardContentTitleStyle}>Duration: </Text> {duration}
     </Text>
-    <View style={styles.canceBtnContainer}>
-      <Button
-        rounded
-        title="Cancel"
-        icon={{name: 'cancel'}}
-        buttonStyle= {styles.cancelBtnStyle}
-        textStyle = {styles.cancelBtnTextStyle}
-      />
-    </View>
+
   </Card>
 </View>
 )
 
-export default CardView;
+export default LessonCard;
 
 
 const styles = StyleSheet.create({
+  cardStyle: {
+    elevation: 8,
+      marginBottom:10
+  },
   lessonCardStyle:{
-    fontSize:18
+    fontSize:18,
   },
   cardContentContainerStyle:{
       fontSize:16,
@@ -60,22 +57,5 @@ const styles = StyleSheet.create({
   },
   cardContentContainerStyle2:{
       fontSize:16,
-  },
-  canceBtnContainer:{
-    alignItems: "flex-end",
-  },
-  cancelBtnStyle:{
-    marginTop: 30,
-    marginBottom: 10,
-    backgroundColor: 'rgba(252, 227, 138, 0.9)',
-    elevation: 2,
-
-  },
-  cancelBtnTextStyle:{
-    fontFamily: "Roboto",
-    textShadowColor:"orange",
-    letterSpacing: 3,
-    textShadowOffset: {width: 2, height: 2},
-    fontWeight:"900",
   },
 })
