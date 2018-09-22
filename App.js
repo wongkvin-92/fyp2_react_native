@@ -18,15 +18,25 @@ import {
   StyleSheet} from 'react-native';
 
 
+import { PersistGate } from 'redux-persist/integration/react';
+import {Provider} from 'react-redux';
+import store, {persistor} from "./src/store";
+
 class MainApp extends React.Component {
-  state={loading: true, isLoggedIn: false};
+//  state={loading: false, isLoggedIn: false};
+
 
   componentWillMount(){
+
+    //this.setState({loading:false, isLoggedIn: false});
+
     //Load state from the server
+    /*
     new LecturerAPI().checkLoginState(
       () =>    this.setState({isLoggedIn: true, loading: false}),
       () =>     this.setState({isLoggedIn: false, loading: false})
-    );
+    );*/
+
   }
 
  lecturerLogin = ()=>{
@@ -37,25 +47,31 @@ class MainApp extends React.Component {
 
   render(){
     return (
-      <NativeRouter>
-      <GenerateRoutes
-        commonRoutes={commonRoutes}
-        loginState={this.state.isLoggedIn}
-        props={
-          {
-            changeLogin: ()=>{},
-            login: this.lecturerLogin,
-            logout: ()=> {                   //success() - callback func
-              new LecturerAPI().logout( this.onLogout )
-            },
-            setLogin: this.setLogin,
-                      ...this.state
-          }
-        }
-       />
-      </NativeRouter>
+      <Provider store={store}>
+       <PersistGate loading={null} persistor={persistor}>
+          <NativeRouter>
+            <GenerateRoutes
+              commonRoutes={commonRoutes}
+              props={
+                {
+                  changeLogin: ()=>{},
+                  login: this.lecturerLogin,
+                  logout: ()=> {                   //success() - callback func
+                    new LecturerAPI().logout( this.onLogout )
+                  },
+                  setLogin: this.setLogin,
+                            ...this.state
+                }
+              }
+             />
+            </NativeRouter>
+          </PersistGate>
+      </Provider>
     );
   }
 }
 
+
+
+//const ConnectedMainApp = connect(state => state.loginStateReducer)(MainApp);
 export default MainApp;

@@ -22,6 +22,28 @@ import {
 import {Redirect, Link} from 'react-router-native';
 
 import {LecturerAPI} from "../../API";
+import LoginStateCard from "./components/LoginStateCard";
+
+
+
+
+
+const LoginStateCard2 = (props) =>
+
+(<Animated.View style={[{opacity: this.state.fadeAnim}]}>
+  <Card
+    title="Welcome!!!"
+    titleStyle={styles.cardTitleStyle}
+    containerStyle={styles.cardStyle}
+      wrapperStyle={styles.innerCardStyle}
+  >
+    <Text style={styles.cardContentContainerStyle}>
+      <Text style={styles.cardContentTitleStyle}> Lecturer Name: </Text>
+      <Text style={styles.cardContentTitle2Style}>{props.lecturerName} </Text>
+    </Text>
+  </Card>
+</Animated.View>
+);
 
 class HomeView extends React.Component{
 
@@ -73,20 +95,7 @@ class HomeView extends React.Component{
           <Text style={styles.titleTextStyle}>Profile</Text>
          </View>
 
-          <Animated.View style={[{opacity: this.state.fadeAnim}]}>
-            <Card
-              title="Welcome!!!"
-              titleStyle={styles.cardTitleStyle}
-              containerStyle={styles.cardStyle}
-                wrapperStyle={styles.innerCardStyle}
-            >
-              <Text style={styles.cardContentContainerStyle}>
-                <Text style={styles.cardContentTitleStyle}> Lecturer Name: </Text>
-                <Text style={styles.cardContentTitle2Style}>{this.state.lecturerName} </Text>
-              </Text>
-            </Card>
-          </Animated.View>
-
+          <LoginStateCard lecturerName={this.state.lecturerName} />
             <View style={styles.logoutBtnBackground}>
               <Button rounded
                  title="Logout"
