@@ -13,12 +13,12 @@ import {
 
 
 import {
-  Card, Button
+  Card, Button, CheckBox
 } from 'react-native-elements';
 
 import CardView from './components/CardView';
 
-import {Redirect} from 'react-router-native';
+import {Redirect, Link} from 'react-router-native';
 
 import { Calendar, CalendarList, Agenda } from 'react-native-calendars';
 import {LecturerAPI} from "../../API";
@@ -28,7 +28,7 @@ import {LecturerAPI} from "../../API";
 const cancelLesson = (classId, date) => {
   new LecturerAPI().cancelLesson(classId, date, (r) => {
     alert(r.msg);
-    
+
   });
 };
 
@@ -46,7 +46,11 @@ const confirmCancel = (classId, date) => {
 }
 
 const DailyScheduleItem = (props) => (
+
+
+
     <View style={[styles.item, {height: props.height}]}>
+
 
       <Text>{props.subjectID} - {props.subjectName}</Text>
       <Text>{props.type}</Text>
@@ -54,14 +58,10 @@ const DailyScheduleItem = (props) => (
       <View style={styles.canceBtnContainer}>
 
       {props.isCancelled=="0"?
-        <Button
-         title="Cancel"
-           rounded
-           icon={{name: 'cancel'}}
-           buttonStyle= {styles.cancelBtnStyle}
-           textStyle = {styles.cancelBtnTextStyle}
-           onPress={()=> confirmCancel(props.classID, props.curDate) }
-        />
+      <CheckBox
+    title='Click Here'
+    value={props.checked}
+  />
         :
         <Text>
         Subject cancelled for this day
@@ -208,6 +208,21 @@ class HomeView extends React.Component{
 
         <View style={styles.containers}>
              {this.state.redirect?<Redirect to="/login" />:<View/>}
+             <View style={styles.titleStlye}>
+
+                 <View style={styles.titleCenterStyle}>
+                <Text style={styles.titleTextStyle}>Lesson</Text>
+                </View>
+
+                <Button
+                 title="Cancel"
+                   rounded
+                   icon={{name: 'cancel'}}
+                   buttonStyle= {styles.backBtnStyle}
+                   textStyle = {styles.cancelBtnTextStyle}
+                   onPress={()=> confirmCancel(props.classID, props.curDate) }
+                />
+             </View>
 
              <Agenda
                items={this.state.items}
@@ -316,17 +331,28 @@ const styles = StyleSheet.create({
     fontSize:20,
   },
   titleStlye:{
-    paddingTop:20,
-    paddingLeft:20,
+    paddingTop: 16,
     paddingBottom:16,
+    paddingLeft:20,
     backgroundColor: 'white',
     elevation:4,
+    flexDirection:'row',
+
   },
   titleTextStyle:{
     fontSize:19,
     fontWeight:"bold",
     color:"black",
-        letterSpacing: 2,
+    letterSpacing: 2,
+
+  },
+  titleCenterStyle: {
+      flex:1,
+  },
+  backBtnStyle : {
+      backgroundColor: 'rgba(252, 227, 138, 0.9)',
+      elevation: 2,
+      padding: 5,
   },
   logoutBtnStyle:{
     marginTop: 30,
@@ -376,6 +402,6 @@ const styles = StyleSheet.create({
     letterSpacing: 3,
     textShadowOffset: {width: 2, height: 2},
     fontWeight:"900",
-  },
+  }
 
 })

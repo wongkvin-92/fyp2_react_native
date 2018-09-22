@@ -1,4 +1,4 @@
-const host = "192.168.1.91";
+const host = "192.168.0.6";
 const port = 80;
 const path = "fypBackEnd";
 
