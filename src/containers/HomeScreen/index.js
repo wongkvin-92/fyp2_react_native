@@ -9,8 +9,7 @@ import {
   Platform,
   StyleSheet,
   Picker,
-  Animated,
-  Modal
+  Animated
 } from 'react-native';
 
 

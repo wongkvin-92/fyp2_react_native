@@ -37,7 +37,7 @@ class HomeView extends React.Component{
 
 
   componentDidMount(){
-    new LecturerAPI().displayLessonList(
+    new LecturerAPI().displayCancelledList(
           (d) => this.setState({data: d})
     );
   }
@@ -59,7 +59,7 @@ class HomeView extends React.Component{
                      buttonStyle= {styles.backBtnStyle}
                  />
                  <View style={styles.titleCenterStyle}>
-                <Text style={styles.titleTextStyle}>Class Lesson</Text>
+                <Text style={styles.titleTextStyle}>Cancellation List</Text>
                 </View>
              </View>
 
@@ -72,11 +72,9 @@ class HomeView extends React.Component{
                 itemStyle={styles.pickerItemStyle}
                 >
                 <Picker.Item label="All" value="all" />
-                <Picker.Item label="Monday" value="monday" />
-                <Picker.Item label="Tuesday" value="tuesday" />
-                <Picker.Item label="Wednesday" value="wednesday" />
-                <Picker.Item label="Thursday" value="thursday" />
-                <Picker.Item label="Friday" value="friday" />
+                <Picker.Item label="Pending" value="pending" />
+                <Picker.Item label="Approved" value="approved" />
+
               </Picker>
              </Card>
 
@@ -115,7 +113,6 @@ const styles = StyleSheet.create({
   containers: {
     height: "100%",
     backgroundColor: 'rgba(243,129,129,0.9)',
-  
   },
 
   bodyStyle: {
@@ -144,7 +141,6 @@ const styles = StyleSheet.create({
 
   },
   titleCenterStyle: {
-
     alignSelf: 'center'
   },
   backBtnStyle : {

@@ -24,9 +24,11 @@ import { Calendar, CalendarList, Agenda } from 'react-native-calendars';
 import {LecturerAPI} from "../../API";
 
 
+
 const cancelLesson = (classId, date) => {
   new LecturerAPI().cancelLesson(classId, date, (r) => {
     alert(r.msg);
+    
   });
 };
 

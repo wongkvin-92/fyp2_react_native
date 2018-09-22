@@ -1,4 +1,4 @@
-const host = "10.125.194.162";
+const host = "192.168.1.91";
 const port = 80;
 const path = "fypBackEnd";
 
@@ -24,6 +24,16 @@ export class API {
       .catch(r => console.log(r))
     ;
   }
+
+  deleteRequest(action, headers={}){
+    let url = this.host+action;
+    return fetch(url, {...this.headers, method: "delete", ...headers})
+     .then( r=> { console.log(r); return r;})
+      .then(r=>r.json())
+      .catch(r => console.log(r))
+    ;
+  }
+
 
 }
 
@@ -51,6 +61,12 @@ export class LecturerAPI extends API{
           alert("Cannot login. Error:  "+err);
         }
       );
+    }
+
+    deleteCancellationRequest(id, callback){
+      this.deleteRequest("reschedule/"+id+"/cancel/remove/").
+          then(r=>callback(r))
+          .catch( err => console.log(err) );
     }
 
     fetchProfile(callback){
@@ -85,6 +101,12 @@ export class LecturerAPI extends API{
 
     displayLessonList(onSuccess){
       this.getRequest("lessons/").
+          then(r=>onSuccess(r))
+          .catch( err => alert(err) );
+    }
+
+    displayCancelledList(onSuccess){
+      this.getRequest("cancel/lecturer/list/").
           then(r=>onSuccess(r))
           .catch( err => alert(err) );
     }

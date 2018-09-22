@@ -7,6 +7,7 @@ import LoginScreen from './containers/LoginScreen';
 import SplashScreen from './containers/SplashScreen';
 import ProfileScreen from './containers/ProfileScreen';
 import RescheduleScreen from './containers/RescheduleScreen';
+import RequestRescheduleScreen from './containers/RescheduleRequestScreen';
 
 import React from 'react';
 import {Text} from 'react-native';
@@ -23,7 +24,8 @@ export const commonRoutes = [
   {path: "/login", component: LoginScreen},
   {path: "/home", component: LecturerTabLayout},
   {path: "/lessons", component: CancellationScreen},
-  {path: "/reschedule", component: RescheduleScreen }
+  {path: "/reschedule", component: RescheduleScreen },
+  {path: "/request", component: RequestRescheduleScreen }
 ];
 
 /*
