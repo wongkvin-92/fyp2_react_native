@@ -10,12 +10,13 @@ import{
 } from 'react-native-elements';
 
 import {Redirect, Link} from 'react-router-native';
+import {LecturerAPI} from "../../API/index";
 
 import DatePicker from 'react-native-datepicker';
 
 class RescheduleRequest extends React.Component{
 
-  state = { datetime1: '2019-09-01 00:00'};
+    state = { datetime1: '2019-09-01 00:00'};
 
   render () {
 
@@ -61,6 +62,21 @@ class RescheduleRequest extends React.Component{
           icon={{name: 'calendar', type: 'font-awesome'}}
           buttonStyle= {styles.rescheduleBtnStyle}
           textStyle = {styles.cancelBtnTextStyle}
+	  onPress={()=>{
+	      let dateStr = this.state.datetime1;
+	      let dtime = dateStr.split(' ');
+	      let fdateString = dtime[0];
+	      let ftimeString = dtime[1];
+	      let id = this.props.match.params.id;
+
+	      new LecturerAPI().requestRescheduleClass(
+		  id,
+		  fdateString, ftimeString,
+		  (r) => {
+		      alert(r.msg);
+		  }
+	      );
+	  }}
         />
         </View>
       </View>

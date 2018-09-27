@@ -8,9 +8,11 @@ import {combineReducers} from 'redux';
 import { syncHistoryWithStore, routerReducer } from 'react-router-redux';
 
 import loginStateReducer from './loginStateReducer';
+import subjectListReducer from './subjectListReducer';
 
 const reducers = combineReducers({
     loginStateReducer,
+    subjectListReducer,
     routing: routerReducer
 });
 

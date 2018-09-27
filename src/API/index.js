@@ -1,4 +1,4 @@
-const host = "192.168.0.6";
+const host = "192.168.0.83";
 const port = 80;
 const path = "fypBackEnd";
 
@@ -25,7 +25,17 @@ export class API {
     ;
   }
 
-  deleteRequest(action, headers={}){
+    patchRequest(action, headers={}){
+	let url = this.host+action;
+	return fetch(url, {...this.headers, method: "patch", ...headers})
+	    .then( r=> { console.log(r); return r;})
+	    .then(r=>r.json())
+	    .catch(r => console.log(r))
+	;
+    }
+
+
+    deleteRequest(action, headers={}){
     let url = this.host+action;
     return fetch(url, {...this.headers, method: "delete", ...headers})
      .then( r=> { console.log(r); return r;})
@@ -68,6 +78,7 @@ export class LecturerAPI extends API{
           then(r=>callback(r))
           .catch( err => console.log(err) );
     }
+   
 
     fetchProfile(callback){
       this.getRequest("login/lecturers/").
@@ -105,10 +116,28 @@ export class LecturerAPI extends API{
           .catch( err => alert(err) );
     }
 
-    displayCancelledList(onSuccess){
-      this.getRequest("cancel/lecturer/list/").
+    displayCancelledList(filter, onSuccess){
+	var action = "cancel/lecturer/list/";
+	if(filter != "all"){
+	    action += "filter/"+filter;
+	}
+      this.getRequest(action).
           then(r=>onSuccess(r))
           .catch( err => alert(err) );
+    }
+
+    requestRescheduleClass(id, date, time, onSuccess){
+	let action = "reschedule/"+id+"/replace/";
+	let data = JSON.stringify({
+	    "date": date,
+	    "time": time
+	});
+	this.patchRequest(
+	    action,
+	    {
+	    body: data
+	}).then(onSuccess);
+	
     }
 
     logout(success){

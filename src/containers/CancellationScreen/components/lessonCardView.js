@@ -45,28 +45,15 @@ export const LessonCard = ({rescheduleID, title, subName, type, oriDate, oriDay,
     <View style={styles.canceBtnContainer}>
 
       <Link
-            to="/request"
-            component={Button}
-            rounded
-            title="Reschedule"
-            icon={{name: 'calendar', type: 'font-awesome'}}
-            buttonStyle= {styles.rescheduleBtnStyle}
-            textStyle = {styles.cancelBtnTextStyle}
-      /  >
-      <Button
+    to={"/request/"+rescheduleID}
+        component={Button}
         rounded
-        title=""
-        icon={{name: 'trash', type: 'font-awesome'}}
-        buttonStyle= {styles.cancelBtnStyle}
+        title="Reschedule"
+        icon={{name: 'calendar', type: 'font-awesome'}}
+        buttonStyle= {styles.rescheduleBtnStyle}
         textStyle = {styles.cancelBtnTextStyle}
-        onPress={
-          () => {
-            new LecturerAPI().deleteCancellationRequest(rescheduleID, (response)=>{
-              alert(response.msg);
-            })
-          }
-        }
       />
+
     </View>
   </Card>
 </View>

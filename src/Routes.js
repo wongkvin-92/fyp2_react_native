@@ -12,20 +12,27 @@ import RequestRescheduleScreen from './containers/RescheduleRequestScreen';
 import React from 'react';
 import {Text} from 'react-native';
 
+import {withRouter} from 'react-router-native';
+
+
 export const tabRoutes = [
-  {id: "home", label: "Home", component: HomeScreen, logo:"home"},
-  {id: "lesson", label: "Lesson", component: LessonScreen, logo:"assignment"},
-  {id: "profile", label: "Profile", component: ProfileScreen, logo:"face"}
+    {id: "home", label: "Home", component: HomeScreen, logo:"home"},
+    {id: "lesson", label: "Lesson", component: LessonScreen, logo:"assignment"},
+    {id: "profile", label: "Profile", component: ProfileScreen, logo:"face"}
 ];
 
 
 export const commonRoutes = [
-  {path: "/", component: SplashScreen},
-  {path: "/login", component: LoginScreen},
-  {path: "/home", component: LecturerTabLayout},
-  {path: "/lessons", component: CancellationScreen},
-  {path: "/reschedule", component: RescheduleScreen },
-  {path: "/request", component: RequestRescheduleScreen }
+    {path: "/", component: SplashScreen},
+    {path: "/login", component: LoginScreen},
+    {path: "/home", component: LecturerTabLayout},
+    {path: "/lessons", component: CancellationScreen},
+    {path: "/reschedule", component: RescheduleScreen },
+    {path: "/request/:id", component: withRouter((props) => {
+
+	return <RequestRescheduleScreen {...props} />;
+    })
+    }
 ];
 
 /*

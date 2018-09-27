@@ -33,13 +33,18 @@ const sampleData = [
 
 class HomeView extends React.Component{
 
-  state={redirect:false, data: []};
+  state={redirect:false, data: [], filter: "all"};
 
 
-  componentDidMount(){
+  downloadList = (filter)=>{
     new LecturerAPI().displayCancelledList(
+        filter,
           (d) => this.setState({data: d})
     );
+  }
+
+  componentDidMount(){
+      this.downloadList("all");
   }
 
   render () {
@@ -66,14 +71,20 @@ class HomeView extends React.Component{
 
              <Card>
                <Picker
-                selectedValue={this.state.language}
+                selectedValue={this.state.filter}
                 style={styles.pickerStyle}
-                onValueChange={(itemValue, itemIndex) => this.setState({language: itemValue})}
+                onValueChange={(itemValue, itemIndex) => {
+
+                    this.downloadList(itemValue);
+                    this.setState({filter: itemValue});
+                } }
                 itemStyle={styles.pickerItemStyle}
                 >
                 <Picker.Item label="All" value="all" />
                 <Picker.Item label="Pending" value="pending" />
                 <Picker.Item label="Approved" value="approved" />
+                <Picker.Item label="Unscheduled" value="unscheduled" />
+                <Picker.Item label="Scheduled" value="scheduled" />
 
               </Picker>
              </Card>

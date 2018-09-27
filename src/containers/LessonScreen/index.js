@@ -11,6 +11,7 @@ import {
   Picker
 } from 'react-native';
 
+import {connect} from 'react-redux';
 
 import {
   Card, Button, CheckBox
@@ -58,26 +59,46 @@ const DailyScheduleItem = (props) => (
       <View style={styles.canceBtnContainer}>
 
       {props.isCancelled=="0"?
-      <CheckBox
-    title='Click Here'
-    value={props.checked}
-  />
+        <CheckBox
+          title='Click Here'
+          value={props.checked}
+          checked={props.checked}
+        />
         :
-        <Text>
-        Subject cancelled for this day
+        <Text style={{color: "red", fontWeight:"900"}}>
+        Cancelled
         </Text>
       }
       </View>
     </View>
 );
 
-class HomeView extends React.Component{
 
-  state={redirect:false, items: {}, selectedDate: "2018-09-16"};
+
+
+
+
+
+
+
+
+class LessonScreen extends React.Component{
+  constructor(props){
+    super(props);
+
+    let today = this.formatDate(this.getWeekStart(new Date()));
+    this.state={
+      redirect:false,
+      items: {},
+      selectedDate: today
+    };
+    this.isLoading=false;
+  }
+
 
   logout(){
       this.props.logout ();
-      this.setState({redirect: true});
+      //this.setState({redirect: true});
 
   }
 
@@ -99,13 +120,32 @@ class HomeView extends React.Component{
       let weekDay = this.getWeekStart(date);
       weekDay.setDate(weekDay.getDate()+i);
       this.fetchSchedule(this.formatDate(weekDay));
-
     }
   }
 
-  componentWillMount(){
-    this.loadWeek(new Date());
+  loadMonth(date){
+    let newDate = new Date(date);
 
+    var today = new Date();
+    var lastDayOfMonth = new Date(today.getFullYear(), today.getMonth()+1, 0);
+    //this.setState({item: {}});
+
+/*
+    for(date=today; date< lastDayOfMonth; date++){
+      newDate.setDate(date);
+      this.fetchSchedule(this.formatDate(newDate));
+    }
+*/
+    /*for(let i=0; i< 7; i++){
+      let weekDay = this.getWeekStart(date);
+      weekDay.setDate(weekDay.getDate()+i);
+      this.fetchSchedule(this.formatDate(weekDay));
+    }*/
+  }
+
+  componentWillMount(){
+    //this.loadWeek(new Date());
+    //this.loadMonth(new Date());
   }
 
   truncateDateString(str){
@@ -115,9 +155,11 @@ class HomeView extends React.Component{
   }
 
   fetchSchedule(day){
-    let obj = this.state.items;
+    //let obj = this.state.items;
+    let obj = {};
     obj[day] = [];
-    this.setState({items: obj});
+    //this.setState({items: obj});
+    //this.props.setSchedule(obj);
     new LecturerAPI().fetchSchedule(day, (r) => {
         let obj = this.state.items;
 
@@ -125,63 +167,34 @@ class HomeView extends React.Component{
         console.log(curDay);
 
         obj[day] =r;
-        this.setState({items: obj});
+        //this.props.setSchedule(obj);
+        //this.setState({items: obj});
+        console.log(this.state.items);
     });
   }
 
+/*
+  fetchSchedule2(day){
+    let obj = this.state.items;
+    obj[day] = [];
+    this.dateBuffer = [];
+    this.isLoading = true;
+
+    new LecturerAPI().fetchSchedule(day, (r) => {
+        let obj = this.state.items;
+
+        let curDay = this.formatDate(new Date(day));
+        console.log(curDay);
+
+        obj[day] =r;
+        this.dateBuffer.append(obj);
+    });
+  }*/
+
+
   loadItems(dayObj) {
     this.loadWeek(new Date(dayObj.dateString));
-    //this.fetchSchedule(dayObj.dateString);
-    //let obj = this.state.items;
-    /*obj[day.dateString] = [
-      {name: "Class 1"+day.dateString + " 12:00:00", height: 100},
-      {name: "Class 2 "+day.dateString + " 09:00:00", height: 100},
-      {name: "Class 3"+day.dateString + " 14:00:00", height: 100}
-    ]
-      ;*/
-
-    //this.setState({items: obj});
-
-    /*
-    const time = day.timestamp + 0 * 24 * 60 * 60 * 1000;
-    const strTime = this.timeToString(time);
-
-    this.setState({
-      items: {
-        "2018-07-27": [
-          {
-          name: "test",
-          height: 30
-        }
-        ]
-      }
-    });*/
-    /*
-    setTimeout(() => {
-      for (let i = -15; i < 30; i++) {
-        const time = day.timestamp + i * 24 * 60 * 60 * 1000;
-        const strTime = this.timeToString(time);
-        if (!this.state.items[strTime]) {
-          this.state.items[strTime] = [];
-          const numItems = Math.floor(Math.random() * 5);
-          for (let j = 0; j < numItems; j++) {
-            this.state.items[strTime].push({
-              name: 'Item for ' + strTime,
-              height: Math.max(50, Math.floor(Math.random() * 150))
-            });
-          }
-        }
-      }
-      //console.log(this.state.items);
-      const newItems = {};
-      Object.keys(this.state.items).forEach(key => {newItems[key] = this.state.items[key];});
-      this.setState({
-        items: newItems
-      });
-    }, 1000);*/
-
-
-    // console.log(`Load Items for ${day.year}-${day.month}`);
+    //this.loadMonth(new Date(this.state.selectedDate));
   }
 
   renderEmptyDate() {
@@ -269,48 +282,17 @@ class HomeView extends React.Component{
   }
 }
 
-/*
-<ScrollView >
-<View style={styles.titleStlye}>
- <Text style={styles.titleTextStyle}>Cancellation Records</Text>
-</View>
-<Card>
-  <Picker
-   selectedValue={this.state.language}
-   style={styles.pickerStyle}
-   onValueChange={(itemValue, itemIndex) => this.setState({language: itemValue})}
-   itemStyle={styles.pickerItemStyle}
-   >
-   <Picker.Item label="All" value="all" />
-   <Picker.Item label="Monday" value="monday" />
-   <Picker.Item label="Tuesday" value="tuesday" />
-   <Picker.Item label="Wednesday" value="wednesday" />
-   <Picker.Item label="Thursday" value="thursday" />
-   <Picker.Item label="Friday" value="friday" />
- </Picker>
-</Card>
 
- {
-   sampleData.map(e =>
-     <CardView
-       {...e}
-     />
-   )
- }
- <View style={styles.logoutBtnBackground}>
-   <Button rounded
-      title="Logout"
-      onPress={this.logout.bind(this)}
-      buttonStyle= {styles.logoutBtnStyle}
-      textStyle = {styles.btnTextStyle}
-      fontWeight="bold"
-    />
-  </View>
+//export default LessonScreen;
+const mapStateToProps = p => p.subjectListReducer;
+const mapDispatchToProps = dispatch => {
+  return {
+    setSchedule: (data) => dispatch({type: "SET_SCHEDULE", weeklySchedule: data})
+  }
+};
 
-</ScrollView>
-
-*/
-export default HomeView;
+export default LessonScreen;
+//export default connect(mapStateToProps, mapDispatchToProps)(LessonScreen);
 
 
 const styles = StyleSheet.create({

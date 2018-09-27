@@ -89,7 +89,7 @@ class HomeView extends React.Component{
 
           <Animated.View style={[{opacity: this.state.fadeAnim2}]}>
             <Card
-              title="Reminder"
+              title="Reschedule"
               titleStyle={styles.cardTitleStyle}
               containerStyle={styles.cardStyle2}
               wrapperStyle={styles.innerCardStyle2}
