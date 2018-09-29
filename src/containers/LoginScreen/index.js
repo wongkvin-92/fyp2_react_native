@@ -19,6 +19,7 @@ import {
 
 import {LecturerAPI} from "../../API";
 import {Redirect} from 'react-router-native';
+import {connect} from 'react-redux';
 
 
 class LoginView extends React.Component{
@@ -30,6 +31,12 @@ class LoginView extends React.Component{
     fadeAnim: new Animated.Value(0),
   //  springAnim: new Animated.Value(0)
   };
+
+componentWillReceiveProps(newProps){
+  if(newProps.isLoggedIn != this.props.isLoggedIn){
+      this.setState({redirect: newProps.isLoggedIn});
+  }
+}
 
  /*
 
@@ -47,8 +54,10 @@ class LoginView extends React.Component{
     {this.props.isLoggedIn==false?<View />:<Redirect to="/home" />}
 
 */
-componentDidMount() {
 
+componentDidMount() {
+  console.log("Im hhere");
+  console.log(this.props);
     Animated.timing(                  // Animate over time
       this.state.fadeAnim,            // The animated value to drive
       {
@@ -136,7 +145,8 @@ componentDidMount() {
                       (r) => {
                         alert(r.msg);
                         this.props.login();
-                        this.setState({redirect:true})
+                        this.props.dispatchLogin(this.state.email, r.id);
+                        //this.setState({redirect:true})
                       }
                     )
                   }
@@ -157,6 +167,8 @@ componentDidMount() {
     );
   }
 }
+
+
 
 const styles = StyleSheet.create({
 
@@ -213,5 +225,12 @@ const styles = StyleSheet.create({
   }
 });
 
+const mapStateToProps = (state) => state.loginStateReducer;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    dispatchLogin: (email, lecturerID) => dispatch({type: "LOGIN", email: email, lecturerID: lecturerID})
+  };
+}
 
-export default LoginView;
+
+export default connect(mapStateToProps, mapDispatchToProps)(LoginView);

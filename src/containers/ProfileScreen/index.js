@@ -25,7 +25,7 @@ import {LecturerAPI} from "../../API";
 import LoginStateCard from "./components/LoginStateCard";
 
 
-
+import {connect} from 'react-redux';
 
 
 const LoginStateCard2 = (props) =>
@@ -57,6 +57,7 @@ class HomeView extends React.Component{
 
   logout(){
       this.props.logout ();
+      this.props.dispatchLogout();
       this.setState({redirect: true});
   }
 
@@ -109,14 +110,19 @@ class HomeView extends React.Component{
              </View>
 
         </View>
-
   );
-
   }
 }
 
+//const mapStateToProps= (state) => state.loginStateReducer;
 
-export default HomeView;
+const mapDispatchToProps= (dispatch) => {
+  return {
+    dispatchLogout: () => dispatch({type: "LOGOUT"})
+  };
+};
+
+export default connect(null, mapDispatchToProps)(HomeView);
 //export default TabNavigator;
 
 const styles = StyleSheet.create({

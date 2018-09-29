@@ -1,4 +1,5 @@
 import React from 'react';
+
 //import {loggedIn, notLoggedIn} from "./src/Routes";
 import {commonRoutes} from "./src/Routes";
 import GenerateRoutes from './src/GenerateRoutes';
@@ -31,8 +32,8 @@ class MainApp extends React.Component {
     //this.setState({loading:false, isLoggedIn: false});
 
     //Load state from the server
-    /*
-    new LecturerAPI().checkLoginState(
+
+    /*new LecturerAPI().checkLoginState(
       () =>    this.setState({isLoggedIn: true, loading: false}),
       () =>     this.setState({isLoggedIn: false, loading: false})
     );*/

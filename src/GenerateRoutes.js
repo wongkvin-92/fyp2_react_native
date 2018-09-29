@@ -7,8 +7,8 @@ import {connect} from 'react-redux';
 import { push } from 'react-router-redux';
 
 const GenerateRoutes = ({commonRoutes, loginState, props})=>{
-//const targetRoute = (!loginState)? defaultRoutes : normalRoutes;
-const targetRoute = commonRoutes;
+  //const targetRoute = (!loginState)? defaultRoutes : normalRoutes;
+  const targetRoute = commonRoutes;
 return (
   <View>
     {targetRoute.map( (el, i) =>
@@ -20,7 +20,6 @@ return (
        render={()=><el.component {...props}/>}
       />
     )}
-
   </View>)
   ;
 };

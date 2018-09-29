@@ -7,14 +7,13 @@ import {
   ScrollView,
   Image,
   Platform,
-  StyleSheet,
   Picker
 } from 'react-native';
 
 import {connect} from 'react-redux';
 
 import {
-  Card, Button, CheckBox
+  Card, Button
 } from 'react-native-elements';
 
 import CardView from './components/CardView';
@@ -24,7 +23,8 @@ import {Redirect, Link} from 'react-router-native';
 import { Calendar, CalendarList, Agenda } from 'react-native-calendars';
 import {LecturerAPI} from "../../API";
 
-
+import {styles} from './style';
+import DailyScheduleItem from './components/DailyScheduleItems';
 
 const cancelLesson = (classId, date) => {
   new LecturerAPI().cancelLesson(classId, date, (r) => {
@@ -45,38 +45,6 @@ const confirmCancel = (classId, date) => {
   { cancelable: false }
   );
 }
-
-const checkBoxTest = () =>{
-  alert("hey");
-}
-
-const DailyScheduleItem = (props) => (
-
-    <View style={[styles.item, {height: props.height}]}>
-
-
-      <Text>{props.subjectID} - {props.subjectName}</Text>
-      <Text>{props.type}</Text>
-      <Text>From {props.startTime} to {props.endTime}</Text>
-      <View style={styles.canceBtnContainer}>
-
-      {props.isCancelled=="0"?
-        <CheckBox
-          title='Click Here'
-          value={props.checked}
-          checked={props.checked}
-          onPress = {()=>checkBoxTest()}
-        />
-        :
-        <Text style={{color: "red", fontWeight:"900"}}>
-        Cancelled
-        </Text>
-      }
-      </View>
-    </View>
-);
-
-
 
 class LessonScreen extends React.Component{
   constructor(props){
@@ -293,85 +261,3 @@ const mapDispatchToProps = dispatch => {
 
 export default LessonScreen;
 //export default connect(mapStateToProps, mapDispatchToProps)(LessonScreen);
-
-
-const styles = StyleSheet.create({
-  containers: {
-    height: "100%",
-    backgroundColor: 'rgba(243,129,129,0.9)',
-  },
-
-  bodyStyle: {
-    width: "100%",
-
-  },
-  pickerStyle:{
-
-  },
-  pickerItemStyle:{
-    backgroundColor: "red",
-    color: "blue",
-    fontSize:20,
-  },
-  titleStlye:{
-    paddingTop: 16,
-    paddingBottom:16,
-    paddingLeft:20,
-    backgroundColor: 'white',
-    elevation:4,
-    flexDirection:'row',
-
-  },
-  titleTextStyle:{
-    fontSize:19,
-    fontWeight:"bold",
-    color:"black",
-    letterSpacing: 2,
-
-  },
-  titleCenterStyle: {
-      flex:1,
-  },
-
-  btnTextStyle:{
-    fontFamily: "Roboto",
-    textShadowColor:"red",
-    letterSpacing: 3,
-    textShadowOffset: {width: 2, height: 2},
-  },
-  item: {
-    backgroundColor: 'white',
-    flex: 1,
-    borderRadius: 6,
-    padding: 20,
-    marginRight: 10,
-    marginTop: 150,
-    justifyContent: 'center',
-    elevation: 10,
-    marginBottom:120
-  },
-  emptyDate: {
-    height: 100,
-    flex:1,
-    paddingTop: 50,
-    marginRight: 10,
-    marginTop: 150,
-    marginBottom: 120
-  },
-  canceBtnContainer:{
-    alignItems: "flex-end",
-  },
-  cancelBtnStyle:{
-    padding: 5,
-    backgroundColor: '#4f9deb',
-    elevation: 4,
-  },
-  cancelBtnTextStyle:{
-    fontFamily: "Roboto",
-    textShadowColor:"grey",
-    letterSpacing: 3,
-    textShadowOffset: {width: 2, height: 2},
-    fontWeight:"900",
-  }
-
-})

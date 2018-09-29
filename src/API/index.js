@@ -99,9 +99,9 @@ export class LecturerAPI extends API{
         .then(r=>r.json())
         .then(r => {
           if(r)
-            onSuccess()
+            onSuccess(r)
           else
-            onFailure();
+            onFailure(r);
         });
     }
 

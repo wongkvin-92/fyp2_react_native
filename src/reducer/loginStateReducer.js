@@ -1,6 +1,5 @@
 const INITIAL_STATE = {
   showSplashScreen: false,
-  loginState: true,
   email: "",
   lecturerID: null,
   loading: false,
@@ -10,9 +9,9 @@ const INITIAL_STATE = {
 export default (state = INITIAL_STATE, action) => {
     switch(action.type){
       case "LOGIN":
-        return {isLoggedIn: true, email: action.email, lecturerID: action.lecturerID};
+        return {...INITIAL_STATE, isLoggedIn: true, email: action.email, lecturerID: action.lecturerID};
       case "LOGOUT":
-        return {...INITIAL_STATE};
+        return {...INITIAL_STATE, isLoggedIn: false, email: "", lecturerID: null};
       default:
         return state;
     }
