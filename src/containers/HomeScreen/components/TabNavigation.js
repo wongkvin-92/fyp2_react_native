@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text, Image} from 'react-native';
+import {View, Text, Image, StyleSheet} from 'react-native';
 
 Icon
 
@@ -29,7 +29,7 @@ export class TabbedHome extends React.Component {
      return(
        <View style={{height: "100%"}}>
        <TabNavigator
-        tabBarStyle={{ overflow: 'hidden' }}
+        tabBarStyle={styles.tabBarStyle}
        >
         {tabRoutes.map( (el, i) => (
 
@@ -63,3 +63,12 @@ export class TabbedHome extends React.Component {
  **/
 
 export default TabbedHome;
+
+const styles = StyleSheet.create({
+  tabBarStyle:{
+  overflow: 'hidden' ,
+  height: '8%',
+  backgroundColor: 'white',
+  elevation:4,
+},
+})

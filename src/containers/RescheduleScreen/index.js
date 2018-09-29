@@ -55,19 +55,7 @@ const DailyScheduleItem = (props) => (
       <Text>{props.subjectID} - {props.subjectName}</Text>
       <Text>{props.type}</Text>
       <Text>From {props.startTime} to {props.endTime}</Text>
-      <View style={styles.canceBtnContainer}>
 
-      {props.isCancelled=="0"?
-        <CheckBox
-          title='Click Here'
-          value={props.checked}
-        />
-        :
-        <Text style={{color: "red", fontWeight:"900"}}>
-        Cancelled
-        </Text>
-      }
-      </View>
     </View>
 );
 
@@ -185,7 +173,7 @@ class HomeView extends React.Component{
 
   renderEmptyDate() {
     return (
-      <View style={styles.emptyDate}><Text>This is empty date!</Text></View>
+      <View style={styles.emptyDate}><Text style={{color:'red', fontWeight:'900'}}>No Class</Text></View>
     );
   }
 
@@ -208,25 +196,16 @@ class HomeView extends React.Component{
         <View style={styles.containers}>
              {this.state.redirect?<Redirect to="/login" />:<View/>}
              <View style={styles.titleStlye}>
-             <Link
-                   to="/home"
-                   component={Button}
-                   rounded
-                   icon={{name: 'arrow-left', type: 'font-awesome'}}
-                   buttonStyle= {styles.backBtnStyle}
-               />
+               <Link
+                     to="/home"
+                     component={Button}
+                     rounded
+                     icon={{name: 'arrow-left', type: 'font-awesome'}}
+                     buttonStyle= {styles.backBtnStyle}
+                 />
                  <View style={styles.titleCenterStyle}>
                 <Text style={styles.titleTextStyle}>Lesson</Text>
                 </View>
-
-                <Button
-                 title="Cancel"
-                   rounded
-                   icon={{name: 'cancel'}}
-                   buttonStyle= {styles.backBtnStyle}
-                   textStyle = {styles.cancelBtnTextStyle}
-                   onPress={()=> confirmCancel(props.classID, props.curDate) }
-                />
              </View>
 
              <Agenda
@@ -298,10 +277,8 @@ const styles = StyleSheet.create({
   titleStlye:{
     paddingTop: 16,
     paddingBottom:16,
-    paddingLeft:20,
     backgroundColor: 'white',
     elevation:4,
-    flexDirection:'row',
 
   },
   titleTextStyle:{
@@ -312,12 +289,13 @@ const styles = StyleSheet.create({
 
   },
   titleCenterStyle: {
-      flex:1,
+    alignSelf: 'center'
   },
   backBtnStyle : {
-      backgroundColor: 'rgba(252, 227, 138, 0.9)',
-      elevation: 2,
-      padding: 5,
+    position:'absolute',
+    padding:5,
+    paddingLeft:10,
+    paddingRight:0,
   },
   logoutBtnStyle:{
     marginTop: 30,
@@ -355,9 +333,9 @@ const styles = StyleSheet.create({
     alignItems: "flex-end",
   },
   cancelBtnStyle:{
-    marginTop: 30,
+    marginTop: 10,
     marginBottom: 10,
-    backgroundColor: 'rgba(252, 227, 138, 0.9)',
+    backgroundColor: 'rgba(255,0,0,0.8)',
     elevation: 2,
 
   },

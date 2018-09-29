@@ -18,43 +18,68 @@ import {LecturerAPI} from '../../../API';
 
 export const LessonCard = ({rescheduleID, title, subName, type, oriDate, oriDay, cancelDate, newDateTime, status, newVenue} ) => (
 <View>
+
   <Card
     title={title}
     titleStyle={styles.lessonCardStyle}
     containerStyle={styles.cardStyle}
   >
+
     <Text style={styles.cardContentContainerStyle}>
       <Text style={styles.cardContentTitleStyle}>Subject Name: </Text>{subName}
     </Text>
+
     <Text style={styles.cardContentContainerStyle}>
       <Text style={styles.cardContentTitleStyle}>Type: </Text> {type}
     </Text>
+
     <Text style={styles.cardContentContainerStyle}>
       <Text style={styles.cardContentTitleStyle}>Ori. Date: </Text> {oriDate}
     </Text>
+
     <Text style={styles.cardContentContainerStyle}>
-      <Text style={styles.cardContentTitleStyle}>Ori. Day: </Text> {oriDay}
-    </Text>
-    <Text style={styles.cardContentContainerStyle2}>
       <Text style={styles.cardContentTitleStyle}>Date Cancelled: </Text> {cancelDate}
     </Text>
-    {newDateTime==null?<Text>No replacement class set</Text>:<Text>Replacement class is set on date {newDateTime}
-    </Text>}
-    {newDateTime!=null&&status=="approved"?<Text>approved by admin, venue: {newVenue}</Text>:<Text>but not approved by admin</Text>}
 
-    <View style={styles.canceBtnContainer}>
+    <Text style={styles.cardContentContainerStyle}>
+      {newDateTime==null?
+        <Text style={styles.cardContentTitleStyle}>
+          No replacement class set</Text>
+      :<Text style={styles.cardContentTitleStyle}>
+        Replacement date:
+         <Text style={{fontWeight:"100"}}>
+          {newDateTime}
+         </Text>
+       </Text>}
+    </Text>
 
-      <Link
-    to={"/request/"+rescheduleID}
-        component={Button}
-        rounded
-        title="Reschedule"
-        icon={{name: 'calendar', type: 'font-awesome'}}
-        buttonStyle= {styles.rescheduleBtnStyle}
-        textStyle = {styles.cancelBtnTextStyle}
-      />
+    <Text style={styles.cardContentContainerStyle2}>
+      {newDateTime!=null&&status=="approved"?<Text style={{color: 'blue', fontWeight: '900'}}>Approved</Text>:<Text style={{color: 'red', fontWeight: '900'}}>Unapproved</Text>}
+    </Text>
 
-    </View>
+      {newDateTime!=null&&status=="approved"?
+        <Text style={styles.cardContentContainerStyle}>
+          <Text style={{color: 'blue', fontWeight: '900'}}>
+            New Venue: {newVenue}
+          </Text>
+        </Text>
+      :<Text></Text>}
+
+      {newDateTime!=null?
+        <View></View>
+        :  <View style={styles.canceBtnContainer}>
+             <Link
+                to={"/request/"+rescheduleID}
+                    component={Button}
+                    rounded
+                    title="Reschedule"
+                    icon={{name: 'calendar', type: 'font-awesome'}}
+                    buttonStyle= {styles.rescheduleBtnStyle}
+                    textStyle = {styles.cancelBtnTextStyle}
+             />
+          </View>
+      }
+
   </Card>
 </View>
 )
@@ -65,7 +90,8 @@ export default LessonCard;
 const styles = StyleSheet.create({
   cardStyle: {
     elevation: 8,
-      marginBottom:10
+    marginBottom:10,
+    borderRadius: 6
   },
   lessonCardStyle:{
     fontSize:18,
@@ -75,16 +101,22 @@ const styles = StyleSheet.create({
       marginBottom:10,
   },
   cardContentContainerStyle2:{
-      fontSize:16,
+      fontSize:12,
+      marginBottom:10,
+      position: "absolute",
+      alignSelf: "flex-end",
+      alignItems: "center",
+  },
+  cardContentTitleStyle: {
+      fontWeight: "900",
   },
   canceBtnContainer:{
-    flexDirection:"row",
-    alignItems: "center",
+    alignItems: "flex-end",
   },
   rescheduleBtnStyle:{
     marginTop: 10,
     marginBottom: 10,
-    backgroundColor: 'rgba(252, 227, 138, 0.9)',
+    backgroundColor: '#4f9deb',
     elevation: 2,
   },
   cancelBtnStyle:{
@@ -96,8 +128,9 @@ const styles = StyleSheet.create({
   },
   cancelBtnTextStyle:{
     fontFamily: "Roboto",
-    textShadowColor:"orange",
+    textShadowColor:"grey",
     letterSpacing: 3,
     textShadowOffset: {width: 2, height: 2},
+    fontWeight: "900",
   },
 })

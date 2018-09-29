@@ -1,4 +1,6 @@
-const host = "192.168.0.83";
+const artisan = "192.168.0.82";
+const myHome = "192.168.0.189";
+const host = artisan;
 const port = 80;
 const path = "fypBackEnd";
 
@@ -26,12 +28,12 @@ export class API {
   }
 
     patchRequest(action, headers={}){
-	let url = this.host+action;
-	return fetch(url, {...this.headers, method: "patch", ...headers})
-	    .then( r=> { console.log(r); return r;})
-	    .then(r=>r.json())
-	    .catch(r => console.log(r))
-	;
+    	let url = this.host+action;
+    	return fetch(url, {...this.headers, method: "patch", ...headers})
+    	    .then( r=> { console.log(r); return r;})
+    	    .then(r=>r.json())
+    	    .catch(r => console.log(r))
+	    ;
     }
 
 
@@ -78,7 +80,7 @@ export class LecturerAPI extends API{
           then(r=>callback(r))
           .catch( err => console.log(err) );
     }
-   
+
 
     fetchProfile(callback){
       this.getRequest("login/lecturers/").
@@ -137,7 +139,7 @@ export class LecturerAPI extends API{
 	    {
 	    body: data
 	}).then(onSuccess);
-	
+
     }
 
     logout(success){

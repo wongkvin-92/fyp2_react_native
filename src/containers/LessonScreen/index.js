@@ -46,9 +46,11 @@ const confirmCancel = (classId, date) => {
   );
 }
 
+const checkBoxTest = () =>{
+  alert("hey");
+}
+
 const DailyScheduleItem = (props) => (
-
-
 
     <View style={[styles.item, {height: props.height}]}>
 
@@ -63,6 +65,7 @@ const DailyScheduleItem = (props) => (
           title='Click Here'
           value={props.checked}
           checked={props.checked}
+          onPress = {()=>checkBoxTest()}
         />
         :
         <Text style={{color: "red", fontWeight:"900"}}>
@@ -75,13 +78,6 @@ const DailyScheduleItem = (props) => (
 
 
 
-
-
-
-
-
-
-
 class LessonScreen extends React.Component{
   constructor(props){
     super(props);
@@ -90,7 +86,8 @@ class LessonScreen extends React.Component{
     this.state={
       redirect:false,
       items: {},
-      selectedDate: today
+      selectedDate: today,
+      checked: false,
     };
     this.isLoading=false;
   }
@@ -199,7 +196,7 @@ class LessonScreen extends React.Component{
 
   renderEmptyDate() {
     return (
-      <View style={styles.emptyDate}><Text>This is empty date!</Text></View>
+      <View style={styles.emptyDate}><Text style={{color:'red', fontWeight:'900'}}>No Class</Text></View>
     );
   }
 
@@ -211,6 +208,8 @@ class LessonScreen extends React.Component{
     const date = new Date(time);
     return date.toISOString().split('T')[0];
   }
+
+
 
   render () {
     const vacation = {key:'vacation', color: 'red', selectedDotColor: 'blue'};
@@ -231,7 +230,7 @@ class LessonScreen extends React.Component{
                  title="Cancel"
                    rounded
                    icon={{name: 'cancel'}}
-                   buttonStyle= {styles.backBtnStyle}
+                   buttonStyle= {styles.cancelBtnStyle}
                    textStyle = {styles.cancelBtnTextStyle}
                    onPress={()=> confirmCancel(props.classID, props.curDate) }
                 />
@@ -277,6 +276,7 @@ class LessonScreen extends React.Component{
               agendaDayNumColor: 'black',
             }}
          />
+
         </View>
   );
   }
@@ -303,6 +303,7 @@ const styles = StyleSheet.create({
 
   bodyStyle: {
     width: "100%",
+
   },
   pickerStyle:{
 
@@ -331,56 +332,43 @@ const styles = StyleSheet.create({
   titleCenterStyle: {
       flex:1,
   },
-  backBtnStyle : {
-      backgroundColor: 'rgba(252, 227, 138, 0.9)',
-      elevation: 2,
-      padding: 5,
-  },
-  logoutBtnStyle:{
-    marginTop: 30,
-    marginBottom: 30,
-    backgroundColor: 'rgba(243,129,129,0.9)',
-    elevation: 2,
-  },
+
   btnTextStyle:{
     fontFamily: "Roboto",
     textShadowColor:"red",
     letterSpacing: 3,
     textShadowOffset: {width: 2, height: 2},
   },
-  logoutBtnBackground: {
-    marginTop:20,
-    backgroundColor: 'rgba(252, 227, 138, 0.9)',
-  },
   item: {
     backgroundColor: 'white',
     flex: 1,
-    borderRadius: 5,
+    borderRadius: 6,
     padding: 20,
     marginRight: 10,
-    marginTop: 10,
+    marginTop: 150,
     justifyContent: 'center',
     elevation: 10,
-    marginBottom:10
+    marginBottom:120
   },
   emptyDate: {
-    height: 15,
+    height: 100,
     flex:1,
-    paddingTop: 30
+    paddingTop: 50,
+    marginRight: 10,
+    marginTop: 150,
+    marginBottom: 120
   },
   canceBtnContainer:{
     alignItems: "flex-end",
   },
   cancelBtnStyle:{
-    marginTop: 30,
-    marginBottom: 10,
-    backgroundColor: 'rgba(252, 227, 138, 0.9)',
-    elevation: 2,
-
+    padding: 5,
+    backgroundColor: '#4f9deb',
+    elevation: 4,
   },
   cancelBtnTextStyle:{
     fontFamily: "Roboto",
-    textShadowColor:"orange",
+    textShadowColor:"grey",
     letterSpacing: 3,
     textShadowOffset: {width: 2, height: 2},
     fontWeight:"900",

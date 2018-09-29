@@ -1,7 +1,7 @@
 const INITIAL_STATE = {
   showSplashScreen: false,
   loginState: true,
-  email: "1235324",
+  email: "",
   lecturerID: null,
   loading: false,
   isLoggedIn: false

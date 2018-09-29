@@ -58,7 +58,19 @@ class HomeView extends React.Component{
 
 
          <View style={styles.titleStlye}>
-          <Text style={styles.titleTextStyle}>Home</Text>
+           <View style={styles.titleCenterStyle}>
+            <Text style={styles.titleTextStyle}>Home</Text>
+           </View>
+          <Link
+                to="/lessons"
+                component={Button}
+                rounded
+                icon={{name: 'notifications'}}
+                buttonStyle= {styles.backBtnStyle}
+                textStyle = {styles.cancelBtnTextStyle}
+                fontSize = {50}
+          /  >
+
          </View>
 
           <Animated.View style={[{opacity: this.state.fadeAnim}]}>
@@ -150,15 +162,25 @@ const styles = StyleSheet.create({
     paddingBottom:16,
     backgroundColor: 'white',
     elevation:4,
+    flexDirection:'row',
   },
 
   titleTextStyle:{
     fontSize:19,
     fontWeight:"bold",
     color:"black",
-        letterSpacing: 2,
+    letterSpacing: 2,
   },
+  titleCenterStyle: {
+      flex:1,
+  },
+  backBtnStyle : {
 
+      elevation: 2,
+      padding: 5,
+      paddingLeft:10,
+      paddingRight:0,
+  },
   cardBtn1Style:{
     display: 'none'
   },
@@ -166,12 +188,14 @@ const styles = StyleSheet.create({
   cardStyle:{
     elevation: 8,
     marginTop: 20,
-    marginBottom: 10
+    marginBottom: 10,
+    borderRadius:6
   },
 
   cardStyle2:{
     elevation: 8,
-    marginBottom: 10
+    marginBottom: 10,
+    borderRadius:6
   },
 
   btnTextStyle:{
@@ -187,8 +211,17 @@ const styles = StyleSheet.create({
   cardContentContainerStyle:{
       fontSize:16,
       marginBottom:10,
+
+  },
+  cardContentTitleStyle:{
+    fontWeight:'900',
+  },
+  cardContentTitle2Style:{
+    color:'#4f9deb',
   },
   viewBtnContainer:{
+    flexDirection:'row',
+    justifyContent:'center'
 
   },
   viewBtnStyle:{
@@ -196,6 +229,7 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     backgroundColor: '#4f9deb',
     elevation: 4,
+        width: '100%',
 
   },
   viewBtnTextStyle:{

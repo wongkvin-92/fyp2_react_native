@@ -51,7 +51,8 @@ class HomeView extends React.Component{
     redirect:false,
     fadeAnim: new Animated.Value(0),
     fadeAnim2: new Animated.Value(0),
-    lecturerName: "Loading"
+    lecturerName: "Loading",
+    lecturerEmail: "Loading"
   };
 
   logout(){
@@ -61,7 +62,7 @@ class HomeView extends React.Component{
 
   componentWillMount(){
       new LecturerAPI().fetchProfile( (r) => {
-          this.setState({lecturerName: r.lecturerName});
+          this.setState({lecturerName: r.lecturerName, lecturerEmail: r.lecturerEmail});
       });
   }
 
@@ -94,8 +95,9 @@ class HomeView extends React.Component{
          <View style={styles.titleStlye}>
           <Text style={styles.titleTextStyle}>Profile</Text>
          </View>
-
-          <LoginStateCard lecturerName={this.state.lecturerName} />
+         <Animated.View style={[{opacity: this.state.fadeAnim}]}>
+          <LoginStateCard lecturerName={this.state.lecturerName} lecturerEmail={this.state.lecturerEmail}/>
+         </Animated.View>
             <View style={styles.logoutBtnBackground}>
               <Button rounded
                  title="Logout"
@@ -163,6 +165,7 @@ const styles = StyleSheet.create({
     marginBottom: 30,
     backgroundColor: 'rgba(243,129,129,0.9)',
     elevation: 2,
+      width: '100%',
   },
 
   btnTextStyle:{
@@ -175,7 +178,8 @@ const styles = StyleSheet.create({
   logoutBtnBackground: {
     marginTop:20,
     backgroundColor: 'rgba(252, 227, 138, 0.9)',
-
+    flexDirection:'row',
+    justifyContent:'center'
   },
   cardTitleStyle:{
     fontSize:18,

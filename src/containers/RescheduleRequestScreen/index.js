@@ -31,29 +31,31 @@ class RescheduleRequest extends React.Component{
                 buttonStyle= {styles.backBtnStyle}
             />
             <View style={styles.titleCenterStyle}>
-           <Text style={styles.titleTextStyle}>Cancellation List</Text>
+              <Text style={styles.titleTextStyle}>Cancellation List</Text>
            </View>
         </View>
+        <View style={styles.datePickerStyle}>
         <DatePicker
-              style={styles.datetimeStyle}
-              date={this.state.datetime1}
-              mode="datetime"
-              format="YYYY-MM-DD HH:mm"
-              confirmBtnText="Confirm"
-              cancelBtnText="Cancel"
-              customStyles={{
-                dateIcon: {
-                  position: 'absolute',
-                  left: 0,
-                  top: 4,
-                  marginLeft: 0
-                },
-                dateInput: {
-                  marginLeft: 36
-                }
-              }}
-              minuteInterval={10}
-              onDateChange={(datetime) => {this.setState({datetime1: datetime});}}
+          style={styles.datetimeStyle}
+          date={this.state.datetime1}
+          mode="datetime"
+          format="YYYY-MM-DD HH:mm"
+          confirmBtnText="Confirm"
+          cancelBtnText="Cancel"
+          customStyles={{
+            dateIcon: {
+              position: 'absolute',
+              left: 0,
+              top: 4,
+              marginLeft: 0
+            },
+            dateInput: {
+              marginLeft: 36,
+
+            }
+          }}
+          minuteInterval={10}
+          onDateChange={(datetime) => {this.setState({datetime1: datetime});}}
         />
         <View style={styles.canceBtnContainer}>
         <Button
@@ -62,22 +64,23 @@ class RescheduleRequest extends React.Component{
           icon={{name: 'calendar', type: 'font-awesome'}}
           buttonStyle= {styles.rescheduleBtnStyle}
           textStyle = {styles.cancelBtnTextStyle}
-	  onPress={()=>{
-	      let dateStr = this.state.datetime1;
-	      let dtime = dateStr.split(' ');
-	      let fdateString = dtime[0];
-	      let ftimeString = dtime[1];
-	      let id = this.props.match.params.id;
+        	  onPress={()=>{
+        	      let dateStr = this.state.datetime1;
+        	      let dtime = dateStr.split(' ');
+        	      let fdateString = dtime[0];
+        	      let ftimeString = dtime[1];
+        	      let id = this.props.match.params.id;
 
-	      new LecturerAPI().requestRescheduleClass(
-		  id,
-		  fdateString, ftimeString,
-		  (r) => {
-		      alert(r.msg);
-		  }
-	      );
-	  }}
-        />
+        	      new LecturerAPI().requestRescheduleClass(
+        		  id,
+        		  fdateString, ftimeString,
+        		  (r) => {
+        		      alert(r.msg);
+        		  }
+        	      );
+	          }}
+      />
+        </View>
         </View>
       </View>
     );
@@ -88,6 +91,7 @@ const styles = StyleSheet.create({
   containers: {
     height: "100%",
     backgroundColor: 'rgba(243,129,129,0.9)',
+
   },
   titleStlye:{
     paddingTop: 16,
@@ -113,8 +117,20 @@ const styles = StyleSheet.create({
       paddingRight:0,
 
   },
+  datePickerStyle:{
+    flex: 1,
+    justifyContent: 'center',
+    alignSelf: 'center',
+    alignItems: 'center',
+    flexDirection: 'column',
+    fontSize: 20,
+    fontWeight:'900'
+  },
   datetimeStyle:{
-    width: 200,
+    width: 250,
+    backgroundColor: 'white',
+    borderRadius: 6,
+
   },
   canceBtnContainer:{
     flexDirection:"row",

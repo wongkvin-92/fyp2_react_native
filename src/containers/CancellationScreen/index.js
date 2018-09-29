@@ -31,7 +31,7 @@ const sampleData = [
   {title:"bit103", subName:"Intro DB", type:"lecture1", day:"friday", duration:"2"}
 ];*/
 
-class HomeView extends React.Component{
+class CancellationScreen extends React.Component{
 
   state={redirect:false, data: [], filter: "all"};
 
@@ -53,8 +53,6 @@ class HomeView extends React.Component{
 
         <View style={styles.containers}>
              {this.state.redirect?<Redirect to="/login" />:<View/>}
-
-             <ScrollView >
              <View style={styles.titleStlye}>
                <Link
                      to="/home"
@@ -67,41 +65,37 @@ class HomeView extends React.Component{
                 <Text style={styles.titleTextStyle}>Cancellation List</Text>
                 </View>
              </View>
+             <ScrollView >
+               <Card
+                containerStyle={styles.cardPickerStlye}
+               >
+                 <Picker
+                  selectedValue={this.state.filter}
+                  style={styles.pickerStyle}
+                  onValueChange={(itemValue, itemIndex) => {
+                      this.downloadList(itemValue);
+                      this.setState({filter: itemValue});
+                  }}
+                  itemStyle={styles.pickerItemStyle}
+                 >
+                 <Picker.Item label="All" value="all" />
+                 <Picker.Item label="Pending" value="pending" />
+                 <Picker.Item label="Approved" value="approved" />
+                 <Picker.Item label="Unscheduled" value="unscheduled" />
+                 <Picker.Item label="Scheduled" value="scheduled" />
 
+                </Picker>
+               </Card>
 
-             <Card>
-               <Picker
-                selectedValue={this.state.filter}
-                style={styles.pickerStyle}
-                onValueChange={(itemValue, itemIndex) => {
-
-                    this.downloadList(itemValue);
-                    this.setState({filter: itemValue});
-                } }
-                itemStyle={styles.pickerItemStyle}
-                >
-                <Picker.Item label="All" value="all" />
-                <Picker.Item label="Pending" value="pending" />
-                <Picker.Item label="Approved" value="approved" />
-                <Picker.Item label="Unscheduled" value="unscheduled" />
-                <Picker.Item label="Scheduled" value="scheduled" />
-
-              </Picker>
-             </Card>
-
-              {
-                this.state.data.map( (e,key) =>
-                  <LessonCard
-                    key={key}
-                    {...e}
-                  />
-                )
-              }
-
+                {
+                  this.state.data.map( (e,key) =>
+                    <LessonCard
+                      key={key}
+                      {...e}
+                    />
+                  )
+                }
              </ScrollView>
-
-
-
         </View>
 
   );
@@ -109,7 +103,7 @@ class HomeView extends React.Component{
   }
 }
 
-export default HomeView;
+export default CancellationScreen;
 
 /*
 <Button
@@ -129,12 +123,14 @@ const styles = StyleSheet.create({
   bodyStyle: {
     width: "100%",
   },
+  cardPickerStlye: {
+    borderRadius: 6
+  },
   pickerStyle:{
 
   },
   pickerItemStyle:{
-    backgroundColor: "red",
-    color: "blue",
+
     fontSize:20,
   },
   titleStlye:{
@@ -142,7 +138,6 @@ const styles = StyleSheet.create({
     paddingBottom:16,
     backgroundColor: 'white',
     elevation:4,
-
   },
   titleTextStyle:{
     fontSize:19,
@@ -159,7 +154,6 @@ const styles = StyleSheet.create({
       padding:5,
       paddingLeft:10,
       paddingRight:0,
-
   }
 
 })

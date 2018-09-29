@@ -188,15 +188,18 @@ const styles = StyleSheet.create({
     'borderTopColor': 'rgba(252, 227, 138, 0.9)',
     'borderBottomColor': 'rgba(252, 227, 138, 0.9)',
      elevation: 24,
+
   },
   loginBtnStyle: {
     backgroundColor: 'rgba(243,129,129,0.9)',
     elevation: 2,
+    width: '100%'
   },
   loginBtnContainer: {
     marginTop: 30,
     marginBottom: 30,
-
+    flexDirection:'row',
+    justifyContent:'center'
   },
 
   logoContainer: {
@@ -204,7 +207,7 @@ const styles = StyleSheet.create({
   },
   btnTextStyle:{
     fontFamily: "Roboto",
-    textShadowColor:"red",
+    textShadowColor:"grey",
     letterSpacing: 3,
     textShadowOffset: {width: 2, height: 2},
   }
