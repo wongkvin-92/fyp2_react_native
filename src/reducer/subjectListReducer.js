@@ -1,6 +1,8 @@
 const INITIAL_STATE = {
-  weeklySchedule: [],
+  weeklySchedule: {},
   subjectListChecked: false,
+  downloadingSchedule: false,
+  itemsPending: 0,
   cancelList: []
 };
 
@@ -15,8 +17,14 @@ export default (state = INITIAL_STATE, action) => {
        var newEntry = {};
        newEntry[action.day] = action.obj;
        let newWeeklySchedule= {...state.weeklySchedule, ...newEntry};
-
-      return {...state, weeklySchedule: newWeeklySchedule};
+       return {...state, weeklySchedule: newWeeklySchedule, itemsPending: state.itemsPending-1};
+      case "START_DOWNLOAD":
+        return {...state,
+                  weeklySchedule: {},
+                  downloadingSchedule: true,
+                  itemsPending: action.itemsPending};
+      case "STOP_DOWNLOAD":
+        return {...state, downloadingSchedule: false};
       case "ADD_CANCEL_SUBJECT":
         return {...state, cancelList: [...cancelList, action.subject]};
       case "REMOVE_CANCEL_SUBJECT":

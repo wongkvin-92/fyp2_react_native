@@ -46,7 +46,7 @@ const confirmCancel = (classId, date) => {
   );
 }
 
-class LessonScreen extends React.Component{
+class LessonScreen extends React.PureComponent{
   constructor(props){
     super(props);
 
@@ -72,6 +72,13 @@ class LessonScreen extends React.Component{
     if(this.props.subjectListChecked != newProps.subjectListChecked){
       this.setState({showCancelButton: newProps.subjectListChecked});
     }
+
+    if(this.props.itemsPending != newProps.itemsPending){
+        if(newProps.itemsPending == 0){
+          this.props.stopDownload();
+          this.setState({items: newProps.weeklySchedule});
+        }
+    }
   }
 
 
@@ -95,12 +102,15 @@ class LessonScreen extends React.Component{
   }
 
   loadWeek(date){
-    for(let i=0; i< 7; i++){
-      let weekDay = this.getWeekStart(date);
-      weekDay.setDate(weekDay.getDate()+i);
-      console.log(weekDay);
-      this.fetchSchedule(this.formatDate(weekDay));
-    }
+    if(this.props.downloadingSchedule == false){
+        this.props.startDownload(7);
+        for(let i=0; i< 7; i++){
+          let weekDay = this.getWeekStart(date);
+          weekDay.setDate(weekDay.getDate()+i);
+          console.log(weekDay);
+          this.fetchSchedule(this.formatDate(weekDay));
+        }
+      }
   }
 
   loadMonth(date){
@@ -145,7 +155,7 @@ class LessonScreen extends React.Component{
         this.props.addSubject(curDay, r);
         //this.props.setSchedule(obj);
         //this.setState({items: obj});
-        
+
     });
   }
 
@@ -218,6 +228,7 @@ class LessonScreen extends React.Component{
              </View>
 
              <Agenda
+              style={{height: 30}}
                items={this.state.items}
                loadItemsForMonth={this.loadItems.bind(this)}
                selected={this.state.selectedDate}
@@ -269,7 +280,9 @@ const mapStateToProps = p => p.subjectListReducer;
 const mapDispatchToProps = dispatch => {
   return {
     setSchedule: (data) => dispatch({type: "SET_SCHEDULE", weeklySchedule: data}),
-    addSubject: (day, obj) => dispatch({type: "ADD_SUBJECT_SCHEDULE", day, obj})
+    addSubject: (day, obj) => dispatch({type: "ADD_SUBJECT_SCHEDULE", day, obj}),
+    startDownload: (count) => dispatch({type: "START_DOWNLOAD", itemsPending: count}),
+    stopDownload: () => dispatch({type: "STOP_DOWNLOAD"})
   }
 };
 
