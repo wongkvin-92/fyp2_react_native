@@ -32,14 +32,30 @@ const DailyScheduleItem = (props) => (
           value={props.checked}
           checked={props.checked}
           onPress = {()=> {
-            props.checkSubject();
-            if(props.weeklySchedule){
-                      let subject = props.weeklySchedule.find(e => e.classID == props.classID);
-                      if(subject){
-                        props.addSubject(subject);
-                      }else
-                        console.error("Sorry, error occured");
-          }
+            //
+            let temp1  = props.weeklySchedule;
+            let keyList = Object.keys(temp1);
+            let searchMap = keyList.map(e=>temp1[e]);
+            let searchBuffer = [].concat.apply([], searchMap);
+            let subject = searchBuffer.find(e => e.classID == props.classID);
+            console.log("Class ID"+props.classID);
+            console.log(searchBuffer);
+            console.log(subject);
+
+            if(subject){
+              props.addSubject(subject);
+              props.checkSubject();
+            }
+            //else
+          //    console.error("Sorry, error subject not found in the state tree");
+
+                    /*let weekSchedule = Object.keys(props.weeklySchedule).map(e=>props.weeklySchedule[e])；
+                    let allClasses = [].concat([], weekSchedule);
+                    let subject = allClasses.find(e => e.classID == props.classID);
+                    if(subject){
+                      props.addSubject(subject);
+                    }else
+                      console.error("Sorry, error occured");*/
           }}
         />
 

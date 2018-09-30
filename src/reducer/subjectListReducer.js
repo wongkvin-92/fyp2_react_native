@@ -1,18 +1,23 @@
 const INITIAL_STATE = {
   weeklySchedule: {},
+  weekStart: null,
   subjectListChecked: false,
   downloadingSchedule: false,
   itemsPending: 0,
-  cancelList: []
+  cancelList: {}
 };
 
 
 export default (state = INITIAL_STATE, action) => {
     switch(action.type){
+      case "SET_WEEK_START":
+        return {...state, weekStart: action.weekStart};
       case "SET_SCHEDULE":
         return {...state, weeklySchedule: action.weeklySchedule};
       case "CHECK_SUBJECT":
         return {...state, subjectListChecked: true};
+      case "UNCHECK_SUBJECT":
+        return {...state, subjectListChecked: false};
       case "ADD_SUBJECT_SCHEDULE":
        var newEntry = {};
        newEntry[action.day] = action.obj;
@@ -26,7 +31,9 @@ export default (state = INITIAL_STATE, action) => {
       case "STOP_DOWNLOAD":
         return {...state, downloadingSchedule: false};
       case "ADD_CANCEL_SUBJECT":
-        return {...state, cancelList: [...cancelList, action.subject]};
+       let newItem={};
+       newItem[action.subject.classID] = action.subject;
+      return {...state, cancelList: {...state.cancelList, ...newItem}};
       case "REMOVE_CANCEL_SUBJECT":
         let newList = INITIAL_STATE.cancelList.filter( e => e != action.subject );
         return {...state, cancelList: newList};

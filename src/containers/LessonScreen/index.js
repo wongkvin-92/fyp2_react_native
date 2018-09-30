@@ -102,13 +102,22 @@ class LessonScreen extends React.PureComponent{
   }
 
   loadWeek(date){
+    let weekStart = this.getWeekStart(date);
+
     if(this.props.downloadingSchedule == false){
+      if(this.props.weekStart == null ||
+        weekStart.toDateString() != this.props.weekStart){
+        this.props.setWeekStart(weekStart.toDateString());
         this.props.startDownload(7);
+
+        //console.log("WEEK_START IS ");
+        //console.log(week);
         for(let i=0; i< 7; i++){
-          let weekDay = this.getWeekStart(date);
-          weekDay.setDate(weekDay.getDate()+i);
-          console.log(weekDay);
-          this.fetchSchedule(this.formatDate(weekDay));
+            let weekDay = this.getWeekStart(date);
+            weekDay.setDate(weekDay.getDate()+i);
+            console.log(weekDay);
+            this.fetchSchedule(this.formatDate(weekDay));
+          }
         }
       }
   }
@@ -282,7 +291,8 @@ const mapDispatchToProps = dispatch => {
     setSchedule: (data) => dispatch({type: "SET_SCHEDULE", weeklySchedule: data}),
     addSubject: (day, obj) => dispatch({type: "ADD_SUBJECT_SCHEDULE", day, obj}),
     startDownload: (count) => dispatch({type: "START_DOWNLOAD", itemsPending: count}),
-    stopDownload: () => dispatch({type: "STOP_DOWNLOAD"})
+    stopDownload: () => dispatch({type: "STOP_DOWNLOAD"}),
+    setWeekStart: (date) => dispatch({type: "SET_WEEK_START", weekStart: date})
   }
 };
 
