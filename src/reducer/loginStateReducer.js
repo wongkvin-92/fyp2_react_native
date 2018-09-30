@@ -1,3 +1,5 @@
+//import { AsyncStorage } from 'react-native';
+
 const INITIAL_STATE = {
   showSplashScreen: false,
   email: "",
@@ -7,11 +9,13 @@ const INITIAL_STATE = {
 };
 
 export default (state = INITIAL_STATE, action) => {
+    //AsyncStorage.setItem('test', '1234');
+    //AsyncStorage.getItem('test').then(e=>console.log(e));
     switch(action.type){
       case "LOGIN":
-        return {...INITIAL_STATE, isLoggedIn: true, email: action.email, lecturerID: action.lecturerID};
+        return {...state, isLoggedIn: true, email: action.email, lecturerID: action.lecturerID};
       case "LOGOUT":
-        return {...INITIAL_STATE, isLoggedIn: false, email: "", lecturerID: null};
+        return {...state, isLoggedIn: false, email: "", lecturerID: null};
       default:
         return state;
     }

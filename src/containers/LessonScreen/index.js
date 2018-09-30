@@ -56,8 +56,22 @@ class LessonScreen extends React.Component{
       items: {},
       selectedDate: today,
       checked: false,
+      showCancelButton: false
     };
     this.isLoading=false;
+  }
+
+
+  componentWillMount(){
+    //this.setState({showCancelButton: })
+    //this.loadWeek(new Date());
+    //this.loadMonth(new Date());
+  }
+
+  componentWillReceiveProps(newProps){
+    if(this.props.subjectListChecked != newProps.subjectListChecked){
+      this.setState({showCancelButton: newProps.subjectListChecked});
+    }
   }
 
 
@@ -84,6 +98,7 @@ class LessonScreen extends React.Component{
     for(let i=0; i< 7; i++){
       let weekDay = this.getWeekStart(date);
       weekDay.setDate(weekDay.getDate()+i);
+      console.log(weekDay);
       this.fetchSchedule(this.formatDate(weekDay));
     }
   }
@@ -108,10 +123,6 @@ class LessonScreen extends React.Component{
     }*/
   }
 
-  componentWillMount(){
-    //this.loadWeek(new Date());
-    //this.loadMonth(new Date());
-  }
 
   truncateDateString(str){
     let date = new Date(str);
@@ -126,15 +137,15 @@ class LessonScreen extends React.Component{
     //this.setState({items: obj});
     //this.props.setSchedule(obj);
     new LecturerAPI().fetchSchedule(day, (r) => {
-        let obj = this.state.items;
+
+        //let obj = this.state.items;
 
         let curDay = this.formatDate(new Date(day));
-        console.log(curDay);
 
-        obj[day] =r;
+        this.props.addSubject(curDay, r);
         //this.props.setSchedule(obj);
         //this.setState({items: obj});
-        console.log(this.state.items);
+        
     });
   }
 
@@ -194,6 +205,7 @@ class LessonScreen extends React.Component{
                 <Text style={styles.titleTextStyle}>Lesson</Text>
                 </View>
 
+          {this.state.showCancelButton==true?
                 <Button
                  title="Cancel"
                    rounded
@@ -202,6 +214,7 @@ class LessonScreen extends React.Component{
                    textStyle = {styles.cancelBtnTextStyle}
                    onPress={()=> confirmCancel(props.classID, props.curDate) }
                 />
+                :<View/>}
              </View>
 
              <Agenda
@@ -255,9 +268,10 @@ class LessonScreen extends React.Component{
 const mapStateToProps = p => p.subjectListReducer;
 const mapDispatchToProps = dispatch => {
   return {
-    setSchedule: (data) => dispatch({type: "SET_SCHEDULE", weeklySchedule: data})
+    setSchedule: (data) => dispatch({type: "SET_SCHEDULE", weeklySchedule: data}),
+    addSubject: (day, obj) => dispatch({type: "ADD_SUBJECT_SCHEDULE", day, obj})
   }
 };
 
-export default LessonScreen;
+export default connect(mapStateToProps, mapDispatchToProps)(LessonScreen);
 //export default connect(mapStateToProps, mapDispatchToProps)(LessonScreen);

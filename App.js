@@ -23,9 +23,9 @@ import { PersistGate } from 'redux-persist/integration/react';
 import {Provider} from 'react-redux';
 import store, {persistor} from "./src/store";
 
+
 class MainApp extends React.Component {
 //  state={loading: false, isLoggedIn: false};
-
 
   componentWillMount(){
 

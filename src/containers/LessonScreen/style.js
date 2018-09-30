@@ -50,10 +50,14 @@ export const styles = StyleSheet.create({
     borderRadius: 6,
     padding: 20,
     marginRight: 10,
-    marginTop: 150,
+    marginTop: 20,
     justifyContent: 'center',
     elevation: 10,
-    marginBottom:120
+    marginBottom:20
+  },
+  scheduleContentStyle:{
+    marginBottom:10,
+    fontSize:15,
   },
   emptyDate: {
     height: 100,
@@ -77,6 +81,10 @@ export const styles = StyleSheet.create({
     letterSpacing: 3,
     textShadowOffset: {width: 2, height: 2},
     fontWeight:"900",
-  }
+  },
+  cardTitleStyle:{
+    fontSize:18,
+    color: '#4f9deb',
+  },
 
 });

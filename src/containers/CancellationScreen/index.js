@@ -144,7 +144,6 @@ const styles = StyleSheet.create({
     fontWeight:"bold",
     color:"black",
     letterSpacing: 2,
-
   },
   titleCenterStyle: {
     alignSelf: 'center'
