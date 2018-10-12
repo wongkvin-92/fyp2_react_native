@@ -1,8 +1,10 @@
-const artisan = "192.168.0.82";
+const artisan = "192.168.0.78";
 const myHome = "192.168.0.189";
 const mcdKotaDam = "192.168.182.120";
 const bandarSriDam = "192.168.1.134";
-const host = bandarSriDam;
+const help = "10.125.192.36";
+const darr = "192.168.0.7";
+const host = myHome;
 const port = 80;
 const path = "fypBackEnd";
 
@@ -118,6 +120,13 @@ export class LecturerAPI extends API{
       this.getRequest("lessons/").
           then(r=>onSuccess(r))
           .catch( err => alert(err) );
+    }
+
+    cancelLessonList(lessons, callback){
+      let action = "reschedule/cancel/list/";
+      this.postRequest(action, {
+        body: JSON.stringify({data: lessons})
+      }).then(callback);
     }
 
     displayCancelledList(filter, onSuccess){

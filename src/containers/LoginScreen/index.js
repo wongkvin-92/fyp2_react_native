@@ -24,8 +24,8 @@ import {connect} from 'react-redux';
 
 class LoginView extends React.Component{
   state={
-    email: "seethal@help.edu.my",
-    password: "123456",
+    email: "",
+    password: "",
     loginState: "NONE",
     redirect: false,
     fadeAnim: new Animated.Value(0),
@@ -218,7 +218,6 @@ const styles = StyleSheet.create({
     alignItems : 'center',
   },
   btnTextStyle:{
-    fontFamily: "Roboto",
     textShadowColor:"grey",
     letterSpacing: 3,
     textShadowOffset: {width: 2, height: 2},

@@ -4,14 +4,14 @@ import {View, Text, StyleSheet} from 'react-native';
 import {CheckBox, Card} from 'react-native-elements';
 import {styles} from '../style';
 import {connect} from 'react-redux';
-
+import hash from 'object-hash';
 /*
 const checkBoxTest = ({checkSubj}) =>{
   //alert("hey");
   checkSubj();
 }*/
 
-const DailyScheduleItem = (props) => (
+const DailyScheduleItemFunc = (props) => (
 
     <View>
     <Card
@@ -33,19 +33,25 @@ const DailyScheduleItem = (props) => (
           checked={props.checked}
           onPress = {()=> {
             //
+            props.toggleTick();
             let temp1  = props.weeklySchedule;
             let keyList = Object.keys(temp1);
             let searchMap = keyList.map(e=>temp1[e]);
             let searchBuffer = [].concat.apply([], searchMap);
-            let subject = searchBuffer.find(e => e.classID == props.classID);
-            console.log("Class ID"+props.classID);
-            console.log(searchBuffer);
-            console.log(subject);
+
+            //let subject = searchBuffer.find(e => e.classID == props.classID);
+            let subject = props.subject;
 
             if(subject){
-              props.addSubject(subject);
+              if(props.cancelListFromState.hasOwnProperty(hash(subject))){
+                props.removeSubject(subject);
+              }else{
+                props.addSubject(subject);
+              }
               props.checkSubject();
             }
+
+
             //else
           //    console.error("Sorry, error subject not found in the state tree");
 
@@ -70,6 +76,36 @@ const DailyScheduleItem = (props) => (
      </Card>
     </View>
 );
+
+class DailyScheduleItem extends React.PureComponent{
+
+  constructor(props){
+    super(props);
+    let subjKeys = ["classID", "type", "subjectID", "subjectName",
+                  "startTime", "endTime", "isCancelled", "curDate"];
+    let subj = {};
+    subjKeys.forEach(key => subj[key] = props[key]);
+    let isChecked  = props.cancelList.hasOwnProperty(hash(subj));
+    this.state = {checked: isChecked,
+                cancelList: [],
+                subject: subj
+              };
+  }
+
+  componentWillReceiveProps(newProps){
+    if(this.props.cancelList != newProps.cancelList){
+      this.setState({cancelList: newProps.cancelList});
+    }
+  }
+  render(){
+      return  <DailyScheduleItemFunc
+       toggleTick={()=> this.setState({checked: !this.state.checked}) }
+      checked={this.state.checked} {...this.props}
+      cancelListFromState={this.state.cancelList}
+      subject={this.state.subject}
+      />;
+  }
+};
 
 const mapStateToProps = state => state.subjectListReducer;
 

@@ -54,7 +54,7 @@ export const LessonCard = ({rescheduleID, title, subName, type, oriDate, oriDay,
     </Text>
 
     <Text style={styles.cardContentContainerStyle2}>
-      {newDateTime!=null&&status=="approved"?<Text style={{color: 'blue', fontWeight: '900'}}>Approved</Text>:<Text style={{color: 'red', fontWeight: '900'}}>Unapproved</Text>}
+      {newDateTime!=null&&status=="approved"?<Text style={{color: 'blue', fontWeight: '900'}}>Approved</Text>:<Text style={{color: 'red', fontWeight: '900'}}>Pending</Text>}
     </Text>
 
       {newDateTime!=null&&status=="approved"?
@@ -127,7 +127,6 @@ const styles = StyleSheet.create({
 
   },
   cancelBtnTextStyle:{
-    fontFamily: "Roboto",
     textShadowColor:"grey",
     letterSpacing: 3,
     textShadowOffset: {width: 2, height: 2},

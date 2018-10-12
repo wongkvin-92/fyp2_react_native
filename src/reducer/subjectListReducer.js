@@ -1,11 +1,23 @@
+import hash from 'object-hash';
 const INITIAL_STATE = {
   weeklySchedule: {},
   weekStart: null,
   subjectListChecked: false,
   downloadingSchedule: false,
   itemsPending: 0,
-  cancelList: {}
+  cancelList: {},
+  forceReload: false
 };
+
+/*
+function guid() {
+  function s4() {
+    return Math.floor((1 + Math.random()) * 0x10000)
+      .toString(16)
+      .substring(1);
+  }
+  return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4();
+}*/
 
 
 export default (state = INITIAL_STATE, action) => {
@@ -15,7 +27,7 @@ export default (state = INITIAL_STATE, action) => {
       case "SET_SCHEDULE":
         return {...state, weeklySchedule: action.weeklySchedule};
       case "CHECK_SUBJECT":
-        return {...state, subjectListChecked: true};
+        return {...state, subjectListChecked: Object.keys(state.cancelList).length !=0 };
       case "UNCHECK_SUBJECT":
         return {...state, subjectListChecked: false};
       case "ADD_SUBJECT_SCHEDULE":
@@ -32,11 +44,24 @@ export default (state = INITIAL_STATE, action) => {
         return {...state, downloadingSchedule: false};
       case "ADD_CANCEL_SUBJECT":
        let newItem={};
-       newItem[action.subject.classID] = action.subject;
+       newItem[hash(action.subject)] = action.subject;
       return {...state, cancelList: {...state.cancelList, ...newItem}};
       case "REMOVE_CANCEL_SUBJECT":
-        let newList = INITIAL_STATE.cancelList.filter( e => e != action.subject );
-        return {...state, cancelList: newList};
+        //let newList = state.cancelList.filter( e => e != action.subject );
+        var temp = {};
+          Object.keys(state.cancelList)
+                .filter(e => e != hash(action.subject))
+                .forEach(key => temp[key] = state.cancelList[key]);
+        //Object.keys(temp).map(e => temp[e].classID!=action.subject? temp[e]:null)
+        //                .filter(e=>e!=null)
+        return {...state, cancelList: temp};
+      case "REMOVE_ALL_LIST":
+        return {...state, cancelList:{}};
+
+      case "FORCE_RELOAD":
+        return {...state, forceReload: true};
+      case "AFTER_RELOAD":
+        return {...state, forceReload: false};
       default:
         return state;
     }

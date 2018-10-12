@@ -304,7 +304,7 @@ const styles = StyleSheet.create({
     elevation: 2,
   },
   btnTextStyle:{
-    fontFamily: "Roboto",
+
     textShadowColor:"red",
     letterSpacing: 3,
     textShadowOffset: {width: 2, height: 2},
@@ -340,7 +340,7 @@ const styles = StyleSheet.create({
 
   },
   cancelBtnTextStyle:{
-    fontFamily: "Roboto",
+
     textShadowColor:"orange",
     letterSpacing: 3,
     textShadowOffset: {width: 2, height: 2},

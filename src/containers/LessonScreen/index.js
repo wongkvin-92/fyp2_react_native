@@ -26,37 +26,42 @@ import {LecturerAPI} from "../../API";
 import {styles} from './style';
 import DailyScheduleItem from './components/DailyScheduleItems';
 
-const cancelLesson = (classId, date) => {
-  new LecturerAPI().cancelLesson(classId, date, (r) => {
+const cancelLesson = (cancelList, callback) => {
+  let dataList = Object.keys(cancelList).map(i => ({"classID": cancelList[i].classID, "cancelDate": cancelList[i].curDate}) )
+  new LecturerAPI().cancelLessonList(dataList, (r) =>{
+    callback();
     alert(r.msg);
-
   });
+  /*new LecturerAPI().cancelLesson(classId, date, (r) => {
+    alert(r.msg);
+  });*/
 };
 
-
-const confirmCancel = (classId, date) => {
+/*
+const confirmCancel = (cancelList, callback) => {
   Alert.alert(
   'Confirm Cancel',
   'Are you sure you want to cancel class',
   [
     {text: 'No', onPress: () => console.log('OK Pressed'), style: 'cancel'},
-    {text: 'Yes', onPress: ()=>cancelLesson(classId, date) },
+    {text: 'Yes', onPress: ()=>cancelLesson(cancelList, callback) },
   ],
   { cancelable: false }
   );
 }
-
+*/
 class LessonScreen extends React.PureComponent{
   constructor(props){
     super(props);
 
-    let today = this.formatDate(this.getWeekStart(new Date()));
+    let today = this.formatDate(new Date());
     this.state={
       redirect:false,
       items: {},
       selectedDate: today,
       checked: false,
-      showCancelButton: false
+      showCancelButton: false,
+      doNothing: false
     };
     this.isLoading=false;
   }
@@ -79,6 +84,17 @@ class LessonScreen extends React.PureComponent{
           this.setState({items: newProps.weeklySchedule});
         }
     }
+    /*
+    if(this.props.forceReload != newProps.forceReload){
+      if(newProps.forceReload == true){
+        //this.setState({doNothing: !this.state.doNothing});
+        //this.loadItems(this.state.selectedDate);
+        newProps.done_reload();
+      }
+    }*/
+    //if(this.props.cancelList != newProps.cancelList){
+
+    //}
   }
 
 
@@ -194,7 +210,7 @@ class LessonScreen extends React.PureComponent{
 
   renderEmptyDate() {
     return (
-      <View style={styles.emptyDate}><Text style={{color:'red', fontWeight:'900'}}>No Class</Text></View>
+      <View style={styles.emptyDate}><Text style={styles.emptyTextStyle}>No Class</Text></View>
     );
   }
 
@@ -213,39 +229,53 @@ class LessonScreen extends React.PureComponent{
     const vacation = {key:'vacation', color: 'red', selectedDotColor: 'blue'};
     const massage = {key:'massage', color: 'blue', selectedDotColor: 'blue'};
     const workout = {key:'workout', color: 'green'};
-
+      var startDay = this.formatDate(new Date());
     return  (
 
         <View style={styles.containers}>
              {this.state.redirect?<Redirect to="/login" />:<View/>}
              <View style={styles.titleStlye}>
-
+             <Link
+                   to="/home"
+                   component={Button}
+                   rounded
+                   icon={{name: 'arrow-left', type: 'font-awesome'}}
+                   buttonStyle= {styles.backBtnStyle}
+               />
                  <View style={styles.titleCenterStyle}>
                 <Text style={styles.titleTextStyle}>Lesson</Text>
                 </View>
 
           {this.state.showCancelButton==true?
-                <Button
-                 title="Cancel"
-                   rounded
-                   icon={{name: 'cancel'}}
-                   buttonStyle= {styles.cancelBtnStyle}
-                   textStyle = {styles.cancelBtnTextStyle}
-                   onPress={()=> confirmCancel(props.classID, props.curDate) }
-                />
+
+                <Link
+                      to="/home"
+                      component={Button}
+                      title="Cancel"
+                      rounded
+                      icon={{name: 'cancel'}}
+                      buttonStyle= {styles.cancelBtnStyle}
+                      textStyle = {styles.cancelBtnTextStyle}
+                      onPress={()=> {
+                       cancelLesson(this.props.cancelList, ()=>{
+                            this.props.clearCancelList()
+                            this.props.force_reload();
+                          }); }}
+                /  >
                 :<View/>}
              </View>
 
              <Agenda
+              doNothing={this.state.doNothing}
               style={{height: 30}}
                items={this.state.items}
                loadItemsForMonth={this.loadItems.bind(this)}
-               selected={this.state.selectedDate}
+               selected={this.state.selectedDate }
                // Minimum date that can be selected, dates before minDate will be grayed out. Default = undefined
-               minDate={'2018-08-01'}
+               minDate={startDay}
                // Maximum date that can be selected, dates after maxDate will be grayed out. Default = undefined
-               maxDate={'2018-11-30'}
-               renderItem={(props) => <DailyScheduleItem {...props} /> }
+               maxDate={'2018-12-01'}
+               renderItem={(props)=> <DailyScheduleItem {...props} /> }
                renderEmptyDate={this.renderEmptyDate.bind(this)}
                rowHasChanged={this.rowHasChanged.bind(this)}
                // markingType={'period'}
@@ -270,11 +300,14 @@ class LessonScreen extends React.PureComponent{
                 // monthFormat={'yyyy'}
 
               // renderDay={(day, item) => (<Text>{day ? day.day: 'item'}</Text>)}
+
             }}
             theme={{
               backgroundColor: 'rgba(243,129,129,0.9)',
               agendaDayTextColor: 'black',
               agendaDayNumColor: 'black',
+              todayBackgroundColor: 'red',
+              todayTextColor:'#ffffff'
             }}
          />
 
@@ -282,7 +315,20 @@ class LessonScreen extends React.PureComponent{
   );
   }
 }
-
+/*
+<Button
+ title="Cancel"
+   rounded
+   icon={{name: 'cancel'}}
+   buttonStyle= {styles.cancelBtnStyle}
+   textStyle = {styles.cancelBtnTextStyle}
+   onPress={()=> {
+     confirmCancel(this.props.cancelList, ()=>{
+       this.props.clearCancelList()
+       this.props.force_reload();
+     });
+   }}
+/>*/
 
 //export default LessonScreen;
 const mapStateToProps = p => p.subjectListReducer;
@@ -292,7 +338,10 @@ const mapDispatchToProps = dispatch => {
     addSubject: (day, obj) => dispatch({type: "ADD_SUBJECT_SCHEDULE", day, obj}),
     startDownload: (count) => dispatch({type: "START_DOWNLOAD", itemsPending: count}),
     stopDownload: () => dispatch({type: "STOP_DOWNLOAD"}),
-    setWeekStart: (date) => dispatch({type: "SET_WEEK_START", weekStart: date})
+    setWeekStart: (date) => dispatch({type: "SET_WEEK_START", weekStart: date}),
+    clearCancelList: () => dispatch({type: "REMOVE_ALL_LIST"}),
+    done_reload: ()=>dispatch({type: "AFTER_RELOAD"}),
+    force_reload: ()=>dispatch({type: "FORCE_RELOAD"})
   }
 };
 

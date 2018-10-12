@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>logFormatVersion</key>
+	<integer>9</integer>
+	<key>logs</key>
+	<dict>
+		<key>C5B0A5C7-4E4E-42E1-88B0-E1000F30BD55</key>
+		<dict>
+			<key>className</key>
+			<string>IDECommandLineBuildLog</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.DebugLog</string>
+			<key>fileName</key>
+			<string>C5B0A5C7-4E4E-42E1-88B0-E1000F30BD55.xcactivitylog</string>
+			<key>highLevelStatus</key>
+			<string>W</string>
+			<key>schemeIdentifier-containerName</key>
+			<string>fyp2 project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>fyp2</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Building project fyp2 with scheme fyp2 and configuration Debug</string>
+			<key>timeStartedRecording</key>
+			<real>560136869.10071003</real>
+			<key>timeStoppedRecording</key>
+			<real>560136875.86685205</real>
+			<key>title</key>
+			<string>Building project fyp2 with scheme fyp2 and configuration Debug</string>
+			<key>uniqueIdentifier</key>
+			<string>C5B0A5C7-4E4E-42E1-88B0-E1000F30BD55</string>
+		</dict>
+		<key>F0490FDC-DA39-4B29-9D7E-5D570CCA6DCE</key>
+		<dict>
+			<key>className</key>
+			<string>IDECommandLineBuildLog</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.DebugLog</string>
+			<key>fileName</key>
+			<string>F0490FDC-DA39-4B29-9D7E-5D570CCA6DCE.xcactivitylog</string>
+			<key>highLevelStatus</key>
+			<string>W</string>
+			<key>schemeIdentifier-containerName</key>
+			<string>fyp2 project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>fyp2</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Building project fyp2 with scheme fyp2 and configuration Debug</string>
+			<key>timeStartedRecording</key>
+			<real>560221865.37196898</real>
+			<key>timeStoppedRecording</key>
+			<real>560221867.91354406</real>
+			<key>title</key>
+			<string>Building project fyp2 with scheme fyp2 and configuration Debug</string>
+			<key>uniqueIdentifier</key>
+			<string>F0490FDC-DA39-4B29-9D7E-5D570CCA6DCE</string>
+		</dict>
+	</dict>
+</dict>
+</plist>

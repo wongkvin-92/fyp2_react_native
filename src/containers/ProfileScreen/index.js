@@ -96,9 +96,32 @@ class HomeView extends React.Component{
          <View style={styles.titleStlye}>
           <Text style={styles.titleTextStyle}>Profile</Text>
          </View>
+         <View style={styles.loginCardStyle}>
          <Animated.View style={[{opacity: this.state.fadeAnim}]}>
           <LoginStateCard lecturerName={this.state.lecturerName} lecturerEmail={this.state.lecturerEmail}/>
          </Animated.View>
+         <Animated.View style={[{opacity: this.state.fadeAnim}]}>
+         <Card
+           title="My Class Lessons"
+           titleStyle={styles.cardTitleStyle}
+           containerStyle={styles.cardStyle}
+             wrapperStyle={styles.innerCardStyle}
+         >
+           <View style={styles.viewBtnContainer}>
+             <Link
+                   to="/lessons"
+                   component={Button}
+                   title="View"
+                   rounded
+                   icon={{name: 'visibility'}}
+                   buttonStyle= {styles.viewBtnStyle}
+                   textStyle = {styles.viewBtnTextStyle}
+             /  >
+           </View>
+         </Card>
+         </Animated.View>
+
+         </View>
             <View style={styles.logoutBtnBackground}>
               <Button rounded
                  title="Logout"
@@ -169,23 +192,26 @@ const styles = StyleSheet.create({
   logoutBtnStyle:{
     marginTop: 20,
     marginBottom: 30,
-    backgroundColor: 'rgba(243,129,129,0.9)',
+    backgroundColor: 'red',
+    opacity: 0.9,
     elevation: 2,
       width: '100%',
   },
 
   btnTextStyle:{
-    fontFamily: "Roboto",
-    textShadowColor:"red",
+    textShadowColor:"grey",
     letterSpacing: 3,
     textShadowOffset: {width: 2, height: 2},
   },
-
+  loginCardStyle: {
+    flex:4,
+  },
   logoutBtnBackground: {
     marginTop:20,
-    backgroundColor: 'rgba(252, 227, 138, 0.9)',
+    flex:1,
     flexDirection:'row',
     justifyContent:'center'
+
   },
   cardTitleStyle:{
     fontSize:18,
@@ -206,7 +232,6 @@ const styles = StyleSheet.create({
 
   },
   viewBtnTextStyle:{
-    fontFamily: "Roboto",
     textShadowColor:"grey",
     letterSpacing: 3,
     textShadowOffset: {width: 2, height: 2},

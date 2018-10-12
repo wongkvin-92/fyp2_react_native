@@ -16,7 +16,7 @@ import DatePicker from 'react-native-datepicker';
 
 class RescheduleRequest extends React.Component{
 
-    state = { datetime1: '2019-09-01 00:00'};
+    state = { datetime1: '2018-10-03 09:00'};
 
   render () {
 
@@ -24,14 +24,14 @@ class RescheduleRequest extends React.Component{
       <View style={styles.containers}>
         <View style={styles.titleStlye}>
           <Link
-                to="/lessons"
+                to="/home"
                 component={Button}
                 rounded
                 icon={{name: 'arrow-left', type: 'font-awesome'}}
                 buttonStyle= {styles.backBtnStyle}
             />
             <View style={styles.titleCenterStyle}>
-              <Text style={styles.titleTextStyle}>Cancellation List</Text>
+              <Text style={styles.titleTextStyle}>Reschedule</Text>
            </View>
         </View>
         <View style={styles.datePickerStyle}>
@@ -58,28 +58,32 @@ class RescheduleRequest extends React.Component{
           onDateChange={(datetime) => {this.setState({datetime1: datetime});}}
         />
         <View style={styles.canceBtnContainer}>
-        <Button
-          rounded
-          title="Submit"
-          icon={{name: 'calendar', type: 'font-awesome'}}
-          buttonStyle= {styles.rescheduleBtnStyle}
-          textStyle = {styles.cancelBtnTextStyle}
-        	  onPress={()=>{
-        	      let dateStr = this.state.datetime1;
-        	      let dtime = dateStr.split(' ');
-        	      let fdateString = dtime[0];
-        	      let ftimeString = dtime[1];
-        	      let id = this.props.match.params.id;
 
-        	      new LecturerAPI().requestRescheduleClass(
-        		  id,
-        		  fdateString, ftimeString,
-        		  (r) => {
-        		      alert(r.msg);
-        		  }
-        	      );
-	          }}
-      />
+        <Link
+              to="/home"
+              component={Button}
+              rounded
+              title="Submit"
+              icon={{name: 'calendar', type: 'font-awesome'}}
+              buttonStyle= {styles.rescheduleBtnStyle}
+              textStyle = {styles.cancelBtnTextStyle}
+                onPress={()=>{
+                    let dateStr = this.state.datetime1;
+                    let dtime = dateStr.split(' ');
+                    let fdateString = dtime[0];
+                    let ftimeString = dtime[1];
+                    let id = this.props.match.params.id;
+
+                    new LecturerAPI().requestRescheduleClass(
+                  id,
+                  fdateString, ftimeString,
+                  (r) => {
+                      alert(r.msg);
+                  }
+                    );
+                }}
+          />
+
         </View>
         </View>
       </View>
@@ -150,7 +154,7 @@ const styles = StyleSheet.create({
 
   },
   cancelBtnTextStyle:{
-    fontFamily: "Roboto",
+
     textShadowColor:"orange",
     letterSpacing: 3,
     textShadowOffset: {width: 2, height: 2},

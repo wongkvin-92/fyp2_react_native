@@ -76,7 +76,7 @@ class HomeView extends React.Component{
 
           <Animated.View style={[{opacity: this.state.fadeAnim}]}>
             <Card
-              title="Cancellation"
+              title="Cancellation & Reschedule"
               titleStyle={styles.cardTitleStyle}
               containerStyle={styles.cardStyle}
                 wrapperStyle={styles.innerCardStyle}
@@ -100,32 +100,7 @@ class HomeView extends React.Component{
             </Card>
           </Animated.View>
 
-          <Animated.View style={[{opacity: this.state.fadeAnim2}]}>
-            <Card
-              title="Reschedule"
-              titleStyle={styles.cardTitleStyle}
-              containerStyle={styles.cardStyle2}
-              wrapperStyle={styles.innerCardStyle2}
-            >
 
-              <Text style={styles.cardContentContainerStyle}>
-                <Text style={styles.cardContentTitleStyle}> No. of Reschedule: </Text>
-                <Text style={styles.cardContentTitle2Style}>7 </Text>
-              </Text>
-
-              <View style={styles.viewBtnContainer}>
-              <Link
-                    to="/reschedule"
-                    component={Button}
-                    title="View"
-                    rounded
-                    icon={{name: 'visibility'}}
-                    buttonStyle= {styles.viewBtnStyle}
-                    textStyle = {styles.viewBtnTextStyle}
-              /  >
-              </View>
-            </Card>
-          </Animated.View>
         </View>
 
   );

@@ -16,8 +16,8 @@ import {withRouter} from 'react-router-native';
 
 
 export const tabRoutes = [
-    {id: "home", label: "Home", component: HomeScreen, logo:"home"},
-    {id: "lesson", label: "Lesson", component: LessonScreen, logo:"assignment"},
+    {id: "home", label: "Home", component: CancellationScreen, logo:"home"},
+
     {id: "profile", label: "Profile", component: ProfileScreen, logo:"face"}
 ];
 
@@ -26,7 +26,7 @@ export const commonRoutes = [
     {path: "/", component: SplashScreen},
     {path: "/login", component: LoginScreen},
     {path: "/home", component: LecturerTabLayout},
-    {path: "/lessons", component: CancellationScreen},
+    {path: "/lessons", component: LessonScreen},
     {path: "/reschedule", component: RescheduleScreen },
     {path: "/request/:id", component: withRouter((props) => {
 

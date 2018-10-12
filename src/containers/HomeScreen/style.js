@@ -46,6 +46,7 @@ export const styles = StyleSheet.create({
     marginTop: 20,
     marginBottom: 10,
     borderRadius:6
+
   },
 
   cardStyle2:{
@@ -55,7 +56,7 @@ export const styles = StyleSheet.create({
   },
 
   btnTextStyle:{
-    fontFamily: "Roboto",
+
     textShadowColor:"red",
     letterSpacing: 3,
     textShadowOffset: {width: 2, height: 2},
@@ -89,7 +90,7 @@ export const styles = StyleSheet.create({
 
   },
   viewBtnTextStyle:{
-    fontFamily: "Roboto",
+
     textShadowColor:"grey",
     letterSpacing: 3,
     textShadowOffset: {width: 2, height: 2},

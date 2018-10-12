@@ -3,7 +3,7 @@ import {StyleSheet} from 'react-native';
 export const styles = StyleSheet.create({
   containers: {
     height: "100%",
-    backgroundColor: 'rgba(243,129,129,0.9)',
+
   },
 
   bodyStyle: {
@@ -21,7 +21,7 @@ export const styles = StyleSheet.create({
   titleStlye:{
     paddingTop: 16,
     paddingBottom:16,
-    paddingLeft:20,
+    paddingLeft:5,
     backgroundColor: 'white',
     elevation:4,
     flexDirection:'row',
@@ -36,10 +36,10 @@ export const styles = StyleSheet.create({
   },
   titleCenterStyle: {
       flex:1,
+      paddingLeft: 30
   },
 
   btnTextStyle:{
-    fontFamily: "Roboto",
     textShadowColor:"red",
     letterSpacing: 3,
     textShadowOffset: {width: 2, height: 2},
@@ -50,7 +50,7 @@ export const styles = StyleSheet.create({
     borderRadius: 6,
     padding: 20,
     marginRight: 10,
-    marginTop: 20,
+    marginTop: 60,
     justifyContent: 'center',
     elevation: 10,
     marginBottom:20
@@ -60,12 +60,28 @@ export const styles = StyleSheet.create({
     fontSize:15,
   },
   emptyDate: {
-    height: 100,
     flex:1,
     paddingTop: 50,
     marginRight: 10,
     marginTop: 150,
-    marginBottom: 120
+    marginBottom: 120,
+    alignItems: 'center',
+
+  },
+  emptyTextStyle:{
+    color:'red',
+    fontWeight:'900',
+    fontSize: 30,
+    textShadowColor:"grey",
+    letterSpacing: 3,
+    textShadowOffset: {width: 2, height: 2},
+  },
+  backBtnStyle : {
+      position:'absolute',
+      padding:5,
+      paddingLeft:10,
+      paddingRight:0,
+      marginLeft:0
   },
   canceBtnContainer:{
     alignItems: "flex-end",
@@ -76,7 +92,6 @@ export const styles = StyleSheet.create({
     elevation: 4,
   },
   cancelBtnTextStyle:{
-    fontFamily: "Roboto",
     textShadowColor:"grey",
     letterSpacing: 3,
     textShadowOffset: {width: 2, height: 2},

@@ -7,7 +7,8 @@ import {
   Image,
   Platform,
   StyleSheet,
-  Picker
+  Picker,
+  Animated
 } from 'react-native';
 
 
@@ -33,7 +34,12 @@ const sampleData = [
 
 class CancellationScreen extends React.Component{
 
-  state={redirect:false, data: [], filter: "all"};
+  state={
+    redirect:false,
+    data: [],
+    filter: "all",
+    fadeAnim: new Animated.Value(0),
+  };
 
 
   downloadList = (filter)=>{
@@ -44,7 +50,18 @@ class CancellationScreen extends React.Component{
   }
 
   componentDidMount(){
-      this.downloadList("all");
+
+    Animated.timing(                  // Animate over time
+      this.state.fadeAnim,            // The animated value to drive
+      {
+        toValue: 1,                   // Animate to opacity: 1 (opaque)
+        duration: 2000,              // Make it take a while
+      }
+    ).start();
+
+    this.downloadList("all");
+
+
   }
 
   render () {
@@ -52,20 +69,19 @@ class CancellationScreen extends React.Component{
     return  (
 
         <View style={styles.containers}>
+
              {this.state.redirect?<Redirect to="/login" />:<View/>}
+
              <View style={styles.titleStlye}>
-               <Link
-                     to="/home"
-                     component={Button}
-                     rounded
-                     icon={{name: 'arrow-left', type: 'font-awesome'}}
-                     buttonStyle= {styles.backBtnStyle}
-                 />
+
                  <View style={styles.titleCenterStyle}>
-                <Text style={styles.titleTextStyle}>Cancellation List</Text>
+                <Text style={styles.titleTextStyle}>Home</Text>
                 </View>
              </View>
+             <View style={{flex: 1}}>
+             <Animated.View style={[{opacity: this.state.fadeAnim}]}>
              <ScrollView >
+
                <Card
                 containerStyle={styles.cardPickerStlye}
                >
@@ -82,11 +98,10 @@ class CancellationScreen extends React.Component{
                  <Picker.Item label="Pending" value="pending" />
                  <Picker.Item label="Approved" value="approved" />
                  <Picker.Item label="Unscheduled" value="unscheduled" />
-                 <Picker.Item label="Scheduled" value="scheduled" />
 
                 </Picker>
                </Card>
-
+               <View style={{marginBottom: 30}}>
                 {
                   this.state.data.map( (e,key) =>
                     <LessonCard
@@ -95,8 +110,12 @@ class CancellationScreen extends React.Component{
                     />
                   )
                 }
+              </View>
              </ScrollView>
+            </Animated.View>
+          </View>
         </View>
+
 
   );
 
@@ -116,15 +135,14 @@ export default CancellationScreen;
 
 const styles = StyleSheet.create({
   containers: {
-    height: "100%",
+    flex:1,
     backgroundColor: 'rgba(243,129,129,0.9)',
   },
-
-  bodyStyle: {
-    width: "100%",
-  },
   cardPickerStlye: {
-    borderRadius: 6
+      marginTop: 30,
+    borderRadius: 6,
+    padding: 10,
+    marginBottom: 10
   },
   pickerStyle:{
 
@@ -134,11 +152,14 @@ const styles = StyleSheet.create({
     fontSize:20,
   },
   titleStlye:{
-    paddingTop: 16,
+    paddingTop:20,
+    paddingLeft:20,
     paddingBottom:16,
     backgroundColor: 'white',
     elevation:4,
+    flexDirection:'row',
   },
+
   titleTextStyle:{
     fontSize:19,
     fontWeight:"bold",
@@ -146,13 +167,6 @@ const styles = StyleSheet.create({
     letterSpacing: 2,
   },
   titleCenterStyle: {
-    alignSelf: 'center'
+      flex:1,
   },
-  backBtnStyle : {
-      position:'absolute',
-      padding:5,
-      paddingLeft:10,
-      paddingRight:0,
-  }
-
 })

@@ -72,7 +72,6 @@ const styles = StyleSheet.create({
 
   },
   cancelBtnTextStyle:{
-    fontFamily: "Roboto",
     textShadowColor:"orange",
     letterSpacing: 3,
     textShadowOffset: {width: 2, height: 2},

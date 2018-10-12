@@ -32,7 +32,8 @@ const styles = StyleSheet.create({
     elevation: 8,
     marginTop: 20,
     marginBottom: 10,
-    borderRadius:6
+    borderRadius:6,
+    padding: 20
   },
   cardTitleStyle:{
     fontSize:18,
