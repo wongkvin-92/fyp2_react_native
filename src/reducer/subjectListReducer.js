@@ -56,8 +56,26 @@ export default (state = INITIAL_STATE, action) => {
         //                .filter(e=>e!=null)
         return {...state, cancelList: temp};
       case "REMOVE_ALL_LIST":
-        return {...state, cancelList:{}};
+        var temp = {};
+        //Object.keys(state.cancelList)
+        //      .filter(e => e != hash(action.subject))
+        //      .forEach(key => temp[key] = state.cancelList[key]);
+        Object.keys(state.weeklySchedule).forEach(d => {
+          temp[d] = state.weeklySchedule[d];
+           let dailySchedule = state.weeklySchedule[d];
+           let dailyIndices = Object.keys(dailySchedule)
 
+           dailyIndices.forEach(i=> {
+             let subjHash = hash(dailySchedule[i])
+             if(state.cancelList.hasOwnProperty(subjHash)){
+               temp[d][i].isCancelled = "1";
+             }
+           });
+
+           //dailyIndices.forEach(i=> temp[d][i].isCancelled="1");
+        });
+        console.log(state.cancelList);
+        return {...state, weeklySchedule: temp, cancelList:{}, subjectListChecked: false};
       case "FORCE_RELOAD":
         return {...state, forceReload: true};
       case "AFTER_RELOAD":

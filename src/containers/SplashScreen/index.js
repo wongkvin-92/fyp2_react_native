@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 
-import {View, Text} from 'react-native';
+import {View, Text, Image} from 'react-native';
 
 import {LecturerAPI} from "../../API";
 
@@ -12,24 +12,41 @@ import {connect} from 'react-redux';
   () =>    this.setState({isLoggedIn: true, loading: false}),
   () =>     this.setState({isLoggedIn: false, loading: false})
 );*/
+/*
+const SplashCard = () => (
+  <View>
+    <Text> Splash Screen </Text>
 
+  </View>
+);
 
-
+state={
+  showMe: true
+};
+*/
 class SplashScreen extends Component{
 
+
+
+  componentWillMount(){
+
+  }
+
   componentDidMount(){
-      new LecturerAPI().checkLoginState(
-      (r) => this.props.gotoHomeScreen(r.lecturerID, r.lecturerEmail),
-      () =>  this.props.gotoLogin()
-    );
+    new LecturerAPI().checkLoginState(
+    (r) => this.props.gotoHomeScreen(r.lecturerID, r.lecturerEmail),
+    () =>  this.props.gotoLogin()
+  );
   }
 
 
   render(){
     const redirect=  this.props.isLoggedIn?<Redirect to="/home" />:<Redirect to="/login" />;
-    return(<View>
-      <Text>SplashScreen</Text>
-      {this.props.loading?<View/>:redirect}
+    return(
+      <View>
+
+        <Text>Hi</Text>
+        {this.props.loading?<View/>:redirect}
       </View>);
   }
 };

@@ -3,7 +3,6 @@ import {combineReducers} from 'redux';
 //import createHistory from "history/createMemoryHistory";
 //const history = createHistory();
 
-
 //import subjectListReducer from './subjectListReducer';
 import { syncHistoryWithStore, routerReducer } from 'react-router-redux';
 
@@ -15,7 +14,5 @@ const reducers = combineReducers({
     subjectListReducer,
     routing: routerReducer
 });
-
-
 
 export default reducers;

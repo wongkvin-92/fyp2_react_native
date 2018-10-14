@@ -47,8 +47,6 @@ const confirmCancel = (classId, date) => {
 
 const DailyScheduleItem = (props) => (
 
-
-
     <View style={[styles.item, {height: props.height}]}>
 
 

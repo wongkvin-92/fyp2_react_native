@@ -3,7 +3,6 @@ import {
   Text,
   View,
   TouchableHighlight,
-  TouchableOpacity,
   ScrollView,
   Image,
   Platform,
@@ -14,42 +13,56 @@ import {
 
 
 import {
-  Card, Button, PricingCard,
+  Card, Button
 } from 'react-native-elements';
 
+import LessonCard from './components/lessonCardView';
 
 import {Redirect, Link} from 'react-router-native';
+import {LecturerAPI} from '../../API';
 
-import {styles} from './style';
+import { Calendar, CalendarList, Agenda } from 'react-native-calendars';
 
-class HomeView extends React.Component{
+/*
+const sampleData = [
+  {title: "bit200", subName:"IT & Entrepre", type:"lecture1", day:"monday" , duration:"2"},
+  {title:"bit306", subName:"Web Tech", type:"lecture1",  day:"tuesday", duration:"2"},
+  {title:"bit208", subName:"Data Struct", type:"lecture1", day:"wednesday", duration:"2"},
+  {title:"bit301", subName:"IT Proj Mgmt", type:"lecture1",  day:"thursday",duration:"2"},
+  {title:"bit103", subName:"Intro DB", type:"lecture1", day:"friday", duration:"2"}
+];*/
+
+class HomeScreen extends React.Component{
 
   state={
-
+    redirect:false,
+    data: [],
+    filter: "all",
     fadeAnim: new Animated.Value(0),
-    fadeAnim2: new Animated.Value(0)
   };
 
 
-  componentDidMount() {
+  downloadList = (filter)=>{
+    new LecturerAPI().displayCancelledList(
+        filter,
+          (d) => this.setState({data: d})
+    );
+  }
 
-      Animated.timing(                  // Animate over time
-        this.state.fadeAnim,            // The animated value to drive
-        {
-          toValue: 1,                   // Animate to opacity: 1 (opaque)
-          duration: 2000,              // Make it take a while
-        }
-      ).start();
+  componentDidMount(){
 
-      Animated.timing(                  // Animate over time
-        this.state.fadeAnim2,            // The animated value to drive
-        {
-          toValue: 1,                   // Animate to opacity: 1 (opaque)
-          duration: 4000,              // Make it take a while
-        }
-      ).start();
+    Animated.timing(                  // Animate over time
+      this.state.fadeAnim,            // The animated value to drive
+      {
+        toValue: 1,                   // Animate to opacity: 1 (opaque)
+        duration: 2000,              // Make it take a while
+      }
+    ).start();
 
-    }
+    this.downloadList("all");
+
+
+  }
 
   render () {
 
@@ -57,66 +70,103 @@ class HomeView extends React.Component{
 
         <View style={styles.containers}>
 
+             {this.state.redirect?<Redirect to="/login" />:<View/>}
 
-         <View style={styles.titleStlye}>
-           <View style={styles.titleCenterStyle}>
-            <Text style={styles.titleTextStyle}>Home</Text>
-           </View>
-          <Link
-                to="/lessons"
-                component={Button}
-                rounded
-                icon={{name: 'notifications'}}
-                buttonStyle= {styles.backBtnStyle}
-                textStyle = {styles.cancelBtnTextStyle}
-                fontSize = {50}
-          /  >
+             <View style={styles.titleStlye}>
 
-         </View>
+                 <View style={styles.titleCenterStyle}>
+                <Text style={styles.titleTextStyle}>Home</Text>
+                </View>
+             </View>
+             <View style={{flex: 1}}>
+             <Animated.View style={[{opacity: this.state.fadeAnim}]}>
+             <ScrollView >
 
-          <Animated.View style={[{opacity: this.state.fadeAnim}]}>
-            <Card
-              title="Cancellation & Reschedule"
-              titleStyle={styles.cardTitleStyle}
-              containerStyle={styles.cardStyle}
-                wrapperStyle={styles.innerCardStyle}
-            >
-              <Text style={styles.cardContentContainerStyle}>
-                <Text style={styles.cardContentTitleStyle}> No. of Cancellation: </Text>
-                <Text style={styles.cardContentTitle2Style}>7 </Text>
+               <Card
+                containerStyle={styles.cardPickerStlye}
+               >
+                 <Picker
+                  selectedValue={this.state.filter}
+                  style={styles.pickerStyle}
+                  onValueChange={(itemValue, itemIndex) => {
+                      this.downloadList(itemValue);
+                      this.setState({filter: itemValue});
+                  }}
+                  itemStyle={styles.pickerItemStyle}
+                 >
+                 <Picker.Item label="All Cancel & Rescheduling Record" value="all" />
+                 <Picker.Item label="Pending Reschedule Approval" value="pending" />
+                 <Picker.Item label="Approved Rescheduling Request" value="approved" />
+                 <Picker.Item label="Unscheduled Cancellation" value="unscheduled" />
 
-              </Text>
-              <View style={styles.viewBtnContainer}>
-                <Link
-                      to="/lessons"
-                      component={Button}
-                      title="View"
-                      rounded
-                      icon={{name: 'visibility'}}
-                      buttonStyle= {styles.viewBtnStyle}
-                      textStyle = {styles.viewBtnTextStyle}
-                /  >
+                </Picker>
+               </Card>
+               <View style={{marginBottom: 30}}>
+                {
+                  this.state.data.map( (e,key) =>
+                    <LessonCard
+                      key={key}
+                      {...e}
+                    />
+                  )
+                }
               </View>
-            </Card>
-          </Animated.View>
-
-
+             </ScrollView>
+            </Animated.View>
+          </View>
         </View>
+
 
   );
 
   }
 }
 
+export default HomeScreen;
+
 /*
 <Button
-
-  title="View"
+  rounded
+  title="Back"
   icon={{name: 'visibility'}}
   buttonStyle= {styles.cancelBtnStyle}
   textStyle = {styles.cancelBtnTextStyle}
-  />
-  */
+  />*/
 
-export default HomeView;
-//export default TabNavigator;
+const styles = StyleSheet.create({
+  containers: {
+    flex:1,
+    backgroundColor: 'rgba(243,129,129,0.9)',
+  },
+  cardPickerStlye: {
+      marginTop: 30,
+    borderRadius: 6,
+    padding: 10,
+    marginBottom: 10
+  },
+  pickerStyle:{
+
+  },
+  pickerItemStyle:{
+
+    fontSize:20,
+  },
+  titleStlye:{
+    paddingTop:20,
+    paddingLeft:20,
+    paddingBottom:16,
+    backgroundColor: 'white',
+    elevation:4,
+    flexDirection:'row',
+  },
+
+  titleTextStyle:{
+    fontSize:19,
+    fontWeight:"bold",
+    color:"black",
+    letterSpacing: 2,
+  },
+  titleCenterStyle: {
+      flex:1,
+  },
+})

@@ -4,6 +4,8 @@ import {Card} from 'react-native-elements';
 
 import {connect} from 'react-redux';
 
+import {styles} from '../style';
+
 const LoginStateCard = (props) =>
 (
   <View>
@@ -26,25 +28,3 @@ const LoginStateCard = (props) =>
 const ConnectedLoginStateCard = connect( state => state.loginStateReducer)(LoginStateCard);
 
 export default ConnectedLoginStateCard;
-
-const styles = StyleSheet.create({
-  cardStyle:{
-    elevation: 8,
-    marginTop: 20,
-    marginBottom: 10,
-    borderRadius:6,
-    padding: 20
-  },
-  cardTitleStyle:{
-    fontSize:18,
-    color: '#4f9deb',
-  },
-  cardContentContainerStyle:{
-      fontSize:16,
-      marginBottom:10,
-  },
-  cardContentTitleStyle: {
-      fontWeight: "900",
-  },
-
-})

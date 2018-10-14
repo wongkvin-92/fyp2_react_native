@@ -32,12 +32,26 @@ const cancelLesson = (cancelList, callback) => {
     callback();
     alert(r.msg);
   });
-  /*new LecturerAPI().cancelLesson(classId, date, (r) => {
-    alert(r.msg);
-  });*/
+
 };
 
-/*
+
+/**
+ * Create new Agenda Class without onVisibleMonthsChange()
+ * to fix a bug.
+ **/
+class CustomAgenda extends Agenda{
+  constructor(p)
+  {
+    super(p);
+  }
+
+  onVisibleMonthsChange(months) {
+    //Do nothing
+  }
+}
+
+
 const confirmCancel = (cancelList, callback) => {
   Alert.alert(
   'Confirm Cancel',
@@ -49,7 +63,7 @@ const confirmCancel = (cancelList, callback) => {
   { cancelable: false }
   );
 }
-*/
+
 class LessonScreen extends React.PureComponent{
   constructor(props){
     super(props);
@@ -64,16 +78,11 @@ class LessonScreen extends React.PureComponent{
       doNothing: false
     };
     this.isLoading=false;
-  }
-
-
-  componentWillMount(){
-    //this.setState({showCancelButton: })
-    //this.loadWeek(new Date());
-    //this.loadMonth(new Date());
+    this.lastDayObj = null;
   }
 
   componentWillReceiveProps(newProps){
+
     if(this.props.subjectListChecked != newProps.subjectListChecked){
       this.setState({showCancelButton: newProps.subjectListChecked});
     }
@@ -84,14 +93,15 @@ class LessonScreen extends React.PureComponent{
           this.setState({items: newProps.weeklySchedule});
         }
     }
-    /*
     if(this.props.forceReload != newProps.forceReload){
       if(newProps.forceReload == true){
         //this.setState({doNothing: !this.state.doNothing});
-        //this.loadItems(this.state.selectedDate);
-        newProps.done_reload();
+       //this.loadItems(this.state.selectedDate);
+       console.log("Forcing reload...");
+       this.setState({items: newProps.weeklySchedule});
+        newProps.done_reload(); //update redux tre
       }
-    }*/
+    }
     //if(this.props.cancelList != newProps.cancelList){
 
     //}
@@ -119,10 +129,13 @@ class LessonScreen extends React.PureComponent{
 
   loadWeek(date){
     let weekStart = this.getWeekStart(date);
+    let prevWeekStart = new Date(this.props.weekStart);
 
     if(this.props.downloadingSchedule == false){
-      if(this.props.weekStart == null ||
-        weekStart.toDateString() != this.props.weekStart){
+      let cond2 = (this.props.weekStart != null) && (weekStart.toDateString() != prevWeekStart.toDateString());
+
+      if(this.props.weekStart == null || cond2){
+        //download schedule
         this.props.setWeekStart(weekStart.toDateString());
         this.props.startDownload(7);
 
@@ -204,7 +217,9 @@ class LessonScreen extends React.PureComponent{
 
 
   loadItems(dayObj) {
-    this.loadWeek(new Date(dayObj.dateString));
+    this.lastDayObj = dayObj;
+    //console.log(dayObj.toDateString());
+    this.loadWeek(new Date(dayObj.timestamp));
     //this.loadMonth(new Date(this.state.selectedDate));
   }
 
@@ -214,8 +229,12 @@ class LessonScreen extends React.PureComponent{
     );
   }
 
+  /**
+   * TO
+   **/
   rowHasChanged(r1, r2) {
-    return r1.name !== r2.name;
+    return true;
+    ///return (r1.classID   !== r2.classID) || (r1.isCancelled !== r2.isCancelled);
   }
 
   timeToString(time) {
@@ -229,7 +248,7 @@ class LessonScreen extends React.PureComponent{
     const vacation = {key:'vacation', color: 'red', selectedDotColor: 'blue'};
     const massage = {key:'massage', color: 'blue', selectedDotColor: 'blue'};
     const workout = {key:'workout', color: 'green'};
-      var startDay = this.formatDate(new Date());
+    var startDay = this.formatDate(new Date());
     return  (
 
         <View style={styles.containers}>
@@ -248,29 +267,37 @@ class LessonScreen extends React.PureComponent{
 
           {this.state.showCancelButton==true?
 
-                <Link
-                      to="/home"
-                      component={Button}
-                      title="Cancel"
-                      rounded
-                      icon={{name: 'cancel'}}
-                      buttonStyle= {styles.cancelBtnStyle}
-                      textStyle = {styles.cancelBtnTextStyle}
-                      onPress={()=> {
-                       cancelLesson(this.props.cancelList, ()=>{
-                            this.props.clearCancelList()
-                            this.props.force_reload();
-                          }); }}
-                /  >
+            <Button
+              title="Cancel"
+               rounded
+               icon={{name: 'cancel'}}
+               buttonStyle= {styles.cancelBtnStyle}
+               textStyle = {styles.cancelBtnTextStyle}
+               onPress={()=> {
+                 confirmCancel(this.props.cancelList, ()=>{
+                   this.props.clearCancelList()
+                   this.props.force_reload();
+                 });
+               }}
+            />
                 :<View/>}
              </View>
 
-             <Agenda
+             <CustomAgenda
               doNothing={this.state.doNothing}
               style={{height: 30}}
                items={this.state.items}
                loadItemsForMonth={this.loadItems.bind(this)}
-               selected={this.state.selectedDate }
+               selected={this.state.selectedDate}
+               onDayPress={(date)=>{this.setState({
+                 selectedDate :  new Date(date.year, date.month-1, date.day)
+               })
+             }}
+             onDayChange = {(date) => {
+  this.setState({
+    selectedDate: new Date(date.year, date.month-1, date.day),
+  });
+}}
                // Minimum date that can be selected, dates before minDate will be grayed out. Default = undefined
                minDate={startDay}
                // Maximum date that can be selected, dates after maxDate will be grayed out. Default = undefined
@@ -300,7 +327,6 @@ class LessonScreen extends React.PureComponent{
                 // monthFormat={'yyyy'}
 
               // renderDay={(day, item) => (<Text>{day ? day.day: 'item'}</Text>)}
-
             }}
             theme={{
               backgroundColor: 'rgba(243,129,129,0.9)',
@@ -315,20 +341,7 @@ class LessonScreen extends React.PureComponent{
   );
   }
 }
-/*
-<Button
- title="Cancel"
-   rounded
-   icon={{name: 'cancel'}}
-   buttonStyle= {styles.cancelBtnStyle}
-   textStyle = {styles.cancelBtnTextStyle}
-   onPress={()=> {
-     confirmCancel(this.props.cancelList, ()=>{
-       this.props.clearCancelList()
-       this.props.force_reload();
-     });
-   }}
-/>*/
+
 
 //export default LessonScreen;
 const mapStateToProps = p => p.subjectListReducer;

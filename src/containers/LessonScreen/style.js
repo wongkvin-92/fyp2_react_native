@@ -50,7 +50,7 @@ export const styles = StyleSheet.create({
     borderRadius: 6,
     padding: 20,
     marginRight: 10,
-    marginTop: 60,
+    marginTop: 70,
     justifyContent: 'center',
     elevation: 10,
     marginBottom:20
@@ -64,7 +64,7 @@ export const styles = StyleSheet.create({
     paddingTop: 50,
     marginRight: 10,
     marginTop: 150,
-    marginBottom: 120,
+    marginBottom: 160,
     alignItems: 'center',
 
   },
