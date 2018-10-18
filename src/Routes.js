@@ -9,10 +9,7 @@ import ProfileScreen from './containers/ProfileScreen';
 import RescheduleScreen from './containers/RescheduleScreen';
 import RequestRescheduleScreen from './containers/RescheduleRequestScreen';
 
-//Student Routes
-import StudentHomeScreen from './containers/StudentHomeScreen';
-import StudentCREATEScreen from './containers/StudentCREATEScreen';
-import StudentLessonScreen from './containers/StudentLessonScreen';
+
 
 import React from 'react';
 import {Text} from 'react-native';
@@ -38,9 +35,6 @@ export const commonRoutes = [
   	     return <RequestRescheduleScreen {...props} />;
       })
     },
-
-    //Student Routes
-    {path: "/studentcreate", component: StudentCREATEScreen}
 
 ];
 

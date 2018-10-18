@@ -55,7 +55,7 @@ class CustomAgenda extends Agenda{
 const confirmCancel = (cancelList, callback) => {
   Alert.alert(
   'Confirm Cancel',
-  'Are you sure you want to cancel class',
+  'Are you sure you want to cancel class?',
   [
     {text: 'No', onPress: () => console.log('OK Pressed'), style: 'cancel'},
     {text: 'Yes', onPress: ()=>cancelLesson(cancelList, callback) },
@@ -294,10 +294,10 @@ class LessonScreen extends React.PureComponent{
                })
              }}
              onDayChange = {(date) => {
-  this.setState({
-    selectedDate: new Date(date.year, date.month-1, date.day),
-  });
-}}
+                this.setState({
+                  selectedDate: new Date(date.year, date.month-1, date.day),
+                });
+              }}
                // Minimum date that can be selected, dates before minDate will be grayed out. Default = undefined
                minDate={startDay}
                // Maximum date that can be selected, dates after maxDate will be grayed out. Default = undefined

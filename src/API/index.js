@@ -2,10 +2,10 @@ const artisan = "192.168.0.79";
 const myHome = "192.168.0.189";
 const mcdKotaDam = "192.168.182.120";
 const bandarSriDam = "192.168.1.134";
-const help = "10.125.192.36";
+const help = "10.125.197.86";
 const darr = "192.168.0.7";
 const ace ="192.168.1.114";
-const host = ace;
+const host = myHome;
 const port = 80;
 const path = "fypBackEnd";
 
@@ -62,7 +62,7 @@ export class LecturerAPI extends API{
       data.append('password', password);
 
       let action = "lecturers/login/";
-      fetch(this.host+action, {
+      fetch(this.host+action,{
         method: "post",
         body: data,
         credentials: "same-origin",
@@ -131,38 +131,36 @@ export class LecturerAPI extends API{
     }
 
     displayCancelledList(filter, onSuccess){
-	var action = "cancel/lecturer/list/";
-	if(filter != "all"){
-	    action += "filter/"+filter;
-	}
-      this.getRequest(action).
-          then(r=>onSuccess(r))
-          .catch( err => alert(err) );
-    }
+    	var action = "cancel/lecturer/list/";
+    	if(filter != "all"){
+    	    action += "filter/"+filter;
+    	}
+          this.getRequest(action).
+              then(r=>onSuccess(r))
+              .catch( err => alert(err) );
+     }
 
     requestRescheduleClass(id, date, time, onSuccess){
-	let action = "reschedule/"+id+"/replace/";
-	let data = JSON.stringify({
-	    "date": date,
-	    "time": time
-	});
-	this.patchRequest(
-	    action,
-	    {
-	    body: data
-	}).then(onSuccess);
-
+    	let action = "reschedule/"+id+"/replace/";
+    	let data = JSON.stringify({
+    	    "date": date,
+    	    "time": time
+    	});
+    	this.patchRequest(
+    	    action,
+    	    {
+    	    body: data
+    	}).then(onSuccess);
     }
 
     logout(success){
       let action = "lecturers/logout/";
       fetch(this.host+action, {credentials: "same-origin"})
       .then(()=>{
-        alert("Logout successful");
+        alert("Logout successful!");
         success();
         }
-    );
-
+      );
     }
 };
 

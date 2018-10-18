@@ -1,3 +1,10 @@
+/**
+ * Lecturer React Native App
+ *
+ * @format
+ * @flow
+ */
+
 import React from 'react';
 
 //import {loggedIn, notLoggedIn} from "./src/Routes";

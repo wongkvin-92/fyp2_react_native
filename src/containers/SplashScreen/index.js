@@ -26,8 +26,6 @@ state={
 */
 class SplashScreen extends Component{
 
-
-
   componentWillMount(){
 
   }
@@ -51,7 +49,7 @@ class SplashScreen extends Component{
   }
 };
 
-
+const mapStateToProps = state=>state.loginStateReducer;
 const mapDispatchToProps = dispatch => {
     return {
         gotoHomeScreen: (id, email) => dispatch({type: "LOGIN", email: email, lecturerID: id}),
@@ -59,6 +57,6 @@ const mapDispatchToProps = dispatch => {
     };
 };
 
-export default connect(state=>state.loginStateReducer, mapDispatchToProps)(SplashScreen);
+export default connect(mapStateToProps, mapDispatchToProps)(SplashScreen);
 
 //export default SplashScreeen;

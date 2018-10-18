@@ -98,40 +98,39 @@ class HomeView extends React.Component{
           <Text style={styles.titleTextStyle}>Profile</Text>
          </View>
          <View style={styles.loginCardStyle}>
-         <Animated.View style={[{opacity: this.state.fadeAnim}]}>
-          <LoginStateCard lecturerName={this.state.lecturerName} lecturerEmail={this.state.lecturerEmail}/>
-         </Animated.View>
-         <Animated.View style={[{opacity: this.state.fadeAnim}]}>
-         <Card
-           title="My Class Lessons"
-           titleStyle={styles.cardTitleStyle}
-           containerStyle={styles.cardStyle}
-             wrapperStyle={styles.innerCardStyle}
-         >
-           <View style={styles.viewBtnContainer}>
-             <Link
-                   to="/lessons"
-                   component={Button}
-                   title="View"
-                   rounded
-                   icon={{name: 'visibility'}}
-                   buttonStyle= {styles.viewBtnStyle}
-                   textStyle = {styles.viewBtnTextStyle}
-             /  >
-           </View>
-         </Card>
-         </Animated.View>
-
+           <Animated.View style={[{opacity: this.state.fadeAnim}]}>
+            <LoginStateCard lecturerName={this.state.lecturerName} lecturerEmail={this.state.lecturerEmail}/>
+           </Animated.View>
+           <Animated.View style={[{opacity: this.state.fadeAnim}]}>
+             <Card
+               title="My Class Lessons"
+               titleStyle={styles.cardTitleStyle}
+               containerStyle={styles.cardStyle}
+                 wrapperStyle={styles.innerCardStyle}
+             >
+               <View style={styles.viewBtnContainer}>
+                 <Link
+                       to="/lessons"
+                       component={Button}
+                       title="View"
+                       rounded
+                       icon={{name: 'visibility'}}
+                       buttonStyle= {styles.viewBtnStyle}
+                       textStyle = {styles.viewBtnTextStyle}
+                 />
+               </View>
+             </Card>
+           </Animated.View>
          </View>
-            <View style={styles.logoutBtnBackground}>
-              <Button rounded
-                 title="Logout"
-                 onPress={this.logout.bind(this)}
-                 buttonStyle= {styles.logoutBtnStyle}
-                 textStyle = {styles.btnTextStyle}
-                 fontWeight="bold"
-               />
-             </View>
+          <View style={styles.logoutBtnBackground}>
+            <Button rounded
+               title="Logout"
+               onPress={this.logout.bind(this)}
+               buttonStyle= {styles.logoutBtnStyle}
+               textStyle = {styles.btnTextStyle}
+               fontWeight="bold"
+             />
+          </View>
 
         </View>
   );

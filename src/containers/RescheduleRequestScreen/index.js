@@ -15,9 +15,18 @@ import {LecturerAPI} from "../../API/index";
 import DatePicker from 'react-native-datepicker';
 
 class RescheduleRequest extends React.Component{
+  constructor(props){
+        super(props);
+  let mtoday = this.formatDate(new Date());
+  this.state = { datetime1: mtoday};
+  }
 
-    state = { datetime1: '2018-10-03 09:00'};
-
+    formatDate(date){
+      let fixZero = e => Math.floor(e / 10) == 0? "0"+e:e+""
+      let m = date.getMonth()+1;
+      let month = fixZero(m);
+      return [date.getFullYear(), month,  fixZero(date.getDate()) ].join("-");
+    }
   render () {
 
     return  (
@@ -73,6 +82,7 @@ class RescheduleRequest extends React.Component{
                     let fdateString = dtime[0];
                     let ftimeString = dtime[1];
                     let id = this.props.match.params.id;
+
 
                     new LecturerAPI().requestRescheduleClass(
                   id,

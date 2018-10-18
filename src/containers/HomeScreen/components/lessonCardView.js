@@ -43,13 +43,11 @@ export const LessonCard = ({rescheduleID, title, subName, type, oriDate, oriDay,
 
     <Text style={styles.cardContentContainerStyle}>
       {newDateTime==null?
-        <Text style={styles.cardContentTitleStyle}>
+        <Text style={{color: "red", fontWeight:"900"}}>
           No replacement class set</Text>
-      :<Text style={styles.cardContentTitleStyle}>
-        Replacement date:
-         <Text style={{fontWeight:"100"}}>
-          {newDateTime}
-         </Text>
+      :<Text >
+      <Text style={styles.cardContentTitleStyle}>
+        Replacement: </Text><Text style={{color: "blue"}}> {newDateTime} </Text>
        </Text>}
     </Text>
 
@@ -109,6 +107,7 @@ const styles = StyleSheet.create({
   },
   cardContentTitleStyle: {
       fontWeight: "900",
+
   },
   canceBtnContainer:{
     alignItems: "flex-end",
