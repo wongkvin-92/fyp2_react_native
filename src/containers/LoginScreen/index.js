@@ -149,7 +149,7 @@ componentDidMount() {
                         this.props.login();
                         this.props.dispatchLogin(this.state.email, r.id);
                       }else{
-                        alert("Sorry");
+                        alert(r.msg);
                       }
                         //this.setState({redirect:true})
                       }

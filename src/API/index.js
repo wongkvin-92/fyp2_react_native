@@ -5,7 +5,7 @@ const bandarSriDam = "192.168.1.134";
 const help = "10.125.197.86";
 const darr = "192.168.0.7";
 const ace ="192.168.1.114";
-const host = artisan;
+const host = myHome;
 const port = 80;
 const path = "fypBackEnd";
 

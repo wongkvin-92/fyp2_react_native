@@ -28,7 +28,7 @@ class RescheduleRequest extends React.Component{
       return [date.getFullYear(), month,  fixZero(date.getDate()) ].join("-");
     }
   render () {
-
+    var startDay = this.formatDate(new Date());
     return  (
       <View style={styles.containers}>
         <View style={styles.titleStlye}>
@@ -49,6 +49,7 @@ class RescheduleRequest extends React.Component{
           date={this.state.datetime1}
           mode="datetime"
           format="YYYY-MM-DD HH:mm"
+          minDate={startDay}
           confirmBtnText="Confirm"
           cancelBtnText="Cancel"
           customStyles={{
@@ -85,11 +86,11 @@ class RescheduleRequest extends React.Component{
 
 
                     new LecturerAPI().requestRescheduleClass(
-                  id,
-                  fdateString, ftimeString,
-                  (r) => {
-                      alert(r.msg);
-                  }
+                      id,
+                      fdateString, ftimeString,
+                      (r) => {
+                          alert(r.msg);
+                      }
                     );
                 }}
           />

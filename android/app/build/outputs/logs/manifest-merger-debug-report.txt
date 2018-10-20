@@ -19,12 +19,12 @@ ADDED from /Users/wKvin/Desktop/fyp2_react_native/android/app/src/main/AndroidMa
 		ADDED from /Users/wKvin/Desktop/fyp2_react_native/android/app/src/main/AndroidManifest.xml:4:22-64
 uses-permission#android.permission.SYSTEM_ALERT_WINDOW
 ADDED from /Users/wKvin/Desktop/fyp2_react_native/android/app/src/main/AndroidManifest.xml:5:5-77
-MERGED from [com.facebook.react:react-native:0.56.0] /Users/wKvin/.android/build-cache/c1c71868201dec8f522370094814ce00e52e278e/output/AndroidManifest.xml:11:5-78
+MERGED from [com.facebook.react:react-native:0.56.0] /Users/wKvin/.android/build-cache/f69096ee9ce88f05e7456a7913d30d28e57882ce/output/AndroidManifest.xml:11:5-78
 	android:name
 		ADDED from /Users/wKvin/Desktop/fyp2_react_native/android/app/src/main/AndroidManifest.xml:5:22-75
 application
 ADDED from /Users/wKvin/Desktop/fyp2_react_native/android/app/src/main/AndroidManifest.xml:7:5-24:19
-MERGED from [com.facebook.react:react-native:0.56.0] /Users/wKvin/.android/build-cache/c1c71868201dec8f522370094814ce00e52e278e/output/AndroidManifest.xml:13:5-20
+MERGED from [com.facebook.react:react-native:0.56.0] /Users/wKvin/.android/build-cache/f69096ee9ce88f05e7456a7913d30d28e57882ce/output/AndroidManifest.xml:13:5-20
 MERGED from [com.android.support:appcompat-v7:26.1.0] /Users/wKvin/.android/build-cache/a00aeee86f8b4462e974d489c6cc2d90d34bf126/output/AndroidManifest.xml:25:5-29:19
 MERGED from [com.android.support:support-v4:26.1.0] /Users/wKvin/.android/build-cache/c3ca915ebc732ab3eb3a694893ddef15b68274ab/output/AndroidManifest.xml:25:5-29:19
 MERGED from [com.android.support:support-media-compat:26.1.0] /Users/wKvin/.android/build-cache/8df79c45db5715023f2a1295778067d6edad1f13/output/AndroidManifest.xml:25:5-29:19
@@ -74,7 +74,7 @@ ADDED from /Users/wKvin/Desktop/fyp2_react_native/android/app/src/main/AndroidMa
 uses-sdk
 INJECTED from /Users/wKvin/Desktop/fyp2_react_native/android/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
 MERGED from [fyp2:react-native-vector-icons:unspecified] /Users/wKvin/Desktop/fyp2_react_native/node_modules/react-native-vector-icons/android/build/intermediates/bundles/default/AndroidManifest.xml:7:5-9:41
-MERGED from [com.facebook.react:react-native:0.56.0] /Users/wKvin/.android/build-cache/c1c71868201dec8f522370094814ce00e52e278e/output/AndroidManifest.xml:7:5-9:41
+MERGED from [com.facebook.react:react-native:0.56.0] /Users/wKvin/.android/build-cache/f69096ee9ce88f05e7456a7913d30d28e57882ce/output/AndroidManifest.xml:7:5-9:41
 MERGED from [com.android.support:appcompat-v7:26.1.0] /Users/wKvin/.android/build-cache/a00aeee86f8b4462e974d489c6cc2d90d34bf126/output/AndroidManifest.xml:21:5-23:78
 MERGED from [com.android.support:support-v4:26.1.0] /Users/wKvin/.android/build-cache/c3ca915ebc732ab3eb3a694893ddef15b68274ab/output/AndroidManifest.xml:21:5-23:54
 MERGED from [com.android.support:support-media-compat:26.1.0] /Users/wKvin/.android/build-cache/8df79c45db5715023f2a1295778067d6edad1f13/output/AndroidManifest.xml:21:5-23:63

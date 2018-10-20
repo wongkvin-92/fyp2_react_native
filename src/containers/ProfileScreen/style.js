@@ -50,7 +50,7 @@ export const styles = StyleSheet.create({
     backgroundColor: 'red',
     opacity: 0.9,
     elevation: 2,
-      width: '100%',
+    width: '100%',
   },
 
   btnTextStyle:{
@@ -66,7 +66,6 @@ export const styles = StyleSheet.create({
     flex:1,
     flexDirection:'row',
     justifyContent:'center'
-
   },
   cardTitleStyle:{
     fontSize:18,
@@ -80,6 +79,8 @@ export const styles = StyleSheet.create({
       fontWeight: "900",
   },
   viewBtnContainer:{
+    flexDirection:'row',
+    justifyContent:'center',
 
   },
   viewBtnStyle:{
@@ -87,6 +88,7 @@ export const styles = StyleSheet.create({
     marginBottom: 10,
     backgroundColor: '#4f9deb',
     elevation: 4,
+    width: "100%"
 
   },
   viewBtnTextStyle:{
