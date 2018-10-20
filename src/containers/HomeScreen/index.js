@@ -23,7 +23,7 @@ import {LecturerAPI} from '../../API';
 
 import { Calendar, CalendarList, Agenda } from 'react-native-calendars';
 
-import {styles} from './style';
+import styles from './style';
 /*
 const sampleData = [
   {title: "bit200", subName:"IT & Entrepre", type:"lecture1", day:"monday" , duration:"2"},

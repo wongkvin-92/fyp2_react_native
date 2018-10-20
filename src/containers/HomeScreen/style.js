@@ -1,3 +1,5 @@
+import React from 'react';
+import {StyleSheet} from 'react-native';
 const styles = StyleSheet.create({
   containers: {
     flex:1,
@@ -35,3 +37,4 @@ const styles = StyleSheet.create({
       flex:1,
   },
 })
+export default styles;

@@ -139,13 +139,18 @@ componentDidMount() {
                 title="Login"
                 onPress = {
                   () => {
+
                     new LecturerAPI().login(
                       this.state.email,
                       this.state.password,
                       (r) => {
                         alert(r.msg);
+                      if(r.result==true){
                         this.props.login();
                         this.props.dispatchLogin(this.state.email, r.id);
+                      }else{
+                        alert("Sorry");
+                      }
                         //this.setState({redirect:true})
                       }
                     )

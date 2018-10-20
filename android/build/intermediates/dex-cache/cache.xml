@@ -3,39 +3,12 @@
 
     <item
         is-multidex="false"
-        jar="/Users/wKvin/.android/build-cache/324496e7252a5bb15876d6bd28e0ecc126adc455/output/jars/classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="26.0.3"
-        sha1="e7a850c25a7efbd533c496ab482c980fdafac58d">
-        <dex dex="/Users/wKvin/Desktop/fyp2_react_native/android/app/build/intermediates/pre-dexed/debug/classes_8883325e41ab9834fdb09b6213a2eb2bb21b86dd.jar" />
-    </item>
-    <item
-        is-multidex="false"
         jar="/Users/wKvin/Desktop/fyp2_react_native/node_modules/react-native-vector-icons/android/build/intermediates/bundles/default/classes.jar"
         jumboMode="false"
         optimize="true"
         revision="26.0.3"
         sha1="f2cf527de8d0bd35d72088fafea02395ba4a9eec">
         <dex dex="/Users/wKvin/Desktop/fyp2_react_native/android/app/build/intermediates/pre-dexed/debug/classes_3cd845a264369bff14e20808f554730a1a0e9a33.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/Users/wKvin/.android/build-cache/324496e7252a5bb15876d6bd28e0ecc126adc455/output/jars/libs/infer-annotations-4.0.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="26.0.3"
-        sha1="9809e90be788acdb479b2b44e2112f3295a03068">
-        <dex dex="/Users/wKvin/Desktop/fyp2_react_native/android/app/build/intermediates/pre-dexed/debug/infer-annotations-4.0_ccb356f6e47ad091bf19bddf6fd9cddb70119d10.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/Users/wKvin/Desktop/fyp2/node_modules/react-native-vector-icons/android/build/intermediates/bundles/default/classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="26.0.3"
-        sha1="f2cf527de8d0bd35d72088fafea02395ba4a9eec">
-        <dex dex="/Users/wKvin/Desktop/fyp2/android/app/build/intermediates/pre-dexed/debug/classes_3f39399aa10f860e46b255bf081073ac8d4a8c37.jar" />
     </item>
 
 </items>
