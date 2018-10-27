@@ -30,25 +30,29 @@ import { PersistGate } from 'redux-persist/integration/react';
 import {Provider} from 'react-redux';
 import store, {persistor} from "./src/store";
 
+import { pushNotifications } from './src/services';
+import {UserAPI} from './src/API';
+
+const sharedObj = {};
+pushNotifications.configure(sharedObj);
+
 
 class MainApp extends React.Component {
-//  state={loading: false, isLoggedIn: false};
+    
+    constructor(p){
+	super(p);
+	this.state = {loading: false, token: null};
+    }
 
-  componentWillMount(){
-
-    //this.setState({loading:false, isLoggedIn: false});
-
-    //Load state from the server
-
-    /*new LecturerAPI().checkLoginState(
-      () =>    this.setState({isLoggedIn: true, loading: false}),
-      () =>     this.setState({isLoggedIn: false, loading: false})
-    );*/
-
-  }
-
+    registerToken = ()=> new UserAPI().registerToken(sharedObj.token, ()=>console.log("Token registered"));
+    
+    componentDidMount(){
+	this.registerToken();
+    }
+    
  lecturerLogin = ()=>{
-   this.setState({isLoggedIn: true});
+     this.setState({isLoggedIn: true});
+     this.registerToken();
   }
   //success() - callback func
   onLogout = ()=> this.setState({isLoggedIn: false});
@@ -63,9 +67,9 @@ class MainApp extends React.Component {
               props={
                 {
                   changeLogin: ()=>{},
-                  login: this.lecturerLogin,
+                    login: this.lecturerLogin,
                   logout: ()=> {                   //success() - callback func
-                    new LecturerAPI().logout( this.onLogout )
+                      new LecturerAPI().logout( this.onLogout );
                   },
                   setLogin: this.setLogin,
                             ...this.state

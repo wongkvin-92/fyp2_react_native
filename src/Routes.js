@@ -8,7 +8,7 @@ import SplashScreen from './containers/SplashScreen';
 import ProfileScreen from './containers/ProfileScreen';
 import RescheduleScreen from './containers/RescheduleScreen';
 import RequestRescheduleScreen from './containers/RescheduleRequestScreen';
-
+//import NotificationScreen from './containers/NotificationScreen';
 
 
 import React from 'react';

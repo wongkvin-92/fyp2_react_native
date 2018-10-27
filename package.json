@@ -14,6 +14,7 @@
     "react-native-calendars": "^1.21.0",
     "react-native-datepicker": "^1.7.2",
     "react-native-elements": "^0.19.1",
+    "react-native-push-notification": "^3.1.2",
     "react-native-really-awesome-button": "^0.8.3",
     "react-native-swipe-out": "^2.0.14",
     "react-native-tab-navigator": "^0.3.4",

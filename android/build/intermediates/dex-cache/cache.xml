@@ -3,12 +3,57 @@
 
     <item
         is-multidex="false"
-        jar="/Users/wKvin/.android/build-cache/f69096ee9ce88f05e7456a7913d30d28e57882ce/output/jars/classes.jar"
+        jar="/Users/wKvin/.android/build-cache/632fa0c7d93bd2d4ef66f43893897022aed9e974/output/jars/classes.jar"
         jumboMode="false"
         optimize="true"
         revision="26.0.3"
-        sha1="e7a850c25a7efbd533c496ab482c980fdafac58d">
-        <dex dex="/Users/wKvin/Desktop/fyp2_react_native/android/app/build/intermediates/pre-dexed/debug/classes_56cfa02924a38adee90d11ec3aaeed873abc2afd.jar" />
+        sha1="63413895dce50f6123807d1db2274a1982a34194">
+        <dex dex="/Users/wKvin/Desktop/fyp2_react_native/android/app/build/intermediates/pre-dexed/debug/classes_a8f72ce260a23179f16dcd3c7de69a1e62559432.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/wKvin/.android/build-cache/786316715ffb9017b0f5ef358f6d9cbc750d8c86/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.3"
+        sha1="515ee7a522ec80b8d1c23260cb28f3b678d8bdd3">
+        <dex dex="/Users/wKvin/Desktop/fyp2_react_native/android/app/build/intermediates/pre-dexed/debug/classes_620964178dd3403c3326ce92599b114563d6234f.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/wKvin/.android/build-cache/8dcb38bf64b4693ae705a4c224028977f88349d6/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.3"
+        sha1="d2bb0c3fd1a65a72ae32cc00cc54fdcbe8c8ca73">
+        <dex dex="/Users/wKvin/Desktop/fyp2_react_native/android/app/build/intermediates/pre-dexed/debug/classes_89bcbed9f476269b72da8908301ed06343afdc99.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/wKvin/.android/build-cache/551c2f06acf88bce9b6ede87e896933b3707fb71/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.3"
+        sha1="25cdd380f0a1b2f67a0b7253bbf1f343df981e5e">
+        <dex dex="/Users/wKvin/Desktop/fyp2_react_native/android/app/build/intermediates/pre-dexed/debug/classes_7bf625d0b6a6cd40ca9a0331d7881a3b88ae6438.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/wKvin/.android/build-cache/eb3663cc843647204e8cd49df05d641ae9cc4dc8/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.3"
+        sha1="c5a0f010d8429fa087ba3ce882cd24af9027868a">
+        <dex dex="/Users/wKvin/Desktop/fyp2_react_native/android/app/build/intermediates/pre-dexed/debug/classes_876fd07020b765fa9a256777aef9c0567757056e.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/wKvin/.android/build-cache/e90cae74fc6145424d8f89a44deb8c88116a3eb3/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.3"
+        sha1="651276524a6892465688d2920f28072f4b35c6e7">
+        <dex dex="/Users/wKvin/Desktop/fyp2_react_native/android/app/build/intermediates/pre-dexed/debug/classes_26caef1a753275ce4a3ff33fd90439346d7ff7f2.jar" />
     </item>
     <item
         is-multidex="false"
@@ -21,12 +66,111 @@
     </item>
     <item
         is-multidex="false"
-        jar="/Users/wKvin/.android/build-cache/f69096ee9ce88f05e7456a7913d30d28e57882ce/output/jars/libs/infer-annotations-4.0.jar"
+        jar="/Users/wKvin/.android/build-cache/6399651477dde59fba3731594d376be59379db05/output/jars/classes.jar"
         jumboMode="false"
         optimize="true"
         revision="26.0.3"
-        sha1="9809e90be788acdb479b2b44e2112f3295a03068">
-        <dex dex="/Users/wKvin/Desktop/fyp2_react_native/android/app/build/intermediates/pre-dexed/debug/infer-annotations-4.0_de345969cdf8117ec5559da2588e130fe3630041.jar" />
+        sha1="9abdef6b3ea9a6d226f4ef13198d24e32f33ea4d">
+        <dex dex="/Users/wKvin/Desktop/fyp2_react_native/android/app/build/intermediates/pre-dexed/debug/classes_3ec8af8e138d8da96b3eeab914c80c4e6dc8a5b8.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/wKvin/.android/build-cache/6eb6f74672356320eb54f33ebfa0fa42c1655a94/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.3"
+        sha1="dd86dfc9c6946cf3fc34ba8bebd49e0e0845a89e">
+        <dex dex="/Users/wKvin/Desktop/fyp2_react_native/android/app/build/intermediates/pre-dexed/debug/classes_3e65b35ea0f3bf6d27a687bf7518894b2ffd8a55.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/wKvin/.android/build-cache/a38493fb19155dacd500fefe48dde49c02fa24e9/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.3"
+        sha1="637393020f93f1744e2e325a7da6706b81697efe">
+        <dex dex="/Users/wKvin/Desktop/fyp2_react_native/android/app/build/intermediates/pre-dexed/debug/classes_2deb2cfeef52fb37578e042a684a8056ade9fed3.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/wKvin/.android/build-cache/88de703325d34746c1bfa62dca7a1cdf1be0c964/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.3"
+        sha1="5b9f57b1fb76487516b73b908f54c60c48202d84">
+        <dex dex="/Users/wKvin/Desktop/fyp2_react_native/android/app/build/intermediates/pre-dexed/debug/classes_ef9c05cd06ffd92c53e74638b9b58feb2ac40136.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/wKvin/.android/build-cache/2022a216bd27881139137dc2a836e66beb7b1b23/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.3"
+        sha1="4096514ce1185b89df80681e982486efa30e440e">
+        <dex dex="/Users/wKvin/Desktop/fyp2_react_native/android/app/build/intermediates/pre-dexed/debug/classes_407a8cb32ac79e1a5697c1e382ea02c548b1dd94.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/wKvin/.android/build-cache/e5895aa56fd6b766c0097933bf94607741f75fb2/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.3"
+        sha1="d5c9872f97093326e643dbda4ffea750ecd69ea5">
+        <dex dex="/Users/wKvin/Desktop/fyp2_react_native/android/app/build/intermediates/pre-dexed/debug/classes_bf8763b5429c1bd026287f3c6ab00dc0ea6b19fa.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/wKvin/.android/build-cache/0da33ec8d6864fba4c3576d6c99ae1380175a48e/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.3"
+        sha1="9b7b9f800b62f974cd3a75faf1720c010c7ac244">
+        <dex dex="/Users/wKvin/Desktop/fyp2_react_native/android/app/build/intermediates/pre-dexed/debug/classes_82b0ef71c9a1b227fddba35f19e02fae788cbf2d.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/wKvin/.android/build-cache/edaa1bad125c1e1b3edffeb8574601d878d34e36/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.3"
+        sha1="9d0ff1960f148dafff5b945e8596c060ff3cf88e">
+        <dex dex="/Users/wKvin/Desktop/fyp2_react_native/android/app/build/intermediates/pre-dexed/debug/classes_b6c213c85cace42548721f9e96ebc3a1a0cbcce1.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/wKvin/Desktop/fyp2_react_native/node_modules/react-native-push-notification/android/build/intermediates/bundles/default/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.3"
+        sha1="3de81fa84e42144d35b5f13d5ac856264fae7c10">
+        <dex dex="/Users/wKvin/Desktop/fyp2_react_native/android/app/build/intermediates/pre-dexed/debug/classes_7d042aa2bada5b8a2e89306892a3eb816d6f737d.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/wKvin/.android/build-cache/7e3485923f5a0c2a3b27fc45ee05c357d89a968b/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.3"
+        sha1="6ff520d5283b90ff4bb3db6b82298c3f1acd220b">
+        <dex dex="/Users/wKvin/Desktop/fyp2_react_native/android/app/build/intermediates/pre-dexed/debug/classes_f93d381fbc027dbb7049727077d9e7278542bb44.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/wKvin/.android/build-cache/591239570a79b3645a25c5aacbecad36497d4bfc/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.3"
+        sha1="531c33d3697000a05e9493a2d0f09ba41fa114d3">
+        <dex dex="/Users/wKvin/Desktop/fyp2_react_native/android/app/build/intermediates/pre-dexed/debug/classes_976cd54535367c86668d9218ae40aa7f600e1715.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/wKvin/.android/build-cache/92f94bc9a62d4d22d06f8c7642aa9c17a13908ee/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.3"
+        sha1="a08c6dadfd96a281d9fddf59a767749e43064c23">
+        <dex dex="/Users/wKvin/Desktop/fyp2_react_native/android/app/build/intermediates/pre-dexed/debug/classes_b29cbd9fa0abe613fdfcf40b3ac943d68b984104.jar" />
     </item>
 
 </items>

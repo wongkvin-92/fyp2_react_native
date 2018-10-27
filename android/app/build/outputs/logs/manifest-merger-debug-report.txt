@@ -1,6 +1,6 @@
 -- Merging decision tree log ---
 manifest
-ADDED from /Users/wKvin/Desktop/fyp2_react_native/android/app/src/main/AndroidManifest.xml:1:1-26:12
+ADDED from /Users/wKvin/Desktop/fyp2_react_native/android/app/src/main/AndroidManifest.xml:1:1-84:12
 	package
 		ADDED from /Users/wKvin/Desktop/fyp2_react_native/android/app/src/main/AndroidManifest.xml:2:5-23
 		INJECTED from /Users/wKvin/Desktop/fyp2_react_native/android/app/src/main/AndroidManifest.xml
@@ -15,76 +15,200 @@ ADDED from /Users/wKvin/Desktop/fyp2_react_native/android/app/src/main/AndroidMa
 		INJECTED from /Users/wKvin/Desktop/fyp2_react_native/android/app/src/main/AndroidManifest.xml
 uses-permission#android.permission.INTERNET
 ADDED from /Users/wKvin/Desktop/fyp2_react_native/android/app/src/main/AndroidManifest.xml:4:5-67
+MERGED from [com.google.android.gms:play-services-gcm:16.0.0] /Users/wKvin/.android/build-cache/6399651477dde59fba3731594d376be59379db05/output/AndroidManifest.xml:24:5-67
+MERGED from [com.google.android.gms:play-services-iid:16.0.0] /Users/wKvin/.android/build-cache/eb3663cc843647204e8cd49df05d641ae9cc4dc8/output/AndroidManifest.xml:24:5-67
+MERGED from [com.google.firebase:firebase-measurement-connector-impl:16.0.1] /Users/wKvin/.android/build-cache/e90cae74fc6145424d8f89a44deb8c88116a3eb3/output/AndroidManifest.xml:22:5-67
+MERGED from [com.google.firebase:firebase-analytics:16.0.1] /Users/wKvin/.android/build-cache/a38493fb19155dacd500fefe48dde49c02fa24e9/output/AndroidManifest.xml:23:5-67
+MERGED from [com.google.firebase:firebase-analytics-impl:16.1.1] /Users/wKvin/.android/build-cache/e5895aa56fd6b766c0097933bf94607741f75fb2/output/AndroidManifest.xml:23:5-67
+MERGED from [com.google.firebase:firebase-iid:17.0.4] /Users/wKvin/.android/build-cache/786316715ffb9017b0f5ef358f6d9cbc750d8c86/output/AndroidManifest.xml:23:5-67
 	android:name
 		ADDED from /Users/wKvin/Desktop/fyp2_react_native/android/app/src/main/AndroidManifest.xml:4:22-64
 uses-permission#android.permission.SYSTEM_ALERT_WINDOW
 ADDED from /Users/wKvin/Desktop/fyp2_react_native/android/app/src/main/AndroidManifest.xml:5:5-77
-MERGED from [com.facebook.react:react-native:0.56.0] /Users/wKvin/.android/build-cache/f69096ee9ce88f05e7456a7913d30d28e57882ce/output/AndroidManifest.xml:11:5-78
+MERGED from [com.facebook.react:react-native:0.56.0] /Users/wKvin/.android/build-cache/90d236fa2c768bb622b6be558365d55b2eb7d717/output/AndroidManifest.xml:11:5-78
 	android:name
 		ADDED from /Users/wKvin/Desktop/fyp2_react_native/android/app/src/main/AndroidManifest.xml:5:22-75
+uses-permission#android.permission.WAKE_LOCK
+ADDED from /Users/wKvin/Desktop/fyp2_react_native/android/app/src/main/AndroidManifest.xml:6:5-68
+MERGED from [com.google.firebase:firebase-measurement-connector-impl:16.0.1] /Users/wKvin/.android/build-cache/e90cae74fc6145424d8f89a44deb8c88116a3eb3/output/AndroidManifest.xml:24:5-68
+MERGED from [com.google.firebase:firebase-analytics:16.0.1] /Users/wKvin/.android/build-cache/a38493fb19155dacd500fefe48dde49c02fa24e9/output/AndroidManifest.xml:25:5-68
+MERGED from [com.google.firebase:firebase-analytics-impl:16.1.1] /Users/wKvin/.android/build-cache/e5895aa56fd6b766c0097933bf94607741f75fb2/output/AndroidManifest.xml:25:5-68
+MERGED from [com.google.firebase:firebase-iid:17.0.4] /Users/wKvin/.android/build-cache/786316715ffb9017b0f5ef358f6d9cbc750d8c86/output/AndroidManifest.xml:24:5-68
+	android:name
+		ADDED from /Users/wKvin/Desktop/fyp2_react_native/android/app/src/main/AndroidManifest.xml:6:22-65
+permission#${applicationId}.permission.C2D_MESSAGE
+ADDED from /Users/wKvin/Desktop/fyp2_react_native/android/app/src/main/AndroidManifest.xml:8:5-10:47
+	android:protectionLevel
+		ADDED from /Users/wKvin/Desktop/fyp2_react_native/android/app/src/main/AndroidManifest.xml:10:9-44
+	android:name
+		ADDED from /Users/wKvin/Desktop/fyp2_react_native/android/app/src/main/AndroidManifest.xml:9:9-63
+		INJECTED from /Users/wKvin/Desktop/fyp2_react_native/android/app/src/main/AndroidManifest.xml
+uses-permission#${applicationId}.permission.C2D_MESSAGE
+ADDED from /Users/wKvin/Desktop/fyp2_react_native/android/app/src/main/AndroidManifest.xml:11:5-79
+	android:name
+		ADDED from /Users/wKvin/Desktop/fyp2_react_native/android/app/src/main/AndroidManifest.xml:11:22-76
+		INJECTED from /Users/wKvin/Desktop/fyp2_react_native/android/app/src/main/AndroidManifest.xml
+uses-permission#android.permission.VIBRATE
+ADDED from /Users/wKvin/Desktop/fyp2_react_native/android/app/src/main/AndroidManifest.xml:13:5-66
+	android:name
+		ADDED from /Users/wKvin/Desktop/fyp2_react_native/android/app/src/main/AndroidManifest.xml:13:22-63
+uses-permission#android.permission.RECEIVE_BOOT_COMPLETED
+ADDED from /Users/wKvin/Desktop/fyp2_react_native/android/app/src/main/AndroidManifest.xml:14:5-80
+	android:name
+		ADDED from /Users/wKvin/Desktop/fyp2_react_native/android/app/src/main/AndroidManifest.xml:14:22-78
 application
-ADDED from /Users/wKvin/Desktop/fyp2_react_native/android/app/src/main/AndroidManifest.xml:7:5-24:19
-MERGED from [com.facebook.react:react-native:0.56.0] /Users/wKvin/.android/build-cache/f69096ee9ce88f05e7456a7913d30d28e57882ce/output/AndroidManifest.xml:13:5-20
+ADDED from /Users/wKvin/Desktop/fyp2_react_native/android/app/src/main/AndroidManifest.xml:16:5-82:19
+MERGED from [com.google.android.gms:play-services-gcm:16.0.0] /Users/wKvin/.android/build-cache/6399651477dde59fba3731594d376be59379db05/output/AndroidManifest.xml:26:5-20
+MERGED from [com.google.android.gms:play-services-iid:16.0.0] /Users/wKvin/.android/build-cache/eb3663cc843647204e8cd49df05d641ae9cc4dc8/output/AndroidManifest.xml:26:5-20
+MERGED from [com.google.firebase:firebase-messaging:17.3.4] /Users/wKvin/.android/build-cache/8dcb38bf64b4693ae705a4c224028977f88349d6/output/AndroidManifest.xml:22:5-35:19
+MERGED from [com.facebook.react:react-native:0.56.0] /Users/wKvin/.android/build-cache/90d236fa2c768bb622b6be558365d55b2eb7d717/output/AndroidManifest.xml:13:5-20
 MERGED from [com.android.support:appcompat-v7:26.1.0] /Users/wKvin/.android/build-cache/a00aeee86f8b4462e974d489c6cc2d90d34bf126/output/AndroidManifest.xml:25:5-29:19
+MERGED from [com.android.support:animated-vector-drawable:26.1.0] /Users/wKvin/.android/build-cache/0061448eae22bb087b9826098013e343ff0f7f8d/output/AndroidManifest.xml:22:5-26:19
+MERGED from [com.android.support:support-vector-drawable:26.1.0] /Users/wKvin/.android/build-cache/db53351b40811c11fb946f12e91b2b4f4619c6f7/output/AndroidManifest.xml:22:5-26:19
+MERGED from [com.facebook.soloader:soloader:0.3.0] /Users/wKvin/.android/build-cache/e46c173d525bcfaed40e571818e674a5248da5f6/output/AndroidManifest.xml:11:5-20
+MERGED from [org.webkit:android-jsc:r174650] /Users/wKvin/.android/build-cache/e9f15f3128a9ba97a0c00cc592a79260f87f6b75/output/AndroidManifest.xml:2:3-17
+MERGED from [com.google.firebase:firebase-core:16.0.1] /Users/wKvin/.android/build-cache/bc4353005252a4f118610a5ff6187544fb455cd3/output/AndroidManifest.xml:7:5-20
+MERGED from [com.google.firebase:firebase-measurement-connector-impl:16.0.1] /Users/wKvin/.android/build-cache/e90cae74fc6145424d8f89a44deb8c88116a3eb3/output/AndroidManifest.xml:26:5-32:19
+MERGED from [com.google.firebase:firebase-analytics:16.0.1] /Users/wKvin/.android/build-cache/a38493fb19155dacd500fefe48dde49c02fa24e9/output/AndroidManifest.xml:28:5-53:19
+MERGED from [com.google.firebase:firebase-analytics-impl:16.1.1] /Users/wKvin/.android/build-cache/e5895aa56fd6b766c0097933bf94607741f75fb2/output/AndroidManifest.xml:28:5-38:19
+MERGED from [com.google.android.gms:play-services-ads-identifier:15.0.1] /Users/wKvin/.android/build-cache/632fa0c7d93bd2d4ef66f43893897022aed9e974/output/AndroidManifest.xml:22:5-20
+MERGED from [com.google.android.gms:play-services-measurement-base:16.0.0] /Users/wKvin/.android/build-cache/7e3485923f5a0c2a3b27fc45ee05c357d89a968b/output/AndroidManifest.xml:22:5-20
+MERGED from [com.google.firebase:firebase-iid:17.0.4] /Users/wKvin/.android/build-cache/786316715ffb9017b0f5ef358f6d9cbc750d8c86/output/AndroidManifest.xml:28:5-57:19
+MERGED from [com.google.android.gms:play-services-stats:16.0.1] /Users/wKvin/.android/build-cache/92f94bc9a62d4d22d06f8c7642aa9c17a13908ee/output/AndroidManifest.xml:7:5-20
+MERGED from [com.google.firebase:firebase-iid-interop:16.0.1] /Users/wKvin/.android/build-cache/6eb6f74672356320eb54f33ebfa0fa42c1655a94/output/AndroidManifest.xml:7:5-8:19
+MERGED from [com.google.android.gms:play-services-base:16.0.1] /Users/wKvin/.android/build-cache/edaa1bad125c1e1b3edffeb8574601d878d34e36/output/AndroidManifest.xml:22:5-27:19
+MERGED from [com.google.firebase:firebase-common:16.0.3] /Users/wKvin/.android/build-cache/2022a216bd27881139137dc2a836e66beb7b1b23/output/AndroidManifest.xml:9:5-15:19
+MERGED from [com.google.android.gms:play-services-tasks:16.0.1] /Users/wKvin/.android/build-cache/88de703325d34746c1bfa62dca7a1cdf1be0c964/output/AndroidManifest.xml:7:5-20
+MERGED from [com.google.firebase:firebase-measurement-connector:17.0.1] /Users/wKvin/.android/build-cache/0da33ec8d6864fba4c3576d6c99ae1380175a48e/output/AndroidManifest.xml:22:5-23:19
+MERGED from [com.google.android.gms:play-services-basement:16.0.1] /Users/wKvin/.android/build-cache/551c2f06acf88bce9b6ede87e896933b3707fb71/output/AndroidManifest.xml:22:5-26:19
 MERGED from [com.android.support:support-v4:26.1.0] /Users/wKvin/.android/build-cache/c3ca915ebc732ab3eb3a694893ddef15b68274ab/output/AndroidManifest.xml:25:5-29:19
 MERGED from [com.android.support:support-media-compat:26.1.0] /Users/wKvin/.android/build-cache/8df79c45db5715023f2a1295778067d6edad1f13/output/AndroidManifest.xml:25:5-29:19
 MERGED from [com.android.support:support-fragment:26.1.0] /Users/wKvin/.android/build-cache/5d65d90a71448f120c12b7db01723073375f0473/output/AndroidManifest.xml:25:5-29:19
-MERGED from [com.android.support:support-core-utils:26.1.0] /Users/wKvin/.android/build-cache/f83431d7017fce3cd7f0cf171d8e341d8d569463/output/AndroidManifest.xml:25:5-29:19
-MERGED from [com.android.support:animated-vector-drawable:26.1.0] /Users/wKvin/.android/build-cache/0061448eae22bb087b9826098013e343ff0f7f8d/output/AndroidManifest.xml:22:5-26:19
-MERGED from [com.android.support:support-vector-drawable:26.1.0] /Users/wKvin/.android/build-cache/db53351b40811c11fb946f12e91b2b4f4619c6f7/output/AndroidManifest.xml:22:5-26:19
 MERGED from [com.android.support:support-core-ui:26.1.0] /Users/wKvin/.android/build-cache/f0f58bf3342fcb3fb8bc0f4bca84d2e367c50859/output/AndroidManifest.xml:25:5-29:19
+MERGED from [com.android.support:support-core-utils:26.1.0] /Users/wKvin/.android/build-cache/f83431d7017fce3cd7f0cf171d8e341d8d569463/output/AndroidManifest.xml:25:5-29:19
 MERGED from [com.android.support:support-compat:26.1.0] /Users/wKvin/.android/build-cache/1ce45ff58ca1ce277bb71491382d59bf3c4fce58/output/AndroidManifest.xml:25:5-29:19
 MERGED from [android.arch.lifecycle:runtime:1.0.0] /Users/wKvin/.android/build-cache/4a86f14c815950548d2140e7388d3afa93c4dd5f/output/AndroidManifest.xml:24:5-28:19
-MERGED from [com.facebook.soloader:soloader:0.3.0] /Users/wKvin/.android/build-cache/e46c173d525bcfaed40e571818e674a5248da5f6/output/AndroidManifest.xml:11:5-20
-MERGED from [org.webkit:android-jsc:r174650] /Users/wKvin/.android/build-cache/e9f15f3128a9ba97a0c00cc592a79260f87f6b75/output/AndroidManifest.xml:2:3-17
 	android:label
-		ADDED from /Users/wKvin/Desktop/fyp2_react_native/android/app/src/main/AndroidManifest.xml:9:7-39
+		ADDED from /Users/wKvin/Desktop/fyp2_react_native/android/app/src/main/AndroidManifest.xml:18:7-39
 	android:allowBackup
-		ADDED from /Users/wKvin/Desktop/fyp2_react_native/android/app/src/main/AndroidManifest.xml:11:7-34
+		ADDED from /Users/wKvin/Desktop/fyp2_react_native/android/app/src/main/AndroidManifest.xml:20:7-34
 	android:icon
-		ADDED from /Users/wKvin/Desktop/fyp2_react_native/android/app/src/main/AndroidManifest.xml:10:7-41
+		ADDED from /Users/wKvin/Desktop/fyp2_react_native/android/app/src/main/AndroidManifest.xml:19:7-41
 	android:theme
-		ADDED from /Users/wKvin/Desktop/fyp2_react_native/android/app/src/main/AndroidManifest.xml:12:7-38
+		ADDED from /Users/wKvin/Desktop/fyp2_react_native/android/app/src/main/AndroidManifest.xml:21:7-38
 	android:name
-		ADDED from /Users/wKvin/Desktop/fyp2_react_native/android/app/src/main/AndroidManifest.xml:8:7-38
+		ADDED from /Users/wKvin/Desktop/fyp2_react_native/android/app/src/main/AndroidManifest.xml:17:7-38
+meta-data#com.dieam.reactnativepushnotification.notification_channel_name
+ADDED from /Users/wKvin/Desktop/fyp2_react_native/android/app/src/main/AndroidManifest.xml:23:7-24:71
+	android:value
+		ADDED from /Users/wKvin/Desktop/fyp2_react_native/android/app/src/main/AndroidManifest.xml:24:23-69
+	android:name
+		ADDED from /Users/wKvin/Desktop/fyp2_react_native/android/app/src/main/AndroidManifest.xml:23:19-97
+meta-data#com.dieam.reactnativepushnotification.notification_channel_description
+ADDED from /Users/wKvin/Desktop/fyp2_react_native/android/app/src/main/AndroidManifest.xml:25:15-26:82
+	android:value
+		ADDED from /Users/wKvin/Desktop/fyp2_react_native/android/app/src/main/AndroidManifest.xml:26:27-80
+	android:name
+		ADDED from /Users/wKvin/Desktop/fyp2_react_native/android/app/src/main/AndroidManifest.xml:25:27-112
+meta-data#com.dieam.reactnativepushnotification.notification_color
+ADDED from /Users/wKvin/Desktop/fyp2_react_native/android/app/src/main/AndroidManifest.xml:28:15-29:68
+	android:resource
+		ADDED from /Users/wKvin/Desktop/fyp2_react_native/android/app/src/main/AndroidManifest.xml:29:27-66
+	android:name
+		ADDED from /Users/wKvin/Desktop/fyp2_react_native/android/app/src/main/AndroidManifest.xml:28:27-98
+receiver#com.google.android.gms.gcm.GcmReceiver
+ADDED from /Users/wKvin/Desktop/fyp2_react_native/android/app/src/main/AndroidManifest.xml:32:9-40:20
+	android:exported
+		ADDED from /Users/wKvin/Desktop/fyp2_react_native/android/app/src/main/AndroidManifest.xml:34:13-36
+	android:permission
+		ADDED from /Users/wKvin/Desktop/fyp2_react_native/android/app/src/main/AndroidManifest.xml:35:13-73
+	android:name
+		ADDED from /Users/wKvin/Desktop/fyp2_react_native/android/app/src/main/AndroidManifest.xml:33:13-66
+intent-filter#${applicationId}+com.google.android.c2dm.intent.RECEIVE
+ADDED from /Users/wKvin/Desktop/fyp2_react_native/android/app/src/main/AndroidManifest.xml:36:13-39:29
+action#com.google.android.c2dm.intent.RECEIVE
+ADDED from /Users/wKvin/Desktop/fyp2_react_native/android/app/src/main/AndroidManifest.xml:37:17-81
+	android:name
+		ADDED from /Users/wKvin/Desktop/fyp2_react_native/android/app/src/main/AndroidManifest.xml:37:25-78
+category#${applicationId}
+ADDED from /Users/wKvin/Desktop/fyp2_react_native/android/app/src/main/AndroidManifest.xml:38:17-61
+	android:name
+		ADDED from /Users/wKvin/Desktop/fyp2_react_native/android/app/src/main/AndroidManifest.xml:38:27-58
+		INJECTED from /Users/wKvin/Desktop/fyp2_react_native/android/app/src/main/AndroidManifest.xml
+receiver#com.dieam.reactnativepushnotification.modules.RNPushNotificationPublisher
+ADDED from /Users/wKvin/Desktop/fyp2_react_native/android/app/src/main/AndroidManifest.xml:42:9-110
+	android:name
+		ADDED from /Users/wKvin/Desktop/fyp2_react_native/android/app/src/main/AndroidManifest.xml:42:19-107
+receiver#com.dieam.reactnativepushnotification.modules.RNPushNotificationBootEventReceiver
+ADDED from /Users/wKvin/Desktop/fyp2_react_native/android/app/src/main/AndroidManifest.xml:43:9-47:20
+	android:name
+		ADDED from /Users/wKvin/Desktop/fyp2_react_native/android/app/src/main/AndroidManifest.xml:43:19-115
+intent-filter#android.intent.action.BOOT_COMPLETED
+ADDED from /Users/wKvin/Desktop/fyp2_react_native/android/app/src/main/AndroidManifest.xml:44:13-46:29
+action#android.intent.action.BOOT_COMPLETED
+ADDED from /Users/wKvin/Desktop/fyp2_react_native/android/app/src/main/AndroidManifest.xml:45:17-79
+	android:name
+		ADDED from /Users/wKvin/Desktop/fyp2_react_native/android/app/src/main/AndroidManifest.xml:45:25-76
+service#com.dieam.reactnativepushnotification.modules.RNPushNotificationRegistrationService
+ADDED from /Users/wKvin/Desktop/fyp2_react_native/android/app/src/main/AndroidManifest.xml:48:9-118
+	android:name
+		ADDED from /Users/wKvin/Desktop/fyp2_react_native/android/app/src/main/AndroidManifest.xml:48:18-116
+service#com.dieam.reactnativepushnotification.modules.RNPushNotificationListenerServiceGcm
+ADDED from /Users/wKvin/Desktop/fyp2_react_native/android/app/src/main/AndroidManifest.xml:51:9-57:19
+	android:exported
+		ADDED from /Users/wKvin/Desktop/fyp2_react_native/android/app/src/main/AndroidManifest.xml:53:13-37
+	android:name
+		ADDED from /Users/wKvin/Desktop/fyp2_react_native/android/app/src/main/AndroidManifest.xml:52:13-110
+intent-filter#com.google.android.c2dm.intent.RECEIVE
+ADDED from /Users/wKvin/Desktop/fyp2_react_native/android/app/src/main/AndroidManifest.xml:54:13-56:29
+service#com.dieam.reactnativepushnotification.modules.RNPushNotificationListenerService
+ADDED from /Users/wKvin/Desktop/fyp2_react_native/android/app/src/main/AndroidManifest.xml:61:9-67:19
+	android:exported
+		ADDED from /Users/wKvin/Desktop/fyp2_react_native/android/app/src/main/AndroidManifest.xml:63:13-37
+	android:name
+		ADDED from /Users/wKvin/Desktop/fyp2_react_native/android/app/src/main/AndroidManifest.xml:62:13-107
+intent-filter#com.google.firebase.MESSAGING_EVENT
+ADDED from /Users/wKvin/Desktop/fyp2_react_native/android/app/src/main/AndroidManifest.xml:64:13-66:29
+action#com.google.firebase.MESSAGING_EVENT
+ADDED from /Users/wKvin/Desktop/fyp2_react_native/android/app/src/main/AndroidManifest.xml:65:17-78
+	android:name
+		ADDED from /Users/wKvin/Desktop/fyp2_react_native/android/app/src/main/AndroidManifest.xml:65:25-75
 activity#com.fyp2.MainActivity
-ADDED from /Users/wKvin/Desktop/fyp2_react_native/android/app/src/main/AndroidManifest.xml:13:7-22:18
+ADDED from /Users/wKvin/Desktop/fyp2_react_native/android/app/src/main/AndroidManifest.xml:71:7-80:18
 	android:label
-		ADDED from /Users/wKvin/Desktop/fyp2_react_native/android/app/src/main/AndroidManifest.xml:15:9-41
+		ADDED from /Users/wKvin/Desktop/fyp2_react_native/android/app/src/main/AndroidManifest.xml:73:9-41
 	android:windowSoftInputMode
-		ADDED from /Users/wKvin/Desktop/fyp2_react_native/android/app/src/main/AndroidManifest.xml:17:9-51
+		ADDED from /Users/wKvin/Desktop/fyp2_react_native/android/app/src/main/AndroidManifest.xml:75:9-51
 	android:configChanges
-		ADDED from /Users/wKvin/Desktop/fyp2_react_native/android/app/src/main/AndroidManifest.xml:16:9-79
+		ADDED from /Users/wKvin/Desktop/fyp2_react_native/android/app/src/main/AndroidManifest.xml:74:9-79
 	android:name
-		ADDED from /Users/wKvin/Desktop/fyp2_react_native/android/app/src/main/AndroidManifest.xml:14:9-37
+		ADDED from /Users/wKvin/Desktop/fyp2_react_native/android/app/src/main/AndroidManifest.xml:72:9-37
 intent-filter#android.intent.action.MAIN+android.intent.category.LAUNCHER
-ADDED from /Users/wKvin/Desktop/fyp2_react_native/android/app/src/main/AndroidManifest.xml:18:9-21:25
+ADDED from /Users/wKvin/Desktop/fyp2_react_native/android/app/src/main/AndroidManifest.xml:76:9-79:25
 action#android.intent.action.MAIN
-ADDED from /Users/wKvin/Desktop/fyp2_react_native/android/app/src/main/AndroidManifest.xml:19:13-65
+ADDED from /Users/wKvin/Desktop/fyp2_react_native/android/app/src/main/AndroidManifest.xml:77:13-65
 	android:name
-		ADDED from /Users/wKvin/Desktop/fyp2_react_native/android/app/src/main/AndroidManifest.xml:19:21-62
+		ADDED from /Users/wKvin/Desktop/fyp2_react_native/android/app/src/main/AndroidManifest.xml:77:21-62
 category#android.intent.category.LAUNCHER
-ADDED from /Users/wKvin/Desktop/fyp2_react_native/android/app/src/main/AndroidManifest.xml:20:13-73
+ADDED from /Users/wKvin/Desktop/fyp2_react_native/android/app/src/main/AndroidManifest.xml:78:13-73
 	android:name
-		ADDED from /Users/wKvin/Desktop/fyp2_react_native/android/app/src/main/AndroidManifest.xml:20:23-70
+		ADDED from /Users/wKvin/Desktop/fyp2_react_native/android/app/src/main/AndroidManifest.xml:78:23-70
 activity#com.facebook.react.devsupport.DevSettingsActivity
-ADDED from /Users/wKvin/Desktop/fyp2_react_native/android/app/src/main/AndroidManifest.xml:23:7-84
+ADDED from /Users/wKvin/Desktop/fyp2_react_native/android/app/src/main/AndroidManifest.xml:81:7-84
 	android:name
-		ADDED from /Users/wKvin/Desktop/fyp2_react_native/android/app/src/main/AndroidManifest.xml:23:17-81
+		ADDED from /Users/wKvin/Desktop/fyp2_react_native/android/app/src/main/AndroidManifest.xml:81:17-81
 uses-sdk
 INJECTED from /Users/wKvin/Desktop/fyp2_react_native/android/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
+MERGED from [fyp2:react-native-push-notification:unspecified] /Users/wKvin/Desktop/fyp2_react_native/node_modules/react-native-push-notification/android/build/intermediates/bundles/default/AndroidManifest.xml:7:5-9:41
+MERGED from [com.google.android.gms:play-services-gcm:16.0.0] /Users/wKvin/.android/build-cache/6399651477dde59fba3731594d376be59379db05/output/AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-iid:16.0.0] /Users/wKvin/.android/build-cache/eb3663cc843647204e8cd49df05d641ae9cc4dc8/output/AndroidManifest.xml:20:5-44
+MERGED from [me.leolin:ShortcutBadger:1.1.8] /Users/wKvin/.android/build-cache/591239570a79b3645a25c5aacbecad36497d4bfc/output/AndroidManifest.xml:7:5-9:41
+MERGED from [com.google.firebase:firebase-messaging:17.3.4] /Users/wKvin/.android/build-cache/8dcb38bf64b4693ae705a4c224028977f88349d6/output/AndroidManifest.xml:20:5-44
 MERGED from [fyp2:react-native-vector-icons:unspecified] /Users/wKvin/Desktop/fyp2_react_native/node_modules/react-native-vector-icons/android/build/intermediates/bundles/default/AndroidManifest.xml:7:5-9:41
-MERGED from [com.facebook.react:react-native:0.56.0] /Users/wKvin/.android/build-cache/f69096ee9ce88f05e7456a7913d30d28e57882ce/output/AndroidManifest.xml:7:5-9:41
+MERGED from [com.facebook.react:react-native:0.56.0] /Users/wKvin/.android/build-cache/90d236fa2c768bb622b6be558365d55b2eb7d717/output/AndroidManifest.xml:7:5-9:41
 MERGED from [com.android.support:appcompat-v7:26.1.0] /Users/wKvin/.android/build-cache/a00aeee86f8b4462e974d489c6cc2d90d34bf126/output/AndroidManifest.xml:21:5-23:78
-MERGED from [com.android.support:support-v4:26.1.0] /Users/wKvin/.android/build-cache/c3ca915ebc732ab3eb3a694893ddef15b68274ab/output/AndroidManifest.xml:21:5-23:54
-MERGED from [com.android.support:support-media-compat:26.1.0] /Users/wKvin/.android/build-cache/8df79c45db5715023f2a1295778067d6edad1f13/output/AndroidManifest.xml:21:5-23:63
-MERGED from [com.android.support:support-fragment:26.1.0] /Users/wKvin/.android/build-cache/5d65d90a71448f120c12b7db01723073375f0473/output/AndroidManifest.xml:21:5-23:60
-MERGED from [com.android.support:support-core-utils:26.1.0] /Users/wKvin/.android/build-cache/f83431d7017fce3cd7f0cf171d8e341d8d569463/output/AndroidManifest.xml:21:5-23:61
 MERGED from [com.android.support:animated-vector-drawable:26.1.0] /Users/wKvin/.android/build-cache/0061448eae22bb087b9826098013e343ff0f7f8d/output/AndroidManifest.xml:20:5-44
 MERGED from [com.android.support:support-vector-drawable:26.1.0] /Users/wKvin/.android/build-cache/db53351b40811c11fb946f12e91b2b4f4619c6f7/output/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:support-core-ui:26.1.0] /Users/wKvin/.android/build-cache/f0f58bf3342fcb3fb8bc0f4bca84d2e367c50859/output/AndroidManifest.xml:21:5-23:58
-MERGED from [com.android.support:support-compat:26.1.0] /Users/wKvin/.android/build-cache/1ce45ff58ca1ce277bb71491382d59bf3c4fce58/output/AndroidManifest.xml:21:5-23:58
-MERGED from [android.arch.lifecycle:runtime:1.0.0] /Users/wKvin/.android/build-cache/4a86f14c815950548d2140e7388d3afa93c4dd5f/output/AndroidManifest.xml:20:5-22:41
 MERGED from [com.facebook.fbui.textlayoutbuilder:textlayoutbuilder:1.0.0] /Users/wKvin/.android/build-cache/b4b1aa62af92a4d36f5e7a2511dbac803a86733a/output/AndroidManifest.xml:14:5-16:41
 MERGED from [com.facebook.fresco:fresco:1.9.0] /Users/wKvin/.android/build-cache/968649e068d34955381695f47377e5e21a0feeda/output/AndroidManifest.xml:5:5-7:41
 MERGED from [com.facebook.fresco:drawee:1.9.0] /Users/wKvin/.android/build-cache/883b5eff85430fdc59fceb997dabe83cd95e3255/output/AndroidManifest.xml:5:5-7:41
@@ -93,6 +217,27 @@ MERGED from [com.facebook.fresco:imagepipeline:1.9.0] /Users/wKvin/.android/buil
 MERGED from [com.facebook.fresco:imagepipeline-base:1.9.0] /Users/wKvin/.android/build-cache/ec23e16592498176bdef7cafac8821d2eff2d4fc/output/AndroidManifest.xml:5:5-7:41
 MERGED from [com.facebook.fresco:fbcore:1.9.0] /Users/wKvin/.android/build-cache/01bddb75c7780ed452bacd94f1d13c6012f3a5bf/output/AndroidManifest.xml:5:5-7:41
 MERGED from [com.facebook.soloader:soloader:0.3.0] /Users/wKvin/.android/build-cache/e46c173d525bcfaed40e571818e674a5248da5f6/output/AndroidManifest.xml:7:5-9:41
+MERGED from [com.google.firebase:firebase-core:16.0.1] /Users/wKvin/.android/build-cache/bc4353005252a4f118610a5ff6187544fb455cd3/output/AndroidManifest.xml:5:5-44
+MERGED from [com.google.firebase:firebase-measurement-connector-impl:16.0.1] /Users/wKvin/.android/build-cache/e90cae74fc6145424d8f89a44deb8c88116a3eb3/output/AndroidManifest.xml:20:5-44
+MERGED from [com.google.firebase:firebase-analytics:16.0.1] /Users/wKvin/.android/build-cache/a38493fb19155dacd500fefe48dde49c02fa24e9/output/AndroidManifest.xml:20:5-44
+MERGED from [com.google.firebase:firebase-analytics-impl:16.1.1] /Users/wKvin/.android/build-cache/e5895aa56fd6b766c0097933bf94607741f75fb2/output/AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-ads-identifier:15.0.1] /Users/wKvin/.android/build-cache/632fa0c7d93bd2d4ef66f43893897022aed9e974/output/AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-measurement-base:16.0.0] /Users/wKvin/.android/build-cache/7e3485923f5a0c2a3b27fc45ee05c357d89a968b/output/AndroidManifest.xml:20:5-44
+MERGED from [com.google.firebase:firebase-iid:17.0.4] /Users/wKvin/.android/build-cache/786316715ffb9017b0f5ef358f6d9cbc750d8c86/output/AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-stats:16.0.1] /Users/wKvin/.android/build-cache/92f94bc9a62d4d22d06f8c7642aa9c17a13908ee/output/AndroidManifest.xml:5:5-44
+MERGED from [com.google.firebase:firebase-iid-interop:16.0.1] /Users/wKvin/.android/build-cache/6eb6f74672356320eb54f33ebfa0fa42c1655a94/output/AndroidManifest.xml:5:5-44
+MERGED from [com.google.android.gms:play-services-base:16.0.1] /Users/wKvin/.android/build-cache/edaa1bad125c1e1b3edffeb8574601d878d34e36/output/AndroidManifest.xml:20:5-44
+MERGED from [com.google.firebase:firebase-common:16.0.3] /Users/wKvin/.android/build-cache/2022a216bd27881139137dc2a836e66beb7b1b23/output/AndroidManifest.xml:5:5-7:41
+MERGED from [com.google.android.gms:play-services-tasks:16.0.1] /Users/wKvin/.android/build-cache/88de703325d34746c1bfa62dca7a1cdf1be0c964/output/AndroidManifest.xml:5:5-44
+MERGED from [com.google.firebase:firebase-measurement-connector:17.0.1] /Users/wKvin/.android/build-cache/0da33ec8d6864fba4c3576d6c99ae1380175a48e/output/AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-basement:16.0.1] /Users/wKvin/.android/build-cache/551c2f06acf88bce9b6ede87e896933b3707fb71/output/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-v4:26.1.0] /Users/wKvin/.android/build-cache/c3ca915ebc732ab3eb3a694893ddef15b68274ab/output/AndroidManifest.xml:21:5-23:54
+MERGED from [com.android.support:support-media-compat:26.1.0] /Users/wKvin/.android/build-cache/8df79c45db5715023f2a1295778067d6edad1f13/output/AndroidManifest.xml:21:5-23:63
+MERGED from [com.android.support:support-fragment:26.1.0] /Users/wKvin/.android/build-cache/5d65d90a71448f120c12b7db01723073375f0473/output/AndroidManifest.xml:21:5-23:60
+MERGED from [com.android.support:support-core-ui:26.1.0] /Users/wKvin/.android/build-cache/f0f58bf3342fcb3fb8bc0f4bca84d2e367c50859/output/AndroidManifest.xml:21:5-23:58
+MERGED from [com.android.support:support-core-utils:26.1.0] /Users/wKvin/.android/build-cache/f83431d7017fce3cd7f0cf171d8e341d8d569463/output/AndroidManifest.xml:21:5-23:61
+MERGED from [com.android.support:support-compat:26.1.0] /Users/wKvin/.android/build-cache/1ce45ff58ca1ce277bb71491382d59bf3c4fce58/output/AndroidManifest.xml:21:5-23:58
+MERGED from [android.arch.lifecycle:runtime:1.0.0] /Users/wKvin/.android/build-cache/4a86f14c815950548d2140e7388d3afa93c4dd5f/output/AndroidManifest.xml:20:5-22:41
 	tools:overrideLibrary
 		ADDED from [com.android.support:appcompat-v7:26.1.0] /Users/wKvin/.android/build-cache/a00aeee86f8b4462e974d489c6cc2d90d34bf126/output/AndroidManifest.xml:23:9-75
 	android:targetSdkVersion
@@ -101,29 +246,205 @@ MERGED from [com.facebook.soloader:soloader:0.3.0] /Users/wKvin/.android/build-c
 	android:minSdkVersion
 		INJECTED from /Users/wKvin/Desktop/fyp2_react_native/android/app/src/main/AndroidManifest.xml
 		INJECTED from /Users/wKvin/Desktop/fyp2_react_native/android/app/src/main/AndroidManifest.xml
+uses-permission#com.google.android.c2dm.permission.RECEIVE
+ADDED from [com.google.android.gms:play-services-gcm:16.0.0] /Users/wKvin/.android/build-cache/6399651477dde59fba3731594d376be59379db05/output/AndroidManifest.xml:23:5-82
+MERGED from [com.google.android.gms:play-services-iid:16.0.0] /Users/wKvin/.android/build-cache/eb3663cc843647204e8cd49df05d641ae9cc4dc8/output/AndroidManifest.xml:23:5-82
+MERGED from [com.google.firebase:firebase-iid:17.0.4] /Users/wKvin/.android/build-cache/786316715ffb9017b0f5ef358f6d9cbc750d8c86/output/AndroidManifest.xml:26:5-82
+	android:name
+		ADDED from [com.google.android.gms:play-services-gcm:16.0.0] /Users/wKvin/.android/build-cache/6399651477dde59fba3731594d376be59379db05/output/AndroidManifest.xml:23:22-79
+uses-permission#com.sec.android.provider.badge.permission.READ
+ADDED from [me.leolin:ShortcutBadger:1.1.8] /Users/wKvin/.android/build-cache/591239570a79b3645a25c5aacbecad36497d4bfc/output/AndroidManifest.xml:19:5-86
+	android:name
+		ADDED from [me.leolin:ShortcutBadger:1.1.8] /Users/wKvin/.android/build-cache/591239570a79b3645a25c5aacbecad36497d4bfc/output/AndroidManifest.xml:19:22-83
+uses-permission#com.sec.android.provider.badge.permission.WRITE
+ADDED from [me.leolin:ShortcutBadger:1.1.8] /Users/wKvin/.android/build-cache/591239570a79b3645a25c5aacbecad36497d4bfc/output/AndroidManifest.xml:20:5-87
+	android:name
+		ADDED from [me.leolin:ShortcutBadger:1.1.8] /Users/wKvin/.android/build-cache/591239570a79b3645a25c5aacbecad36497d4bfc/output/AndroidManifest.xml:20:22-84
+uses-permission#com.htc.launcher.permission.READ_SETTINGS
+ADDED from [me.leolin:ShortcutBadger:1.1.8] /Users/wKvin/.android/build-cache/591239570a79b3645a25c5aacbecad36497d4bfc/output/AndroidManifest.xml:23:5-81
+	android:name
+		ADDED from [me.leolin:ShortcutBadger:1.1.8] /Users/wKvin/.android/build-cache/591239570a79b3645a25c5aacbecad36497d4bfc/output/AndroidManifest.xml:23:22-78
+uses-permission#com.htc.launcher.permission.UPDATE_SHORTCUT
+ADDED from [me.leolin:ShortcutBadger:1.1.8] /Users/wKvin/.android/build-cache/591239570a79b3645a25c5aacbecad36497d4bfc/output/AndroidManifest.xml:24:5-83
+	android:name
+		ADDED from [me.leolin:ShortcutBadger:1.1.8] /Users/wKvin/.android/build-cache/591239570a79b3645a25c5aacbecad36497d4bfc/output/AndroidManifest.xml:24:22-80
+uses-permission#com.sonyericsson.home.permission.BROADCAST_BADGE
+ADDED from [me.leolin:ShortcutBadger:1.1.8] /Users/wKvin/.android/build-cache/591239570a79b3645a25c5aacbecad36497d4bfc/output/AndroidManifest.xml:27:5-88
+	android:name
+		ADDED from [me.leolin:ShortcutBadger:1.1.8] /Users/wKvin/.android/build-cache/591239570a79b3645a25c5aacbecad36497d4bfc/output/AndroidManifest.xml:27:22-85
+uses-permission#com.sonymobile.home.permission.PROVIDER_INSERT_BADGE
+ADDED from [me.leolin:ShortcutBadger:1.1.8] /Users/wKvin/.android/build-cache/591239570a79b3645a25c5aacbecad36497d4bfc/output/AndroidManifest.xml:28:5-92
+	android:name
+		ADDED from [me.leolin:ShortcutBadger:1.1.8] /Users/wKvin/.android/build-cache/591239570a79b3645a25c5aacbecad36497d4bfc/output/AndroidManifest.xml:28:22-89
+uses-permission#com.anddoes.launcher.permission.UPDATE_COUNT
+ADDED from [me.leolin:ShortcutBadger:1.1.8] /Users/wKvin/.android/build-cache/591239570a79b3645a25c5aacbecad36497d4bfc/output/AndroidManifest.xml:31:5-84
+	android:name
+		ADDED from [me.leolin:ShortcutBadger:1.1.8] /Users/wKvin/.android/build-cache/591239570a79b3645a25c5aacbecad36497d4bfc/output/AndroidManifest.xml:31:22-81
+uses-permission#com.majeur.launcher.permission.UPDATE_BADGE
+ADDED from [me.leolin:ShortcutBadger:1.1.8] /Users/wKvin/.android/build-cache/591239570a79b3645a25c5aacbecad36497d4bfc/output/AndroidManifest.xml:34:5-83
+	android:name
+		ADDED from [me.leolin:ShortcutBadger:1.1.8] /Users/wKvin/.android/build-cache/591239570a79b3645a25c5aacbecad36497d4bfc/output/AndroidManifest.xml:34:22-80
+uses-permission#com.huawei.android.launcher.permission.CHANGE_BADGE
+ADDED from [me.leolin:ShortcutBadger:1.1.8] /Users/wKvin/.android/build-cache/591239570a79b3645a25c5aacbecad36497d4bfc/output/AndroidManifest.xml:37:5-91
+	android:name
+		ADDED from [me.leolin:ShortcutBadger:1.1.8] /Users/wKvin/.android/build-cache/591239570a79b3645a25c5aacbecad36497d4bfc/output/AndroidManifest.xml:37:22-88
+uses-permission#com.huawei.android.launcher.permission.READ_SETTINGS
+ADDED from [me.leolin:ShortcutBadger:1.1.8] /Users/wKvin/.android/build-cache/591239570a79b3645a25c5aacbecad36497d4bfc/output/AndroidManifest.xml:38:5-92
+	android:name
+		ADDED from [me.leolin:ShortcutBadger:1.1.8] /Users/wKvin/.android/build-cache/591239570a79b3645a25c5aacbecad36497d4bfc/output/AndroidManifest.xml:38:22-89
+uses-permission#com.huawei.android.launcher.permission.WRITE_SETTINGS
+ADDED from [me.leolin:ShortcutBadger:1.1.8] /Users/wKvin/.android/build-cache/591239570a79b3645a25c5aacbecad36497d4bfc/output/AndroidManifest.xml:39:5-93
+	android:name
+		ADDED from [me.leolin:ShortcutBadger:1.1.8] /Users/wKvin/.android/build-cache/591239570a79b3645a25c5aacbecad36497d4bfc/output/AndroidManifest.xml:39:22-90
+service#com.google.firebase.messaging.FirebaseMessagingService
+ADDED from [com.google.firebase:firebase-messaging:17.3.4] /Users/wKvin/.android/build-cache/8dcb38bf64b4693ae705a4c224028977f88349d6/output/AndroidManifest.xml:28:9-34:19
+	android:exported
+		ADDED from [com.google.firebase:firebase-messaging:17.3.4] /Users/wKvin/.android/build-cache/8dcb38bf64b4693ae705a4c224028977f88349d6/output/AndroidManifest.xml:30:13-36
+	android:name
+		ADDED from [com.google.firebase:firebase-messaging:17.3.4] /Users/wKvin/.android/build-cache/8dcb38bf64b4693ae705a4c224028977f88349d6/output/AndroidManifest.xml:29:13-82
 meta-data#android.support.VERSION
 ADDED from [com.android.support:appcompat-v7:26.1.0] /Users/wKvin/.android/build-cache/a00aeee86f8b4462e974d489c6cc2d90d34bf126/output/AndroidManifest.xml:26:9-28:38
+MERGED from [com.android.support:animated-vector-drawable:26.1.0] /Users/wKvin/.android/build-cache/0061448eae22bb087b9826098013e343ff0f7f8d/output/AndroidManifest.xml:23:9-25:38
+MERGED from [com.android.support:support-vector-drawable:26.1.0] /Users/wKvin/.android/build-cache/db53351b40811c11fb946f12e91b2b4f4619c6f7/output/AndroidManifest.xml:23:9-25:38
 MERGED from [com.android.support:support-v4:26.1.0] /Users/wKvin/.android/build-cache/c3ca915ebc732ab3eb3a694893ddef15b68274ab/output/AndroidManifest.xml:26:9-28:38
 MERGED from [com.android.support:support-media-compat:26.1.0] /Users/wKvin/.android/build-cache/8df79c45db5715023f2a1295778067d6edad1f13/output/AndroidManifest.xml:26:9-28:38
 MERGED from [com.android.support:support-fragment:26.1.0] /Users/wKvin/.android/build-cache/5d65d90a71448f120c12b7db01723073375f0473/output/AndroidManifest.xml:26:9-28:38
-MERGED from [com.android.support:support-core-utils:26.1.0] /Users/wKvin/.android/build-cache/f83431d7017fce3cd7f0cf171d8e341d8d569463/output/AndroidManifest.xml:26:9-28:38
-MERGED from [com.android.support:animated-vector-drawable:26.1.0] /Users/wKvin/.android/build-cache/0061448eae22bb087b9826098013e343ff0f7f8d/output/AndroidManifest.xml:23:9-25:38
-MERGED from [com.android.support:support-vector-drawable:26.1.0] /Users/wKvin/.android/build-cache/db53351b40811c11fb946f12e91b2b4f4619c6f7/output/AndroidManifest.xml:23:9-25:38
 MERGED from [com.android.support:support-core-ui:26.1.0] /Users/wKvin/.android/build-cache/f0f58bf3342fcb3fb8bc0f4bca84d2e367c50859/output/AndroidManifest.xml:26:9-28:38
+MERGED from [com.android.support:support-core-utils:26.1.0] /Users/wKvin/.android/build-cache/f83431d7017fce3cd7f0cf171d8e341d8d569463/output/AndroidManifest.xml:26:9-28:38
 MERGED from [com.android.support:support-compat:26.1.0] /Users/wKvin/.android/build-cache/1ce45ff58ca1ce277bb71491382d59bf3c4fce58/output/AndroidManifest.xml:26:9-28:38
 	android:value
 		ADDED from [com.android.support:appcompat-v7:26.1.0] /Users/wKvin/.android/build-cache/a00aeee86f8b4462e974d489c6cc2d90d34bf126/output/AndroidManifest.xml:28:13-35
 	android:name
 		ADDED from [com.android.support:appcompat-v7:26.1.0] /Users/wKvin/.android/build-cache/a00aeee86f8b4462e974d489c6cc2d90d34bf126/output/AndroidManifest.xml:27:13-51
+uses-permission#android.permission.WRITE_EXTERNAL_STORAGE
+IMPLIED from /Users/wKvin/Desktop/fyp2_react_native/android/app/src/main/AndroidManifest.xml:1:1-84:12 reason: org.webkit.android_jsc has a targetSdkVersion < 4
+uses-permission#android.permission.READ_PHONE_STATE
+IMPLIED from /Users/wKvin/Desktop/fyp2_react_native/android/app/src/main/AndroidManifest.xml:1:1-84:12 reason: org.webkit.android_jsc has a targetSdkVersion < 4
+uses-permission#android.permission.READ_EXTERNAL_STORAGE
+IMPLIED from /Users/wKvin/Desktop/fyp2_react_native/android/app/src/main/AndroidManifest.xml:1:1-84:12 reason: org.webkit.android_jsc requested WRITE_EXTERNAL_STORAGE
+uses-permission#android.permission.ACCESS_NETWORK_STATE
+ADDED from [com.google.firebase:firebase-measurement-connector-impl:16.0.1] /Users/wKvin/.android/build-cache/e90cae74fc6145424d8f89a44deb8c88116a3eb3/output/AndroidManifest.xml:23:5-79
+MERGED from [com.google.firebase:firebase-analytics:16.0.1] /Users/wKvin/.android/build-cache/a38493fb19155dacd500fefe48dde49c02fa24e9/output/AndroidManifest.xml:24:5-79
+MERGED from [com.google.firebase:firebase-analytics-impl:16.1.1] /Users/wKvin/.android/build-cache/e5895aa56fd6b766c0097933bf94607741f75fb2/output/AndroidManifest.xml:24:5-79
+MERGED from [com.google.firebase:firebase-iid:17.0.4] /Users/wKvin/.android/build-cache/786316715ffb9017b0f5ef358f6d9cbc750d8c86/output/AndroidManifest.xml:22:5-79
+	android:name
+		ADDED from [com.google.firebase:firebase-measurement-connector-impl:16.0.1] /Users/wKvin/.android/build-cache/e90cae74fc6145424d8f89a44deb8c88116a3eb3/output/AndroidManifest.xml:23:22-76
+service#com.google.firebase.components.ComponentDiscoveryService
+ADDED from [com.google.firebase:firebase-measurement-connector-impl:16.0.1] /Users/wKvin/.android/build-cache/e90cae74fc6145424d8f89a44deb8c88116a3eb3/output/AndroidManifest.xml:27:9-31:19
+MERGED from [com.google.firebase:firebase-iid:17.0.4] /Users/wKvin/.android/build-cache/786316715ffb9017b0f5ef358f6d9cbc750d8c86/output/AndroidManifest.xml:29:9-35:19
+	android:exported
+		ADDED from [com.google.firebase:firebase-iid:17.0.4] /Users/wKvin/.android/build-cache/786316715ffb9017b0f5ef358f6d9cbc750d8c86/output/AndroidManifest.xml:31:13-37
+	android:name
+		ADDED from [com.google.firebase:firebase-measurement-connector-impl:16.0.1] /Users/wKvin/.android/build-cache/e90cae74fc6145424d8f89a44deb8c88116a3eb3/output/AndroidManifest.xml:27:18-89
+meta-data#com.google.firebase.components:com.google.firebase.analytics.connector.internal.AnalyticsConnectorRegistrar
+ADDED from [com.google.firebase:firebase-measurement-connector-impl:16.0.1] /Users/wKvin/.android/build-cache/e90cae74fc6145424d8f89a44deb8c88116a3eb3/output/AndroidManifest.xml:28:13-30:85
+	android:value
+		ADDED from [com.google.firebase:firebase-measurement-connector-impl:16.0.1] /Users/wKvin/.android/build-cache/e90cae74fc6145424d8f89a44deb8c88116a3eb3/output/AndroidManifest.xml:30:17-82
+	android:name
+		ADDED from [com.google.firebase:firebase-measurement-connector-impl:16.0.1] /Users/wKvin/.android/build-cache/e90cae74fc6145424d8f89a44deb8c88116a3eb3/output/AndroidManifest.xml:29:17-139
+uses-permission#com.google.android.finsky.permission.BIND_GET_INSTALL_REFERRER_SERVICE
+ADDED from [com.google.firebase:firebase-analytics:16.0.1] /Users/wKvin/.android/build-cache/a38493fb19155dacd500fefe48dde49c02fa24e9/output/AndroidManifest.xml:26:5-110
+MERGED from [com.google.firebase:firebase-analytics-impl:16.1.1] /Users/wKvin/.android/build-cache/e5895aa56fd6b766c0097933bf94607741f75fb2/output/AndroidManifest.xml:26:5-110
+	android:name
+		ADDED from [com.google.firebase:firebase-analytics:16.0.1] /Users/wKvin/.android/build-cache/a38493fb19155dacd500fefe48dde49c02fa24e9/output/AndroidManifest.xml:26:22-107
+receiver#com.google.android.gms.measurement.AppMeasurementReceiver
+ADDED from [com.google.firebase:firebase-analytics:16.0.1] /Users/wKvin/.android/build-cache/a38493fb19155dacd500fefe48dde49c02fa24e9/output/AndroidManifest.xml:29:9-33:20
+	android:enabled
+		ADDED from [com.google.firebase:firebase-analytics:16.0.1] /Users/wKvin/.android/build-cache/a38493fb19155dacd500fefe48dde49c02fa24e9/output/AndroidManifest.xml:31:13-35
+	android:exported
+		ADDED from [com.google.firebase:firebase-analytics:16.0.1] /Users/wKvin/.android/build-cache/a38493fb19155dacd500fefe48dde49c02fa24e9/output/AndroidManifest.xml:32:13-37
+	android:name
+		ADDED from [com.google.firebase:firebase-analytics:16.0.1] /Users/wKvin/.android/build-cache/a38493fb19155dacd500fefe48dde49c02fa24e9/output/AndroidManifest.xml:30:13-85
+receiver#com.google.android.gms.measurement.AppMeasurementInstallReferrerReceiver
+ADDED from [com.google.firebase:firebase-analytics:16.0.1] /Users/wKvin/.android/build-cache/a38493fb19155dacd500fefe48dde49c02fa24e9/output/AndroidManifest.xml:34:9-42:20
+MERGED from [com.google.firebase:firebase-analytics-impl:16.1.1] /Users/wKvin/.android/build-cache/e5895aa56fd6b766c0097933bf94607741f75fb2/output/AndroidManifest.xml:29:9-37:20
+	android:enabled
+		ADDED from [com.google.firebase:firebase-analytics:16.0.1] /Users/wKvin/.android/build-cache/a38493fb19155dacd500fefe48dde49c02fa24e9/output/AndroidManifest.xml:36:13-35
+	android:exported
+		ADDED from [com.google.firebase:firebase-analytics:16.0.1] /Users/wKvin/.android/build-cache/a38493fb19155dacd500fefe48dde49c02fa24e9/output/AndroidManifest.xml:37:13-36
+	android:permission
+		ADDED from [com.google.firebase:firebase-analytics:16.0.1] /Users/wKvin/.android/build-cache/a38493fb19155dacd500fefe48dde49c02fa24e9/output/AndroidManifest.xml:38:13-69
+	android:name
+		ADDED from [com.google.firebase:firebase-analytics:16.0.1] /Users/wKvin/.android/build-cache/a38493fb19155dacd500fefe48dde49c02fa24e9/output/AndroidManifest.xml:35:13-100
+intent-filter#com.android.vending.INSTALL_REFERRER
+ADDED from [com.google.firebase:firebase-analytics:16.0.1] /Users/wKvin/.android/build-cache/a38493fb19155dacd500fefe48dde49c02fa24e9/output/AndroidManifest.xml:39:13-41:29
+action#com.android.vending.INSTALL_REFERRER
+ADDED from [com.google.firebase:firebase-analytics:16.0.1] /Users/wKvin/.android/build-cache/a38493fb19155dacd500fefe48dde49c02fa24e9/output/AndroidManifest.xml:40:17-79
+	android:name
+		ADDED from [com.google.firebase:firebase-analytics:16.0.1] /Users/wKvin/.android/build-cache/a38493fb19155dacd500fefe48dde49c02fa24e9/output/AndroidManifest.xml:40:25-76
+service#com.google.android.gms.measurement.AppMeasurementService
+ADDED from [com.google.firebase:firebase-analytics:16.0.1] /Users/wKvin/.android/build-cache/a38493fb19155dacd500fefe48dde49c02fa24e9/output/AndroidManifest.xml:44:9-47:40
+	android:enabled
+		ADDED from [com.google.firebase:firebase-analytics:16.0.1] /Users/wKvin/.android/build-cache/a38493fb19155dacd500fefe48dde49c02fa24e9/output/AndroidManifest.xml:46:13-35
+	android:exported
+		ADDED from [com.google.firebase:firebase-analytics:16.0.1] /Users/wKvin/.android/build-cache/a38493fb19155dacd500fefe48dde49c02fa24e9/output/AndroidManifest.xml:47:13-37
+	android:name
+		ADDED from [com.google.firebase:firebase-analytics:16.0.1] /Users/wKvin/.android/build-cache/a38493fb19155dacd500fefe48dde49c02fa24e9/output/AndroidManifest.xml:45:13-84
+service#com.google.android.gms.measurement.AppMeasurementJobService
+ADDED from [com.google.firebase:firebase-analytics:16.0.1] /Users/wKvin/.android/build-cache/a38493fb19155dacd500fefe48dde49c02fa24e9/output/AndroidManifest.xml:48:9-52:72
+	android:enabled
+		ADDED from [com.google.firebase:firebase-analytics:16.0.1] /Users/wKvin/.android/build-cache/a38493fb19155dacd500fefe48dde49c02fa24e9/output/AndroidManifest.xml:50:13-35
+	android:exported
+		ADDED from [com.google.firebase:firebase-analytics:16.0.1] /Users/wKvin/.android/build-cache/a38493fb19155dacd500fefe48dde49c02fa24e9/output/AndroidManifest.xml:51:13-37
+	android:permission
+		ADDED from [com.google.firebase:firebase-analytics:16.0.1] /Users/wKvin/.android/build-cache/a38493fb19155dacd500fefe48dde49c02fa24e9/output/AndroidManifest.xml:52:13-69
+	android:name
+		ADDED from [com.google.firebase:firebase-analytics:16.0.1] /Users/wKvin/.android/build-cache/a38493fb19155dacd500fefe48dde49c02fa24e9/output/AndroidManifest.xml:49:13-87
+meta-data#com.google.firebase.components:com.google.firebase.iid.Registrar
+ADDED from [com.google.firebase:firebase-iid:17.0.4] /Users/wKvin/.android/build-cache/786316715ffb9017b0f5ef358f6d9cbc750d8c86/output/AndroidManifest.xml:32:13-34:85
+	android:value
+		ADDED from [com.google.firebase:firebase-iid:17.0.4] /Users/wKvin/.android/build-cache/786316715ffb9017b0f5ef358f6d9cbc750d8c86/output/AndroidManifest.xml:34:17-82
+	android:name
+		ADDED from [com.google.firebase:firebase-iid:17.0.4] /Users/wKvin/.android/build-cache/786316715ffb9017b0f5ef358f6d9cbc750d8c86/output/AndroidManifest.xml:33:17-96
+receiver#com.google.firebase.iid.FirebaseInstanceIdReceiver
+ADDED from [com.google.firebase:firebase-iid:17.0.4] /Users/wKvin/.android/build-cache/786316715ffb9017b0f5ef358f6d9cbc750d8c86/output/AndroidManifest.xml:37:9-44:20
+	android:exported
+		ADDED from [com.google.firebase:firebase-iid:17.0.4] /Users/wKvin/.android/build-cache/786316715ffb9017b0f5ef358f6d9cbc750d8c86/output/AndroidManifest.xml:39:13-36
+	android:permission
+		ADDED from [com.google.firebase:firebase-iid:17.0.4] /Users/wKvin/.android/build-cache/786316715ffb9017b0f5ef358f6d9cbc750d8c86/output/AndroidManifest.xml:40:13-73
+	android:name
+		ADDED from [com.google.firebase:firebase-iid:17.0.4] /Users/wKvin/.android/build-cache/786316715ffb9017b0f5ef358f6d9cbc750d8c86/output/AndroidManifest.xml:38:13-78
+service#com.google.firebase.iid.FirebaseInstanceIdService
+ADDED from [com.google.firebase:firebase-iid:17.0.4] /Users/wKvin/.android/build-cache/786316715ffb9017b0f5ef358f6d9cbc750d8c86/output/AndroidManifest.xml:50:9-56:19
+	android:exported
+		ADDED from [com.google.firebase:firebase-iid:17.0.4] /Users/wKvin/.android/build-cache/786316715ffb9017b0f5ef358f6d9cbc750d8c86/output/AndroidManifest.xml:52:13-36
+	android:name
+		ADDED from [com.google.firebase:firebase-iid:17.0.4] /Users/wKvin/.android/build-cache/786316715ffb9017b0f5ef358f6d9cbc750d8c86/output/AndroidManifest.xml:51:13-77
+intent-filter#com.google.firebase.INSTANCE_ID_EVENT
+ADDED from [com.google.firebase:firebase-iid:17.0.4] /Users/wKvin/.android/build-cache/786316715ffb9017b0f5ef358f6d9cbc750d8c86/output/AndroidManifest.xml:53:13-55:29
+	android:priority
+		ADDED from [com.google.firebase:firebase-iid:17.0.4] /Users/wKvin/.android/build-cache/786316715ffb9017b0f5ef358f6d9cbc750d8c86/output/AndroidManifest.xml:53:28-51
+action#com.google.firebase.INSTANCE_ID_EVENT
+ADDED from [com.google.firebase:firebase-iid:17.0.4] /Users/wKvin/.android/build-cache/786316715ffb9017b0f5ef358f6d9cbc750d8c86/output/AndroidManifest.xml:54:17-80
+	android:name
+		ADDED from [com.google.firebase:firebase-iid:17.0.4] /Users/wKvin/.android/build-cache/786316715ffb9017b0f5ef358f6d9cbc750d8c86/output/AndroidManifest.xml:54:25-77
+activity#com.google.android.gms.common.api.GoogleApiActivity
+ADDED from [com.google.android.gms:play-services-base:16.0.1] /Users/wKvin/.android/build-cache/edaa1bad125c1e1b3edffeb8574601d878d34e36/output/AndroidManifest.xml:23:9-26:75
+	android:exported
+		ADDED from [com.google.android.gms:play-services-base:16.0.1] /Users/wKvin/.android/build-cache/edaa1bad125c1e1b3edffeb8574601d878d34e36/output/AndroidManifest.xml:25:13-37
+	android:theme
+		ADDED from [com.google.android.gms:play-services-base:16.0.1] /Users/wKvin/.android/build-cache/edaa1bad125c1e1b3edffeb8574601d878d34e36/output/AndroidManifest.xml:26:13-72
+	android:name
+		ADDED from [com.google.android.gms:play-services-base:16.0.1] /Users/wKvin/.android/build-cache/edaa1bad125c1e1b3edffeb8574601d878d34e36/output/AndroidManifest.xml:24:13-79
+provider#com.google.firebase.provider.FirebaseInitProvider
+ADDED from [com.google.firebase:firebase-common:16.0.3] /Users/wKvin/.android/build-cache/2022a216bd27881139137dc2a836e66beb7b1b23/output/AndroidManifest.xml:10:9-14:39
+	android:authorities
+		ADDED from [com.google.firebase:firebase-common:16.0.3] /Users/wKvin/.android/build-cache/2022a216bd27881139137dc2a836e66beb7b1b23/output/AndroidManifest.xml:12:13-72
+	android:exported
+		ADDED from [com.google.firebase:firebase-common:16.0.3] /Users/wKvin/.android/build-cache/2022a216bd27881139137dc2a836e66beb7b1b23/output/AndroidManifest.xml:13:13-37
+	android:initOrder
+		ADDED from [com.google.firebase:firebase-common:16.0.3] /Users/wKvin/.android/build-cache/2022a216bd27881139137dc2a836e66beb7b1b23/output/AndroidManifest.xml:14:13-36
+	android:name
+		ADDED from [com.google.firebase:firebase-common:16.0.3] /Users/wKvin/.android/build-cache/2022a216bd27881139137dc2a836e66beb7b1b23/output/AndroidManifest.xml:11:13-77
+meta-data#com.google.android.gms.version
+ADDED from [com.google.android.gms:play-services-basement:16.0.1] /Users/wKvin/.android/build-cache/551c2f06acf88bce9b6ede87e896933b3707fb71/output/AndroidManifest.xml:23:9-25:69
+	android:value
+		ADDED from [com.google.android.gms:play-services-basement:16.0.1] /Users/wKvin/.android/build-cache/551c2f06acf88bce9b6ede87e896933b3707fb71/output/AndroidManifest.xml:25:13-66
+	android:name
+		ADDED from [com.google.android.gms:play-services-basement:16.0.1] /Users/wKvin/.android/build-cache/551c2f06acf88bce9b6ede87e896933b3707fb71/output/AndroidManifest.xml:24:13-58
 meta-data#android.arch.lifecycle.VERSION
 ADDED from [android.arch.lifecycle:runtime:1.0.0] /Users/wKvin/.android/build-cache/4a86f14c815950548d2140e7388d3afa93c4dd5f/output/AndroidManifest.xml:25:9-27:47
 	android:value
 		ADDED from [android.arch.lifecycle:runtime:1.0.0] /Users/wKvin/.android/build-cache/4a86f14c815950548d2140e7388d3afa93c4dd5f/output/AndroidManifest.xml:27:13-44
 	android:name
 		ADDED from [android.arch.lifecycle:runtime:1.0.0] /Users/wKvin/.android/build-cache/4a86f14c815950548d2140e7388d3afa93c4dd5f/output/AndroidManifest.xml:26:13-58
-uses-permission#android.permission.WRITE_EXTERNAL_STORAGE
-IMPLIED from /Users/wKvin/Desktop/fyp2_react_native/android/app/src/main/AndroidManifest.xml:1:1-26:12 reason: org.webkit.android_jsc has a targetSdkVersion < 4
-uses-permission#android.permission.READ_PHONE_STATE
-IMPLIED from /Users/wKvin/Desktop/fyp2_react_native/android/app/src/main/AndroidManifest.xml:1:1-26:12 reason: org.webkit.android_jsc has a targetSdkVersion < 4
-uses-permission#android.permission.READ_EXTERNAL_STORAGE
-IMPLIED from /Users/wKvin/Desktop/fyp2_react_native/android/app/src/main/AndroidManifest.xml:1:1-26:12 reason: org.webkit.android_jsc requested WRITE_EXTERNAL_STORAGE

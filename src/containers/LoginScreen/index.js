@@ -7,6 +7,7 @@ import {
   Image,
   Platform,
   StyleSheet,
+  Alert,
   KeyboardAvoidingView,
   Animated} from 'react-native';
 
@@ -14,23 +15,30 @@ import {
 
 import {
   Button,
-  FormLabel, FormInput, Grid, Row, Col
+  FormLabel, FormInput, Grid, Row, Col,FormValidationMessage
 } from 'react-native-elements';
 
 import {LecturerAPI} from "../../API";
 import {Redirect} from 'react-router-native';
 import {connect} from 'react-redux';
 
+import { pushNotifications } from '../../services';
 
 class LoginView extends React.Component{
   state={
-    email: "",
-    password: "",
+    email: "seethal@help.edu.my",
+    password: "123456",
     loginState: "NONE",
     redirect: false,
     fadeAnim: new Animated.Value(0),
+    bbc:"black",
+    bbc2:"black",
+    error: false,
+    error2: false,
+    errorMsg:"",
+    errorMsg2:""
   //  springAnim: new Animated.Value(0)
-  };
+  };   
 
 componentWillReceiveProps(newProps){
   if(newProps.isLoggedIn != this.props.isLoggedIn){
@@ -56,6 +64,9 @@ componentWillReceiveProps(newProps){
 */
 
 componentDidMount() {
+/*
+  pushNotifications.localNotification();
+*/
   console.log("Im hhere");
   console.log(this.props);
     Animated.timing(                  // Animate over time
@@ -73,7 +84,36 @@ componentDidMount() {
       }).start();                    // Starts the animation
       */
   }
+/*
+  handleOnPress = () => {
+     pushNotifications.localNotification();
+   };
 
+*/
+  wrongInputValidate = (e) => {
+    this.setState({
+      bbc: "red"
+
+    })
+  }
+  wrongInputValidate2 = (e) => {
+    this.setState({
+      bbc2: "red",
+      error: true
+    })
+  }
+
+    correctInputValidate = (e) => {
+      this.setState({
+        bbc: "green"
+      })
+    }
+
+    correctInputValidate2 = (e) => {
+      this.setState({
+        bbc2: "green"
+      })
+    }
 
   render (){
     return (
@@ -109,30 +149,30 @@ componentDidMount() {
              returnKeyType="next"
               keyboardType="email-address"
               textInputRef='email'
-
+              shake={!this.state.error ? false : true}
               onChangeText={ t=> this.setState({email: t}) }
               value={this.state.email}
-              containerStyle= {{
-                'borderWidth': 0.5,
-                'borderColor': 'white',
-                'borderBottomColor': 'black',
-              }}
+              containerStyle= {
+                [styles.formInputStyle,
+                {'borderBottomColor': this.state.bbc}]
+              }
              />
-
+             <FormValidationMessage>{this.state.errorMsg}</FormValidationMessage>
             <FormLabel>Password</FormLabel>
             <FormInput
               returnKeyType="go"
               secureTextEntry={true}
               textInputRef='password'
-
+              shake={!this.state.error2 ? false : true}
               onChangeText={ t=> this.setState({password: t}) }
               value={this.state.password}
-              containerStyle= {{
-                'borderWidth': 0.5,
-                'borderColor': 'white',
-                'borderBottomColor': 'black'
-              }}
+              containerStyle= {
+              [styles.formInputStyle,
+                {'borderBottomColor': this.state.bbc2}]
+              }
+
              />
+             <FormValidationMessage>{this.state.errorMsg2}</FormValidationMessage>
 
             <View style={styles.loginBtnContainer}>
               <Button
@@ -141,18 +181,36 @@ componentDidMount() {
                   () => {
 
                     new LecturerAPI().login(
-                      this.state.email,
-                      this.state.password,
-                      (r) => {
-                        alert(r.msg);
-                      if(r.result==true){
-                        this.props.login();
-                        this.props.dispatchLogin(this.state.email, r.id);
-                      }else{
-                        alert(r.msg);
-                      }
+			this.state.email,
+			this.state.password,
+			(r) => {
+			    
+			    if(r.result==true){
+				this.props.login();
+				this.props.dispatchLogin(this.state.email, r.id);
+			    }else{
+				if(this.state.email ==""){
+				    this.wrongInputValidate();
+				    this.setState({
+					errorMsg: r.msg,
+					error: true
+				    })
+				}
+				else if(this.state.password ==""){
+				    this.correctInputValidate();
+				    this.wrongInputValidate2();
+				    this.setState({
+					errorMsg:"",
+					errorMsg2: r.msg,
+					error2: true
+				    })
+				}
+				else{
+				    errorMsg2: r.msg;
+				}
+			    }
                         //this.setState({redirect:true})
-                      }
+			}
                     )
                   }
                 }
@@ -206,6 +264,10 @@ const styles = StyleSheet.create({
     'borderBottomColor': 'rgba(252, 227, 138, 0.9)',
      elevation: 24,
 
+  },
+  formInputStyle: {
+    'borderWidth': 0.5,
+    'borderColor': 'white',
   },
   loginBtnStyle: {
     backgroundColor: 'rgba(243,129,129,0.9)',

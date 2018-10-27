@@ -25,11 +25,6 @@ state={
 };
 */
 class SplashScreen extends Component{
-
-  componentWillMount(){
-
-  }
-
   componentDidMount(){
     new LecturerAPI().checkLoginState(
     (r) => this.props.gotoHomeScreen(r.lecturerID, r.lecturerEmail),
@@ -42,8 +37,7 @@ class SplashScreen extends Component{
     const redirect=  this.props.isLoggedIn?<Redirect to="/home" />:<Redirect to="/login" />;
     return(
       <View>
-
-        <Text>Hi</Text>
+        <Text>Loading</Text>
         {this.props.loading?<View/>:redirect}
       </View>);
   }

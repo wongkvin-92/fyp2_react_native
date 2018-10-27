@@ -8,9 +8,9 @@ package com.facebook.drawee;
 
 public final class R {
     public static final class attr {
-        public static final int actualImageResource = 0x7f0100fc;
+        public static final int actualImageResource = 0x7f010102;
         public static final int actualImageScaleType = 0x7f0100c9;
-        public static final int actualImageUri = 0x7f0100fb;
+        public static final int actualImageUri = 0x7f010101;
         public static final int backgroundImage = 0x7f0100ca;
         public static final int fadeDuration = 0x7f0100be;
         public static final int failureImage = 0x7f0100c4;
@@ -83,7 +83,7 @@ public final class R {
         public static final int GenericDraweeHierarchy_roundingBorderPadding = 28;
         public static final int GenericDraweeHierarchy_roundingBorderWidth = 26;
         public static final int GenericDraweeHierarchy_viewAspectRatio = 1;
-        public static final int[] SimpleDraweeView = { 0x7f0100be, 0x7f0100bf, 0x7f0100c0, 0x7f0100c1, 0x7f0100c2, 0x7f0100c3, 0x7f0100c4, 0x7f0100c5, 0x7f0100c6, 0x7f0100c7, 0x7f0100c8, 0x7f0100c9, 0x7f0100ca, 0x7f0100cb, 0x7f0100cc, 0x7f0100cd, 0x7f0100ce, 0x7f0100cf, 0x7f0100d0, 0x7f0100d1, 0x7f0100d2, 0x7f0100d3, 0x7f0100d4, 0x7f0100d5, 0x7f0100d6, 0x7f0100d7, 0x7f0100d8, 0x7f0100d9, 0x7f0100da, 0x7f0100fb, 0x7f0100fc };
+        public static final int[] SimpleDraweeView = { 0x7f0100be, 0x7f0100bf, 0x7f0100c0, 0x7f0100c1, 0x7f0100c2, 0x7f0100c3, 0x7f0100c4, 0x7f0100c5, 0x7f0100c6, 0x7f0100c7, 0x7f0100c8, 0x7f0100c9, 0x7f0100ca, 0x7f0100cb, 0x7f0100cc, 0x7f0100cd, 0x7f0100ce, 0x7f0100cf, 0x7f0100d0, 0x7f0100d1, 0x7f0100d2, 0x7f0100d3, 0x7f0100d4, 0x7f0100d5, 0x7f0100d6, 0x7f0100d7, 0x7f0100d8, 0x7f0100d9, 0x7f0100da, 0x7f010101, 0x7f010102 };
         public static final int SimpleDraweeView_actualImageResource = 30;
         public static final int SimpleDraweeView_actualImageScaleType = 11;
         public static final int SimpleDraweeView_actualImageUri = 29;
