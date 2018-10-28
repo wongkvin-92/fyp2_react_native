@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 
 import {View, Text, Image} from 'react-native';
 
-import {LecturerAPI} from "../../API";
+import {LecturerAPI, UserAPI} from "../../API";
 
 import {Redirect} from 'react-router';
 
@@ -26,12 +26,11 @@ state={
 */
 class SplashScreen extends Component{
   componentDidMount(){
-    new LecturerAPI().checkLoginState(
-    (r) => this.props.gotoHomeScreen(r.lecturerID, r.lecturerEmail),
-    () =>  this.props.gotoLogin()
-  );
+    new UserAPI().checkLoginState(
+	(r) => this.props.gotoHomeScreen(r),
+	() =>  this.props.gotoLogin()
+    );
   }
-
 
   render(){
     const redirect=  this.props.isLoggedIn?<Redirect to="/home" />:<Redirect to="/login" />;
@@ -46,7 +45,7 @@ class SplashScreen extends Component{
 const mapStateToProps = state=>state.loginStateReducer;
 const mapDispatchToProps = dispatch => {
     return {
-        gotoHomeScreen: (id, email) => dispatch({type: "LOGIN", email: email, lecturerID: id}),
+        gotoHomeScreen: (c) => dispatch({type: "LOGIN", credentials: c}),
         gotoLogin: () => dispatch({type: "LOGOUT"})
     };
 };

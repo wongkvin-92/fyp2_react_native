@@ -10,7 +10,9 @@ import RescheduleScreen from './containers/RescheduleScreen';
 import RequestRescheduleScreen from './containers/RescheduleRequestScreen';
 //import NotificationScreen from './containers/NotificationScreen';
 
-
+//student Routes
+import EnrollScreen from './studentContainers/SenrollSubjectScreen';
+import SHomeScreen from './studentContainers/ShomeScreen';
 import React from 'react';
 import {Text} from 'react-native';
 
@@ -18,11 +20,16 @@ import {withRouter} from 'react-router-native';
 
 
 export const tabRoutes = [
-    {id: "home", label: "Home", component: HomeScreen, logo:"home"},
+    {id: "home", label: "Home", component: SHomeScreen, logo:"home"},
     {id: "profile", label: "Profile", component: ProfileScreen, logo:"face"}
 ];
 
+export const studentTabRoutes = [
 
+];
+
+
+//Lecturer Routes
 export const commonRoutes = [
     //Lecturer Routes
     {path: "/", component: SplashScreen},

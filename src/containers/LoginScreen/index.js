@@ -18,7 +18,7 @@ import {
   FormLabel, FormInput, Grid, Row, Col,FormValidationMessage
 } from 'react-native-elements';
 
-import {LecturerAPI} from "../../API";
+import {LecturerAPI,UserAPI} from "../../API";
 import {Redirect} from 'react-router-native';
 import {connect} from 'react-redux';
 
@@ -115,6 +115,22 @@ componentDidMount() {
       })
     }
 
+    onLoginPress = () => {
+	//alert("Login button pressed!");
+	new UserAPI().login(
+	    this.state.email,
+	    this.state.password,
+	    (response) => {
+		if(response.result == true){
+		    this.props.login();
+		    this.props.dispatchLogin(response.credentials);
+		}else{
+		    alert("Sorry cannot login");
+		}
+	    });
+    }
+    
+
   render (){
     return (
 
@@ -177,9 +193,26 @@ componentDidMount() {
             <View style={styles.loginBtnContainer}>
               <Button
                 title="Login"
-                onPress = {
-                  () => {
+                onPress = {this.onLoginPress}		    
+                rounded
+                icon={{name: 'input'}}
+                buttonStyle= {styles.loginBtnStyle}
+               textStyle = {styles.btnTextStyle}
+               fontWeight="bold"
+              />
+            </View>
+          </KeyboardAvoidingView>
+        </View>
+      </Animated.View>
+    </View>
 
+    );
+  }
+}
+
+/*
+
+		      /*
                     new LecturerAPI().login(
 			this.state.email,
 			this.state.password,
@@ -212,24 +245,7 @@ componentDidMount() {
                         //this.setState({redirect:true})
 			}
                     )
-                  }
-                }
-
-                rounded
-                icon={{name: 'input'}}
-                buttonStyle= {styles.loginBtnStyle}
-               textStyle = {styles.btnTextStyle}
-               fontWeight="bold"
-              />
-            </View>
-          </KeyboardAvoidingView>
-        </View>
-      </Animated.View>
-    </View>
-
-    );
-  }
-}
+                  }*/
 
 
 
@@ -262,12 +278,12 @@ const styles = StyleSheet.create({
     'borderColor': 'rgb(241,114,125)',
     'borderTopColor': 'rgba(252, 227, 138, 0.9)',
     'borderBottomColor': 'rgba(252, 227, 138, 0.9)',
-     elevation: 24,
+     elevation: 24
 
   },
   formInputStyle: {
     'borderWidth': 0.5,
-    'borderColor': 'white',
+    'borderColor': 'white'
   },
   loginBtnStyle: {
     backgroundColor: 'rgba(243,129,129,0.9)',
@@ -294,7 +310,7 @@ const styles = StyleSheet.create({
 const mapStateToProps = (state) => state.loginStateReducer;
 const mapDispatchToProps = (dispatch) => {
   return {
-    dispatchLogin: (email, lecturerID) => dispatch({type: "LOGIN", email: email, lecturerID: lecturerID})
+      dispatchLogin: (c) => dispatch({type: "LOGIN", credentials: c})
   };
 }
 

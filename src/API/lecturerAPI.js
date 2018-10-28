@@ -3,7 +3,6 @@ import UserAPI from './user';
  
 export class LecturerAPI extends UserAPI{
     login(username, password, onSuccess){
-
       let data = new FormData();
       data.append('email', username);
       data.append('password', password);

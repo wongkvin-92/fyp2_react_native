@@ -2,20 +2,24 @@
 
 const INITIAL_STATE = {
   showSplashScreen: false,
-  email: "",
-  lecturerID: null,
-  loading: false,
-  isLoggedIn: false
+    credentials: {
+	result: false
+    },
+    loading: false,
+    isLoggedIn: false
 };
+
+//lecturerID: null,
+
 
 export default (state = INITIAL_STATE, action) => {
     //AsyncStorage.setItem('test', '1234');
     //AsyncStorage.getItem('test').then(e=>console.log(e));
     switch(action.type){
       case "LOGIN":
-        return {...state, isLoggedIn: true, email: action.email, lecturerID: action.lecturerID};
+        return {...state, isLoggedIn: true, credentials: action.credentials};
       case "LOGOUT":
-        return {...state, isLoggedIn: false, email: "", lecturerID: null};
+        return {...state, isLoggedIn: false, credentials: null};
       default:
         return state;
     }

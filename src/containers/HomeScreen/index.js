@@ -24,14 +24,6 @@ import {LecturerAPI} from '../../API';
 import { Calendar, CalendarList, Agenda } from 'react-native-calendars';
 
 import styles from './style';
-/*
-const sampleData = [
-  {title: "bit200", subName:"IT & Entrepre", type:"lecture1", day:"monday" , duration:"2"},
-  {title:"bit306", subName:"Web Tech", type:"lecture1",  day:"tuesday", duration:"2"},
-  {title:"bit208", subName:"Data Struct", type:"lecture1", day:"wednesday", duration:"2"},
-  {title:"bit301", subName:"IT Proj Mgmt", type:"lecture1",  day:"thursday",duration:"2"},
-  {title:"bit103", subName:"Intro DB", type:"lecture1", day:"friday", duration:"2"}
-];*/
 
 class HomeScreen extends React.Component{
 
@@ -39,7 +31,7 @@ class HomeScreen extends React.Component{
     redirect:false,
     data: [],
     filter: "all",
-    fadeAnim: new Animated.Value(0),
+    fadeAnim: new Animated.Value(0)
   };
 
 
