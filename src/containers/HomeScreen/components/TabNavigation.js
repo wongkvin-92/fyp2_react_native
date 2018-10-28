@@ -9,11 +9,16 @@ Icon
 import TabNavigator from 'react-native-tab-navigator';
 //import TabBar from './TabBar';
 
-import {tabRoutes} from "../../../Routes";
+import {lecturerTabRoutes, studentTabRoutes} from "../../../Routes";
+import {connect} from 'react-redux';
 
-export class TabbedHome extends React.Component {
-  state = {selectedTab:"home", redirect: false};
-
+export class TabbedLayout extends React.Component {
+    
+    constructor(p){
+	super(p);
+	const tabRoutes = p.credentials.type == "lecturer"?lecturerTabRoutes: studentTabRoutes;
+	this.state = {type: p.credentials.type, selectedTab:"home", redirect: false, tabRoutes: tabRoutes};	
+    }
   clickHandler = (viewId)=>{
     this.setState({selectedTab: viewId});
   }
@@ -21,7 +26,14 @@ export class TabbedHome extends React.Component {
 /*    logout(){
         this.props.logout ();
         this.setState({redirect: true});
-    }*/
+	}*/
+    componentWillMount(){
+	if(this.props.credentials != null){
+	    //alert("Logged in as "+this.state.type);	    
+	}else{
+	    //todo: redirect back to login screen if we reach here
+	}	
+    }
 
 
    render(){
@@ -30,8 +42,8 @@ export class TabbedHome extends React.Component {
        <TabNavigator
         tabBarStyle={styles.tabBarStyle}
        >
-        {tabRoutes.map( (el, i) => (
-
+         {this.state.tabRoutes.map( (el, i) => (
+	     
           <TabNavigator.Item
            key={i}
            titleStyle={{fontWeight: 'bold', fontSize: 12}}
@@ -52,6 +64,10 @@ export class TabbedHome extends React.Component {
    }
 }
 
+
+const mapStateToProps = state => state.loginStateReducer;
+export default connect(mapStateToProps, null)(TabbedLayout);
+
 /**
  *
  Our own tab
@@ -61,7 +77,7 @@ export class TabbedHome extends React.Component {
 />
  **/
 
-export default TabbedHome;
+//export default TabbedHome;
 
 const styles = StyleSheet.create({
   tabBarStyle:{

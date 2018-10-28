@@ -48,6 +48,7 @@ class MainApp extends React.Component {
     
     componentDidMount(){
 	this.registerToken();
+	console.log("Component HAS MOUNTED");
     }
     
  lecturerLogin = ()=>{

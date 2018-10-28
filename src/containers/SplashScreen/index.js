@@ -28,10 +28,10 @@ class SplashScreen extends Component{
   componentDidMount(){
     new UserAPI().checkLoginState(
 	(r) => this.props.gotoHomeScreen(r),
-	() =>  this.props.gotoLogin()
+	() =>  {console.log("Failed to retreive login state");}
     );
   }
-
+    
   render(){
     const redirect=  this.props.isLoggedIn?<Redirect to="/home" />:<Redirect to="/login" />;
     return(

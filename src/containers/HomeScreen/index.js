@@ -94,16 +94,27 @@ class HomeScreen extends React.Component{
 
                 </Picker>
                </Card>
-               <View style={{marginBottom: 30}}>
-                {
-                  this.state.data.map( (e,key) =>
-                    <LessonCard
-                      key={key}
-                      {...e}
-                    />
-                  )
-                }
-              </View>
+	       {this.state.data.length==0?
+		   <View>
+          <Card
+            containerStyle={styles.cardPickerStlye}
+          >
+            <Text style={{color: "red", fontWeight:"900"}}>No Cancellation or Rescheduling been made!</Text>
+         </Card>
+       </View>
+		       :
+		       <View style={{marginBottom: 30}}>
+			     {
+				 this.state.data.map( (e,key) =>
+				       <LessonCard
+						      key={key}
+						      {...e}
+						      />
+						    )
+			     }
+
+		</View>
+	       }
              </ScrollView>
             </Animated.View>
           </View>

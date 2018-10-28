@@ -25,7 +25,7 @@ MERGED from [com.google.firebase:firebase-iid:17.0.4] /Users/wKvin/.android/buil
 		ADDED from /Users/wKvin/Desktop/fyp2_react_native/android/app/src/main/AndroidManifest.xml:4:22-64
 uses-permission#android.permission.SYSTEM_ALERT_WINDOW
 ADDED from /Users/wKvin/Desktop/fyp2_react_native/android/app/src/main/AndroidManifest.xml:5:5-77
-MERGED from [com.facebook.react:react-native:0.56.0] /Users/wKvin/.android/build-cache/90d236fa2c768bb622b6be558365d55b2eb7d717/output/AndroidManifest.xml:11:5-78
+MERGED from [com.facebook.react:react-native:0.56.0] /Users/wKvin/.android/build-cache/324496e7252a5bb15876d6bd28e0ecc126adc455/output/AndroidManifest.xml:11:5-78
 	android:name
 		ADDED from /Users/wKvin/Desktop/fyp2_react_native/android/app/src/main/AndroidManifest.xml:5:22-75
 uses-permission#android.permission.WAKE_LOCK
@@ -61,7 +61,7 @@ ADDED from /Users/wKvin/Desktop/fyp2_react_native/android/app/src/main/AndroidMa
 MERGED from [com.google.android.gms:play-services-gcm:16.0.0] /Users/wKvin/.android/build-cache/6399651477dde59fba3731594d376be59379db05/output/AndroidManifest.xml:26:5-20
 MERGED from [com.google.android.gms:play-services-iid:16.0.0] /Users/wKvin/.android/build-cache/eb3663cc843647204e8cd49df05d641ae9cc4dc8/output/AndroidManifest.xml:26:5-20
 MERGED from [com.google.firebase:firebase-messaging:17.3.4] /Users/wKvin/.android/build-cache/8dcb38bf64b4693ae705a4c224028977f88349d6/output/AndroidManifest.xml:22:5-35:19
-MERGED from [com.facebook.react:react-native:0.56.0] /Users/wKvin/.android/build-cache/90d236fa2c768bb622b6be558365d55b2eb7d717/output/AndroidManifest.xml:13:5-20
+MERGED from [com.facebook.react:react-native:0.56.0] /Users/wKvin/.android/build-cache/324496e7252a5bb15876d6bd28e0ecc126adc455/output/AndroidManifest.xml:13:5-20
 MERGED from [com.android.support:appcompat-v7:26.1.0] /Users/wKvin/.android/build-cache/a00aeee86f8b4462e974d489c6cc2d90d34bf126/output/AndroidManifest.xml:25:5-29:19
 MERGED from [com.android.support:animated-vector-drawable:26.1.0] /Users/wKvin/.android/build-cache/0061448eae22bb087b9826098013e343ff0f7f8d/output/AndroidManifest.xml:22:5-26:19
 MERGED from [com.android.support:support-vector-drawable:26.1.0] /Users/wKvin/.android/build-cache/db53351b40811c11fb946f12e91b2b4f4619c6f7/output/AndroidManifest.xml:22:5-26:19
@@ -205,7 +205,7 @@ MERGED from [com.google.android.gms:play-services-iid:16.0.0] /Users/wKvin/.andr
 MERGED from [me.leolin:ShortcutBadger:1.1.8] /Users/wKvin/.android/build-cache/591239570a79b3645a25c5aacbecad36497d4bfc/output/AndroidManifest.xml:7:5-9:41
 MERGED from [com.google.firebase:firebase-messaging:17.3.4] /Users/wKvin/.android/build-cache/8dcb38bf64b4693ae705a4c224028977f88349d6/output/AndroidManifest.xml:20:5-44
 MERGED from [fyp2:react-native-vector-icons:unspecified] /Users/wKvin/Desktop/fyp2_react_native/node_modules/react-native-vector-icons/android/build/intermediates/bundles/default/AndroidManifest.xml:7:5-9:41
-MERGED from [com.facebook.react:react-native:0.56.0] /Users/wKvin/.android/build-cache/90d236fa2c768bb622b6be558365d55b2eb7d717/output/AndroidManifest.xml:7:5-9:41
+MERGED from [com.facebook.react:react-native:0.56.0] /Users/wKvin/.android/build-cache/324496e7252a5bb15876d6bd28e0ecc126adc455/output/AndroidManifest.xml:7:5-9:41
 MERGED from [com.android.support:appcompat-v7:26.1.0] /Users/wKvin/.android/build-cache/a00aeee86f8b4462e974d489c6cc2d90d34bf126/output/AndroidManifest.xml:21:5-23:78
 MERGED from [com.android.support:animated-vector-drawable:26.1.0] /Users/wKvin/.android/build-cache/0061448eae22bb087b9826098013e343ff0f7f8d/output/AndroidManifest.xml:20:5-44
 MERGED from [com.android.support:support-vector-drawable:26.1.0] /Users/wKvin/.android/build-cache/db53351b40811c11fb946f12e91b2b4f4619c6f7/output/AndroidManifest.xml:20:5-44

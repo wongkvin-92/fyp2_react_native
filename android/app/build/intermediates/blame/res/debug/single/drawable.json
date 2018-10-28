@@ -12,12 +12,12 @@
         "source": "/Users/wKvin/.android/build-cache/edaa1bad125c1e1b3edffeb8574601d878d34e36/output/res/drawable/common_google_signin_btn_text_light_normal.xml"
     },
     {
-        "merged": "/Users/wKvin/Desktop/fyp2_react_native/android/app/build/intermediates/res/merged/debug/drawable/abc_spinner_textfield_background_material.xml",
-        "source": "/Users/wKvin/.android/build-cache/a00aeee86f8b4462e974d489c6cc2d90d34bf126/output/res/drawable/abc_spinner_textfield_background_material.xml"
-    },
-    {
         "merged": "/Users/wKvin/Desktop/fyp2_react_native/android/app/build/intermediates/res/merged/debug/drawable/common_google_signin_btn_text_dark_focused.xml",
         "source": "/Users/wKvin/.android/build-cache/edaa1bad125c1e1b3edffeb8574601d878d34e36/output/res/drawable/common_google_signin_btn_text_dark_focused.xml"
+    },
+    {
+        "merged": "/Users/wKvin/Desktop/fyp2_react_native/android/app/build/intermediates/res/merged/debug/drawable/abc_spinner_textfield_background_material.xml",
+        "source": "/Users/wKvin/.android/build-cache/a00aeee86f8b4462e974d489c6cc2d90d34bf126/output/res/drawable/abc_spinner_textfield_background_material.xml"
     },
     {
         "merged": "/Users/wKvin/Desktop/fyp2_react_native/android/app/build/intermediates/res/merged/debug/drawable/abc_btn_radio_material.xml",

@@ -67,7 +67,7 @@ export const LessonCard = ({rescheduleID, title, subName, type, oriDate, oriDay,
         <View></View>
         :  <View style={styles.canceBtnContainer}>
              <Link
-                to={"/request/"+rescheduleID}
+                to={"/lecturer/request/"+rescheduleID}
                     component={Button}
                     rounded
                     title="Reschedule"

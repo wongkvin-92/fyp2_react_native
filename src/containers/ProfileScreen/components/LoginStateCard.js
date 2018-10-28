@@ -10,21 +10,18 @@ const LoginStateCard = (props) =>
 (
   <View>
     <Card
-      title="Lecturer"
+      title={props.type=="lecturer"?"Lecturer":"Student"}
       titleStyle={styles.cardTitleStyle}
       containerStyle={styles.cardStyle}
     >
       <Text style={styles.cardContentContainerStyle}>
-        <Text style={styles.cardContentTitleStyle}>Name: </Text> {props.lecturerName}
+        <Text style={styles.cardContentTitleStyle}>Name: </Text> {props.name}
       </Text>
       <Text style={styles.cardContentContainerStyle}>
-        <Text style={styles.cardContentTitleStyle}>Email: </Text> {props.lecturerEmail}
+        <Text style={styles.cardContentTitleStyle}>Email: </Text> {props.email}
       </Text>
     </Card>
 </View>
 );
 
-
-const ConnectedLoginStateCard = connect( state => state.loginStateReducer)(LoginStateCard);
-
-export default ConnectedLoginStateCard;
+export default LoginStateCard;
