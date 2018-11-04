@@ -30,15 +30,17 @@ export const lecturerTabRoutes = [
     {id: "profile", label: "Profile", component: ProfileScreen, logo:"face"}
 ];
 
+
 export const studentTabRoutes = [
     {id: "home", label: "Home", component: SHomeScreen, logo:"home"},
+    {id: "enroll", label: "Enroll", component: EnrollScreen, logo:"home"},
     {id: "profile", label: "Profile", component: ProfileScreen, logo:"face"}
 ];
 
 
 //Lecturer Routes
 export const commonRoutes = [
-    
+
     {path: "/", component: SplashScreen},
     {path: "/login", component: LoginScreen},
     {path: "/home", component: LecturerTabLayout},
@@ -50,7 +52,7 @@ export const commonRoutes = [
   	     return <RequestRescheduleScreen {...props} />;
       })
     }
-    
+
     //Student Routes
 ,
 

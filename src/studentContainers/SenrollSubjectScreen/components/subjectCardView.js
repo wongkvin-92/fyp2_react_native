@@ -16,7 +16,7 @@ import {Redirect, Link} from 'react-router-native';
 
 import {StudentAPI} from '../../../API';
 
-export const SubjectCard = ({subjectID, subjectName} ) => (
+export const SubjectCard = ({subjectID, subjectName, clickHandler=()=>{}} ) => (
 <View>
 
   <Card
@@ -34,10 +34,8 @@ export const SubjectCard = ({subjectID, subjectName} ) => (
        rounded
        icon={{name: 'add'}}
        buttonStyle= {styles.cancelBtnStyle}
-       textStyle = {styles.cancelBtnTextStyle}
-       onPress={()=> {
-         
-       }}
+      textStyle = {styles.cancelBtnTextStyle}      
+      onPress={(event)=> clickHandler(subjectID, event) }      
     />
 
   </Card>

@@ -13,52 +13,63 @@ import {lecturerTabRoutes, studentTabRoutes} from "../../../Routes";
 import {connect} from 'react-redux';
 
 export class TabbedLayout extends React.Component {
+    state = {type: "lecturer", selectedTab:"home", redirect: false, tabRoutes: null};
+
     
-    constructor(p){
-	super(p);
-	const tabRoutes = p.credentials.type == "lecturer"?lecturerTabRoutes: studentTabRoutes;
-	this.state = {type: p.credentials.type, selectedTab:"home", redirect: false, tabRoutes: tabRoutes};	
+    clickHandler = (viewId)=>{
+	this.setState({selectedTab: viewId});
     }
-  clickHandler = (viewId)=>{
-    this.setState({selectedTab: viewId});
-  }
 
 /*    logout(){
         this.props.logout ();
         this.setState({redirect: true});
 	}*/
-    componentWillMount(){
-	if(this.props.credentials != null){
-	    //alert("Logged in as "+this.state.type);	    
-	}else{
-	    //todo: redirect back to login screen if we reach here
-	}	
+    
+    componentDidMount(){	
+	let type= this.props.credentials.type;	
+	let tabRoutes = type=="lecturer"?lecturerTabRoutes:studentTabRoutes;
+	this.setState({type: this.props.credentials.type, tabRoutes: tabRoutes})
+	;	
     }
 
+    componentWillReceiveProps(newProps){
+	console.log("Component updated old vs new = ");	
+	console.log(this.props);
+	console.log(newProps);	
+    }
+    
 
    render(){
      return(
-       <View style={{height: "100%"}}>
+	 <View style={{height: "100%"}}>
+	   {this.state.tabRoutes == null?<View></View>:
+	       
        <TabNavigator
-        tabBarStyle={styles.tabBarStyle}
-       >
+             tabBarStyle={styles.tabBarStyle}       
+	     showLabel={true}
+	     >	     
          {this.state.tabRoutes.map( (el, i) => (
-	     
+
           <TabNavigator.Item
            key={i}
            titleStyle={{fontWeight: 'bold', fontSize: 12}}
-           title={el.id}
-           renderIcon={() => <Icon containerStyle={{paddingTop:40}} color={'#5e6977'} name={el.logo} size={30} />}
-           renderSelectedIcon={() => <Icon containerStyle={{paddingTop:30}} color={'#6296f9'} name={el.logo} size={26} />}
-           selected={this.state.selectedTab === el.id}
-           onPress={()=>{ this.clickHandler(el.id); }}
+            title={el.label}
+	    
+            renderIcon={
+	    () => <Icon containerStyle={{paddingTop:40}} color={'#5e6977'} name={el.logo} size={30} />}
+            renderSelectedIcon={() => <Icon containerStyle={{paddingTop:30}} color={'#6296f9'} name={el.logo} size={26} />}
+	    
+            selected={this.state.selectedTab === el.id}
+            onPress={()=>{ this.clickHandler(el.id); }}
+	    
            {...el.props}
           >
           <el.component {...this.props}/>
          </TabNavigator.Item>
 
         ))}
-       </TabNavigator>
+	    </TabNavigator>
+	   }
        </View>
      );
    }
@@ -66,8 +77,9 @@ export class TabbedLayout extends React.Component {
 
 
 const mapStateToProps = state => state.loginStateReducer;
-export default connect(mapStateToProps, null)(TabbedLayout);
+export default connect(mapStateToProps)(TabbedLayout);
 
+//export default TabbedLayout;
 /**
  *
  Our own tab
@@ -84,6 +96,6 @@ const styles = StyleSheet.create({
   overflow: 'hidden' ,
   height: '8%',
   backgroundColor: 'white',
-  elevation:4,
+  elevation:4
 },
-})
+});

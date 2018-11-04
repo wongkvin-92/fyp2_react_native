@@ -67,7 +67,7 @@ class ProfileScreen extends React.Component{
   }
 
     componentWillMount(){
-	this.setState({email: this.props.credentials.email, name: this.props.credentials.name});
+	this.setState({email: this.props.credentials.email, name: this.props.credentials.name, type: this.props.credentials.type});	
 	/*if(this.props.credentials != null && this.props.credentials.user != null){
 	    this.setState({email: this.props.credentials.user.email, name: this.props.credentials.user.name});
 	}*/	
@@ -117,8 +117,10 @@ class ProfileScreen extends React.Component{
            <Animated.View style={[{opacity: this.state.fadeAnim}]}>
              <LoginStateCard name={this.state.name} email={this.state.email} type={this.state.type}  />	     
            </Animated.View>
+
+	   {this.state.type=="student"?<View></View>:
            <Animated.View style={[{opacity: this.state.fadeAnim}]}>
-	    
+	     
              <Card
                title="My Class Lessons"
                titleStyle={styles.cardTitleStyle}
@@ -137,8 +139,10 @@ class ProfileScreen extends React.Component{
                  />
                </View>
              </Card>
-           </Animated.View>
+               </Animated.View>
+	   }
          </View>
+
           <View style={styles.logoutBtnBackground}>
             <Button rounded
                title="Logout"

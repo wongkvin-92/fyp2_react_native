@@ -16,8 +16,6 @@ import {
   Card, Button
 } from 'react-native-elements';
 
-import CardView from './components/CardView';
-
 import {Redirect, Link} from 'react-router-native';
 
 import { Calendar, CalendarList, Agenda } from 'react-native-calendars';
@@ -121,7 +119,7 @@ class LessonScreen extends React.PureComponent{
   }
 
   formatDate(date){
-    let fixZero = e => Math.floor(e / 10) == 0? "0"+e:e+""
+      let fixZero = e => Math.floor(e / 10) == 0? "0"+e:e+"";
     let m = date.getMonth()+1;
     let month = fixZero(m);
     return [date.getFullYear(), month,  fixZero(date.getDate()) ].join("-");

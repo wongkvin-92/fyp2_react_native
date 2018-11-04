@@ -18,11 +18,17 @@ import {
   FormLabel, FormInput, Grid, Row, Col,FormValidationMessage
 } from 'react-native-elements';
 
+//import Store from 'react-native-store';
+
 import {LecturerAPI,UserAPI} from "../../API";
 import {Redirect} from 'react-router-native';
 import {connect} from 'react-redux';
 
 import { pushNotifications } from '../../services';
+
+/*const DB ={
+  'studentTest' : Store.model('studentTest')
+}*/
 
 class LoginView extends React.Component{
   state={
@@ -36,9 +42,10 @@ class LoginView extends React.Component{
     error: false,
     error2: false,
     errorMsg:"",
-    errorMsg2:""
+      errorMsg2:"",
+       studentTest: []
   //  springAnim: new Animated.Value(0)
-  };   
+  };
 
 componentWillReceiveProps(newProps){
   if(newProps.isLoggedIn != this.props.isLoggedIn){
@@ -76,21 +83,33 @@ componentDidMount() {
         duration: 1700,              // Make it take a while
       }
     ).start();
-/*
-    Animated.spring(
-      this.state.springAnim,{
-        toValue: 1,
-        friction: 0.8
-      }).start();                    // Starts the animation
-      */
-  }
-/*
-  handleOnPress = () => {
-     pushNotifications.localNotification();
-   };
+    /*
+       Animated.spring(
+       this.state.springAnim,{
+       toValue: 1,
+       friction: 0.8
+       }).start();                    // Starts the animation
+     */
 
-*/
-  wrongInputValidate = (e) => {
+    /*DB.studentTest.add({
+       studentID: '1234',
+       name: "Ibrahim"
+    });
+
+    DB.studentTest.find().then(resp => this.setState({studentTest: resp}));
+    console.log("State");
+    console.log(DB);
+    console.log(this.state.studentTest);
+    */
+}
+    /*
+       handleOnPress = () => {
+       pushNotifications.localNotification();
+       };
+
+     */
+
+    wrongInputValidate = (e) => {
     this.setState({
       bbc: "red"
 
@@ -125,11 +144,29 @@ componentDidMount() {
 		    this.props.login();
 		    this.props.dispatchLogin(response.credentials);
 		}else{
-		    alert("Sorry cannot login");
-		}
+  if(this.state.email ==""){
+      this.wrongInputValidate();
+      this.setState({
+    errorMsg: r.msg,
+    error: true
+      })
+  }
+  else if(this.state.password ==""){
+      this.correctInputValidate();
+      this.wrongInputValidate2();
+      this.setState({
+    errorMsg:"",
+    errorMsg2: r.msg,
+    error2: true
+      })
+  }
+  else{
+      errorMsg2: r.msg;
+  }
+    }
 	    });
     }
-    
+
 
   render (){
     return (
@@ -193,7 +230,7 @@ componentDidMount() {
             <View style={styles.loginBtnContainer}>
               <Button
                 title="Login"
-                onPress = {this.onLoginPress}		    
+                onPress = {this.onLoginPress}
                 rounded
                 icon={{name: 'input'}}
                 buttonStyle= {styles.loginBtnStyle}
@@ -217,7 +254,7 @@ componentDidMount() {
 			this.state.email,
 			this.state.password,
 			(r) => {
-			    
+
 			    if(r.result==true){
 				this.props.login();
 				this.props.dispatchLogin(this.state.email, r.id);

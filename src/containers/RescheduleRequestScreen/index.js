@@ -77,7 +77,8 @@ class RescheduleRequest extends React.Component{
               icon={{name: 'calendar', type: 'font-awesome'}}
               buttonStyle= {styles.rescheduleBtnStyle}
               textStyle = {styles.cancelBtnTextStyle}
-                onPress={()=>{
+                onPress={(goBacktoHome)=>{
+                  goBacktoHome.preventDefault();
                     let dateStr = this.state.datetime1;
                     let dtime = dateStr.split(' ');
                     let fdateString = dtime[0];

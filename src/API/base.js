@@ -1,4 +1,4 @@
-const artisan = "192.168.0.79";
+const artisan = "192.168.0.80";
 const myHome = "192.168.0.189";
 const mcdKotaDam = "192.168.182.120";
 const mcdDamansara2 ="192.168.182.246";

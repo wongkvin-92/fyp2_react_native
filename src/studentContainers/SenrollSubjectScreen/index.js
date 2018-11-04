@@ -20,6 +20,7 @@ import SearchSubject from './components/searchBar';
 
 import {Redirect, Link} from 'react-router-native';
 import {StudentAPI} from '../../API';
+import {connect} from 'react-redux';
 
 import styles from './style';
 /*
@@ -36,30 +37,50 @@ class EnrollScreen extends React.Component{
   state={
     redirect:false,
     data: [],
-  
-    fadeAnim: new Animated.Value(0),
+    fadeAnim: new Animated.Value(0)
   };
-
-
+    
+    filterOutSubjects = (d, localList) => d.filter(e=>localList.indexOf(e.subjectID)==-1);
+    
   downloadList = ()=>{
     new StudentAPI().displaySubjectList(
-          (d) => this.setState({data: d})
+        (d) => {
+	    let filteredData = this.filterOutSubjects(d, this.props.enrolledSubject);
+	    this.setState({data: filteredData});	    
+	}
     );
   }
 
-  componentDidMount(){
-
+    componentDidMount(){
+	console.log("props");
+      console.log(this.props);
     Animated.timing(                  // Animate over time
       this.state.fadeAnim,            // The animated value to drive
       {
         toValue: 1,                   // Animate to opacity: 1 (opaque)
-        duration: 1000,              // Make it take a while
+        duration: 1000              // Make it take a while
       }
     ).start();
 
     this.downloadList();
-
   }
+
+
+    enrollSubjectClick = (subjectId) => {
+	//alert("Enrolling subject "+subjectId);
+	this.props.enrollSubject(subjectId);
+
+	let data = this.filterOutSubjects(this.state.data, this.props.enrolledSubject);
+	this.setState({data: this.state.data.filter(e => e.subjectID != subjectId) });	
+    }
+
+    componentWillReceiveProps(newProps){
+	
+	if (JSON.stringify(newProps.enrolledSubject != JSON.stringify(this.props.enrolledSubject))){
+	    console.log("enrolled subject updated");
+	    newProps.asyncStore('enrolledSubject', JSON.stringify(newProps.enrolledSubject));	    
+	}	
+    }
 
   render () {
 
@@ -84,7 +105,8 @@ class EnrollScreen extends React.Component{
                 {
                   this.state.data.map( (e,key) =>
                     <SubjectCard
-                      key={key}
+				       key={key}
+				       clickHandler={this.enrollSubjectClick}
                       {...e}
                     />
                   )
@@ -100,8 +122,14 @@ class EnrollScreen extends React.Component{
 
   }
 }
+const mapStateToProps = p => p.studentStateReducer;
 
-export default EnrollScreen;
+const mapDispatchToProps = dispatch => {
+    return {
+	enrollSubject: s => dispatch({type: "ENROLL_SUBJECT", subject: s})
+    };
+};
+export default connect(mapStateToProps, mapDispatchToProps)(EnrollScreen);
 
 /*
 <Button

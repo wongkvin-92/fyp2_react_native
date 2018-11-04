@@ -3,7 +3,8 @@
 const INITIAL_STATE = {
   showSplashScreen: false,
     credentials: {
-	result: false
+	result: false,
+	type: "student"
     },
     loading: false,
     isLoggedIn: false

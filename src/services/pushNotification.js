@@ -6,12 +6,12 @@ const configure = (sharedObj) => {
  PushNotification.configure({
    senderID: "144006346881",
 
-     
+
    onRegister: function(token) {
        //console.log( 'TOKEN:', token );
        //process token
        sharedObj.token = token;
-       new UserAPI().registerToken(token, ()=> {console.log("Successfully registered token"); });
+       //new UserAPI().registerToken(token, ()=> {console.log("Successfully registered token"); });
    },
 
    onNotification: function(notification) {

@@ -49,9 +49,19 @@ export class StudentAPI extends UserAPI{
     if(filter != "all"){
         action += "filter/"+filter;
     }
-        this.getRequest(action).
-            then(r=>onSuccess(r))
-            .catch( err => alert(err) );
+      this.getRequest(action)
+	  .catch(() => {})
+          .then(r=>onSuccess(r));
+   }
+
+   displayLessonList(date, subjectList, onSuccess){
+       var action ="student/schedule/"+ date;       
+     this.postRequest(action,
+       {
+           body: JSON.stringify({subjectList: subjectList})         
+       }
+		     )
+     .then(r=>onSuccess(r));
    }
 
    displaySubjectList(onSuccess){

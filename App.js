@@ -23,34 +23,77 @@ import {
   Platform,
   Button,
   TouchableOpacity,
-  StyleSheet} from 'react-native';
+    StyleSheet} from 'react-native';
 
 
-import { PersistGate } from 'redux-persist/integration/react';
+//import { PersistGate } from 'redux-persist/integration/react';
 import {Provider} from 'react-redux';
-import store, {persistor} from "./src/store";
+import store from "./src/store";
 
 import { pushNotifications } from './src/services';
 import {UserAPI} from './src/API';
 
+import {AsyncStorage} from 'react-native';
+//import _ from 'loadash';
+
+// To see all the requests in the chrome Dev tools in the network tab.
+//XMLHttpRequest = GLOBAL.originalXMLHttpRequest ?
+//    GLOBAL.originalXMLHttpRequest :
+//    GLOBAL.XMLHttpRequest;
+
+// fetch logger
+
+global._fetch = fetch;
+global.fetch = function (uri, options, ...args) {
+  return global._fetch(uri, options, ...args).then((response) => {
+      console.log('Fetch', { request: { uri, options, ...args }, response  });
+    return response;
+  });
+};
+
 const sharedObj = {};
 pushNotifications.configure(sharedObj);
 
-
 class MainApp extends React.Component {
-    
+    storeData = async (key, value, onSuccess= () => {}) =>{
+	try {
+	    console.log("Saving "+key);
+            await AsyncStorage.setItem('@MySuperStore:'+key, value);
+            if(onSuccess!=null)
+		onSuccess();
+	    console.log("successfully saved");
+	} catch (error) {
+            console.log("Error saving data" + error);
+	}
+    }
+
+    retrieveData = async (key, onRetrieved) => {
+	try {
+	    console.log("Loading "+key);
+            const value = await AsyncStorage.getItem('@MySuperStore:'+key);
+	    console.log("successfully loaded");
+        //this.setState({myKey: value});
+        onRetrieved(value);
+      } catch (error) {
+        console.log("Error retrieving data" + error);
+      }
+    }
+
+
+
     constructor(p){
-	super(p);
-	this.state = {loading: false, token: null};
+    	super(p);
+    	this.state = {loading: false, token: null, myKey: null};
     }
 
     registerToken = ()=> new UserAPI().registerToken(sharedObj.token, ()=>console.log("Token registered"));
-    
+
     componentDidMount(){
-	this.registerToken();
-	console.log("Component HAS MOUNTED");
+    	this.registerToken();
+    	//this.storeData('enrolledKey', ["bit100"]);
+    	//this.retrieveData('enrolledKey', r=>console.log(r));
     }
-    
+
  lecturerLogin = ()=>{
      this.setState({isLoggedIn: true});
      this.registerToken();
@@ -61,7 +104,6 @@ class MainApp extends React.Component {
   render(){
     return (
       <Provider store={store}>
-       <PersistGate loading={null} persistor={persistor}>
           <NativeRouter>
             <GenerateRoutes
               commonRoutes={commonRoutes}
@@ -72,13 +114,13 @@ class MainApp extends React.Component {
                   logout: ()=> {                   //success() - callback func
                       new LecturerAPI().logout( this.onLogout );
                   },
+		    asyncStore:this.storeData,
+                    asyncLoad:this.retrieveData,
                   setLogin: this.setLogin,
-                            ...this.state
-                }
-              }
+                    ...this.state
+              }}
              />
             </NativeRouter>
-          </PersistGate>
       </Provider>
     );
   }

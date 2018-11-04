@@ -25,13 +25,36 @@ state={
 };
 */
 class SplashScreen extends Component{
-  componentDidMount(){
-    new UserAPI().checkLoginState(
-	(r) => this.props.gotoHomeScreen(r),
-	() =>  {console.log("Failed to retreive login state");}
-    );
+    componentDidMount(){
+	console.log("Splash screen component did mount");
+	console.log(this.props);
+	this.props.asyncLoad("enrolledSubject", (data) => {
+	    this.props.setSubjectList(JSON.parse(data));
+	});
+
+	new UserAPI().checkLoginState(
+	    (r) => {
+
+		if(r.type=="student"){
+		    new UserAPI().startSyncSchedule(
+			({schedule, period})=>{
+          let data = schedule;
+			    this.props.updateSchedule(data);
+          this.props.setPeriod(period);
+			    console.log("Successfully synchronized");
+			},
+			()=>{ console.log("Synchronized failure"); },
+			this.props.studentStateReducer
+		    );
+		}
+
+		this.props.gotoHomeScreen(r);
+	    },
+	    () =>  {console.log("Failed to retreive login state");}
+	);
+
   }
-    
+
   render(){
     const redirect=  this.props.isLoggedIn?<Redirect to="/home" />:<Redirect to="/login" />;
     return(
@@ -42,14 +65,21 @@ class SplashScreen extends Component{
   }
 };
 
-const mapStateToProps = state=>state.loginStateReducer;
+const mapStateToProps = (state)=> {
+    return {
+	loginStateReducer:   state.loginStateReducer,
+	studentStateReducer: state.studentStateReducer
+    };
+}
 const mapDispatchToProps = dispatch => {
     return {
         gotoHomeScreen: (c) => dispatch({type: "LOGIN", credentials: c}),
-        gotoLogin: () => dispatch({type: "LOGOUT"})
+        gotoLogin: () => dispatch({type: "LOGOUT"}),
+	      setSubjectList: (data) => dispatch({type: "SET_SUBJECT", subject: data}),
+	      updateSchedule: data => dispatch({type: "UPDATE_SCHEDULE", subjectList: data}),
+        setPeriod: data => dispatch({type: "SET_PERIOD", period: data})
     };
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(SplashScreen);
-
 //export default SplashScreeen;
