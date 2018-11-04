@@ -87,7 +87,7 @@ class ShomeScreen extends React.PureComponent{
 
     	}
 
-      if(this.props.period != newProps.period){
+	if(hash(this.props.period) != hash(newProps.period)){
         this.setState({ minDate: newProps.period.start_date,
                         maxDate: newProps.period.end_date });
         console.log("Updated Period............");

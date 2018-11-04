@@ -17,7 +17,7 @@ const SplashCard = () => (
   <View>
     <Text> Splash Screen </Text>
 
-  </View>
+  </View
 );
 
 state={
@@ -25,13 +25,46 @@ state={
 };
 */
 class SplashScreen extends Component{
-    componentDidMount(){
-	console.log("Splash screen component did mount");
-	console.log(this.props);
+
+    runStudentStartup(){
 	this.props.asyncLoad("enrolledSubject", (data) => {
 	    this.props.setSubjectList(JSON.parse(data));
 	});
 
+	let period = {start_date: "2018-11-04", end_date: "2018-11-07"};
+	this.props.setPeriod(period);
+
+
+	let permenantClass = {};
+	let replacementClass = {};
+	this.props.updateSchedule(
+	    this.props.studentService.generateSchedule(null, null, period.start_date, period.end_date)
+	);
+
+
+	console.log("Student service");
+	console.log(this.props.studentService);
+    }
+
+    componentDidMount(){
+	console.log("Splash screen component did mount");
+	console.log(this.props);
+
+
+
+	new UserAPI().checkLoginState(
+	    (r) => {
+		this.props.gotoHomeScreen(r);
+		if(r.type == "student"){
+		    this.runStudentStartup();
+		}
+	    },
+	    () =>  {console.log("Failed to retreive login state");}
+	);
+
+
+
+	/*
 	new UserAPI().checkLoginState(
 	    (r) => {
 
@@ -51,8 +84,7 @@ class SplashScreen extends Component{
 		this.props.gotoHomeScreen(r);
 	    },
 	    () =>  {console.log("Failed to retreive login state");}
-	);
-
+	);*/
   }
 
   render(){

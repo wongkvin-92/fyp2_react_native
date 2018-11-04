@@ -30,7 +30,7 @@ import {
 import {Provider} from 'react-redux';
 import store from "./src/store";
 
-import { pushNotifications } from './src/services';
+import { pushNotifications, scheduleSyncServices } from './src/services';
 import {UserAPI} from './src/API';
 
 import {AsyncStorage} from 'react-native';
@@ -43,16 +43,18 @@ import {AsyncStorage} from 'react-native';
 
 // fetch logger
 
+/*
 global._fetch = fetch;
 global.fetch = function (uri, options, ...args) {
   return global._fetch(uri, options, ...args).then((response) => {
       console.log('Fetch', { request: { uri, options, ...args }, response  });
     return response;
   });
-};
+  };*/
 
 const sharedObj = {};
 pushNotifications.configure(sharedObj);
+const studentService = new scheduleSyncServices.StudentScheduleSystem(sharedObj);
 
 class MainApp extends React.Component {
     storeData = async (key, value, onSuccess= () => {}) =>{
@@ -116,8 +118,9 @@ class MainApp extends React.Component {
                   },
 		    asyncStore:this.storeData,
                     asyncLoad:this.retrieveData,
-                  setLogin: this.setLogin,
-                    ...this.state
+                    setLogin: this.setLogin,
+                    ...this.state,		    
+		    studentService: studentService
               }}
              />
             </NativeRouter>

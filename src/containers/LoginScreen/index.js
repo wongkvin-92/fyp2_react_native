@@ -32,8 +32,8 @@ import { pushNotifications } from '../../services';
 
 class LoginView extends React.Component{
   state={
-    email: "seethal@help.edu.my",
-    password: "123456",
+    email: "b1301746",
+    password: "ibrahim1746",
     loginState: "NONE",
     redirect: false,
     fadeAnim: new Animated.Value(0),
