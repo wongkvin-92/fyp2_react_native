@@ -91,7 +91,8 @@ class MainApp extends React.Component {
     registerToken = ()=> new UserAPI().registerToken(sharedObj.token, ()=>console.log("Token registered"));
 
     componentDidMount(){
-    	this.registerToken();
+      console.log("Mounting", pushNotifications);
+    	//this.registerToken();
     	//this.storeData('enrolledKey', ["bit100"]);
     	//this.retrieveData('enrolledKey', r=>console.log(r));
     }
@@ -119,7 +120,7 @@ class MainApp extends React.Component {
 		    asyncStore:this.storeData,
                     asyncLoad:this.retrieveData,
                     setLogin: this.setLogin,
-                    ...this.state,		    
+                    ...this.state,
 		    studentService: studentService
               }}
              />

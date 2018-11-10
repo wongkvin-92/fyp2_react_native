@@ -113,13 +113,13 @@ export class UserAPI extends API{
       	}
       }
 
-      startSyncSchedule(onSuccess, onFailure, reducer){
-        this.downloadSemester( (r)=> {
+      startSyncSchedule(onSuccess, onFailure){
+        /*this.downloadSemester( (r)=> {
           if(r.start_date != null){
             let period = {start_date: r.start_date, end_date: r.end_date};
-            this._startSyncSchedule(onSuccess, onFailure, reducer, period);
+            //this._startSyncSchedule(onSuccess, onFailure, period);
           }
-        });
+        });*/
       }
 
       downloadSemester(onSuccess){

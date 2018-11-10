@@ -27,15 +27,15 @@ export class StudentAPI extends UserAPI{
   checkLoginState(onSuccess, onFailure){
       this.getRequest("state/student/")
           .then(r=>r.json())
-    .catch( err =>
-      {}
-    )
-      .then(r => {
-          if(r)
-  onSuccess(r);
-          else
-  onFailure(r);
-      });
+        .catch( err =>
+          {}
+        )
+          .then(r => {
+              if(r)
+      onSuccess(r);
+              else
+      onFailure(r);
+          });
   }
 
   fetchProfile(callback){
@@ -55,14 +55,24 @@ export class StudentAPI extends UserAPI{
    }
 
    displayLessonList(date, subjectList, onSuccess){
-       var action ="student/schedule/"+ date;       
+       var action ="student/schedule/"+ date;
      this.postRequest(action,
        {
-           body: JSON.stringify({subjectList: subjectList})         
+           body: JSON.stringify({subjectList: subjectList})
        }
 		     )
      .then(r=>onSuccess(r));
    }
+
+   downloadAllSubjects(subjectList, onSuccess){
+    var action ="student/all/schedule/";
+    this.postRequest(action,
+         {
+             body: JSON.stringify({subjectList:subjectList})
+         }
+        )
+        .then(r=>onSuccess(r));
+  }
 
    displaySubjectList(onSuccess){
      this.getRequest("subjects/").

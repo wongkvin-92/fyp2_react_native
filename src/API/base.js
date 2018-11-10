@@ -1,14 +1,13 @@
-const artisan = "192.168.0.80";
+const artisan = "192.168.0.78";
 const myHome = "192.168.0.189";
-const mcdKotaDam = "192.168.182.120";
+const mcdKotaDam = "192.168.182.251";
 const mcdDamansara2 ="192.168.182.246";
 const bandarSriDam = "192.168.1.134";
-const help = "10.125.192.41";
+const help = "10.125.193.254";
 const darr = "192.168.0.7";
-const ace ="192.168.1.114";
+const ace ="192.168.1.106";
 const qi ="192.168.0.6";
-const sudo= "192.168.1.84";
-const host = sudo;
+const host = myHome;
 const port = 80;
 const path = "fypBackEnd";
 

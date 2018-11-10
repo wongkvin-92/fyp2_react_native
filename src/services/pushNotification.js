@@ -8,10 +8,10 @@ const configure = (sharedObj) => {
 
 
    onRegister: function(token) {
-       //console.log( 'TOKEN:', token );
+       console.log( 'TOKEN:', token );
        //process token
        sharedObj.token = token;
-       //new UserAPI().registerToken(token, ()=> {console.log("Successfully registered token"); });
+       new UserAPI().registerToken(token, ()=> {console.log("Successfully registered token"); });
    },
 
    onNotification: function(notification) {
@@ -29,6 +29,8 @@ const configure = (sharedObj) => {
    popInitialNotification: true,
    requestPermissions: true
  });
+
+ console.log("Done configuring", PushNotification);
 };
 
 

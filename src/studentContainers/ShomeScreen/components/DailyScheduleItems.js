@@ -26,9 +26,9 @@ const DailyScheduleItemFunc = (props) => (
 
       <View style={styles.canceBtnContainer}>
 
-      {props.isCancelled=="0"?
+      {props.isCancelled==false?
       <Text style={{color: "red", fontWeight:"900"}}>
-        Normal
+            Normal {props.isCancelled.toString()}
       </Text>
 
         :
@@ -42,6 +42,8 @@ const DailyScheduleItemFunc = (props) => (
      </Card>
     </View>
 );
+
+
 
 class DailyScheduleItem extends React.PureComponent{
 
@@ -71,6 +73,7 @@ class DailyScheduleItem extends React.PureComponent{
       />;
   }
 };
+
 
 export default DailyScheduleItemFunc;
 /*

@@ -52,10 +52,10 @@ class ShomeScreen extends React.PureComponent{
     let today = this.formatDate(new Date());
     this.state={
       redirect:false,
-	items: {},
-	data: {},
-  minDate: "2018-01-01",
-  maxDate: "2018-02-02",
+    	items: {},
+    	data: {},
+      minDate: "2018-01-01",
+      maxDate: "2018-02-02",
       selectedDate: today,
       doNothing: false
     };
@@ -65,36 +65,184 @@ class ShomeScreen extends React.PureComponent{
 
     updateSubjectList = () => {
     	console.log("Updating");
-    	console.log(this.props.subjectList);
-    	this.setState({data: this.props.subjectList});
+    	//console.log(this.props.subjectList);
+    	//this.setState({data: this.props.subjectList});
     }
 
+    _getDays(s, e) {
+    var a = [];
+    while(s < e) {
+      let x = s;
+      let fixZero = e => Math.floor(e/10) ==0? "0"+ e:e +"";
+      let m = x.getMonth()+1;
+      let month = fixZero(m);
+      let year = x.getFullYear();
+      let date = fixZero(x.getDate())
+      let formatDate = [year, month, date].join("-");
+        a.push(formatDate);
+        s = new Date(s.setDate(
+            s.getDate() + 1
+        ));
+    }
+    return a;
+    };
+
+    //new function call it in componentdidmount
+    //updateSubjectSem = (success) =>
+    generateSchedule = (r) => {
+      let allSchedule = r;
+
+      let convertToDate = (strDate) => {
+        let d = strDate.split("-").map(x => parseInt(x));
+        return new Date(d[0], d[1]-1, d[2]);
+      };
+      let getWeekDay = (strDate) => {
+        let weekDay = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+        return weekDay[convertToDate(strDate).getDay()];
+      };
+
+    //let d1 = this.props.period.start_date.split("-").map(e=>parseInt(e));
+    //let d2 = this.props.period.end_date.split("-").map(e=>parseInt(e));
+
+    //let startDate = new Date(d1[0], d1[1]-1,d1[2]);
+    //let endDate = new Date(d2[0], d2[1]-1, d2[2]);
+	//endDate.setMonth(endDate.getMonth()+2);
+	let startDate = convertToDate(this.props.period.start_date);
+	let endDate  = this.props.period.end_date;
+
+    let dateArr = this._getDays(new Date(startDate), new Date(endDate));
+
+    let emptySchedules ={};
+      let newSchedule = {};
+      dateArr.forEach( el => emptySchedules[el]=[]);
+
+	let permenantSchedule = {};
+	let replacementClasses = {};
+	let cancelledClasses = {};
+
+
+      console.log("GET WEEK.........");
+      //console.log(dateArr.map(getWeekDay));
+      dateArr.forEach(el => {
+        permenantSchedule[el] = allSchedule.filter(d =>
+          d.oldDateTime == null && d.day == getWeekDay(el)
+        );
+          replacementClasses[el] = allSchedule.filter(d =>
+						      d.newDateTime != null && d.newDateTime == el  && d.status=="approved"
+						     );
+
+          cancelledClasses[el] = allSchedule.filter(d =>
+						    d.oldDateTime != null && d.oldDateTime == el
+						   ).map(e => parseInt(e.classID));
+      }
+		     );
+	//let finalSchedule = {...permenantSchedule, ...replacementClasses};
+	let finalSchedule = {};
+	Object.keys(permenantSchedule).forEach( k => {
+	    let combinedSchedule = permenantSchedule[k].concat(replacementClasses[k]);
+
+	    //finalSchedule[k]['isCancelled'] = true; //TODO
+	    finalSchedule[k] = Object.values(combinedSchedule).map( j => {
+        const jCopy = {...j};
+        let classID = j['classID']
+        var isCancelled = cancelledClasses[k].includes(parseInt(classID));
+        //jCopy['isCancelled'] = cancelledClasses[k].includes(parseInt(classID));
+        jCopy['isCancelled'] = isCancelled;
+        jCopy['curDate'] = k;
+        //let a = j;
+        //j['wKvin'] = 'here';
+    		//finalSchedule[k][j]['isCancelled'] = cancelledClasses[k].indexOf(parseInt(finalSchedule[k][j]['classID'])) >= 0; // finalSchedule[k][j] in cancelledClasses;
+    		//finalSchedule[k][j]['curDate'] = k;
+        //console.log(	finalSchedule[k][j]['isCancelled']);
+        return jCopy;
+	    });
+	});
+
+	this.props.setSchedule(finalSchedule);
+    };
+
+
+
+
+    downloadAllSubjects(){
+         let subList = this.props.enrolledSubject;
+        // subList =["bit216/bit302",
+	//	"bit100"];
+         if(subList.length > 0){
+           new StudentAPI().downloadAllSubjects(subList, this.generateSchedule);
+         }else{
+           console.log("Please enroll subject");
+         }
+    }
+
+
+    componentDidUpdate(){
+      console.log(this.props.subjectList);
+    }
+
+    /*
     componentDidMount(){
       console.log("COmponent did mount");
 
       console.log(this.props);
-	     this.updateSubjectList();
-       
+       this.updateSubjectList();
+
+
+       new StudentAPI().downloadAllSubjects( (r) => {
+         let schedule = r;
+         let output = {};
+
+         // question 3 should be inside the for loop = permanent
+         let permenantClass = schedule.filter(e => e.oldDateTime == null);
+         // question 4
+         let temporary = schedule.filter(e => e.oldDateTime != null);
+         //question 5
+         r.
+         //generate timetable
+         let dateArr=[];//calculate dateArr
+         //what day is it? Mon, Tues, Wed
+         //add curdate at front end
+          for(var i=0; i<dateArr.length; i++){
+            //curdate is equal to dateArr[i]
+              output[dateArr[i]] = [];
+              if(aaa)
+                if (sadfsaa)]
+                  output[dateArr[i]] = permenant[0];
+
+          }// to generate the dates for agenda
+
+          //UPDATE REDUX TREE tomorr       });
     }
+*/
 
 
     componentWillReceiveProps(newProps){
-       console.log("Props updated");
-    	if(hash(newProps.subjectList) != hash(this.props.subjectList)){
-    	    console.log("Redux tree was updated");
-    	    console.log(newProps.subjectList);
-    	    this.setState({data: newProps.subjectList});
-
-    	}
-
-	if(hash(this.props.period) != hash(newProps.period)){
-        this.setState({ minDate: newProps.period.start_date,
-                        maxDate: newProps.period.end_date });
-        console.log("Updated Period............");
-        console.log(newProps.period);
-      }
+        if(newProps.period != this.props.period){
+            console.log("Period changed");
+            console.log(newProps.period);
+        	    this.setState({minDate: newProps.period.start_date,
+        			   maxDate: newProps.period.end_date
+        			  });
+          //TODO: Do this if hash comparison is successfull
+          this.downloadAllSubjects();
+        }
     }
 
+    /*
+     console.log("Props updated");
+    if(hash(newProps.subjectList) != hash(this.props.subjectList)){
+        console.log("Redux tree was updated");
+        console.log(newProps.subjectList);
+        this.setState({data: newProps.subjectList});
+
+    }
+
+if(hash(this.props.period) != hash(newProps.period)){
+      this.setState({ minDate: newProps.period.start_date,
+                      maxDate: newProps.period.end_date });
+      console.log("Updated Period............");
+      console.log(newProps.period);
+    }*/
 
     formatDate(date){
 	let fixZero = e => Math.floor(e / 10) == 0? "0"+e:e+"";
@@ -162,7 +310,7 @@ class ShomeScreen extends React.PureComponent{
              <CustomAgenda
 		   doNothing={this.state.doNothing}
 		   style={{height: 30}}
-		   items={this.state.data}
+		   items={this.props.subjectList}
 		   loadItemsForMonth={this.loadItems.bind(this)}
 		   selected={this.state.selectedDate}
 		   onDayPress={(date)=>{this.setState({
@@ -222,15 +370,15 @@ class ShomeScreen extends React.PureComponent{
 //export default LessonScreen;
 const mapStateToProps = p => p.studentStateReducer;
 
-/*const mapDispatchToProps = dispatch => {
-  return {
+const mapDispatchToProps = dispatch => ({
+    setSchedule: (data) => dispatch({type: "UPDATE_SCHEDULE", subjectList: data}),
+    addSubject: (day, obj) => dispatch({type: "ADD_SUBJECT_SCHEDULE", day, obj})
 
-  }
-};*/
+  });
 
 /*
 setSchedule: (data) => dispatch({type: "SET_SCHEDULE", weeklySchedule: data}),
 addSubject: (day, obj) => dispatch({type: "ADD_SUBJECT_SCHEDULE", day, obj}),
 */
-export default connect(mapStateToProps)(ShomeScreen);
+export default connect(mapStateToProps, mapDispatchToProps)(ShomeScreen);
 //export default connect(mapStateToProps, mapDispatchToProps)(LessonScreen);

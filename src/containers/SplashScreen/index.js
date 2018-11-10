@@ -32,7 +32,7 @@ class SplashScreen extends Component{
 	});
 
 	let period = {start_date: "2018-11-04", end_date: "2018-11-07"};
-	this.props.setPeriod(period);
+	//this.props.setPeriod(period);
 
 
 	let permenantClass = {};
@@ -54,10 +54,21 @@ class SplashScreen extends Component{
 
 	new UserAPI().checkLoginState(
 	    (r) => {
-		this.props.gotoHomeScreen(r);
-		if(r.type == "student"){
-		    this.runStudentStartup();
-		}
+    		this.props.gotoHomeScreen(r);
+    		if(r.type == "student"){
+    		    this.runStudentStartup();
+            new UserAPI().downloadSemester(r => {
+              this.props.setPeriod(r);
+            });
+            /*new UserAPI().startSyncSchedule(
+              ({period})=>{
+                  this.props.setPeriod(period);
+                 console.log("Successfully synchronized");
+             },
+             ()=>{ console.log("Synchronized failure"); },
+
+           );*/
+       }
 	    },
 	    () =>  {console.log("Failed to retreive login state");}
 	);
