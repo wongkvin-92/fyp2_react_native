@@ -66,7 +66,7 @@ class ShomeScreen extends React.PureComponent{
     updateSubjectList = () => {
     	console.log("Updating");
     	//console.log(this.props.subjectList);
-    	//this.setState({data: this.props.subjectList});
+    	this.setState({data: this.props.subjectList});	
     }
 
     _getDays(s, e) {
@@ -166,8 +166,6 @@ class ShomeScreen extends React.PureComponent{
 
     downloadAllSubjects(){
          let subList = this.props.enrolledSubject;
-         subList =["bit216/bit302",
-		"bit100"];
          if(subList.length > 0){
            new StudentAPI().downloadAllSubjects(subList, this.generateSchedule);
          }else{

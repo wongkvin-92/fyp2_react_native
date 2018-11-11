@@ -1,4 +1,4 @@
-import {UserAPI} from '../API';
+//import {UserAPI} from '../API';
 
 class StudentScheduleSystem{
     constructor(sharedObj){
@@ -39,6 +39,9 @@ class StudentScheduleSystem{
 	dateArr.forEach( el => emptySchedules[el]=[]);
 	return emptySchedules;
     }
+
+
+    
     
     generateSchedule(permanantClasses, replacementClasses, semStartDate, semEndDate){
 	let d = this.createEmptyDates(semStartDate, semEndDate);

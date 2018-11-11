@@ -28,6 +28,7 @@ class SplashScreen extends Component{
 
     runStudentStartup(){
 	this.props.asyncLoad("enrolledSubject", (data) => {
+	    console.log("ASYNC LOADING", data);
 	    this.props.setSubjectList(JSON.parse(data));
 	});
 

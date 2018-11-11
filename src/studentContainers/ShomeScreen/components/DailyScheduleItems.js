@@ -28,13 +28,14 @@ const DailyScheduleItemFunc = (props) => (
 
       {props.isCancelled==false?
       <Text style={{color: "red", fontWeight:"900"}}>
-            Normal {props.isCancelled.toString()}
+            Normal
       </Text>
 
         :
         <Text style={{color: "red", fontWeight:"900"}}>
           Cancelled
         </Text>
+        
 
       }
 
