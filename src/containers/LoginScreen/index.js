@@ -140,17 +140,19 @@ componentDidMount() {
 	    this.state.email,
 	    this.state.password,
 	    (response) => {
+		//alert(response);
 		if(response.result == true){
 		    this.props.login();
 		    this.props.dispatchLogin(response.credentials);
 		}else{
-  if(this.state.email ==""){
-      this.wrongInputValidate();
-      this.setState({
-    errorMsg: r.msg,
-    error: true
-      })
+		    if(this.state.email ==""){
+			this.wrongInputValidate();
+			this.setState({
+			    errorMsg: r.msg,
+			    error: true
+			});
   }
+		    
   else if(this.state.password ==""){
       this.correctInputValidate();
       this.wrongInputValidate2();

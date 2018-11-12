@@ -51,6 +51,7 @@ class ShomeScreen extends React.PureComponent{
   constructor(props){
     super(props);
 
+      this.scheduleService = new scheduleSyncServices.StudentScheduleSystem({});
     let today = this.formatDate(new Date());
     this.state={
       redirect:false,
@@ -90,8 +91,50 @@ class ShomeScreen extends React.PureComponent{
     };
 
 
+      downloadAllSubjects(period, subList, checksum){
+          //let subList = this.props.studentStateReducer.enrolledSubject;
+	  let scheduleSync = this.scheduleService;
+	  console.log("SCHEDULESYNC", scheduleSync);
+	  new StudentAPI().downloadSemesterChecksum(
+	      subList,
+	      checksumData => {
+		  if(checksumData){
+		      console.log(checksum + " vs " + checksumData.key);
+		      if(checksumData.key != checksum){
+			  console.log("ShomeScreen: downloading subjects");
+			  
+			  new StudentAPI().downloadAllSubjects(subList, r=> {
+			      
+			      scheduleSync.generateSchedule(r, period, e=> {
+				  this.props.setSchedule(e);
+				  this.props.setSemesterChecksum(checksumData.key);
+				  this.props.asyncStore('semesterChecksum', checksumData.key);
+				  this.props.asyncStore('subjectList', JSON.stringify(e));
+			      });
+			      
+			  });
+		      }else{
+			  console.log("Checksum same");			  
+		      }
+		  };
+	      });
+	  
+      }
+
+    componentDidUpdate(){
+	//console.log("COMPONENT DID UPDATE", this.props.period, this.props.subList, this.props.checksum);
+	let {period, enrolledSubject, semesterChecksum} = this.props;
+
+	if(period && enrolledSubject && semesterChecksum){
+	    console.log("COMPONENT DID UPDATE", period, enrolledSubject, semesterChecksum);
+	    this.downloadAllSubjects(period, enrolledSubject, semesterChecksum);
+	    this.props.setSync();
+	}
+
+    }
 
 
+/*
     downloadAllSubjects(period){
         let subList = this.props.enrolledSubject;
 	let scheduleSync = this.props.studentService;
@@ -110,11 +153,8 @@ class ShomeScreen extends React.PureComponent{
 	    } ));
 	}
     }    
+*/
 
-
-    componentDidUpdate(){
-	console.log(this.props.subjectList);
-    }
 
     /*
     componentDidMount(){
@@ -162,13 +202,22 @@ class ShomeScreen extends React.PureComponent{
           //TODO: Do this if hash comparison is successfull
             //this.downloadAllSubjects(newProps.period);	    
         }
-	
-	if(newProps.syncState != "sync"){
+
+	if(newProps.enrolledSubject != this.props.enrolledSubject){
+	    console.log("Schedule updated", this.props.period, newProps.enrolledSubject, this.props.semesterChecksum);
+	    this.downloadAllSubjects(this.props.period, newProps.enrolledSubject, this.props.semesterChecksum);
+	    
+	}
+/*	if(newProps.syncState != "sync"){
 	    let enrolledSubject = this.props.enrolledSubject;
+	    console.log("IN SYNC:", this.props.period, enrolledSubject, this.props.checksum);
 	    if(enrolledSubject.length != 0){
 		new StudentAPI().downloadSemesterChecksum(enrolledSubject,
 							  (checksum) => {
-							      this.downloadAllSubjects(newProps.period);	    
+							      console.log("HOMESCREEN UPDATED, CHECKSUM: ", checksum);
+							      //this.downloadAllSubjects(newProps.period);
+
+							      
 							      //console.log("CHANGED CHECKSUM", this.props.semesterChecksum, newProps.semesterChecksum);
 							      /*
 							      if(this.props.semesterChecksum == checksum.key){
@@ -176,12 +225,14 @@ class ShomeScreen extends React.PureComponent{
 
 							      }else{
 								  this.downloadAllSubjects(newProps.period);	    
-							      }*/
+							      }
 							  });
 	    }else{
 		this.props.setSync();
 	    }
-	}
+	    }*/
+
+	
     }
 
     /*
@@ -329,8 +380,8 @@ const mapStateToProps = p => p.studentStateReducer;
 const mapDispatchToProps = dispatch => ({
     setSchedule: (data) => dispatch({type: "UPDATE_SCHEDULE", subjectList: data}),
     addSubject: (day, obj) => dispatch({type: "ADD_SUBJECT_SCHEDULE", day, obj}),
-    setSync: () => dispatch({type: "SYNC_DONE"})
-    
+    setSync: () => dispatch({type: "SYNC_DONE"}),
+    setSemesterChecksum: data => dispatch({type: "SET_CHECKSUM", payload: data})
   });
 
 /*
