@@ -16,7 +16,7 @@ import {Redirect, Link} from 'react-router-native';
 
 import {StudentAPI} from '../../../API';
 
-export const SubjectCard = ({subjectID, subjectName, clickHandler=()=>{}} ) => (
+export const SubjectCard = ({subjectID, subjectName, clickHandler=()=>{}, enrolledStatus, removeHandler=()=>{}} ) => (
 <View>
 
   <Card
@@ -24,11 +24,21 @@ export const SubjectCard = ({subjectID, subjectName, clickHandler=()=>{}} ) => (
     titleStyle={styles.lessonCardStyle}
     containerStyle={styles.cardStyle}
   >
-
+    <Text>{enrolledStatus?"Enrolled":"Not enrolled"}</Text>
     <Text style={styles.cardContentContainerStyle}>
       <Text style={styles.cardContentTitleStyle}>Subject Name: </Text>{subjectName}
     </Text>
 
+    {enrolledStatus?
+	<Button
+	      title="Unenroll"
+	      rounded
+	      icon={{name: 'remove'}}
+	      buttonStyle= {{...styles.cancelBtnStyle, backgroundColor: "rgba(92, 99,216, 1)"}}
+		  textStyle = {styles.cancelBtnTextStyle}      
+		  onPress={(event)=> removeHandler(subjectID, event) }      
+	  />
+	:
     <Button
       title="Enroll"
        rounded
@@ -36,7 +46,8 @@ export const SubjectCard = ({subjectID, subjectName, clickHandler=()=>{}} ) => (
        buttonStyle= {styles.cancelBtnStyle}
       textStyle = {styles.cancelBtnTextStyle}      
       onPress={(event)=> clickHandler(subjectID, event) }      
-    />
+	  />
+      }
 
   </Card>
 </View>

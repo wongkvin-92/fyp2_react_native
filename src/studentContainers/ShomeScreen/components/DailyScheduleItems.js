@@ -34,8 +34,9 @@ const DailyScheduleItemFunc = (props) => (
         :
         <Text style={{color: "red", fontWeight:"900"}}>
           Cancelled
+          {props.newDateTime}
         </Text>
-        
+
 
       }
 

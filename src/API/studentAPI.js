@@ -72,7 +72,16 @@ export class StudentAPI extends UserAPI{
          }
         )
         .then(r=>onSuccess(r));
-  }
+   }
+
+    downloadSemesterChecksum(subjectList, onSuccess){
+	var action = "student/all/schedule/hash/";
+	let b= JSON.stringify({subjectList: subjectList});
+	this.postRequest(action,{
+	    body: b
+	})
+	    .then(r=>onSuccess(r));
+    }
 
    displaySubjectList(onSuccess){
      this.getRequest("subjects/").

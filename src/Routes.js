@@ -31,8 +31,9 @@ export const lecturerTabRoutes = [
 ];
 
 
+//    {id: "home", label: "Home", component: SHomeScreen, logo:"home"},
 export const studentTabRoutes = [
-    {id: "home", label: "Home", component: SHomeScreen, logo:"home"},
+    {id: "home", label: "Home", component: SHomeScreen, logo:"home"},    
     {id: "enroll", label: "Enroll", component: EnrollScreen, logo:"home"},
     {id: "profile", label: "Profile", component: ProfileScreen, logo:"face"}
 ];

@@ -27,6 +27,8 @@ import DailyScheduleItem from './components/DailyScheduleItems';
 
 import {styles} from './style';
 
+import {scheduleSyncServices} from '../../services';
+
 
 /**
  * Create new Agenda Class without onVisibleMonthsChange()
@@ -77,7 +79,7 @@ class ShomeScreen extends React.PureComponent{
       let m = x.getMonth()+1;
       let month = fixZero(m);
       let year = x.getFullYear();
-      let date = fixZero(x.getDate())
+	let date = fixZero(x.getDate());
       let formatDate = [year, month, date].join("-");
         a.push(formatDate);
         s = new Date(s.setDate(
@@ -87,95 +89,31 @@ class ShomeScreen extends React.PureComponent{
     return a;
     };
 
-    //new function call it in componentdidmount
-    //updateSubjectSem = (success) =>
-    generateSchedule = (r) => {
-      let allSchedule = r;
-
-      let convertToDate = (strDate) => {
-        let d = strDate.split("-").map(x => parseInt(x));
-        return new Date(d[0], d[1]-1, d[2]);
-      };
-      let getWeekDay = (strDate) => {
-        let weekDay = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-        return weekDay[convertToDate(strDate).getDay()];
-      };
-
-    //let d1 = this.props.period.start_date.split("-").map(e=>parseInt(e));
-    //let d2 = this.props.period.end_date.split("-").map(e=>parseInt(e));
-
-    //let startDate = new Date(d1[0], d1[1]-1,d1[2]);
-    //let endDate = new Date(d2[0], d2[1]-1, d2[2]);
-	//endDate.setMonth(endDate.getMonth()+2);
-	let startDate = convertToDate(this.props.period.start_date);
-	let endDate  = this.props.period.end_date;
-
-    let dateArr = this._getDays(new Date(startDate), new Date(endDate));
-
-    let emptySchedules ={};
-      let newSchedule = {};
-      dateArr.forEach( el => emptySchedules[el]=[]);
-
-	let permenantSchedule = {};
-	let replacementClasses = {};
-	let cancelledClasses = {};
-
-
-      console.log("GET WEEK.........");
-      //console.log(dateArr.map(getWeekDay));
-      dateArr.forEach(el => {
-        permenantSchedule[el] = allSchedule.filter(d =>
-          d.oldDateTime == null && d.day == getWeekDay(el)
-        );
-          replacementClasses[el] = allSchedule.filter(d =>
-						      d.newDateTime != null && d.newDateTime == el  && d.status=="approved"
-						     );
-
-          cancelledClasses[el] = allSchedule.filter(d =>
-						    d.oldDateTime != null && d.oldDateTime == el
-						   ).map(e => parseInt(e.classID));
-      }
-		     );
-	//let finalSchedule = {...permenantSchedule, ...replacementClasses};
-	let finalSchedule = {};
-	Object.keys(permenantSchedule).forEach( k => {
-	    let combinedSchedule = permenantSchedule[k].concat(replacementClasses[k]);
-
-	    //finalSchedule[k]['isCancelled'] = true; //TODO
-	    finalSchedule[k] = Object.values(combinedSchedule).map( j => {
-        const jCopy = {...j};
-        let classID = j['classID']
-        var isCancelled = cancelledClasses[k].includes(parseInt(classID));
-        //jCopy['isCancelled'] = cancelledClasses[k].includes(parseInt(classID));
-        jCopy['isCancelled'] = isCancelled;
-        jCopy['curDate'] = k;
-        //let a = j;
-        //j['wKvin'] = 'here';
-    		//finalSchedule[k][j]['isCancelled'] = cancelledClasses[k].indexOf(parseInt(finalSchedule[k][j]['classID'])) >= 0; // finalSchedule[k][j] in cancelledClasses;
-    		//finalSchedule[k][j]['curDate'] = k;
-        //console.log(	finalSchedule[k][j]['isCancelled']);
-        return jCopy;
-	    });
-	});
-
-	this.props.setSchedule(finalSchedule);
-    };
 
 
 
-
-    downloadAllSubjects(){
-         let subList = this.props.enrolledSubject;
-         if(subList.length > 0){
-           new StudentAPI().downloadAllSubjects(subList, this.generateSchedule);
+    downloadAllSubjects(period){
+        let subList = this.props.enrolledSubject;
+	let scheduleSync = this.props.studentService;
+	
+        if(subList.length > 0 && this.props.period != null){
+	    console.log("home.index.downloadAllSubject: Downloading the schedule..");
+            new StudentAPI().downloadAllSubjects(subList, r => scheduleSync.generateSchedule(r, period, e=>this.props.setSchedule(e) ));
          }else{
            console.log("Please enroll subject");
          }
-    }
+
+	if (this.syncState != "sync"){
+	    new StudentAPI().downloadAllSubjects(subList, r => scheduleSync.generateSchedule(r, period, e=> {
+		this.props.setSchedule(e);
+		this.props.setSync();
+	    } ));
+	}
+    }    
 
 
     componentDidUpdate(){
-      console.log(this.props.subjectList);
+	console.log(this.props.subjectList);
     }
 
     /*
@@ -215,15 +153,35 @@ class ShomeScreen extends React.PureComponent{
 
 
     componentWillReceiveProps(newProps){
-        if(newProps.period != this.props.period){
+        if(newProps.period && newProps.period != this.props.period ){
             console.log("Period changed");
             console.log(newProps.period);
         	    this.setState({minDate: newProps.period.start_date,
         			   maxDate: newProps.period.end_date
         			  });
           //TODO: Do this if hash comparison is successfull
-          this.downloadAllSubjects();
+            //this.downloadAllSubjects(newProps.period);	    
         }
+	
+	if(newProps.syncState != "sync"){
+	    let enrolledSubject = this.props.enrolledSubject;
+	    if(enrolledSubject.length != 0){
+		new StudentAPI().downloadSemesterChecksum(enrolledSubject,
+							  (checksum) => {
+							      this.downloadAllSubjects(newProps.period);	    
+							      //console.log("CHANGED CHECKSUM", this.props.semesterChecksum, newProps.semesterChecksum);
+							      /*
+							      if(this.props.semesterChecksum == checksum.key){
+								  console.log("No need to update timetable");
+
+							      }else{
+								  this.downloadAllSubjects(newProps.period);	    
+							      }*/
+							  });
+	    }else{
+		this.props.setSync();
+	    }
+	}
     }
 
     /*
@@ -303,7 +261,7 @@ if(hash(this.props.period) != hash(newProps.period)){
                 <Text style={styles.titleTextStyle}>Home</Text>
                 </View>
              </View>
-             { this.state.data.length == 0? <View><Text> Please enroll a subject</Text></View>
+             { this.props.enrolledSubject.length == 0? <View><Text> Please enroll a subject</Text></View>
 		 :
              <CustomAgenda
 		   doNothing={this.state.doNothing}
@@ -370,8 +328,9 @@ const mapStateToProps = p => p.studentStateReducer;
 
 const mapDispatchToProps = dispatch => ({
     setSchedule: (data) => dispatch({type: "UPDATE_SCHEDULE", subjectList: data}),
-    addSubject: (day, obj) => dispatch({type: "ADD_SUBJECT_SCHEDULE", day, obj})
-
+    addSubject: (day, obj) => dispatch({type: "ADD_SUBJECT_SCHEDULE", day, obj}),
+    setSync: () => dispatch({type: "SYNC_DONE"})
+    
   });
 
 /*

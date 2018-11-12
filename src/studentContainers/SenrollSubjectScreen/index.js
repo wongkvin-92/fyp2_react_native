@@ -35,51 +35,77 @@ const sampleData = [
 class EnrollScreen extends React.Component{
 
   state={
-    redirect:false,
-    data: [],
-    fadeAnim: new Animated.Value(0)
+      redirect:false,
+      rawdata: [],
+      processedData: [],
+      fadeAnim: new Animated.Value(0)
   };
     
-    filterOutSubjects = (d, localList) => d.filter(e=>localList.indexOf(e.subjectID)==-1);
+    //filterOutSubjects = (d, localList) => d.filter(e=>localList.indexOf(e.subjectID)==-1);
+
+    setEnrolledState = (d, localList) => d.map(e => ({...e, enrolledStatus: localList.indexOf(e.subjectID)>=0}));
     
   downloadList = ()=>{
     new StudentAPI().displaySubjectList(
         (d) => {
-	    let filteredData = this.filterOutSubjects(d, this.props.enrolledSubject);
-	    this.setState({data: filteredData});	    
+	    //let filteredData = this.filterOutSubjects(d, this.props.enrolledSubject);
+	    this.setState({rawdata: d});
+	    //console.log("ENROLLED SUBJECT", this.props.enrolledSubject);	    
+	    this.updateSubjectList(d, this.props.enrolledSubject);
 	}
     );
   }
 
     componentDidMount(){
 	console.log("props");
-      console.log(this.props);
-    Animated.timing(                  // Animate over time
-      this.state.fadeAnim,            // The animated value to drive
-      {
-        toValue: 1,                   // Animate to opacity: 1 (opaque)
-        duration: 1000              // Make it take a while
-      }
-    ).start();
+	console.log(this.props);
+	Animated.timing(                  // Animate over time
+	    this.state.fadeAnim,            // The animated value to drive
+	    {
+		toValue: 1,                   // Animate to opacity: 1 (opaque)
+		duration: 1000              // Make it take a while
+	    }
+	).start();
 
-    this.downloadList();
-  }
+	this.downloadList();
+    }
 
+    
+    updateSubjectList(rawdata, enrolledSubjects){
+	let processedData = this.setEnrolledState(rawdata, enrolledSubjects);
+	this.setState({processedData: processedData});
+    };
 
+    unenrollSubjectClick = (subjectId) => {
+	this.props.unenrollSubject(subjectId);
+	this.props.requestSync();
+	//this.updateSubjectList();	
+    }
+    
     enrollSubjectClick = (subjectId) => {
 	//alert("Enrolling subject "+subjectId);
 	this.props.enrollSubject(subjectId);
-
+	this.props.requestSync();
+	//this.updateSubjectList();
+	/*
+	this.props.enrollSubject(subjectId);
+ 
 	let data = this.filterOutSubjects(this.state.data, this.props.enrolledSubject);
 	this.setState({data: this.state.data.filter(e => e.subjectID != subjectId) });	
+	*/
     }
 
     componentWillReceiveProps(newProps){
 	
-	if (JSON.stringify(newProps.enrolledSubject != JSON.stringify(this.props.enrolledSubject))){
-	    console.log("enrolled subject updated");
-	    newProps.asyncStore('enrolledSubject', JSON.stringify(newProps.enrolledSubject));	    
-	}	
+	if ( newProps.enrolledSubject != this.props.enrolledSubject){
+	    console.log("enrolled subject updated", newProps.enrolledSubject);	    
+	    newProps.asyncStore('enrolledSubject', JSON.stringify(newProps.enrolledSubject));
+	    
+	    let processedData = this.setEnrolledState(this.state.rawdata, newProps.enrolledSubject);	
+	    this.setState({processedData: processedData});
+
+	    //this.updateSubjectList(this.state.rawdata, newProps.enrolledSubject);
+	}
     }
 
   render () {
@@ -103,10 +129,11 @@ class EnrollScreen extends React.Component{
 
                <View style={{marginBottom: 30}}>
                 {
-                  this.state.data.map( (e,key) =>
+                  this.state.processedData.map( (e,key) =>
                     <SubjectCard
 				       key={key}
 				       clickHandler={this.enrollSubjectClick}
+				       removeHandler={this.unenrollSubjectClick}
                       {...e}
                     />
                   )
@@ -126,7 +153,9 @@ const mapStateToProps = p => p.studentStateReducer;
 
 const mapDispatchToProps = dispatch => {
     return {
-	enrollSubject: s => dispatch({type: "ENROLL_SUBJECT", subject: s})
+	enrollSubject: s => dispatch({type: "ENROLL_SUBJECT", subject: s}),
+	unenrollSubject: s => dispatch({type: "UNENROLL_SUBJECT", subject: s}),
+	requestSync: ()=> dispatch({type: "OUT_OF_SYNC"})
     };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(EnrollScreen);
