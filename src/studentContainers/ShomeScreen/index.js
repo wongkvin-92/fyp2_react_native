@@ -93,8 +93,8 @@ class ShomeScreen extends React.PureComponent{
 
       downloadAllSubjects(period, subList, checksum){
           //let subList = this.props.studentStateReducer.enrolledSubject;
-	  let scheduleSync = this.scheduleService;
-	  console.log("SCHEDULESYNC", scheduleSync);
+	  let scheduleSync = this.scheduleService;	  
+	  console.log("Downloading schedule ", period, subList, checksum);
 	  new StudentAPI().downloadSemesterChecksum(
 	      subList,
 	      checksumData => {
@@ -127,8 +127,8 @@ class ShomeScreen extends React.PureComponent{
 
 	if(period && enrolledSubject && semesterChecksum){
 	    console.log("COMPONENT DID UPDATE", period, enrolledSubject, semesterChecksum);
-	    this.downloadAllSubjects(period, enrolledSubject, semesterChecksum);
-	    this.props.setSync();
+	    //this.downloadAllSubjects(period, enrolledSubject, semesterChecksum);
+	    //this.props.setSync();
 	}
 
     }
@@ -204,8 +204,10 @@ class ShomeScreen extends React.PureComponent{
         }
 
 	if(newProps.enrolledSubject != this.props.enrolledSubject){
-	    console.log("Schedule updated", this.props.period, newProps.enrolledSubject, this.props.semesterChecksum);
-	    this.downloadAllSubjects(this.props.period, newProps.enrolledSubject, this.props.semesterChecksum);
+	    if(this.props.period){
+		//console.log("Schedule updated", this.props.period, newProps.enrolledSubject, this.props.semesterChecksum);		
+		this.downloadAllSubjects(this.props.period, newProps.enrolledSubject, this.props.semesterChecksum);
+	    }
 	    
 	}
 /*	if(newProps.syncState != "sync"){
@@ -303,8 +305,7 @@ if(hash(this.props.period) != hash(newProps.period)){
     const massage = {key:'massage', color: 'blue', selectedDotColor: 'blue'};
     const workout = {key:'workout', color: 'green'};
     var startDay = this.formatDate(new Date());
-    return  (
-
+      return  (	  
         <View style={styles.containers}>
              {this.state.redirect?<Redirect to="/login" />:<View/>}
              <View style={styles.titleStlye}>
@@ -312,8 +313,6 @@ if(hash(this.props.period) != hash(newProps.period)){
                 <Text style={styles.titleTextStyle}>Home</Text>
                 </View>
              </View>
-             { this.props.enrolledSubject.length == 0? <View><Text> Please enroll a subject</Text></View>
-		 :
              <CustomAgenda
 		   doNothing={this.state.doNothing}
 		   style={{height: 30}}
@@ -367,7 +366,6 @@ if(hash(this.props.period) != hash(newProps.period)){
               todayTextColor:'#ffffff'
             }}
          />
-       }
         </View>
   );
   }

@@ -52,6 +52,8 @@ export class StudentScheduleSystem{
             return new Date(d[0], d[1]-1, d[2]);
 	};
 	let getWeekDay = (strDate) => {
+	    if(typeof(strDate) === "undefined")
+		return null;
             let weekDay = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
             return weekDay[convertToDate(strDate).getDay()];
 	};

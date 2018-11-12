@@ -26,14 +26,35 @@ state={
 */
 class SplashScreen extends Component{
 
-	runStudentStartup(){
+	runStudentStartup(){	    
 	    //clear data for testing purpose
 	    //this.props.asyncStore('semesterChecksum', "");
 	    //this.props.asyncStore('enrolledSubject', "");
-	    //this.props.asyncStore("storedSubjects", "");	    
+	    //this.props.asyncStore("storedSubjects", "");
+	    this.props.asyncLoad("subjectList", (storedSubjects) => {
+		let schedule = JSON.parse(storedSubjects);
+		console.log("STORED SUBJECTS LOADED", schedule);
+		this.props.setSchedule(schedule);		
+	    });
+
+	    this.props.asyncLoad("enrolledSubject", enrolledSubject => {
+		let subjectList = JSON.parse(enrolledSubject);
+		console.log("ENROLLED SUBJECT LOADED", subjectList);
+		this.props.setSubjectList(subjectList);
+	    });
+
+	    this.props.asyncLoad("semesterChecksum", c => {
+		console.log("SEMESTER CHECKSUM LOADED", c);
+		this.props.setSemesterChecksum(c);
+	    });
+
+	    this.props.asyncLoad("period", p => {
+		let period = JSON.parse(p);
+		this.props.setPeriod(period);
+	    });
 	    
 	    //Load subjectList
-	    this.props.asyncLoad("subjectList", (storedSubjects) => {
+/*	    this.props.asyncLoad("subjectList", (storedSubjects) => {
 		let enrolledSubjects = [];
 		if(storedSubjects){
 		    this.props.updateSchedule(JSON.parse(storedSubjects));
@@ -73,7 +94,7 @@ class SplashScreen extends Component{
 		    
 		});
 	    });
-
+*/
 	//console.log("Student service");
 	//console.log(this.props.studentService);
 	}
