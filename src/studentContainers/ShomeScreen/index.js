@@ -51,6 +51,7 @@ class ShomeScreen extends React.PureComponent{
   constructor(props){
     super(props);
 
+      this.scheduleService = new scheduleSyncServices.StudentScheduleSystem({});
     let today = this.formatDate(new Date());
     this.state={
       redirect:false,
@@ -90,8 +91,50 @@ class ShomeScreen extends React.PureComponent{
     };
 
 
+      downloadAllSubjects(period, subList, checksum){
+          //let subList = this.props.studentStateReducer.enrolledSubject;
+	  let scheduleSync = this.scheduleService;
+	  console.log("Downloading schedule ", period, subList, checksum);
+	  new StudentAPI().downloadSemesterChecksum(
+	      subList,
+	      checksumData => {
+		  if(checksumData){
+		      console.log(checksum + " vs " + checksumData.key);
+		      if(checksumData.key != checksum){
+			  console.log("ShomeScreen: downloading subjects");
+
+			  new StudentAPI().downloadAllSubjects(subList, r=> {
+
+			      scheduleSync.generateSchedule(r, period, e=> {
+				  this.props.setSchedule(e);
+				  this.props.setSemesterChecksum(checksumData.key);
+				  this.props.asyncStore('semesterChecksum', checksumData.key);
+				  this.props.asyncStore('subjectList', JSON.stringify(e));
+			      });
+
+			  });
+		      }else{
+			  console.log("Checksum same");
+		      }
+		  };
+	      });
+
+      }
+
+    componentDidUpdate(){
+	//console.log("COMPONENT DID UPDATE", this.props.period, this.props.subList, this.props.checksum);
+	let {period, enrolledSubject, semesterChecksum} = this.props;
+
+	if(period && enrolledSubject && semesterChecksum){
+	    console.log("COMPONENT DID UPDATE", period, enrolledSubject, semesterChecksum);
+	    //this.downloadAllSubjects(period, enrolledSubject, semesterChecksum);
+	    //this.props.setSync();
+	}
+
+    }
 
 
+/*
     downloadAllSubjects(period){
         let subList = this.props.enrolledSubject;
 	      let scheduleSync = this.props.studentService;
@@ -108,13 +151,7 @@ class ShomeScreen extends React.PureComponent{
 		this.props.setSchedule(e);
 		this.props.setSync();
 	    } ));
-	}
-    }
 
-
-    componentDidUpdate(){
-	console.log(this.props.subjectList);
-    }
 
     /*
     componentDidMount(){
@@ -163,25 +200,39 @@ class ShomeScreen extends React.PureComponent{
             //this.downloadAllSubjects(newProps.period);
         }
 
-	if(newProps.syncState != "sync"){
+	if(newProps.enrolledSubject != this.props.enrolledSubject){
+	    if(this.props.period){
+		//console.log("Schedule updated", this.props.period, newProps.enrolledSubject, this.props.semesterChecksum);
+		this.downloadAllSubjects(this.props.period, newProps.enrolledSubject, this.props.semesterChecksum);
+	    }
+
+	}
+/*	if(newProps.syncState != "sync"){
 	    let enrolledSubject = this.props.enrolledSubject;
+	    console.log("IN SYNC:", this.props.period, enrolledSubject, this.props.checksum);
 	    if(enrolledSubject.length != 0){
 		new StudentAPI().downloadSemesterChecksum(enrolledSubject,
 							  (checksum) => {
-							      this.downloadAllSubjects(newProps.period);
+							      console.log("HOMESCREEN UPDATED, CHECKSUM: ", checksum);
+							      //this.downloadAllSubjects(newProps.period);
+
+
 							      //console.log("CHANGED CHECKSUM", this.props.semesterChecksum, newProps.semesterChecksum);
 							      /*
 							      if(this.props.semesterChecksum == checksum.key){
 								  console.log("No need to update timetable");
 
 							      }else{
+
 								  this.downloadAllSubjects(newProps.period);
-							      }*/
+							      }
 							  });
 	    }else{
 		this.props.setSync();
 	    }
-	}
+	    }*/
+
+
     }
 
     /*
@@ -252,8 +303,7 @@ if(hash(this.props.period) != hash(newProps.period)){
     const massage = {key:'massage', color: 'blue', selectedDotColor: 'blue'};
     const workout = {key:'workout', color: 'green'};
     var startDay = this.formatDate(new Date());
-    return  (
-
+      return  (
         <View style={styles.containers}>
              {this.state.redirect?<Redirect to="/login" />:<View/>}
              <View style={styles.titleStlye}>
@@ -261,9 +311,8 @@ if(hash(this.props.period) != hash(newProps.period)){
                 <Text style={styles.titleTextStyle}>Home</Text>
                 </View>
              </View>
-             { this.props.enrolledSubject.length == 0? <View><Text> Please enroll a subject</Text></View>
-		 :
              <CustomAgenda
+<<<<<<< HEAD
         		   doNothing={this.state.doNothing}
         		   style={{height: 30}}
         		   items={this.props.subjectList}
@@ -317,6 +366,60 @@ if(hash(this.props.period) != hash(newProps.period)){
                     }}
                  />
        }
+=======
+		   doNothing={this.state.doNothing}
+		   style={{height: 30}}
+		   items={this.props.subjectList}
+		   loadItemsForMonth={this.loadItems.bind(this)}
+		   selected={this.state.selectedDate}
+		   onDayPress={(date)=>{this.setState({
+                       selectedDate :  new Date(date.year, date.month-1, date.day)
+		   });
+             }}
+             onDayChange = {(date) => {
+                this.setState({
+                  selectedDate: new Date(date.year, date.month-1, date.day),
+                });
+              }}
+               // Minimum date that can be selected, dates before minDate will be grayed out. Default = undefined
+               minDate={this.state.minDate}
+               // Maximum date that can be selected, dates after maxDate will be grayed out. Default = undefined
+               maxDate={this.state.maxDate}
+               renderItem={(props)=> <DailyScheduleItem {...props} /> }
+               renderEmptyDate={this.renderEmptyDate.bind(this)}
+               rowHasChanged={this.rowHasChanged.bind(this)}
+               // markingType={'period'}
+               markingType={'multi-dot'}
+               markedDates={{
+               //    '2017-05-08': {textColor: '#666'},
+               //    '2017-05-09': {textColor: '#666'},
+               //    '2017-05-14': {startingDay: true, endingDay: true, color: 'blue'},
+
+  /*
+                 '2018-08-28': {
+                   dots: [vacation, massage, workout],
+                 },
+                 '2018-08-29': {
+                   dots: [massage, workout]
+                 },*/
+
+               //    '2017-05-22': {endingDay: true, color: 'gray'},
+               //    '2017-05-24': {startingDay: true, color: 'gray'},
+               //    '2017-05-25': {color: 'gray'},
+               //    '2017-05-26': {endingDay: true, color: 'gray'}}}
+                // monthFormat={'yyyy'}
+
+              // renderDay={(day, item) => (<Text>{day ? day.day: 'item'}</Text>)}
+            }}
+            theme={{
+              backgroundColor: 'rgba(243,129,129,0.9)',
+              agendaDayTextColor: 'black',
+              agendaDayNumColor: 'black',
+              todayBackgroundColor: 'red',
+              todayTextColor:'#ffffff'
+            }}
+         />
+>>>>>>> cc93596bc4400d6609d0d9064d5412bf53102a49
         </View>
   );
   }
@@ -329,8 +432,13 @@ const mapStateToProps = p => p.studentStateReducer;
 const mapDispatchToProps = dispatch => ({
     setSchedule: (data) => dispatch({type: "UPDATE_SCHEDULE", subjectList: data}),
     addSubject: (day, obj) => dispatch({type: "ADD_SUBJECT_SCHEDULE", day, obj}),
+<<<<<<< HEAD
     setSync: () => dispatch({type: "SYNC_DONE"})
 
+=======
+    setSync: () => dispatch({type: "SYNC_DONE"}),
+    setSemesterChecksum: data => dispatch({type: "SET_CHECKSUM", payload: data})
+>>>>>>> cc93596bc4400d6609d0d9064d5412bf53102a49
   });
 
 /*

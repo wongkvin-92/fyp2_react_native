@@ -1,9 +1,9 @@
 //import {UserAPI} from '../API';
 
-class StudentScheduleSystem{
-    constructor(sharedObj){
+export class StudentScheduleSystem{
+    constructor(sharedObj={}){
 	this.sharedObj = sharedObj;
-    }
+    }    
     
     configure(){	
     }
@@ -52,6 +52,8 @@ class StudentScheduleSystem{
             return new Date(d[0], d[1]-1, d[2]);
 	};
 	let getWeekDay = (strDate) => {
+	    if(typeof(strDate) === "undefined")
+		return null;
             let weekDay = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
             return weekDay[convertToDate(strDate).getDay()];
 	};
@@ -70,7 +72,6 @@ class StudentScheduleSystem{
 	let cancelledClasses = {};
 
 
-	console.log("GET WEEK.........");
 	//console.log(dateArr.map(getWeekDay));
 	dateArr.forEach(el => {
             permenantSchedule[el] = allSchedule.filter(d =>
@@ -110,10 +111,11 @@ class StudentScheduleSystem{
 	if(success != null)
 	    success(finalSchedule);
 	//this.props.setSchedule(finalSchedule);
+	console.log("Final Schedule", finalSchedule);
     };
 
 };
 
-export {
-    StudentScheduleSystem
-};
+//export {
+//    StudentScheduleSystem
+//};

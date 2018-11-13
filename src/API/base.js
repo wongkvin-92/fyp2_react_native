@@ -3,11 +3,11 @@ const myHome = "192.168.0.189";
 const mcdKotaDam = "192.168.182.251";
 const mcdDamansara2 ="192.168.182.246";
 const bandarSriDam = "192.168.1.134";
-const help = "10.125.193.254";
+const help = "10.125.194.180";
 const darr = "192.168.0.7";
 const ace ="192.168.1.106";
 const qi ="192.168.0.6";
-const host = myHome;
+const host = help;
 const port = 80;
 const path = "fypBackEnd";
 

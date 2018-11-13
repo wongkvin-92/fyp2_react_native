@@ -28,17 +28,42 @@ class SplashScreen extends Component{
 
 	runStudentStartup(){
 	    //clear data for testing purpose
-	    this.props.asyncStore('semesterChecksum', "");
+	    //this.props.asyncStore('semesterChecksum', "");
 	    //this.props.asyncStore('enrolledSubject', "");
+	    //this.props.asyncStore("storedSubjects", "");
+	    this.props.asyncLoad("subjectList", (storedSubjects) => {
+		let schedule = JSON.parse(storedSubjects);
+		console.log("STORED SUBJECTS LOADED", schedule);
+		this.props.setSchedule(schedule);
+	    });
+
+	    this.props.asyncLoad("enrolledSubject", enrolledSubject => {
+		let subjectList = JSON.parse(enrolledSubject);
+		console.log("ENROLLED SUBJECT LOADED", subjectList);
+		this.props.setSubjectList(subjectList);
+	    });
+
+	    this.props.asyncLoad("semesterChecksum", c => {
+		console.log("SEMESTER CHECKSUM LOADED", c);
+		this.props.setSemesterChecksum(c);
+	    });
+
+	    this.props.asyncLoad("period", p => {
+		let period = JSON.parse(p);
+		this.props.setPeriod(period);
+	    });
 
 	    //Load subjectList
-	    this.props.asyncLoad("subjectList", (storedSubjects) => {
-		if(storedSubjects)
+/*	    this.props.asyncLoad("subjectList", (storedSubjects) => {
+		let enrolledSubjects = [];
+		if(storedSubjects){
 		    this.props.updateSchedule(JSON.parse(storedSubjects));
+		    enrolledSubjects= JSON.parse(storedSubjects);
 
+		}
+		console.log("STORED SUBJECTS LOADED", enrolledSubjects);
 		//Load checksum
 		this.props.asyncLoad("semesterChecksum", storedChecksum => {
-
 
 		    //Load period from async storage and also
 		    // download All subjects if necessary
@@ -58,27 +83,31 @@ class SplashScreen extends Component{
 				this.props.setSemesterChecksum(storedChecksum);
 			    this.props.sync();
 			});
-			/*
-			  if(data){
-			  let period = JSON.parse(data);
-			  this.props.setPeriod(period);
-			  this.downloadAllSubjects(period);
-			  }*/
+
+			  if(periodData){
+			      let period = JSON.parse(periodData);
+			      this.props.setPeriod(period);
+			      //this.downloadAllSubjects(period);
+			  }
 		    });
 
 
 		});
 	    });
-
+*/
 	//console.log("Student service");
 	//console.log(this.props.studentService);
 	}
+
 
       downloadAllSubjects(period, subList, storedChecksum, storedSubjects = []){
           //let subList = this.props.studentStateReducer.enrolledSubject;
 	  let scheduleSync = this.props.studentService;
 
+	  console.log("Splash screen download initiated");
           if(subList.length > 0 && this.props.studentStateReducer.period != null){
+
+	      /*
 	      new StudentAPI().downloadSemesterChecksum(
 		  subList,
 		  data => {
@@ -101,7 +130,10 @@ class SplashScreen extends Component{
 		      }
 		  }
 
-	      );
+	      );*/
+
+
+
           }else{
               console.log("Please enroll subject");
          }
@@ -110,6 +142,8 @@ class SplashScreen extends Component{
 
       runStartup(credentials){
     	  if(credentials.type == "student"){
+	      console.log("Running startup");
+
     	      this.runStudentStartup();
 	      new UserAPI().downloadSemester(period => {
 		  console.log("period was received as ", period);
@@ -123,7 +157,7 @@ class SplashScreen extends Component{
 
     componentDidMount(){
 	console.log("Splash screen component did mount");
-	console.log(this.props);
+	//console.log(this.props);
 
 	//Load credentials first
 	this.props.asyncLoad("credentials", (credentials) => {
@@ -139,10 +173,12 @@ class SplashScreen extends Component{
 	    (r) => {
 		let c = this.props.studentStateReducer.credentials;
     		this.props.setCredentials(r);
+
 		if(!c){
 		    console.log("Credentials was not set initially");
 		    this.runStartup(r);
 		}
+
 		this.props.asyncStore('credentials', JSON.stringify(r));
 	    },
 	    () =>  {console.log("Failed to retreive login state");}
