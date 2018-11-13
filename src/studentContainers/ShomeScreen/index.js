@@ -68,7 +68,7 @@ class ShomeScreen extends React.PureComponent{
     updateSubjectList = () => {
     	console.log("Updating");
     	//console.log(this.props.subjectList);
-    	this.setState({data: this.props.subjectList});	
+    	this.setState({data: this.props.subjectList});
     }
 
     _getDays(s, e) {
@@ -94,8 +94,8 @@ class ShomeScreen extends React.PureComponent{
 
     downloadAllSubjects(period){
         let subList = this.props.enrolledSubject;
-	let scheduleSync = this.props.studentService;
-	
+	      let scheduleSync = this.props.studentService;
+
         if(subList.length > 0 && this.props.period != null){
 	    console.log("home.index.downloadAllSubject: Downloading the schedule..");
             new StudentAPI().downloadAllSubjects(subList, r => scheduleSync.generateSchedule(r, period, e=>this.props.setSchedule(e) ));
@@ -109,7 +109,7 @@ class ShomeScreen extends React.PureComponent{
 		this.props.setSync();
 	    } ));
 	}
-    }    
+    }
 
 
     componentDidUpdate(){
@@ -160,22 +160,22 @@ class ShomeScreen extends React.PureComponent{
         			   maxDate: newProps.period.end_date
         			  });
           //TODO: Do this if hash comparison is successfull
-            //this.downloadAllSubjects(newProps.period);	    
+            //this.downloadAllSubjects(newProps.period);
         }
-	
+
 	if(newProps.syncState != "sync"){
 	    let enrolledSubject = this.props.enrolledSubject;
 	    if(enrolledSubject.length != 0){
 		new StudentAPI().downloadSemesterChecksum(enrolledSubject,
 							  (checksum) => {
-							      this.downloadAllSubjects(newProps.period);	    
+							      this.downloadAllSubjects(newProps.period);
 							      //console.log("CHANGED CHECKSUM", this.props.semesterChecksum, newProps.semesterChecksum);
 							      /*
 							      if(this.props.semesterChecksum == checksum.key){
 								  console.log("No need to update timetable");
 
 							      }else{
-								  this.downloadAllSubjects(newProps.period);	    
+								  this.downloadAllSubjects(newProps.period);
 							      }*/
 							  });
 	    }else{
@@ -264,58 +264,58 @@ if(hash(this.props.period) != hash(newProps.period)){
              { this.props.enrolledSubject.length == 0? <View><Text> Please enroll a subject</Text></View>
 		 :
              <CustomAgenda
-		   doNothing={this.state.doNothing}
-		   style={{height: 30}}
-		   items={this.props.subjectList}
-		   loadItemsForMonth={this.loadItems.bind(this)}
-		   selected={this.state.selectedDate}
-		   onDayPress={(date)=>{this.setState({
-                       selectedDate :  new Date(date.year, date.month-1, date.day)
-		   });
-             }}
-             onDayChange = {(date) => {
-                this.setState({
-                  selectedDate: new Date(date.year, date.month-1, date.day),
-                });
-              }}
-               // Minimum date that can be selected, dates before minDate will be grayed out. Default = undefined
-               minDate={this.state.minDate}
-               // Maximum date that can be selected, dates after maxDate will be grayed out. Default = undefined
-               maxDate={this.state.maxDate}
-               renderItem={(props)=> <DailyScheduleItem {...props} /> }
-               renderEmptyDate={this.renderEmptyDate.bind(this)}
-               rowHasChanged={this.rowHasChanged.bind(this)}
-               // markingType={'period'}
-               markingType={'multi-dot'}
-               markedDates={{
-               //    '2017-05-08': {textColor: '#666'},
-               //    '2017-05-09': {textColor: '#666'},
-               //    '2017-05-14': {startingDay: true, endingDay: true, color: 'blue'},
+        		   doNothing={this.state.doNothing}
+        		   style={{height: 30}}
+        		   items={this.props.subjectList}
+        		   loadItemsForMonth={this.loadItems.bind(this)}
+        		   selected={this.state.selectedDate}
+        		   onDayPress={(date)=>{this.setState({
+                               selectedDate :  new Date(date.year, date.month-1, date.day)
+        		   });
+                     }}
+                     onDayChange = {(date) => {
+                        this.setState({
+                          selectedDate: new Date(date.year, date.month-1, date.day),
+                        });
+                      }}
+                       // Minimum date that can be selected, dates before minDate will be grayed out. Default = undefined
+                       minDate={this.state.minDate}
+                       // Maximum date that can be selected, dates after maxDate will be grayed out. Default = undefined
+                       maxDate={this.state.maxDate}
+                       renderItem={(props)=> <DailyScheduleItem {...props} /> }
+                       renderEmptyDate={this.renderEmptyDate.bind(this)}
+                       rowHasChanged={this.rowHasChanged.bind(this)}
+                       // markingType={'period'}
+                       markingType={'multi-dot'}
+                       markedDates={{
+                       //    '2017-05-08': {textColor: '#666'},
+                       //    '2017-05-09': {textColor: '#666'},
+                       //    '2017-05-14': {startingDay: true, endingDay: true, color: 'blue'},
 
-  /*
-                 '2018-08-28': {
-                   dots: [vacation, massage, workout],
-                 },
-                 '2018-08-29': {
-                   dots: [massage, workout]
-                 },*/
+          /*
+                         '2018-08-28': {
+                           dots: [vacation, massage, workout],
+                         },
+                         '2018-08-29': {
+                           dots: [massage, workout]
+                         },*/
 
-               //    '2017-05-22': {endingDay: true, color: 'gray'},
-               //    '2017-05-24': {startingDay: true, color: 'gray'},
-               //    '2017-05-25': {color: 'gray'},
-               //    '2017-05-26': {endingDay: true, color: 'gray'}}}
-                // monthFormat={'yyyy'}
+                       //    '2017-05-22': {endingDay: true, color: 'gray'},
+                       //    '2017-05-24': {startingDay: true, color: 'gray'},
+                       //    '2017-05-25': {color: 'gray'},
+                       //    '2017-05-26': {endingDay: true, color: 'gray'}}}
+                        // monthFormat={'yyyy'}
 
-              // renderDay={(day, item) => (<Text>{day ? day.day: 'item'}</Text>)}
-            }}
-            theme={{
-              backgroundColor: 'rgba(243,129,129,0.9)',
-              agendaDayTextColor: 'black',
-              agendaDayNumColor: 'black',
-              todayBackgroundColor: 'red',
-              todayTextColor:'#ffffff'
-            }}
-         />
+                      // renderDay={(day, item) => (<Text>{day ? day.day: 'item'}</Text>)}
+                    }}
+                    theme={{
+                      backgroundColor: 'rgba(243,129,129,0.9)',
+                      agendaDayTextColor: 'black',
+                      agendaDayNumColor: 'black',
+                      todayBackgroundColor: 'red',
+                      todayTextColor:'#ffffff'
+                    }}
+                 />
        }
         </View>
   );
@@ -330,7 +330,7 @@ const mapDispatchToProps = dispatch => ({
     setSchedule: (data) => dispatch({type: "UPDATE_SCHEDULE", subjectList: data}),
     addSubject: (day, obj) => dispatch({type: "ADD_SUBJECT_SCHEDULE", day, obj}),
     setSync: () => dispatch({type: "SYNC_DONE"})
-    
+
   });
 
 /*

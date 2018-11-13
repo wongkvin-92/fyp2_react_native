@@ -22,22 +22,32 @@ const DailyScheduleItemFunc = (props) => (
 
       <Text style={styles.scheduleContentStyle}>{props.subjectName}</Text>
       <Text style={styles.scheduleContentStyle}>{props.type}</Text>
-      <Text style={styles.scheduleContentStyle}>From {props.startTime} to {props.endTime}</Text>
 
+      <Text style={styles.scheduleContentStyle}>From {props.startTime} to {props.endTime}</Text>
+      <Text> {props.newVenue}</Text>
       <View style={styles.canceBtnContainer}>
 
       {props.isCancelled==false?
-      <Text style={{color: "red", fontWeight:"900"}}>
+      <Text style={{color: "blue", fontWeight:"900"}}>
             Normal
+
       </Text>
 
         :
-        <Text style={{color: "red", fontWeight:"900"}}>
-          Cancelled
+        <View>
+          <Text style={{color: "red", fontWeight:"900"}}>
+            <Text>
+            Cancelled
+            </Text>
+        </Text>
+        <Text>
           {props.newDateTime}
         </Text>
+        <Text>
 
-
+        {props.newVenue}
+        </Text>
+      </View>
       }
 
       </View>
@@ -45,7 +55,7 @@ const DailyScheduleItemFunc = (props) => (
     </View>
 );
 
-
+/*
 
 class DailyScheduleItem extends React.PureComponent{
 
@@ -76,6 +86,7 @@ class DailyScheduleItem extends React.PureComponent{
   }
 };
 
+*/
 
 export default DailyScheduleItemFunc;
 /*

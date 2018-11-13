@@ -35,18 +35,18 @@ class SplashScreen extends Component{
 	    this.props.asyncLoad("subjectList", (storedSubjects) => {
 		if(storedSubjects)
 		    this.props.updateSchedule(JSON.parse(storedSubjects));
-		
+
 		//Load checksum
 		this.props.asyncLoad("semesterChecksum", storedChecksum => {
-		    
-		    
+
+
 		    //Load period from async storage and also
 		    // download All subjects if necessary
 		    this.props.asyncLoad('period', periodData => {
 			//load enrolled subject from async storage
 			this.props.asyncLoad("enrolledSubject", (enrolledSubjects) => {
 			    console.log("Enrolled subjects", enrolledSubjects);
-			    if(enrolledSubjects){				
+			    if(enrolledSubjects){
 				let period = JSON.parse(periodData);
 				this.props.setSubjectList(JSON.parse(enrolledSubjects));
 				this.props.setPeriod(period);
@@ -65,20 +65,20 @@ class SplashScreen extends Component{
 			  this.downloadAllSubjects(period);
 			  }*/
 		    });
-		    
-		    
+
+
 		});
 	    });
 
 	//console.log("Student service");
 	//console.log(this.props.studentService);
 	}
-      
+
       downloadAllSubjects(period, subList, storedChecksum, storedSubjects = []){
           //let subList = this.props.studentStateReducer.enrolledSubject;
 	  let scheduleSync = this.props.studentService;
-	  
-          if(subList.length > 0 && this.props.studentStateReducer.period != null){	      	  
+
+          if(subList.length > 0 && this.props.studentStateReducer.period != null){
 	      new StudentAPI().downloadSemesterChecksum(
 		  subList,
 		  data => {
@@ -92,30 +92,30 @@ class SplashScreen extends Component{
 				  this.props.setSemesterChecksum(data.key);
 				  this.props.asyncStore('semesterChecksum', data.key);
 				  this.props.asyncStore('subjectList', JSON.stringify(e));
-			      }));			      			 
+			      }));
 			  }else{
 			      console.log("Skipping download, data already in sync with server");
 			      this.props.setSchedule(JSON.parse(storedSubjects));
-			      
-			  }			  
+
+			  }
 		      }
 		  }
-		  
-	      );	 	      
+
+	      );
           }else{
               console.log("Please enroll subject");
          }
-      }      
+      }
 
 
-      runStartup(credentials){	  
+      runStartup(credentials){
     	  if(credentials.type == "student"){
-    	      this.runStudentStartup();		    
+    	      this.runStudentStartup();
 	      new UserAPI().downloadSemester(period => {
 		  console.log("period was received as ", period);
 		  this.props.setPeriod(period);
 		  this.props.asyncStore('period', JSON.stringify(period));
-	      });		    
+	      });
 
 	  }
       }
