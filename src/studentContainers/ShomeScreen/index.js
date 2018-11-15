@@ -312,61 +312,7 @@ if(hash(this.props.period) != hash(newProps.period)){
                 </View>
              </View>
              <CustomAgenda
-<<<<<<< HEAD
-        		   doNothing={this.state.doNothing}
-        		   style={{height: 30}}
-        		   items={this.props.subjectList}
-        		   loadItemsForMonth={this.loadItems.bind(this)}
-        		   selected={this.state.selectedDate}
-        		   onDayPress={(date)=>{this.setState({
-                               selectedDate :  new Date(date.year, date.month-1, date.day)
-        		   });
-                     }}
-                     onDayChange = {(date) => {
-                        this.setState({
-                          selectedDate: new Date(date.year, date.month-1, date.day),
-                        });
-                      }}
-                       // Minimum date that can be selected, dates before minDate will be grayed out. Default = undefined
-                       minDate={this.state.minDate}
-                       // Maximum date that can be selected, dates after maxDate will be grayed out. Default = undefined
-                       maxDate={this.state.maxDate}
-                       renderItem={(props)=> <DailyScheduleItem {...props} /> }
-                       renderEmptyDate={this.renderEmptyDate.bind(this)}
-                       rowHasChanged={this.rowHasChanged.bind(this)}
-                       // markingType={'period'}
-                       markingType={'multi-dot'}
-                       markedDates={{
-                       //    '2017-05-08': {textColor: '#666'},
-                       //    '2017-05-09': {textColor: '#666'},
-                       //    '2017-05-14': {startingDay: true, endingDay: true, color: 'blue'},
 
-          /*
-                         '2018-08-28': {
-                           dots: [vacation, massage, workout],
-                         },
-                         '2018-08-29': {
-                           dots: [massage, workout]
-                         },*/
-
-                       //    '2017-05-22': {endingDay: true, color: 'gray'},
-                       //    '2017-05-24': {startingDay: true, color: 'gray'},
-                       //    '2017-05-25': {color: 'gray'},
-                       //    '2017-05-26': {endingDay: true, color: 'gray'}}}
-                        // monthFormat={'yyyy'}
-
-                      // renderDay={(day, item) => (<Text>{day ? day.day: 'item'}</Text>)}
-                    }}
-                    theme={{
-                      backgroundColor: 'rgba(243,129,129,0.9)',
-                      agendaDayTextColor: 'black',
-                      agendaDayNumColor: 'black',
-                      todayBackgroundColor: 'red',
-                      todayTextColor:'#ffffff'
-                    }}
-                 />
-       }
-=======
 		   doNothing={this.state.doNothing}
 		   style={{height: 30}}
 		   items={this.props.subjectList}
@@ -419,7 +365,7 @@ if(hash(this.props.period) != hash(newProps.period)){
               todayTextColor:'#ffffff'
             }}
          />
->>>>>>> cc93596bc4400d6609d0d9064d5412bf53102a49
+
         </View>
   );
   }
@@ -432,13 +378,10 @@ const mapStateToProps = p => p.studentStateReducer;
 const mapDispatchToProps = dispatch => ({
     setSchedule: (data) => dispatch({type: "UPDATE_SCHEDULE", subjectList: data}),
     addSubject: (day, obj) => dispatch({type: "ADD_SUBJECT_SCHEDULE", day, obj}),
-<<<<<<< HEAD
-    setSync: () => dispatch({type: "SYNC_DONE"})
 
-=======
     setSync: () => dispatch({type: "SYNC_DONE"}),
     setSemesterChecksum: data => dispatch({type: "SET_CHECKSUM", payload: data})
->>>>>>> cc93596bc4400d6609d0d9064d5412bf53102a49
+
   });
 
 /*
