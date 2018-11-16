@@ -26,16 +26,25 @@ export class UserAPI extends API{
 	    .then(r => onSuccess(r));
     }
 
+    logout(success, failure=()=>{console.log("Logout failed")}){	
+      let action = "logout/";
+	fetch(this.host+action, {credentials: "same-origin"})
+	    .then(()=>{
+		success();
+	    }).catch(ex => failure());
+    }
 
-    checkLoginState(onSuccess, onFailure){
+
+
+    checkLoginState(onSuccess, onFailure = ()=>{}){
         this.getRequest("login/state/")
         .then(r => {
             if(r.result)
 		onSuccess(r);
             else
 		onFailure(r);
-        });
-    }
+        }).catch( (err) => onFailure(err));
+    }    
 
     _getDays(s, e) {
     var a = [];

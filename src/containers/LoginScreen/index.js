@@ -32,28 +32,28 @@ import { pushNotifications } from '../../services';
 
 class LoginView extends React.Component{
   state={
-    email: "b1301746",
-    password: "ibrahim1746",
-    loginState: "NONE",
-    redirect: false,
-    fadeAnim: new Animated.Value(0),
-    bbc:"black",
-    bbc2:"black",
-    error: false,
-    error2: false,
-    errorMsg:"",
+      email: "b1301746",
+      password: "ibrahim1746",
+      loginState: "NONE",
+      redirect: false,
+      fadeAnim: new Animated.Value(0),
+      bbc:"black",
+      bbc2:"black",
+      error: false,
+      error2: false,
+      errorMsg:"",
       errorMsg2:"",
        studentTest: []
-  //  springAnim: new Animated.Value(0)
+      //  springAnim: new Animated.Value(0)
   };
-
-componentWillReceiveProps(newProps){
-  if(newProps.isLoggedIn != this.props.isLoggedIn){
-      this.setState({redirect: newProps.isLoggedIn});
-  }
-}
-
- /*
+    
+    componentWillReceiveProps(newProps){
+	if(newProps.isLoggedIn != this.props.isLoggedIn){
+	    this.setState({redirect: newProps.isLoggedIn});
+	}
+    }
+    
+    /*
 
     componentWillMount(){
       new LecturerAPI().checkLoginState(
@@ -148,24 +148,31 @@ componentDidMount() {
 		    if(this.state.email ==""){
 			this.wrongInputValidate();
 			this.setState({
-			    errorMsg: r.msg,
+			    errorMsg: response.msg,
 			    error: true
 			});
-  }
+			
+		    }
 		    
-  else if(this.state.password ==""){
-      this.correctInputValidate();
-      this.wrongInputValidate2();
-      this.setState({
-    errorMsg:"",
-    errorMsg2: r.msg,
-    error2: true
-      })
-  }
-  else{
-      errorMsg2: r.msg;
-  }
-    }
+		    else if(this.state.password ==""){
+			this.correctInputValidate();
+			this.wrongInputValidate2();
+			this.setState({
+			    errorMsg:"",
+			    errorMsg2: response.msg,
+			    error2: true
+			});
+		    }
+		    else{			
+			//console.log("ERROR", response);			
+			//errorMsg2: r.msg;
+			this.setState({
+			    errorMsg:"",
+			    errorMsg2: response.msg,
+			    error2: true
+			});
+		    }
+		}
 	    });
     }
 

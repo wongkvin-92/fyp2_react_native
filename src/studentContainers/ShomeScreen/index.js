@@ -329,9 +329,9 @@ if(hash(this.props.period) != hash(newProps.period)){
                 });
               }}
                // Minimum date that can be selected, dates before minDate will be grayed out. Default = undefined
-               minDate={this.state.minDate}
+               minDate={this.props.period.start_date}
                // Maximum date that can be selected, dates after maxDate will be grayed out. Default = undefined
-               maxDate={this.state.maxDate}
+               maxDate={this.props.period.end_date}
                renderItem={(props)=> <DailyScheduleItem {...props} /> }
                renderEmptyDate={this.renderEmptyDate.bind(this)}
                rowHasChanged={this.rowHasChanged.bind(this)}

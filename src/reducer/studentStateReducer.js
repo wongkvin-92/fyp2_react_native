@@ -1,6 +1,6 @@
 // redux tree List
-const INITIAL_STATE = {
-    period: null,
+const INITIAL_STATE = {    
+    period: {start_date: null, end_date:null},
     downloadProgress: 0.0,
     downloadState: "idle",  //idle <--> downloadingWeek/downloadSem
     syncState: "none", //none -> sync <-> unsync

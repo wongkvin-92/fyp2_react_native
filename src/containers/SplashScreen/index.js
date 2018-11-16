@@ -181,7 +181,10 @@ class SplashScreen extends Component{
 		
 		this.props.asyncStore('credentials', JSON.stringify(r));
 	    },
-	    () =>  {console.log("Failed to retreive login state");}
+	    () =>  {
+		//alert("Cannot connect to server");		
+		console.log("Failed to retreive login state");
+	    }
 	);
 
 

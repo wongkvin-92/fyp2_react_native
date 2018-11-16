@@ -11,18 +11,18 @@ import React from 'react';
 import {commonRoutes} from "./src/Routes";
 import GenerateRoutes from './src/GenerateRoutes';
 
-import {LecturerAPI} from "./src/API";
+import {UserAPI} from "./src/API";
 
 import {RedirectTo, NativeRouter, Route, Link} from 'react-router-native';
 import {
-  Text,
-  View,
-  TouchableHighlight,
-  ScrollView,
-  Image,
-  Platform,
-  Button,
-  TouchableOpacity,
+    Text,
+    View,
+    TouchableHighlight,
+    ScrollView,
+    Image,
+    Platform,
+    Button,
+    TouchableOpacity,
     StyleSheet} from 'react-native';
 
 
@@ -31,7 +31,6 @@ import {Provider} from 'react-redux';
 import store from "./src/store";
 
 import { pushNotifications, scheduleSyncServices } from './src/services';
-import {UserAPI} from './src/API';
 
 import {AsyncStorage} from 'react-native';
 //import _ from 'loadash';
@@ -57,6 +56,7 @@ pushNotifications.configure(sharedObj);
 const studentService = new scheduleSyncServices.StudentScheduleSystem(sharedObj);
 
 class MainApp extends React.Component {
+
     storeData = async (key, value, onSuccess= () => {}) =>{
 	try {
 	    console.log("Saving "+key);
@@ -81,6 +81,19 @@ class MainApp extends React.Component {
       }
     }
 
+    clearData =   async (key, onSuccess=null, onFailure=null) => {
+       try {
+	   await AsyncStorage.removeItem(key);
+	   if(onSuccess){
+	       onSuccess();	       
+	   }
+    }
+	catch(err) {
+	    if(onFailure)
+		onFailure(err);
+    }
+  }
+
 
 
     constructor(p){
@@ -91,7 +104,9 @@ class MainApp extends React.Component {
     registerToken = ()=> new UserAPI().registerToken(sharedObj.token, ()=>console.log("Token registered"));
 
     componentDidMount(){
-      console.log("Mounting", pushNotifications);
+	/*let g = new scheduleSyncServices.StudentScheduleSystem();
+	console.log("loading notification service ", pushNotifications);
+	console.log("loading student service", scheduleSyncServices);*/
     	//this.registerToken();
     	//this.storeData('enrolledKey', ["bit100"]);
     	//this.retrieveData('enrolledKey', r=>console.log(r));
@@ -114,10 +129,14 @@ class MainApp extends React.Component {
                 {
                   changeLogin: ()=>{},
                     login: this.lecturerLogin,
-                  logout: ()=> {                   //success() - callback func
-                      new LecturerAPI().logout( this.onLogout );
+                    logout: (onSuccess, onFailure)=> {                   //success() - callback func
+                      new UserAPI().logout( ()=>{
+			  this.onLogout();
+			  onSuccess();			  
+		      }, ()=>alert("Logout failed"));
                   },
 		    asyncStore:this.storeData,
+		    asyncClear: this.clearData,		    
                     asyncLoad:this.retrieveData,
                     setLogin: this.setLogin,
                     ...this.state,

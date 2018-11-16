@@ -76,10 +76,11 @@ export class StudentScheduleSystem{
 	dateArr.forEach(el => {
             permenantSchedule[el] = allSchedule.filter(d =>
 						       d.oldDateTime == null && d.day == getWeekDay(el)
-						      );
+						      ).map(e => ({...e, isPermanant: true}));
+	    
             replacementClasses[el] = allSchedule.filter(d =>
 							d.newDateTime != null && d.newDateTime == el  && d.status=="approved"
-						       );
+						       ).map(e => ({...e, isPermanant: false}));	    
 
             cancelledClasses[el] = allSchedule.filter(d =>
 						      d.oldDateTime != null && d.oldDateTime == el
@@ -88,13 +89,13 @@ export class StudentScheduleSystem{
 		       );
 	//let finalSchedule = {...permenantSchedule, ...replacementClasses};
 	let finalSchedule = {};
-	Object.keys(permenantSchedule).forEach( k => {
-	    let combinedSchedule = permenantSchedule[k].concat(replacementClasses[k]);
+	Object.keys(permenantSchedule).forEach( k => {	    
+	    let combinedSchedule = permenantSchedule[k].concat(replacementClasses[k]);	    
 
 	    //finalSchedule[k]['isCancelled'] = true; //TODO
 	    finalSchedule[k] = Object.values(combinedSchedule).map( j => {
 		const jCopy = {...j};
-		let classID = j['classID']
+		let classID = j['classID'];
 		var isCancelled = cancelledClasses[k].includes(parseInt(classID));
 		//jCopy['isCancelled'] = cancelledClasses[k].includes(parseInt(classID));
 		jCopy['isCancelled'] = isCancelled;
