@@ -19,17 +19,25 @@ const configure = (sharedObj) => {
      // required on iOS only
      notification.finish(PushNotificationIOS.FetchResult.NoData);
    },
-
+// IOS ONLY (optional): default: all - Permissions to register.
    permissions: {
      alert: true,
      badge: true,
      sound: true
    },
-
+   // Should the initial notification be popped automatically
+      // default: true
    popInitialNotification: true,
+   /**
+      * (optional) default: true
+      * - Specified if permissions (ios) and token (android and ios) will requested or not,
+      * - if not, you must call PushNotificationsHandler.requestPermissions() later
+      */
    requestPermissions: true
  });
 
+
+PushNotificationIOS.addEventListener('registrationError', console.log);
  console.log("Done configuring", PushNotification);
 };
 
@@ -48,7 +56,15 @@ const localNotification = () => {
    message: "Notification Message",
    playSound: true,
    soundName: 'default',
-   actions: '["Accept", "Reject"]'
+   actions: '["Accept", "Reject"]',
+
+   /* iOS only properties */
+      alertAction: 'view', // (optional) default: view
+      category: 'null', // (optional) default: null
+      userInfo: {}, // (optional) default: null (object containing additional notification data)
+
+      number: 10 // (optional) Valid 32 bit integer specified as string. default: none (Cannot be zero)
+
  });
 };
 

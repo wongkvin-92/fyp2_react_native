@@ -80,6 +80,8 @@ export default (state = INITIAL_STATE, action) => {
         return {...state, forceReload: true};
       case "AFTER_RELOAD":
         return {...state, forceReload: false};
+      case "SET_PERIOD":
+          return {...state, period: action.period};
       default:
         return state;
     }

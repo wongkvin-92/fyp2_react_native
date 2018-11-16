@@ -69,7 +69,7 @@ class ShomeScreen extends React.PureComponent{
     updateSubjectList = () => {
     	console.log("Updating");
     	//console.log(this.props.subjectList);
-    	this.setState({data: this.props.subjectList});	
+    	this.setState({data: this.props.subjectList});
     }
 
     _getDays(s, e) {
@@ -93,7 +93,7 @@ class ShomeScreen extends React.PureComponent{
 
       downloadAllSubjects(period, subList, checksum){
           //let subList = this.props.studentStateReducer.enrolledSubject;
-	  let scheduleSync = this.scheduleService;	  
+	  let scheduleSync = this.scheduleService;
 	  console.log("Downloading schedule ", period, subList, checksum);
 	  new StudentAPI().downloadSemesterChecksum(
 	      subList,
@@ -102,23 +102,23 @@ class ShomeScreen extends React.PureComponent{
 		      console.log(checksum + " vs " + checksumData.key);
 		      if(checksumData.key != checksum){
 			  console.log("ShomeScreen: downloading subjects");
-			  
+
 			  new StudentAPI().downloadAllSubjects(subList, r=> {
-			      
+
 			      scheduleSync.generateSchedule(r, period, e=> {
 				  this.props.setSchedule(e);
 				  this.props.setSemesterChecksum(checksumData.key);
 				  this.props.asyncStore('semesterChecksum', checksumData.key);
 				  this.props.asyncStore('subjectList', JSON.stringify(e));
 			      });
-			      
+
 			  });
 		      }else{
-			  console.log("Checksum same");			  
+			  console.log("Checksum same");
 		      }
 		  };
 	      });
-	  
+
       }
 
     componentDidUpdate(){
@@ -137,8 +137,8 @@ class ShomeScreen extends React.PureComponent{
 /*
     downloadAllSubjects(period){
         let subList = this.props.enrolledSubject;
-	let scheduleSync = this.props.studentService;
-	
+	      let scheduleSync = this.props.studentService;
+
         if(subList.length > 0 && this.props.period != null){
 	    console.log("home.index.downloadAllSubject: Downloading the schedule..");
             new StudentAPI().downloadAllSubjects(subList, r => scheduleSync.generateSchedule(r, period, e=>this.props.setSchedule(e) ));
@@ -151,9 +151,6 @@ class ShomeScreen extends React.PureComponent{
 		this.props.setSchedule(e);
 		this.props.setSync();
 	    } ));
-	}
-    }    
-*/
 
 
     /*
@@ -200,15 +197,15 @@ class ShomeScreen extends React.PureComponent{
         			   maxDate: newProps.period.end_date
         			  });
           //TODO: Do this if hash comparison is successfull
-            //this.downloadAllSubjects(newProps.period);	    
+            //this.downloadAllSubjects(newProps.period);
         }
 
 	if(newProps.enrolledSubject != this.props.enrolledSubject){
 	    if(this.props.period){
-		//console.log("Schedule updated", this.props.period, newProps.enrolledSubject, this.props.semesterChecksum);		
+		//console.log("Schedule updated", this.props.period, newProps.enrolledSubject, this.props.semesterChecksum);
 		this.downloadAllSubjects(this.props.period, newProps.enrolledSubject, this.props.semesterChecksum);
 	    }
-	    
+
 	}
 /*	if(newProps.syncState != "sync"){
 	    let enrolledSubject = this.props.enrolledSubject;
@@ -219,14 +216,15 @@ class ShomeScreen extends React.PureComponent{
 							      console.log("HOMESCREEN UPDATED, CHECKSUM: ", checksum);
 							      //this.downloadAllSubjects(newProps.period);
 
-							      
+
 							      //console.log("CHANGED CHECKSUM", this.props.semesterChecksum, newProps.semesterChecksum);
 							      /*
 							      if(this.props.semesterChecksum == checksum.key){
 								  console.log("No need to update timetable");
 
 							      }else{
-								  this.downloadAllSubjects(newProps.period);	    
+
+								  this.downloadAllSubjects(newProps.period);
 							      }
 							  });
 	    }else{
@@ -234,7 +232,7 @@ class ShomeScreen extends React.PureComponent{
 	    }
 	    }*/
 
-	
+
     }
 
     /*
@@ -305,7 +303,7 @@ if(hash(this.props.period) != hash(newProps.period)){
     const massage = {key:'massage', color: 'blue', selectedDotColor: 'blue'};
     const workout = {key:'workout', color: 'green'};
     var startDay = this.formatDate(new Date());
-      return  (	  
+      return  (
         <View style={styles.containers}>
              {this.state.redirect?<Redirect to="/login" />:<View/>}
              <View style={styles.titleStlye}>
@@ -314,6 +312,7 @@ if(hash(this.props.period) != hash(newProps.period)){
                 </View>
              </View>
              <CustomAgenda
+
 		   doNothing={this.state.doNothing}
 		   style={{height: 30}}
 		   items={this.props.subjectList}
@@ -366,6 +365,7 @@ if(hash(this.props.period) != hash(newProps.period)){
               todayTextColor:'#ffffff'
             }}
          />
+
         </View>
   );
   }
@@ -378,8 +378,10 @@ const mapStateToProps = p => p.studentStateReducer;
 const mapDispatchToProps = dispatch => ({
     setSchedule: (data) => dispatch({type: "UPDATE_SCHEDULE", subjectList: data}),
     addSubject: (day, obj) => dispatch({type: "ADD_SUBJECT_SCHEDULE", day, obj}),
+
     setSync: () => dispatch({type: "SYNC_DONE"}),
     setSemesterChecksum: data => dispatch({type: "SET_CHECKSUM", payload: data})
+
   });
 
 /*

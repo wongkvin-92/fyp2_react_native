@@ -20,7 +20,7 @@ import {Redirect, Link} from 'react-router-native';
 
 import { Calendar, CalendarList, Agenda } from 'react-native-calendars';
 import {LecturerAPI} from "../../API";
-
+import {UserAPI} from "../../API";
 import {styles} from './style';
 import DailyScheduleItem from './components/DailyScheduleItems';
 
@@ -68,18 +68,41 @@ class LessonScreen extends React.PureComponent{
 
     let today = this.formatDate(new Date());
     this.state={
+
       redirect:false,
       items: {},
       selectedDate: today,
       checked: false,
       showCancelButton: false,
-      doNothing: false
+      doNothing: false,
+      minDate: "2018-01-01",
+      maxDate: "2018-02-02"
     };
     this.isLoading=false;
     this.lastDayObj = null;
   }
 
+  downloadSemStartEnd =() =>{
+    new UserAPI().downloadSemester(
+      (d) => this.setState({
+        minDate: d.start_date,
+        maxDate: d.end_date
+      })
+    )
+  }
+  componentDidMount(){
+    this.downloadSemStartEnd();
+    //this.setState
+  }
   componentWillReceiveProps(newProps){
+
+    if(newProps.period && newProps.period != this.props.period ){
+        console.log("Period changed");
+        console.log(newProps.period);
+          this.setState({minDate: newProps.period.start_date,
+             maxDate: newProps.period.end_date
+            });
+    }
 
     if(this.props.subjectListChecked != newProps.subjectListChecked){
       this.setState({showCancelButton: newProps.subjectListChecked});
@@ -297,9 +320,9 @@ class LessonScreen extends React.PureComponent{
                 });
               }}
                // Minimum date that can be selected, dates before minDate will be grayed out. Default = undefined
-               minDate={startDay}
+               minDate={this.props.period.start_date}
                // Maximum date that can be selected, dates after maxDate will be grayed out. Default = undefined
-               maxDate={'2018-12-01'}
+               maxDate={this.props.period.end_date}
                renderItem={(props)=> <DailyScheduleItem {...props} /> }
                renderEmptyDate={this.renderEmptyDate.bind(this)}
                rowHasChanged={this.rowHasChanged.bind(this)}

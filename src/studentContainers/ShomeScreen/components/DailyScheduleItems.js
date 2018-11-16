@@ -22,13 +22,15 @@ const DailyScheduleItemFunc = (props) => (
 
       <Text style={styles.scheduleContentStyle}>{props.subjectName}</Text>
       <Text style={styles.scheduleContentStyle}>{props.type}</Text>
-      <Text style={styles.scheduleContentStyle}>From {props.startTime} to {props.endTime}</Text>
 
+      <Text style={styles.scheduleContentStyle}>From {props.startTime} to {props.endTime}</Text>
+      <Text> {props.newVenue}</Text>
       <View style={styles.canceBtnContainer}>
 	{props.isPermanant == false?<Text>Weekly</Text>:<Text>Replacement</Text>}
       {props.isCancelled==false?
-      <Text style={{color: "red", fontWeight:"900"}}>
+      <Text style={{color: "blue", fontWeight:"900"}}>
             Normal
+
       </Text>
         :
         <Text style={{color: "red", fontWeight:"900"}}>
@@ -40,7 +42,7 @@ const DailyScheduleItemFunc = (props) => (
     </View>
 );
 
-
+/*
 
 class DailyScheduleItem extends React.PureComponent{
   constructor(props){
@@ -70,6 +72,7 @@ class DailyScheduleItem extends React.PureComponent{
   }
 };
 
+*/
 
 export default DailyScheduleItemFunc;
 /*

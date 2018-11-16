@@ -6,7 +6,7 @@ const INITIAL_STATE = {
     syncState: "none", //none -> sync <-> unsync
     enrolledSubject: [],
     subjectList: {
-	
+
     },
     semesterChecksum: null,
     weeklyChecksums: []

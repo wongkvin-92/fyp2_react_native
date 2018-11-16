@@ -8,6 +8,7 @@ import SplashScreen from './containers/SplashScreen';
 import ProfileScreen from './containers/ProfileScreen';
 import LecturerTabLayout from './containers/HomeScreen/components/TabNavigation'; //refactor this out of homescreen into an independent component
 
+
 //Lecturer Routes
 import HomeScreen from './containers/HomeScreen';
 import LessonScreen from './containers/LessonScreen';
@@ -21,7 +22,7 @@ import RequestRescheduleScreen from './containers/RescheduleRequestScreen';
 //student Routes
 import EnrollScreen from './studentContainers/SenrollSubjectScreen';
 import SHomeScreen from './studentContainers/ShomeScreen';
-
+import Testing from './studentContainers/Testing';
 
 
 
@@ -33,7 +34,9 @@ export const lecturerTabRoutes = [
 
 //    {id: "home", label: "Home", component: SHomeScreen, logo:"home"},
 export const studentTabRoutes = [
-    {id: "home", label: "Home", component: SHomeScreen, logo:"home"},    
+
+    {id: "home", label: "Home", component: SHomeScreen, logo:"home"},
+      {id: "testing", label: "Home", component: Testing, logo:"home"},
     {id: "enroll", label: "Enroll", component: EnrollScreen, logo:"home"},
     {id: "profile", label: "Profile", component: ProfileScreen, logo:"face"}
 ];
