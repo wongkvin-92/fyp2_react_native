@@ -7,7 +7,8 @@ const help = "10.125.194.180";
 const darr = "192.168.0.7";
 const ace ="192.168.1.106";
 const qi ="192.168.0.6";
-const host = artisan;
+const srvHome = "192.168.0.142";
+const host = srvHome;
 const port = 80;
 const path = "fypBackEnd";
 

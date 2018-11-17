@@ -159,33 +159,41 @@ class SplashScreen extends Component{
 	console.log("Splash screen component did mount");
 	//console.log(this.props);
 
-	//Load credentials first
-	this.props.asyncLoad("credentials", (credentials) => {
-	    if(!credentials)
-		console.log("Credentials are empty");
-	    else{
-		this.runStartup(JSON.parse(credentials));
-	    }
-	});
 
-	//Check login state from server and update credential variable if necessary
+
+		
 	new UserAPI().checkLoginState(
 	    (r) => {
 		let c = this.props.studentStateReducer.credentials;
+		let oldLoginState = this.props.studentStateReducer.credentials;
     		this.props.setCredentials(r);
-
+		this.props.asyncStore('credentials', JSON.stringify(r));
+		
 		if(!c){
 		    console.log("Credentials was not set initially");
-		    this.runStartup(r);
+		    if(this.props.studentStateReducer.credentials == null)
+			this.runStartup(r);
 		}
-
-		this.props.asyncStore('credentials', JSON.stringify(r));
 	    },
 	    () =>  {
 		//alert("Cannot connect to server");		
 		console.log("Failed to retreive login state");
 	    }
-	);
+	);	
+
+	//Load credentials first
+	this.props.asyncLoad("credentials", (credentials) => {
+	    if(!credentials)
+		console.log("Credentials are empty");
+	    else{
+		console.log("Credentials are not empty", JSON.parse(credentials));
+		this.props.setCredentials(credentials);		
+		this.runStartup(JSON.parse(credentials));
+	    }
+	});	
+
+	//Check login state from server and update credential variable if necessary
+	
 
 
 

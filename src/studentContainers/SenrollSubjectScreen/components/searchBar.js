@@ -19,12 +19,13 @@ const styles = StyleSheet.create({
   },
 })
 
-export const SearchSubject = () => (
+export const SearchSubject = ({onSearch}) => (
   <View>
     <SearchBar
       placeholder="Search Subject..."
       round
       containerStyle={styles.searchBar}
+      onChangeText={onSearch}
       autoCorrect={false}
     />
   </View>

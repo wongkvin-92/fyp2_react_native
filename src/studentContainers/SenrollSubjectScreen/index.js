@@ -34,15 +34,15 @@ const sampleData = [
 
 class EnrollScreen extends React.Component{
 
-  state={
-      redirect:false,
-      rawdata: [],
-      processedData: [],
-      fadeAnim: new Animated.Value(0)
-  };
+    state={
+	searchData: "",
+	redirect:false,
+	rawdata: [],
+	processedData: [],
+	fadeAnim: new Animated.Value(0)
+    };
     
     //filterOutSubjects = (d, localList) => d.filter(e=>localList.indexOf(e.subjectID)==-1);
-
     setEnrolledState = (d, localList) => d.map(e => ({...e, enrolledStatus: localList.indexOf(e.subjectID)>=0}));
     
   downloadList = ()=>{
@@ -108,6 +108,8 @@ class EnrollScreen extends React.Component{
 	}
     }
 
+    
+
   render () {
 
     return  (
@@ -122,7 +124,9 @@ class EnrollScreen extends React.Component{
                 <Text style={styles.titleTextStyle}>Subject Enroll</Text>
                 </View>
              </View>
-             <SearchSubject />
+             <SearchSubject
+	       onSearch={text=>this.setState({searchData: text})}
+	       />
              <View style={{flex: 1}}>
              <Animated.View style={[{opacity: this.state.fadeAnim}]}>
              <ScrollView >

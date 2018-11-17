@@ -52,14 +52,14 @@ export class StudentScheduleSystem{
             return new Date(d[0], d[1]-1, d[2]);
 	};
 	let getWeekDay = (strDate) => {
-	    if(typeof(strDate) === "undefined")
+	    if(typeof(strDate) === "undefined" || strDate == null)
 		return null;
             let weekDay = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
             return weekDay[convertToDate(strDate).getDay()];
 	};
 
 	let startDate = convertToDate(period.start_date);
-	let endDate  = period.end_date;
+	let endDate  = convertToDate(period.end_date);
 
 	let dateArr = this._getDays(new Date(startDate), new Date(endDate));
 

@@ -56,7 +56,6 @@ pushNotifications.configure(sharedObj);
 const studentService = new scheduleSyncServices.StudentScheduleSystem(sharedObj);
 
 class MainApp extends React.Component {
-
     storeData = async (key, value, onSuccess= () => {}) =>{
 	try {
 	    console.log("Saving "+key);
@@ -107,15 +106,15 @@ class MainApp extends React.Component {
 	/*let g = new scheduleSyncServices.StudentScheduleSystem();
 	console.log("loading notification service ", pushNotifications);
 	console.log("loading student service", scheduleSyncServices);*/
-    	//this.registerToken();
+    	this.registerToken();
     	//this.storeData('enrolledKey', ["bit100"]);
     	//this.retrieveData('enrolledKey', r=>console.log(r));
-    }
+    }    
 
- lecturerLogin = ()=>{
-     this.setState({isLoggedIn: true});
-     this.registerToken();
-  }
+    login = ()=>{	
+	this.setState({isLoggedIn: true});
+	//this.registerToken();
+    }    
   //success() - callback func
   onLogout = ()=> this.setState({isLoggedIn: false});
 
@@ -128,7 +127,7 @@ class MainApp extends React.Component {
               props={
                 {
                   changeLogin: ()=>{},
-                    login: this.lecturerLogin,
+                    login: this.login,
                     logout: (onSuccess, onFailure)=> {                   //success() - callback func
                       new UserAPI().logout( ()=>{
 			  this.onLogout();
