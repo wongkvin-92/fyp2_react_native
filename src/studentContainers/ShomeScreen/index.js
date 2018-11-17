@@ -100,21 +100,20 @@ class ShomeScreen extends React.PureComponent{
 	      checksumData => {
 		  if(checksumData){
 		      console.log(checksum + " vs " + checksumData.key);
-		      if(checksumData.key != checksum){
-			  console.log("ShomeScreen: downloading subjects");
+		      if( checksum == null || (checksumData.key != checksum) ){
+      			  console.log("ShomeScreen: downloading subjects", subList, period);
 
-			  new StudentAPI().downloadAllSubjects(subList, r=> {
+      			  new StudentAPI().downloadAllSubjects(subList, r=> {
+      			      scheduleSync.generateSchedule(r, period, e=> {
+      				           this.props.setSchedule(e); //async
+      				           this.props.setSemesterChecksum(checksumData.key);
+      				           this.props.asyncStore('semesterChecksum', checksumData.key);
+      				           this.props.asyncStore('subjectList', JSON.stringify(e));
+      			      });
 
-			      scheduleSync.generateSchedule(r, period, e=> {
-				  this.props.setSchedule(e);
-				  this.props.setSemesterChecksum(checksumData.key);
-				  this.props.asyncStore('semesterChecksum', checksumData.key);
-				  this.props.asyncStore('subjectList', JSON.stringify(e));
-			      });
-
-			  });
+      			  });
 		      }else{
-			  console.log("Checksum same");
+			           console.log("Checksum same");
 		      }
 		  };
 	      });
@@ -188,6 +187,12 @@ class ShomeScreen extends React.PureComponent{
     }
 */
 
+ componentDidMount(){
+   if(this.props.period.start_date){
+     console.log("Mounting, subject list is:", this.period, this.props.enrolledSubject);
+     this.downloadAllSubjects(this.props.period, this.props.enrolledSubject, this.props.semesterChecksum);
+  }
+ }
 
     componentWillReceiveProps(newProps){
         if(newProps.period && newProps.period != this.props.period ){
@@ -197,7 +202,7 @@ class ShomeScreen extends React.PureComponent{
         			   maxDate: newProps.period.end_date
         			  });
           //TODO: Do this if hash comparison is successfull
-            //this.downloadAllSubjects(newProps.period);
+            this.downloadAllSubjects(newProps.period, this.props.enrolledSubject, this.props.semesterChecksum);
         }
 
 	if(newProps.enrolledSubject != this.props.enrolledSubject){
@@ -328,9 +333,9 @@ if(hash(this.props.period) != hash(newProps.period)){
                 });
               }}
                // Minimum date that can be selected, dates before minDate will be grayed out. Default = undefined
-               minDate={this.state.minDate}
+               minDate={this.props.period.start_date}
                // Maximum date that can be selected, dates after maxDate will be grayed out. Default = undefined
-               maxDate={this.state.maxDate}
+               maxDate={this.props.period.end_date}
                renderItem={(props)=> <DailyScheduleItem {...props} /> }
                renderEmptyDate={this.renderEmptyDate.bind(this)}
                rowHasChanged={this.rowHasChanged.bind(this)}

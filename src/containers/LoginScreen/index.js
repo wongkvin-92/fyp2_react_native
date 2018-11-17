@@ -46,13 +46,13 @@ class LoginView extends React.Component{
        studentTest: []
       //  springAnim: new Animated.Value(0)
   };
-    
+
     componentWillReceiveProps(newProps){
 	if(newProps.isLoggedIn != this.props.isLoggedIn){
 	    this.setState({redirect: newProps.isLoggedIn});
 	}
     }
-    
+
     /*
 
     componentWillMount(){
@@ -143,6 +143,11 @@ componentDidMount() {
 		//alert(response);
 		if(response.result == true){
 		    this.props.login();
+        let credential = response.credentials;
+        let period = response.sem;
+        this.props.asyncStore('credentials', JSON.stringify(credential));
+        this.props.asyncStore('period', JSON.stringify(response.sem));
+        this.props.setPeriod(response.sem);
 		    this.props.dispatchLogin(response.credentials);
 		}else{
 		    if(this.state.email ==""){
@@ -151,9 +156,9 @@ componentDidMount() {
 			    errorMsg: response.msg,
 			    error: true
 			});
-			
+
 		    }
-		    
+
 		    else if(this.state.password ==""){
 			this.correctInputValidate();
 			this.wrongInputValidate2();
@@ -163,8 +168,8 @@ componentDidMount() {
 			    error2: true
 			});
 		    }
-		    else{			
-			//console.log("ERROR", response);			
+		    else{
+			//console.log("ERROR", response);
 			//errorMsg2: r.msg;
 			this.setState({
 			    errorMsg:"",
@@ -356,7 +361,8 @@ const styles = StyleSheet.create({
 const mapStateToProps = (state) => state.loginStateReducer;
 const mapDispatchToProps = (dispatch) => {
   return {
-      dispatchLogin: (c) => dispatch({type: "LOGIN", credentials: c})
+      dispatchLogin: (c) => dispatch({type: "LOGIN", credentials: c}),
+      setPeriod: data => dispatch({type: "SET_PERIOD", period: data})
   };
 }
 

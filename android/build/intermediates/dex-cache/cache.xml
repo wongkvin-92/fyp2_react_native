@@ -3,147 +3,21 @@
 
     <item
         is-multidex="false"
-        jar="/home/shath/.android/build-cache/62510a3d9e90279321b2c78c0920780ed2a9c187/output/jars/classes.jar"
+        jar="/Users/wKvin/Desktop/fyp2_react_native/node_modules/react-native-push-notification/android/build/intermediates/bundles/default/classes.jar"
         jumboMode="false"
         optimize="true"
         revision="26.0.3"
-        sha1="5b9f57b1fb76487516b73b908f54c60c48202d84">
-        <dex dex="/home/shath/Public/projects/fyp2_react_native/android/app/build/intermediates/pre-dexed/debug/classes_af4691ec0674c2f5ddb015b4a6d20c5cc26eabe8.jar" />
+        sha1="3de81fa84e42144d35b5f13d5ac856264fae7c10">
+        <dex dex="/Users/wKvin/Desktop/fyp2_react_native/android/app/build/intermediates/pre-dexed/debug/classes_7d042aa2bada5b8a2e89306892a3eb816d6f737d.jar" />
     </item>
     <item
         is-multidex="false"
-        jar="/home/shath/.android/build-cache/dae6674183203651baf114b15573ed7cf7615f2f/output/jars/classes.jar"
+        jar="/Users/wKvin/Desktop/fyp2_react_native/node_modules/react-native-vector-icons/android/build/intermediates/bundles/default/classes.jar"
         jumboMode="false"
         optimize="true"
         revision="26.0.3"
-        sha1="9b7b9f800b62f974cd3a75faf1720c010c7ac244">
-        <dex dex="/home/shath/Public/projects/fyp2_react_native/android/app/build/intermediates/pre-dexed/debug/classes_bcecbcea531a0baae3d91c7ad511055920044ec5.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/home/shath/Public/projects/fyp2_react_native/node_modules/react-native-push-notification/android/build/intermediates/bundles/default/classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="26.0.3"
-        sha1="ede40537df4708b34f58538dc735a64165d87b5c">
-        <dex dex="/home/shath/Public/projects/fyp2_react_native/android/app/build/intermediates/pre-dexed/debug/classes_3d6ce4336a8b834fce012a471a09423d66fa90b9.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/home/shath/.android/build-cache/d1b1818c5097a5760b0ca74c912a2bd96abb2ac0/output/jars/classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="26.0.3"
-        sha1="dd86dfc9c6946cf3fc34ba8bebd49e0e0845a89e">
-        <dex dex="/home/shath/Public/projects/fyp2_react_native/android/app/build/intermediates/pre-dexed/debug/classes_0a94cda04ad16eee78ba219c08864d9df08411e3.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/home/shath/.android/build-cache/1dfba746ecd5636c93e818cdbdf220c1d3c204c2/output/jars/classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="26.0.3"
-        sha1="e7a850c25a7efbd533c496ab482c980fdafac58d">
-        <dex dex="/home/shath/Public/projects/fyp2_react_native/android/app/build/intermediates/pre-dexed/debug/classes_aff6e497552ae0cde26e4b9eddc5fdcbe41b4258.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/home/shath/.android/build-cache/61f43693ffdbe581231c5b37452277eccd0a7b18/output/jars/classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="26.0.3"
-        sha1="a08c6dadfd96a281d9fddf59a767749e43064c23">
-        <dex dex="/home/shath/Public/projects/fyp2_react_native/android/app/build/intermediates/pre-dexed/debug/classes_8dce9eaffc28ae91e0962e6b9dc17cdddd352b2e.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/home/shath/Public/projects/fyp2_react_native/node_modules/react-native-vector-icons/android/build/intermediates/bundles/default/classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="26.0.3"
-        sha1="722e34ba5d4009c2551aca051aee8bd56cbdc19c">
-        <dex dex="/home/shath/Public/projects/fyp2_react_native/android/app/build/intermediates/pre-dexed/debug/classes_720ed48126f5ee11c59eeed14115ee9bdb30b98b.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/home/shath/.android/build-cache/94a773262483ea5e41d4b0fdaf89472997a2571c/output/jars/classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="26.0.3"
-        sha1="531c33d3697000a05e9493a2d0f09ba41fa114d3">
-        <dex dex="/home/shath/Public/projects/fyp2_react_native/android/app/build/intermediates/pre-dexed/debug/classes_4b4e75b91439a44a4a38e07d25045bb6daf568c2.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/home/shath/.android/build-cache/2a2398e1252922af81f6bb7e355bf9c444ed06f6/output/jars/classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="26.0.3"
-        sha1="9abdef6b3ea9a6d226f4ef13198d24e32f33ea4d">
-        <dex dex="/home/shath/Public/projects/fyp2_react_native/android/app/build/intermediates/pre-dexed/debug/classes_c6ac063dc748e6dbd329f159641c1655fbc9a997.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/home/shath/.android/build-cache/e61fa716fc593af712183a74b8aa0275e68116c8/output/jars/classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="26.0.3"
-        sha1="c5a0f010d8429fa087ba3ce882cd24af9027868a">
-        <dex dex="/home/shath/Public/projects/fyp2_react_native/android/app/build/intermediates/pre-dexed/debug/classes_795609b60e7666e6627268c3dfee4f3b234792e1.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/home/shath/.android/build-cache/8d6a5cb5d70158eae2804325e2d0a8924e997f79/output/jars/classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="26.0.3"
-        sha1="d2bb0c3fd1a65a72ae32cc00cc54fdcbe8c8ca73">
-        <dex dex="/home/shath/Public/projects/fyp2_react_native/android/app/build/intermediates/pre-dexed/debug/classes_f28963b579de2afbe13546b6b3d406eba1d96922.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/home/shath/.android/build-cache/d113401a8988f3550375a2d56f305504d2cb8275/output/jars/classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="26.0.3"
-        sha1="515ee7a522ec80b8d1c23260cb28f3b678d8bdd3">
-        <dex dex="/home/shath/Public/projects/fyp2_react_native/android/app/build/intermediates/pre-dexed/debug/classes_2047429a44f824236b1321c0e627f022cc597c4d.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/home/shath/.android/build-cache/911c7994a4842ba8036fc042bd1157815215cda0/output/jars/classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="26.0.3"
-        sha1="25cdd380f0a1b2f67a0b7253bbf1f343df981e5e">
-        <dex dex="/home/shath/Public/projects/fyp2_react_native/android/app/build/intermediates/pre-dexed/debug/classes_e74f384096f2b8569f5b4e918696dde05297b773.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/home/shath/.android/build-cache/9f1de389c62ba00c4ac6258f19e1e66ac2179525/output/jars/classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="26.0.3"
-        sha1="4096514ce1185b89df80681e982486efa30e440e">
-        <dex dex="/home/shath/Public/projects/fyp2_react_native/android/app/build/intermediates/pre-dexed/debug/classes_e1ea099ea96abe95b2950e2c560225a898fef753.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/home/shath/.android/build-cache/ff6ffa4c6c6ec19fd134576ec07f5b3007927581/output/jars/classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="26.0.3"
-        sha1="9d0ff1960f148dafff5b945e8596c060ff3cf88e">
-        <dex dex="/home/shath/Public/projects/fyp2_react_native/android/app/build/intermediates/pre-dexed/debug/classes_8173fbeeb759b813d1e07797ec6c00321fcb4503.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/home/shath/.android/build-cache/1dfba746ecd5636c93e818cdbdf220c1d3c204c2/output/jars/libs/infer-annotations-4.0.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="26.0.3"
-        sha1="9809e90be788acdb479b2b44e2112f3295a03068">
-        <dex dex="/home/shath/Public/projects/fyp2_react_native/android/app/build/intermediates/pre-dexed/debug/infer-annotations-4.0_11d5264e349eed3e9a4cac7a7182222aa7b08544.jar" />
+        sha1="f2cf527de8d0bd35d72088fafea02395ba4a9eec">
+        <dex dex="/Users/wKvin/Desktop/fyp2_react_native/android/app/build/intermediates/pre-dexed/debug/classes_3cd845a264369bff14e20808f554730a1a0e9a33.jar" />
     </item>
 
 </items>

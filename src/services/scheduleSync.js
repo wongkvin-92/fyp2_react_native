@@ -3,9 +3,9 @@
 export class StudentScheduleSystem{
     constructor(sharedObj={}){
 	this.sharedObj = sharedObj;
-    }    
-    
-    configure(){	
+    }
+
+    configure(){
     }
 
 
@@ -36,7 +36,7 @@ export class StudentScheduleSystem{
 
 	let startDate = new Date(d1[0], d1[1]-1, d1[2]);
         let endDate = new Date(d2[0], d2[1]-1, d2[2]+1);
-	
+
         let dateArr = this._getDays(new Date(startDate), new Date(endDate));
 	dateArr.forEach( el => emptySchedules[el]=[]);
 	return emptySchedules;
@@ -46,14 +46,14 @@ export class StudentScheduleSystem{
         //new function call it in componentdidmount
     //updateSubjectSem = (success) =>
     generateSchedule(allSchedule, period, success=null){
-	
+
 	let convertToDate = (strDate) => {
             let d = strDate.split("-").map(x => parseInt(x));
             return new Date(d[0], d[1]-1, d[2]);
 	};
 	let getWeekDay = (strDate) => {
-	    if(typeof(strDate) === "undefined" || strDate == null)
-		return null;
+	    //if(typeof(strDate) === "undefined" || strDate == null)
+		//return null;
             let weekDay = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
             return weekDay[convertToDate(strDate).getDay()];
 	};
@@ -77,10 +77,10 @@ export class StudentScheduleSystem{
             permenantSchedule[el] = allSchedule.filter(d =>
 						       d.oldDateTime == null && d.day == getWeekDay(el)
 						      ).map(e => ({...e, isPermanant: true}));
-	    
+
             replacementClasses[el] = allSchedule.filter(d =>
 							d.newDateTime != null && d.newDateTime == el  && d.status=="approved"
-						       ).map(e => ({...e, isPermanant: false}));	    
+						       ).map(e => ({...e, isPermanant: false}));
 
             cancelledClasses[el] = allSchedule.filter(d =>
 						      d.oldDateTime != null && d.oldDateTime == el
@@ -89,8 +89,8 @@ export class StudentScheduleSystem{
 		       );
 	//let finalSchedule = {...permenantSchedule, ...replacementClasses};
 	let finalSchedule = {};
-	Object.keys(permenantSchedule).forEach( k => {	    
-	    let combinedSchedule = permenantSchedule[k].concat(replacementClasses[k]);	    
+	Object.keys(permenantSchedule).forEach( k => {
+	    let combinedSchedule = permenantSchedule[k].concat(replacementClasses[k]);
 
 	    //finalSchedule[k]['isCancelled'] = true; //TODO
 	    finalSchedule[k] = Object.values(combinedSchedule).map( j => {
@@ -108,7 +108,7 @@ export class StudentScheduleSystem{
 		return jCopy;
 	    });
 	});
-	
+
 	if(success != null)
 	    success(finalSchedule);
 	//this.props.setSchedule(finalSchedule);

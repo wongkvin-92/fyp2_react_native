@@ -38,9 +38,10 @@ class SplashScreen extends Component{
 	    });
 
 	    this.props.asyncLoad("enrolledSubject", enrolledSubject => {
-		let subjectList = JSON.parse(enrolledSubject);
-		console.log("ENROLLED SUBJECT LOADED", subjectList);
-		this.props.setSubjectList(subjectList);
+				let subjectList = JSON.parse(enrolledSubject);
+				console.log("ENROLLED SUBJECT LOADED", subjectList);
+				if(subjectList)
+				this.props.setSubjectList(subjectList);
 	    });
 
 	    this.props.asyncLoad("semesterChecksum", c => {
@@ -141,63 +142,54 @@ class SplashScreen extends Component{
 
 
       runStartup(credentials){
-    	  if(credentials.type == "student"){
-	      console.log("Running startup");
+				console.log("Starting up screen");
+    	  	if(credentials.type == "student"){
+	      		console.log("Running startup");
 
-    	      this.runStudentStartup();
-	      new UserAPI().downloadSemester(period => {
-		  console.log("period was received as ", period);
-		  this.props.setPeriod(period);
-		  this.props.asyncStore('period', JSON.stringify(period));
-	      });
+    	      	this.runStudentStartup();
+			      	new UserAPI().downloadSemester(period => {
+								  console.log("period was received as ", period);
+								  this.props.setPeriod(period);
+								  this.props.asyncStore('period', JSON.stringify(period));
+							 });
 
-	  }
+	  	 		}
       }
 
 
     componentDidMount(){
-	console.log("Splash screen component did mount");
-	//console.log(this.props);
+			console.log("Splash screen component did mount");
+			//console.log(this.props);
 
+			/*new UserAPI().startSyncSchedule(({schedule, period})=>{
+				let data = schedule;
+				this.props.updateSchedule(data);
+				this.props.setPeriod(period);
+				console.log("Successfully synchronized");
+			},
+			()=>{ console.log("Synchronized failure"); },
+		    this.props.studentStateReducer
+			);*/
 
-
-		
-	new UserAPI().checkLoginState(
-	    (r) => {
-		let c = this.props.studentStateReducer.credentials;
-		let oldLoginState = this.props.studentStateReducer.credentials;
-    		this.props.setCredentials(r);
-		this.props.asyncStore('credentials', JSON.stringify(r));
-		
-		if(!c){
-		    console.log("Credentials was not set initially");
-		    if(this.props.studentStateReducer.credentials == null)
-			this.runStartup(r);
-		}
-	    },
-	    () =>  {
-		//alert("Cannot connect to server");		
-		console.log("Failed to retreive login state");
-	    }
-	);	
-
-	//Load credentials first
-	this.props.asyncLoad("credentials", (credentials) => {
-	    if(!credentials)
-		console.log("Credentials are empty");
-	    else{
-		console.log("Credentials are not empty", JSON.parse(credentials));
-		this.props.setCredentials(credentials);		
-		this.runStartup(JSON.parse(credentials));
-	    }
-	});	
+			//Load credentials first
+			this.props.asyncLoad("credentials", (credentials) => {
+				console.log("Credentials loaded as ", credentials);
+					if(credentials == null || credentials == "null")
+						console.log("Credentials are empty");
+			    else{
+							console.log("Credentials are not empty", JSON.parse(credentials));
+							this.props.setCredentials(JSON.parse(credentials));
+							this.runStartup(JSON.parse(credentials));
+			    }
+			});
 
 	//Check login state from server and update credential variable if necessary
-	
 
 
 
-	/*
+
+ //load credential from server
+ /*
 	new UserAPI().checkLoginState(
 	    (r) => {
 
@@ -213,11 +205,13 @@ class SplashScreen extends Component{
 			this.props.studentStateReducer
 		    );
 		}
-
-		this.props.gotoHomeScreen(r);
+		this.props.setCredentials(r);
+		//this.props.gotoHomeScreen(r);
 	    },
-	    () =>  {console.log("Failed to retreive login state");}
+	    (r) =>  {console.log("Failed to retreive login state", r);}
 	);*/
+
+
   }
 
   render(){

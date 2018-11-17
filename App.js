@@ -57,15 +57,15 @@ const studentService = new scheduleSyncServices.StudentScheduleSystem(sharedObj)
 
 class MainApp extends React.Component {
     storeData = async (key, value, onSuccess= () => {}) =>{
-	try {
-	    console.log("Saving "+key);
-            await AsyncStorage.setItem('@MySuperStore:'+key, value);
-            if(onSuccess!=null)
-		onSuccess();
-	    console.log("successfully saved");
-	} catch (error) {
-            console.log("Error saving data" + error);
-	}
+      	try {
+      	    console.log("Saving "+key);
+                  await AsyncStorage.setItem('@MySuperStore:'+key, value);
+                  if(onSuccess!=null)
+      		onSuccess();
+      	    console.log("successfully saved");
+      	} catch (error) {
+                  console.log("Error saving data" + error);
+      	}
     }
 
     retrieveData = async (key, onRetrieved) => {
@@ -84,7 +84,7 @@ class MainApp extends React.Component {
        try {
 	   await AsyncStorage.removeItem(key);
 	   if(onSuccess){
-	       onSuccess();	       
+	       onSuccess();
 	   }
     }
 	catch(err) {
@@ -109,12 +109,12 @@ class MainApp extends React.Component {
     	this.registerToken();
     	//this.storeData('enrolledKey', ["bit100"]);
     	//this.retrieveData('enrolledKey', r=>console.log(r));
-    }    
+    }
 
-    login = ()=>{	
+    login = ()=>{
 	this.setState({isLoggedIn: true});
 	//this.registerToken();
-    }    
+    }
   //success() - callback func
   onLogout = ()=> this.setState({isLoggedIn: false});
 
@@ -131,11 +131,11 @@ class MainApp extends React.Component {
                     logout: (onSuccess, onFailure)=> {                   //success() - callback func
                       new UserAPI().logout( ()=>{
 			  this.onLogout();
-			  onSuccess();			  
+			  onSuccess();
 		      }, ()=>alert("Logout failed"));
                   },
 		    asyncStore:this.storeData,
-		    asyncClear: this.clearData,		    
+		    asyncClear: this.clearData,
                     asyncLoad:this.retrieveData,
                     setLogin: this.setLogin,
                     ...this.state,

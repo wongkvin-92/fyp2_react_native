@@ -57,30 +57,33 @@ class ProfileScreen extends React.Component{
 	    name: "Loading",
 	    email: "Loading",
 	    type: "lecturer"
-	};	
+	};
     }
 
     logout(){
 	console.log("Logout pressed");
 	this.props.logout ( () => {
 	    console.log("Logout successfull, clearing cache.");
-	    this.props.dispatchLogout();
-	    this.setState({redirect: true});
-	    
-	    this.props.asyncClear('credentials', () => {		
+
+	    /*this.props.asyncClear('credentials', () => {
 	    }, ()=> alert("Failed to logout"));
+*/
+      this.props.asyncStore('credentials', "null");
+      this.props.dispatchLogout();
+     this.setState({redirect: true});
+
 	}, ()=>alert("Failed to logout, no network connectivity"));
   }
 
     componentWillMount(){
-	this.setState({email: this.props.credentials.email, name: this.props.credentials.name, type: this.props.credentials.type});	
+	this.setState({email: this.props.credentials.email, name: this.props.credentials.name, type: this.props.credentials.type});
 	/*if(this.props.credentials != null && this.props.credentials.user != null){
 	    this.setState({email: this.props.credentials.user.email, name: this.props.credentials.user.name});
-	}*/	
+	}*/
     }
 
     /*
-    componentWillReceiveProps(newProps){	
+    componentWillReceiveProps(newProps){
 	console.log("Update received");
 	if(this.props.credentials == null && newProps.credentials != null){
 	    console.log("Triggering the update");
@@ -88,9 +91,9 @@ class ProfileScreen extends React.Component{
 	}
 
 	console.log(newProps);
-	console.log(this.props);	
+	console.log(this.props);
     }*/
-   
+
 
   componentDidMount() {
       Animated.timing(                  // Animate over time
@@ -115,18 +118,18 @@ class ProfileScreen extends React.Component{
     return  (
         <View style={styles.containers}>
           {this.state.redirect?<Redirect to="/login" />:<View/>}
-	  
+
          <View style={styles.titleStlye}>
           <Text style={styles.titleTextStyle}>Profile</Text>
          </View>
          <View style={styles.loginCardStyle}>
            <Animated.View style={[{opacity: this.state.fadeAnim}]}>
-             <LoginStateCard name={this.state.name} email={this.state.email} type={this.state.type}  />	     
+             <LoginStateCard name={this.state.name} email={this.state.email} type={this.state.type}  />
            </Animated.View>
 
 	   {this.state.type=="student"?<View></View>:
            <Animated.View style={[{opacity: this.state.fadeAnim}]}>
-	     
+
              <Card
                title="My Class Lessons"
                titleStyle={styles.cardTitleStyle}

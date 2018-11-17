@@ -36,24 +36,24 @@
         "source": "/home/shath/.android/build-cache/67320c8874055b389395c425763f75166a387555/output/res/layout/notification_template_big_media_custom.xml"
     },
     {
-        "merged": "/Users/wKvin/Desktop/fyp2_react_native/android/app/build/intermediates/res/merged/debug/layout/notification_template_part_time.xml",
-        "source": "/Users/wKvin/.android/build-cache/1ce45ff58ca1ce277bb71491382d59bf3c4fce58/output/res/layout/notification_template_part_time.xml"
+        "merged": "/home/shath/Public/projects/fyp2_react_native/android/app/build/intermediates/res/merged/debug/layout/select_dialog_item_material.xml",
+        "source": "/home/shath/.android/build-cache/a42c08b3e6cb92ea53c419df2419fa688bf31ff3/output/res/layout/select_dialog_item_material.xml"
     },
     {
         "merged": "/Users/wKvin/Desktop/fyp2_react_native/android/app/build/intermediates/res/merged/debug/layout/abc_popup_menu_item_layout.xml",
         "source": "/Users/wKvin/.android/build-cache/a00aeee86f8b4462e974d489c6cc2d90d34bf126/output/res/layout/abc_popup_menu_item_layout.xml"
     },
     {
-        "merged": "/home/shath/Public/projects/fyp2_react_native/android/app/build/intermediates/res/merged/debug/layout/select_dialog_item_material.xml",
-        "source": "/home/shath/.android/build-cache/a42c08b3e6cb92ea53c419df2419fa688bf31ff3/output/res/layout/select_dialog_item_material.xml"
-    },
-    {
-        "merged": "/Users/wKvin/Desktop/fyp2_react_native/android/app/build/intermediates/res/merged/debug/layout/redbox_view.xml",
-        "source": "/Users/wKvin/.android/build-cache/324496e7252a5bb15876d6bd28e0ecc126adc455/output/res/layout/redbox_view.xml"
+        "merged": "/Users/wKvin/Desktop/fyp2_react_native/android/app/build/intermediates/res/merged/debug/layout/notification_template_part_time.xml",
+        "source": "/Users/wKvin/.android/build-cache/1ce45ff58ca1ce277bb71491382d59bf3c4fce58/output/res/layout/notification_template_part_time.xml"
     },
     {
         "merged": "/Users/wKvin/Desktop/fyp2_react_native/android/app/build/intermediates/res/merged/debug/layout/notification_media_action.xml",
         "source": "/Users/wKvin/.android/build-cache/8df79c45db5715023f2a1295778067d6edad1f13/output/res/layout/notification_media_action.xml"
+    },
+    {
+        "merged": "/Users/wKvin/Desktop/fyp2_react_native/android/app/build/intermediates/res/merged/debug/layout/redbox_view.xml",
+        "source": "/Users/wKvin/.android/build-cache/324496e7252a5bb15876d6bd28e0ecc126adc455/output/res/layout/redbox_view.xml"
     },
     {
         "merged": "/Users/wKvin/Desktop/fyp2_react_native/android/app/build/intermediates/res/merged/debug/layout/abc_action_mode_bar.xml",
@@ -92,12 +92,12 @@
         "source": "/Users/wKvin/.android/build-cache/324496e7252a5bb15876d6bd28e0ecc126adc455/output/res/layout/fps_view.xml"
     },
     {
-        "merged": "/home/shath/Public/projects/fyp2_react_native/android/app/build/intermediates/res/merged/debug/layout/abc_action_menu_layout.xml",
-        "source": "/home/shath/.android/build-cache/a42c08b3e6cb92ea53c419df2419fa688bf31ff3/output/res/layout/abc_action_menu_layout.xml"
-    },
-    {
         "merged": "/Users/wKvin/Desktop/fyp2_react_native/android/app/build/intermediates/res/merged/debug/layout/abc_list_menu_item_layout.xml",
         "source": "/Users/wKvin/.android/build-cache/a00aeee86f8b4462e974d489c6cc2d90d34bf126/output/res/layout/abc_list_menu_item_layout.xml"
+    },
+    {
+        "merged": "/home/shath/Public/projects/fyp2_react_native/android/app/build/intermediates/res/merged/debug/layout/abc_action_menu_layout.xml",
+        "source": "/home/shath/.android/build-cache/a42c08b3e6cb92ea53c419df2419fa688bf31ff3/output/res/layout/abc_action_menu_layout.xml"
     },
     {
         "merged": "/Users/wKvin/Desktop/fyp2_react_native/android/app/build/intermediates/res/merged/debug/layout/abc_popup_menu_header_item_layout.xml",
@@ -176,12 +176,12 @@
         "source": "/home/shath/.android/build-cache/a42c08b3e6cb92ea53c419df2419fa688bf31ff3/output/res/layout/abc_list_menu_item_layout.xml"
     },
     {
-        "merged": "/Users/wKvin/Desktop/fyp2_react_native/android/app/build/intermediates/res/merged/debug/layout/notification_template_big_media.xml",
-        "source": "/Users/wKvin/.android/build-cache/8df79c45db5715023f2a1295778067d6edad1f13/output/res/layout/notification_template_big_media.xml"
-    },
-    {
         "merged": "/home/shath/Public/projects/fyp2_react_native/android/app/build/intermediates/res/merged/debug/layout/abc_action_bar_view_list_nav_layout.xml",
         "source": "/home/shath/.android/build-cache/a42c08b3e6cb92ea53c419df2419fa688bf31ff3/output/res/layout/abc_action_bar_view_list_nav_layout.xml"
+    },
+    {
+        "merged": "/Users/wKvin/Desktop/fyp2_react_native/android/app/build/intermediates/res/merged/debug/layout/notification_template_big_media.xml",
+        "source": "/Users/wKvin/.android/build-cache/8df79c45db5715023f2a1295778067d6edad1f13/output/res/layout/notification_template_big_media.xml"
     },
     {
         "merged": "/home/shath/Public/projects/fyp2_react_native/android/app/build/intermediates/res/merged/debug/layout/notification_media_action.xml",

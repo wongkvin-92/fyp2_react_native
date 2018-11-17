@@ -1,12 +1,11 @@
 // redux tree List
-const INITIAL_STATE = {    
+const INITIAL_STATE = {
     period: {start_date: null, end_date:null},
     downloadProgress: 0.0,
     downloadState: "idle",  //idle <--> downloadingWeek/downloadSem
     syncState: "none", //none -> sync <-> unsync
     enrolledSubject: [],
     subjectList: {
-
     },
     semesterChecksum: null,
     weeklyChecksums: []

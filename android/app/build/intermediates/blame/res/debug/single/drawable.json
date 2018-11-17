@@ -80,20 +80,20 @@
         "source": "/home/shath/.android/build-cache/ff6ffa4c6c6ec19fd134576ec07f5b3007927581/output/res/drawable/common_google_signin_btn_text_dark_focused.xml"
     },
     {
-        "merged": "/home/shath/Public/projects/fyp2_react_native/android/app/build/intermediates/res/merged/debug/drawable/abc_ratingbar_small_material.xml",
-        "source": "/home/shath/.android/build-cache/a42c08b3e6cb92ea53c419df2419fa688bf31ff3/output/res/drawable/abc_ratingbar_small_material.xml"
-    },
-    {
         "merged": "/Users/wKvin/Desktop/fyp2_react_native/android/app/build/intermediates/res/merged/debug/drawable/common_google_signin_btn_icon_light_normal.xml",
         "source": "/Users/wKvin/.android/build-cache/edaa1bad125c1e1b3edffeb8574601d878d34e36/output/res/drawable/common_google_signin_btn_icon_light_normal.xml"
     },
     {
-        "merged": "/home/shath/Public/projects/fyp2_react_native/android/app/build/intermediates/res/merged/debug/drawable/common_google_signin_btn_icon_disabled.xml",
-        "source": "/home/shath/.android/build-cache/ff6ffa4c6c6ec19fd134576ec07f5b3007927581/output/res/drawable/common_google_signin_btn_icon_disabled.xml"
+        "merged": "/home/shath/Public/projects/fyp2_react_native/android/app/build/intermediates/res/merged/debug/drawable/abc_ratingbar_small_material.xml",
+        "source": "/home/shath/.android/build-cache/a42c08b3e6cb92ea53c419df2419fa688bf31ff3/output/res/drawable/abc_ratingbar_small_material.xml"
     },
     {
         "merged": "/home/shath/Public/projects/fyp2_react_native/android/app/build/intermediates/res/merged/debug/drawable/abc_btn_default_mtrl_shape.xml",
         "source": "/home/shath/.android/build-cache/a42c08b3e6cb92ea53c419df2419fa688bf31ff3/output/res/drawable/abc_btn_default_mtrl_shape.xml"
+    },
+    {
+        "merged": "/home/shath/Public/projects/fyp2_react_native/android/app/build/intermediates/res/merged/debug/drawable/common_google_signin_btn_icon_disabled.xml",
+        "source": "/home/shath/.android/build-cache/ff6ffa4c6c6ec19fd134576ec07f5b3007927581/output/res/drawable/common_google_signin_btn_icon_disabled.xml"
     },
     {
         "merged": "/Users/wKvin/Desktop/fyp2_react_native/android/app/build/intermediates/res/merged/debug/drawable/tooltip_frame_dark.xml",

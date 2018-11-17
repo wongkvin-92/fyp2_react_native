@@ -22,7 +22,7 @@ import RequestRescheduleScreen from './containers/RescheduleRequestScreen';
 //student Routes
 import EnrollScreen from './studentContainers/SenrollSubjectScreen';
 import SHomeScreen from './studentContainers/ShomeScreen';
-import Testing from './studentContainers/Testing';
+
 
 
 
@@ -36,8 +36,8 @@ export const lecturerTabRoutes = [
 export const studentTabRoutes = [
 
     {id: "home", label: "Home", component: SHomeScreen, logo:"home"},
-      {id: "testing", label: "Home", component: Testing, logo:"home"},
-    {id: "enroll", label: "Enroll", component: EnrollScreen, logo:"home"},
+
+    {id: "enroll", label: "Enroll", component: EnrollScreen, logo:"assignment"},
     {id: "profile", label: "Profile", component: ProfileScreen, logo:"face"}
 ];
 
