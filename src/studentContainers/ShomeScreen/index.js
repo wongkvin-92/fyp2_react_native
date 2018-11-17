@@ -316,16 +316,18 @@ if(hash(this.props.period) != hash(newProps.period)){
                 <Text style={styles.titleTextStyle}>Home</Text>
                 </View>
              </View>
+
+             {this.props.enrolledSubject.length == 0? <View><Text>Hello</Text></View>:
              <CustomAgenda
 
-		   doNothing={this.state.doNothing}
-		   style={{height: 30}}
-		   items={this.props.subjectList}
-		   loadItemsForMonth={this.loadItems.bind(this)}
-		   selected={this.state.selectedDate}
-		   onDayPress={(date)=>{this.setState({
-                       selectedDate :  new Date(date.year, date.month-1, date.day)
-		   });
+        		   doNothing={this.state.doNothing}
+        		   style={{height: 30}}
+        		   items={this.props.subjectList}
+        		   loadItemsForMonth={this.loadItems.bind(this)}
+        		   selected={this.state.selectedDate}
+        		   onDayPress={(date)=>{this.setState({
+                               selectedDate :  new Date(date.year, date.month-1, date.day)
+        		   });
              }}
              onDayChange = {(date) => {
                 this.setState({
@@ -370,6 +372,7 @@ if(hash(this.props.period) != hash(newProps.period)){
               todayTextColor:'#ffffff'
             }}
          />
+       }
 
         </View>
   );

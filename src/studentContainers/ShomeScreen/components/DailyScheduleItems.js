@@ -26,15 +26,18 @@ const DailyScheduleItemFunc = (props) => (
       <Text style={styles.scheduleContentStyle}>From {props.startTime} to {props.endTime}</Text>
       <Text> {props.newVenue}</Text>
       <View style={styles.canceBtnContainer}>
-	{props.isPermanant != false?<Text>Weekly</Text>:<Text>Replacement</Text>}
+	{props.isPermanant != false?<Text>Weekly</Text>:
+    <Text>Replacement / original Date {props.oldDateTime}</Text>}
       {props.isCancelled==false?
       <Text style={{color: "blue", fontWeight:"900"}}>
             Normal
-
       </Text>
         :
         <Text style={{color: "red", fontWeight:"900"}}>
-          Cancelled
+          Cancelled /
+           {props.replacementClass?
+          " Replacement class is "+props.replacementClass.newDateTime
+         :"No replacement"}
         </Text>
       }
       </View>

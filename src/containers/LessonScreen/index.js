@@ -75,8 +75,8 @@ class LessonScreen extends React.PureComponent{
       checked: false,
       showCancelButton: false,
       doNothing: false,
-      minDate: "2018-01-01",
-      maxDate: "2018-02-02"
+      minDate: "2018-10-07",
+      maxDate: "2018-12-11"
     };
     this.isLoading=false;
     this.lastDayObj = null;
@@ -320,9 +320,9 @@ class LessonScreen extends React.PureComponent{
                 });
               }}
                // Minimum date that can be selected, dates before minDate will be grayed out. Default = undefined
-               minDate={this.props.period.start_date}
+               minDate={this.state.minDate}
                // Maximum date that can be selected, dates after maxDate will be grayed out. Default = undefined
-               maxDate={this.props.period.end_date}
+               maxDate={this.state.maxDate}
                renderItem={(props)=> <DailyScheduleItem {...props} /> }
                renderEmptyDate={this.renderEmptyDate.bind(this)}
                rowHasChanged={this.rowHasChanged.bind(this)}

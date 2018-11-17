@@ -38,7 +38,11 @@ class HomeScreen extends React.Component{
   downloadList = (filter)=>{
     new LecturerAPI().displayCancelledList(
         filter,
-          (d) => this.setState({data: d})
+          (d) => {
+            console.log(d); //sort the datta Here
+            
+            this.setState({data: d});
+          }
     );
   }
 

@@ -6,13 +6,5 @@
     {
         "merged": "/Users/wKvin/Desktop/fyp2_react_native/android/app/build/intermediates/res/merged/debug/mipmap-mdpi/ic_launcher_round.png",
         "source": "/Users/wKvin/Desktop/fyp2_react_native/android/app/src/main/res/mipmap-mdpi/ic_launcher_round.png"
-    },
-    {
-        "merged": "/home/shath/Public/projects/fyp2_react_native/android/app/build/intermediates/res/merged/debug/mipmap-mdpi/ic_launcher.png",
-        "source": "/home/shath/Public/projects/fyp2_react_native/android/app/src/main/res/mipmap-mdpi/ic_launcher.png"
-    },
-    {
-        "merged": "/home/shath/Public/projects/fyp2_react_native/android/app/build/intermediates/res/merged/debug/mipmap-mdpi/ic_launcher_round.png",
-        "source": "/home/shath/Public/projects/fyp2_react_native/android/app/src/main/res/mipmap-mdpi/ic_launcher_round.png"
     }
 ]

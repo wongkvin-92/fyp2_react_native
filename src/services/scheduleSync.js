@@ -58,6 +58,7 @@ export class StudentScheduleSystem{
             return weekDay[convertToDate(strDate).getDay()];
 	};
 
+
 	let startDate = convertToDate(period.start_date);
 	let endDate  = convertToDate(period.end_date);
 
@@ -85,6 +86,7 @@ export class StudentScheduleSystem{
             cancelledClasses[el] = allSchedule.filter(d =>
 						      d.oldDateTime != null && d.oldDateTime == el
 						     ).map(e => parseInt(e.classID));
+
 	}
 		       );
 	//let finalSchedule = {...permenantSchedule, ...replacementClasses};
@@ -100,6 +102,11 @@ export class StudentScheduleSystem{
 		//jCopy['isCancelled'] = cancelledClasses[k].includes(parseInt(classID));
 		jCopy['isCancelled'] = isCancelled;
 		jCopy['curDate'] = k;
+
+    if(finalSchedule[j['oldDateTime']] && finalSchedule[j['oldDateTime']].find(e => e.classID == j['classID']))
+      finalSchedule[j['oldDateTime']].find(e => e.classID == j['classID'])["replacementClass"] = j;
+  //  jCopy['hasReplacementClass'] = finalSchedule[j['oldDateTime']];// = "hasReplacementClass";
+
 		//let a = j;
 		//j['wKvin'] = 'here';
     		//finalSchedule[k][j]['isCancelled'] = cancelledClasses[k].indexOf(parseInt(finalSchedule[k][j]['classID'])) >= 0; // finalSchedule[k][j] in cancelledClasses;

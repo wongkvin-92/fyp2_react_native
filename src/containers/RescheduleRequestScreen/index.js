@@ -91,6 +91,7 @@ class RescheduleRequest extends React.Component{
                       fdateString, ftimeString,
                       (r) => {
                           alert(r.msg);
+              
                       }
                     );
                 }}
