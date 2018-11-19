@@ -18,7 +18,7 @@ const configure = (sharedObj) => {
      // required on iOS only
      notification.finish(PushNotificationIOS.FetchResult.NoData);
    },
-   
+
 // IOS ONLY (optional): default: all - Permissions to register.
    permissions: {
      alert: true,
