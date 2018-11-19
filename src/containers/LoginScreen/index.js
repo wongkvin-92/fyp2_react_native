@@ -149,6 +149,7 @@ componentDidMount() {
         this.props.asyncStore('period', JSON.stringify(response.sem));
         this.props.setPeriod(response.sem);
 		    this.props.dispatchLogin(response.credentials);
+        alert(response.msg);
 		}else{
 		    if(this.state.email ==""){
 			this.wrongInputValidate();

@@ -18,6 +18,12 @@ export const styles = StyleSheet.create({
     color: "blue",
     fontSize:20,
   },
+  cardPickerStlye: {
+      marginTop: 30,
+    borderRadius: 6,
+    padding: 10,
+    marginBottom: 10
+  },
   titleStlye:{
     paddingTop: 16,
     paddingBottom:16,

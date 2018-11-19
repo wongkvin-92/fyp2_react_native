@@ -317,7 +317,15 @@ if(hash(this.props.period) != hash(newProps.period)){
                 </View>
              </View>
 
-             {this.props.enrolledSubject.length == 0? <View><Text>Hello</Text></View>:
+             {this.props.enrolledSubject.length == 0?
+
+                  <Card
+                    containerStyle={styles.cardPickerStlye}
+                  >
+                    <Text style={{color: "red", fontWeight:"900"}}>No Cancellation or Rescheduling been made!</Text>
+                 </Card>
+
+               :
              <CustomAgenda
 
         		   doNothing={this.state.doNothing}

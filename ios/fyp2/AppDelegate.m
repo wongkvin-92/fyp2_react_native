@@ -4,7 +4,7 @@
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  */
-
+#import <React/RCTPushNotificationManager.h>
 #import "AppDelegate.h"
 
 #import <React/RCTBundleURLProvider.h>
@@ -12,11 +12,8 @@
 
 @implementation AppDelegate
 
-<<<<<<< Updated upstream
 
 
-=======
->>>>>>> Stashed changes
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
   NSURL *jsCodeLocation;
@@ -37,7 +34,6 @@
   return YES;
 }
 
-<<<<<<< Updated upstream
 #pragma mark - Handling URLs
 
 // Required to register for notifications
@@ -67,6 +63,4 @@ fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler
   [RCTPushNotificationManager didReceiveLocalNotification:notification];
 }
 
-=======
->>>>>>> Stashed changes
 @end
