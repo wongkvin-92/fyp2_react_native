@@ -59,7 +59,7 @@ export class StudentScheduleSystem{
 	};
 
 	
-	if(period.start_date == null || period.end_date == false) { //bugfix
+	if(period.start_date == null || period.end_date == null) { //bugfix
 	    return;
 	}
 
