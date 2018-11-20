@@ -25,7 +25,13 @@ state={
 };
 */
 class SplashScreen extends Component{
-
+	runLecturerStartup(){
+	    this.props.asyncLoad("semesterChecksum", c => {
+		console.log("SEMESTER CHECKSUM LOADED", c);
+		//this.props.setSemesterChecksum(c);
+	    });
+	}
+	
 	runStudentStartup(){
 	    //clear data for testing purpose
 	    //this.props.asyncStore('semesterChecksum', "");
@@ -142,18 +148,22 @@ class SplashScreen extends Component{
 
 
       runStartup(credentials){
-				console.log("Starting up screen");
-    	  	if(credentials.type == "student"){
-	      		console.log("Running startup");
+	  console.log("Starting up screen");
+    	  if(credentials.type == "student"){
+	      console.log("Running student startup");
 
-    	      	this.runStudentStartup();
-			      	new UserAPI().downloadSemester(period => {
-								  console.log("period was received as ", period);
-								  this.props.setPeriod(period);
-								  this.props.asyncStore('period', JSON.stringify(period));
-							 });
+    	      this.runStudentStartup();
+	      new UserAPI().downloadSemester(period => {
+		  console.log("period was received as ", period);
+		  this.props.setPeriod(period);
+		  this.props.asyncStore('period', JSON.stringify(period));
+	      });
 
-	  	 		}
+	  }
+	  if(credentials.type == "lecturer"){
+	      this.runLecturerStartup();
+	      console.log("Running lecturer startup");	      
+	  }
       }
 
 
@@ -227,9 +237,11 @@ class SplashScreen extends Component{
 const mapStateToProps = (state)=> {
     return {
 	loginStateReducer:   state.loginStateReducer,
-	studentStateReducer: state.studentStateReducer
+	studentStateReducer: state.studentStateReducer,
+	lecturerStateReducer: state.lecturerStateReducer
     };
-}
+};
+
 const mapDispatchToProps = dispatch => {
     return {
         setCredentials: (c) => dispatch({type: "LOGIN", credentials: c}),
@@ -242,6 +254,7 @@ const mapDispatchToProps = dispatch => {
 	sync: () => dispatch({type: "SYNC_DONE"})
     };
 };
+
 
 export default connect(mapStateToProps, mapDispatchToProps)(SplashScreen);
 //export default SplashScreeen;

@@ -143,11 +143,12 @@ componentDidMount() {
 		//alert(response);
 		if(response.result == true){
 		    this.props.login();
+		    
         let credential = response.credentials;
         let period = response.sem;
-        this.props.asyncStore('credentials', JSON.stringify(credential));
-        this.props.asyncStore('period', JSON.stringify(response.sem));
-        this.props.setPeriod(response.sem);
+		    this.props.asyncStore('credentials', JSON.stringify(credential));
+		    this.props.asyncStore('period', JSON.stringify(response.sem));
+		    this.props.setPeriod(response.sem);
 		    this.props.dispatchLogin(response.credentials);
         alert(response.msg);
 		}else{

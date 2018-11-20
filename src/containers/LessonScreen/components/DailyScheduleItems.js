@@ -25,53 +25,51 @@ const DailyScheduleItemFunc = (props) => (
       <Text style={styles.scheduleContentStyle}>From {props.startTime} to {props.endTime}</Text>
 
       <View style={styles.canceBtnContainer}>
+	{props.isPermanant?
+	    props.isCancelled=="0"?
+             <CheckBox
+		   title='Click Here'
+		   value={props.checked}
+		   checked={props.checked}
+		   onPress = {()=> {
+		       //
+		       props.toggleTick();
+		       let temp1  = props.weeklySchedule;
+		       let keyList = Object.keys(temp1);
+		       let searchMap = keyList.map(e=>temp1[e]);
+		       let searchBuffer = [].concat.apply([], searchMap);
 
-      {props.isCancelled=="0"?
-        <CheckBox
-          title='Click Here'
-          value={props.checked}
-          checked={props.checked}
-          onPress = {()=> {
-            //
-            props.toggleTick();
-            let temp1  = props.weeklySchedule;
-            let keyList = Object.keys(temp1);
-            let searchMap = keyList.map(e=>temp1[e]);
-            let searchBuffer = [].concat.apply([], searchMap);
+		       //let subject = searchBuffer.find(e => e.classID == props.classID);
+		       let subject = props.subject;
 
-            //let subject = searchBuffer.find(e => e.classID == props.classID);
-            let subject = props.subject;
-
-            if(subject){
-              if(props.cancelListFromState.hasOwnProperty(hash(subject))){
-                props.removeSubject(subject);
-              }else{
-                props.addSubject(subject);
-              }
-              props.checkSubject();
-            }
+		       if(subject){
+			   if(props.cancelListFromState.hasOwnProperty(hash(subject))){
+			       props.removeSubject(subject);
+			   }else{
+			       props.addSubject(subject);
+			   }
+			   props.checkSubject();
+		       }
 
 
-            //else
-          //    console.error("Sorry, error subject not found in the state tree");
+		       //else
+		       //    console.error("Sorry, error subject not found in the state tree");
 
-                    /*let weekSchedule = Object.keys(props.weeklySchedule).map(e=>props.weeklySchedule[e])；
-                    let allClasses = [].concat([], weekSchedule);
-                    let subject = allClasses.find(e => e.classID == props.classID);
-                    if(subject){
-                      props.addSubject(subject);
-                    }else
-                      console.error("Sorry, error occured");*/
-          }}
-        />
+                       /*let weekSchedule = Object.keys(props.weeklySchedule).map(e=>props.weeklySchedule[e])；
+			 let allClasses = [].concat([], weekSchedule);
+			 let subject = allClasses.find(e => e.classID == props.classID);
+			 if(subject){
+			 props.addSubject(subject);
+			 }else
+			 console.error("Sorry, error occured");*/
+		   }}
+		   />
 
-        :
-        <Text style={{color: "red", fontWeight:"900"}}>
-        Cancelled
-        </Text>
-
-      }
-
+		   :
+		   <Text style={{color: "red", fontWeight:"900"}}>
+			 Cancelled
+		       </Text>		       
+		   :<Text style={{color: "blue", fontWeight:"800"}}>Replacement Class</Text>}
       </View>
      </Card>
     </View>
@@ -84,11 +82,11 @@ class DailyScheduleItem extends React.PureComponent{
     let subjKeys = ["classID", "type", "subjectID", "subjectName",
                   "startTime", "endTime", "isCancelled", "curDate"];
     let subj = {};
-    subjKeys.forEach(key => subj[key] = props[key]);
-    let isChecked  = props.cancelList.hasOwnProperty(hash(subj));
-    this.state = {checked: isChecked,
-                cancelList: [],
-                subject: subj
+      subjKeys.forEach(key => subj[key] = props[key]);
+      let isChecked  = props.cancelList.hasOwnProperty(hash(subj));
+      this.state = {checked: isChecked,
+                    cancelList: [],
+                    subject: subj
               };
   }
 
@@ -99,7 +97,7 @@ class DailyScheduleItem extends React.PureComponent{
   }
   render(){
       return  <DailyScheduleItemFunc
-       toggleTick={()=> this.setState({checked: !this.state.checked}) }
+      toggleTick={()=> this.setState({checked: !this.state.checked}) }
       checked={this.state.checked} {...this.props}
       cancelListFromState={this.state.cancelList}
       subject={this.state.subject}

@@ -16,6 +16,20 @@ export class LecturerAPI extends UserAPI{
 	    .then(r => onSuccess(r));
     }
 
+    downloadSchedule(onSuccess){
+	let action = "lecturer/all/schedule/";
+	this.getRequest(action)
+	    .then(onSuccess)
+	    .catch(err => console.log("Schedule download failed", err));
+    }
+
+    downloadScheduleHash(onSuccess){
+	let action = "lecturer/all/schedule/hash/";
+	this.getRequest(action)
+	    .then(onSuccess)
+	    .catch(err => console.log("Schedule hash download failed", err));
+    }    
+
     deleteCancellationRequest(id, callback){
       this.deleteRequest("reschedule/"+id+"/cancel/remove/").
           then(r=>callback(r))
