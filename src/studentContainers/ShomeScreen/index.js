@@ -322,9 +322,8 @@ if(hash(this.props.period) != hash(newProps.period)){
                   <Card
                     containerStyle={styles.cardPickerStlye}
                   >
-                    <Text style={{color: "red", fontWeight:"900"}}>No Cancellation or Rescheduling been made!</Text>
+                    <Text style={{color: "red", fontWeight:"900"}}>Please enroll a subject first</Text>
                  </Card>
-
                :
              <CustomAgenda
 
@@ -339,7 +338,7 @@ if(hash(this.props.period) != hash(newProps.period)){
              }}
              onDayChange = {(date) => {
                 this.setState({
-                  selectedDate: new Date(date.year, date.month-1, date.day),
+                  selectedDate: new Date(date.year, date.month-1, date.day)
                 });
               }}
                // Minimum date that can be selected, dates before minDate will be grayed out. Default = undefined

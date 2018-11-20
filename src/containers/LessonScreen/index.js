@@ -19,10 +19,12 @@ import {
 import {Redirect, Link} from 'react-router-native';
 
 import { Calendar, CalendarList, Agenda } from 'react-native-calendars';
-import {LecturerAPI} from "../../API";
+import {LecturerAPI, StudentAPI} from "../../API";
 import {UserAPI} from "../../API";
 import {styles} from './style';
 import DailyScheduleItem from './components/DailyScheduleItems';
+
+import {scheduleSyncServices} from '../../services';
 
 const cancelLesson = (cancelList, callback) => {
   let dataList = Object.keys(cancelList).map(i => ({"classID": cancelList[i].classID, "cancelDate": cancelList[i].curDate}) )
@@ -65,7 +67,7 @@ const confirmCancel = (cancelList, callback) => {
 class LessonScreen extends React.PureComponent{
   constructor(props){
     super(props);
-
+      this.scheduleService = new scheduleSyncServices.StudentScheduleSystem({});
     let today = this.formatDate(new Date());
     this.state={
 
@@ -90,10 +92,43 @@ class LessonScreen extends React.PureComponent{
       })
     )
   }
-  componentDidMount(){
-    this.downloadSemStartEnd();
-    //this.setState
+
+    //Download the schedule for the lecturer
+    downloadSchedule(){
+	new LecturerAPI().downloadSchedule( schedule => 
+					    this.scheduleService.generateSchedule(schedule, {start_date: "2018-08-10", end_date: "2018-12-28" }, e => {
+						this.setState({items: e});
+						console.log("Schedule", e);
+					    })
+					  );
+					    
+    }
+    
+    componentDidMount(){
+	//new LecturerAPI().downloadScheduleHash( hash => {
+	//    console.log("Hash downloaded from server = ", hash);
+	//});
+	this.downloadSchedule();
+      //this.downloadSemStartEnd();
+     // new StudentAPI().downloadAllSubjects(['bit100'],
+	//				   schedule =>
+	//				   {
+
+					       //console.log("schedule", schedule);
+
+					       /*
+					       this.scheduleService.generateSchedule(schedule, {start_date: "2018-08-10", end_date: "2018-12-28" }, e => {
+					       this.setState({items: e});
+					       console.log("Schedule", e);
+					       });*/
+	//				   }
+      //				  );
+      
+      //this.setState
   }
+    
+
+    
   componentWillReceiveProps(newProps){
 
     if(newProps.period && newProps.period != this.props.period ){
@@ -240,7 +275,9 @@ class LessonScreen extends React.PureComponent{
   loadItems(dayObj) {
     this.lastDayObj = dayObj;
     //console.log(dayObj.toDateString());
-    this.loadWeek(new Date(dayObj.timestamp));
+      //this.loadWeek(new Date(dayObj.timestamp));
+
+      
     //this.loadMonth(new Date(this.state.selectedDate));
   }
 

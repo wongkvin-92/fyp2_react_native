@@ -28,7 +28,7 @@ export class StudentScheduleSystem{
     };
 
 
-
+    /*
     createEmptyDates(start, end){
 	let d1 = start.split("-").map(e=>parseInt(e));
         let d2 = end.split("-").map(e=>parseInt(e));
@@ -40,13 +40,13 @@ export class StudentScheduleSystem{
         let dateArr = this._getDays(new Date(startDate), new Date(endDate));
 	dateArr.forEach( el => emptySchedules[el]=[]);
 	return emptySchedules;
-    }
+    }*/
 
 
         //new function call it in componentdidmount
     //updateSubjectSem = (success) =>
     generateSchedule(allSchedule, period, success=null){
-
+	
 	let convertToDate = (strDate) => {
             let d = strDate.split("-").map(x => parseInt(x));
             return new Date(d[0], d[1]-1, d[2]);
@@ -58,9 +58,14 @@ export class StudentScheduleSystem{
             return weekDay[convertToDate(strDate).getDay()];
 	};
 
+	
+	if(period.start_date == null || period.end_date == null) { //bugfix
+	    return;
+	}
 
 	let startDate = convertToDate(period.start_date);
 	let endDate  = convertToDate(period.end_date);
+
 
 	let dateArr = this._getDays(new Date(startDate), new Date(endDate));
 
