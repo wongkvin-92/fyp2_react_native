@@ -1327,6 +1327,7 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-vector-icons/RNVectorIconsManager",
+					"\"$(SRCROOT)/node_modules/react-native/React\"",
 				);
 				INFOPLIST_FILE = fyp2Tests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -1353,6 +1354,7 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-vector-icons/RNVectorIconsManager",
+					"\"$(SRCROOT)/node_modules/react-native/React\"",
 				);
 				INFOPLIST_FILE = fyp2Tests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;

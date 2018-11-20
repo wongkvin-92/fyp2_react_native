@@ -152,33 +152,31 @@ componentDidMount() {
         alert(response.msg);
 		}else{
 		    if(this.state.email ==""){
-			this.wrongInputValidate();
-			this.setState({
-			    errorMsg: response.msg,
-			    error: true
-			});
-
-		    }
-
+    			this.wrongInputValidate();
+    			this.setState({
+    			    errorMsg: response.msg,
+    			    error: true
+			    });
+        }
 		    else if(this.state.password ==""){
-			this.correctInputValidate();
-			this.wrongInputValidate2();
-			this.setState({
-			    errorMsg:"",
-			    errorMsg2: response.msg,
-			    error2: true
-			});
+    			this.correctInputValidate();
+    			this.wrongInputValidate2();
+    			this.setState({
+    			    errorMsg:"",
+    			    errorMsg2: response.msg,
+    			    error2: true
+			   });
 		    }
 		    else{
-			//console.log("ERROR", response);
-			//errorMsg2: r.msg;
-			this.setState({
-			    errorMsg:"",
-			    errorMsg2: response.msg,
-			    error2: true
-			});
-		    }
-		}
+    			//console.log("ERROR", response);
+    			//errorMsg2: r.msg;
+    			this.setState({
+    			    errorMsg:"",
+    			    errorMsg2: response.msg,
+    			    error2: true
+    			});
+		     }
+       }
 	    });
     }
 

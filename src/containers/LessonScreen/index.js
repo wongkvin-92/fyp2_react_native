@@ -308,16 +308,14 @@ class LessonScreen extends React.PureComponent{
               doNothing={this.state.doNothing}
               style={{height: 30}}
                items={this.state.items}
-               loadItemsForMonth={this.loadItems.bind(this)}
+
                selected={this.state.selectedDate}
                onDayPress={(date)=>{this.setState({
                  selectedDate :  new Date(date.year, date.month-1, date.day)
                })
              }}
-             onDayChange = {(date) => {
-                this.setState({
-                  selectedDate: new Date(date.year, date.month-1, date.day),
-                });
+             onDayChange = {() => {
+
               }}
                // Minimum date that can be selected, dates before minDate will be grayed out. Default = undefined
                minDate={this.state.minDate}
@@ -327,6 +325,7 @@ class LessonScreen extends React.PureComponent{
                renderEmptyDate={this.renderEmptyDate.bind(this)}
                rowHasChanged={this.rowHasChanged.bind(this)}
                // markingType={'period'}
+
                markingType={'multi-dot'}
                markedDates={{
                //    '2017-05-08': {textColor: '#666'},

@@ -350,6 +350,7 @@ if(hash(this.props.period) != hash(newProps.period)){
                renderEmptyDate={this.renderEmptyDate.bind(this)}
                rowHasChanged={this.rowHasChanged.bind(this)}
                // markingType={'period'}
+
                markingType={'multi-dot'}
                markedDates={{
                //    '2017-05-08': {textColor: '#666'},
