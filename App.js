@@ -29,6 +29,7 @@ import {
 //import { PersistGate } from 'redux-persist/integration/react';
 import {Provider} from 'react-redux';
 import store from "./src/store";
+import DeviceInfo from 'react-native-device-info';
 
 import { pushNotifications, scheduleSyncServices } from './src/services';
 
@@ -98,13 +99,16 @@ class MainApp extends React.Component {
 
     constructor(p){
     	super(p);
+      this.sharedObj = sharedObj;
       sharedObj.onNotification = ()=>{console.log("Notification")}
     	this.state = {loading: false, token: null, myKey: null};
     }
 
-    registerToken = ()=> new UserAPI().registerToken(sharedObj.token, ()=>console.log("Token registered"));
+    registerToken = ()=> new UserAPI().registerToken(this.sharedObj.token, ()=>console.log("Token registered"));
 
     componentDidMount(){
+      //this.registerToken();
+
 	/*let g = new scheduleSyncServices.StudentScheduleSystem();
 	console.log("loading notification service ", pushNotifications);
 	console.log("loading student service", scheduleSyncServices);*/
@@ -147,6 +151,7 @@ class MainApp extends React.Component {
                     asyncLoad:this.retrieveData,
                     addEventListener: this.addEventListener,
                     setLogin: this.setLogin,
+                    registerToken: this.registerToken,
                     ...this.state,
 		               studentService: studentService
               }}

@@ -1,12 +1,16 @@
 import API from './base';
+import DeviceInfo from 'react-native-device-info';
 
 export class UserAPI extends API{
-    registerToken(token, success, failure=(r)=>{console.err(r);}){
+    registerToken(token, success, failure=(r)=>{console.error(r);}){
 
-      console.log("Registering token");
-      console.log(token);
+      let postData = {token: token.token, devid: DeviceInfo.getUniqueID()};
+      console.log("Register post data", postData);
+
 	this.postRequest("device/",
-			 {body: JSON.stringify(token) }
+			 {
+         body: JSON.stringify(postData)
+       }
 			)
 	    .then(r => success(r))
 	    .catch(r => failure(r));
@@ -26,7 +30,7 @@ export class UserAPI extends API{
 	    .then(r => onSuccess(r));
     }
 
-    logout(success, failure=()=>{console.log("Logout failed")}){	
+    logout(success, failure=()=>{console.log("Logout failed")}){
       let action = "logout/";
 	fetch(this.host+action, {credentials: "same-origin"})
 	    .then(()=>{
@@ -44,7 +48,7 @@ export class UserAPI extends API{
             else
 		onFailure(r);
         }).catch( (err) => onFailure(err));
-    }    
+    }
 
     _getDays(s, e) {
     var a = [];

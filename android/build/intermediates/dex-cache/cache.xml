@@ -93,6 +93,15 @@
     </item>
     <item
         is-multidex="false"
+        jar="/Users/wKvin/Desktop/fyp2_react_native/node_modules/react-native-device-info/android/build/intermediates/bundles/default/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.3"
+        sha1="af80c8ef8cbb3c0aa623b6f7d67d50008e5f03de">
+        <dex dex="/Users/wKvin/Desktop/fyp2_react_native/android/app/build/intermediates/pre-dexed/debug/classes_dc0218f961b491afb661aa570d543b447b6de512.jar" />
+    </item>
+    <item
+        is-multidex="false"
         jar="/Users/wKvin/.android/build-cache/edaa1bad125c1e1b3edffeb8574601d878d34e36/output/jars/classes.jar"
         jumboMode="false"
         optimize="true"
