@@ -191,24 +191,27 @@ class ShomeScreen extends React.PureComponent{
           //UPDATE REDUX TREE tomorr       });
     }
 */
+/*componentWillMount(){
+  console.log("MOUNTING STUDENT HOMESCREEN ", this.props);
+}*/
 
- componentDidMount(){
+/* componentDidMount(){
    if(this.props.period.start_date){
      this.setState({minDate: this.props.period.start_date, maxDate: this.props.period.end_date});
 
-     console.log("Mounting, subject list is:", this.period, this.props.enrolledSubject);
+     console.log("Mounting, subject list is:", this.props.period, this.props.enrolledSubject);
      this.downloadAllSubjects(this.props.period, this.props.enrolledSubject, this.props.semesterChecksum);
          this.props.addEventListener('refreshSchedule', ()=>{
            console.log("ComponentDidMount.refreshSchedule(): Downloading all subjects again...");
            this.downloadAllSubjects(this.props.period, this.props.enrolledSubject, this.props.semesterChecksum);
         });
   }
- }
+}*/
+
 
     componentWillReceiveProps(newProps){
         if(newProps.period && newProps.period != this.props.period ){
-            console.log("Period changed");
-            console.log(newProps.period);
+            console.log("Period changed", newProps.period);
         	    this.setState({minDate: newProps.period.start_date,
         			   maxDate: newProps.period.end_date
         			  });
@@ -353,9 +356,9 @@ if(hash(this.props.period) != hash(newProps.period)){
                 });
               }}
                // Minimum date that can be selected, dates before minDate will be grayed out. Default = undefined
-               minDate={this.state.minDate}
+               minDate={this.props.period.start_date}
                // Maximum date that can be selected, dates after maxDate will be grayed out. Default = undefined
-               maxDate={this.state.maxDate}
+               maxDate={this.props.period.end_date}
                renderItem={(props)=> <DailyScheduleItem {...props} /> }
                renderEmptyDate={this.renderEmptyDate.bind(this)}
                rowHasChanged={this.rowHasChanged.bind(this)}

@@ -95,7 +95,7 @@ class LessonScreen extends React.PureComponent{
 
     //Download the schedule for the lecturer
     downloadSchedule(){
-	new LecturerAPI().downloadSchedule( schedule =>
+	     new LecturerAPI().downloadSchedule( schedule =>
 					    this.scheduleService.generateSchedule(schedule, {start_date: this.state.minDate, end_date: this.state.maxDate }, e => {
 						this.setState({items: e});
 						console.log("Schedule", e);
@@ -105,6 +105,9 @@ class LessonScreen extends React.PureComponent{
     }
 
     componentDidMount(){
+      this.props.addEventListener( 'updateLecSchedule', ()=>{
+        this.downloadSchedule();
+      });
 	//new LecturerAPI().downloadScheduleHash( hash => {
 	//    console.log("Hash downloaded from server = ", hash);
 	//});

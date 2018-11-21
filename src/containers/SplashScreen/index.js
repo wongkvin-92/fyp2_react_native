@@ -31,7 +31,7 @@ class SplashScreen extends Component{
 		//this.props.setSemesterChecksum(c);
 	    });
 	}
-	
+
 	runStudentStartup(){
 	    //clear data for testing purpose
 	    //this.props.asyncStore('semesterChecksum', "");
@@ -51,13 +51,13 @@ class SplashScreen extends Component{
 	    });
 
 	    this.props.asyncLoad("semesterChecksum", c => {
-		console.log("SEMESTER CHECKSUM LOADED", c);
+		//console.log("SEMESTER CHECKSUM LOADED", c);
 		this.props.setSemesterChecksum(c);
 	    });
 
 	    this.props.asyncLoad("period", p => {
-		let period = JSON.parse(p);
-		this.props.setPeriod(period);
+				let period = JSON.parse(p);
+				this.props.setPeriod(period);
 	    });
 
 	    //Load subjectList
@@ -148,21 +148,25 @@ class SplashScreen extends Component{
 
 
       runStartup(credentials){
-	  console.log("Starting up screen");
+	  		console.log("Starting up screen");
     	  if(credentials.type == "student"){
-	      console.log("Running student startup");
+			      console.log("Running student startup");
+		    	      this.runStudentStartup();  //Load data from async AsyncStorage
 
-    	      this.runStudentStartup();
-	      new UserAPI().downloadSemester(period => {
-		  console.log("period was received as ", period);
-		  this.props.setPeriod(period);
-		  this.props.asyncStore('period', JSON.stringify(period));
-	      });
+		/*
+			     new UserAPI().downloadSemester(period => {
+				  		console.log("period was received as ", period, this.props.studentStateReducer.period);
+							if( JSON.stringify(this.props.studentStateReducer.period) != JSON.stringify(period) )
+							{
+								this.props.setPeriod(period);
+				  			this.props.asyncStore('period', JSON.stringify(period));
+							}
+			      });*/
 
-	  }
+			  }
 	  if(credentials.type == "lecturer"){
 	      this.runLecturerStartup();
-	      console.log("Running lecturer startup");	      
+	      console.log("Running lecturer startup");
 	  }
       }
 
@@ -183,7 +187,7 @@ class SplashScreen extends Component{
 
 			//Load credentials first
 			this.props.asyncLoad("credentials", (credentials) => {
-				console.log("Credentials loaded as ", credentials);
+				console.log("Credentials loaded as ", credentials);  //In android sometimes it stops here @Issue: ASYNCSTORAGE BUG
 					if(credentials == null || credentials == "null")
 						console.log("Credentials are empty");
 			    else{

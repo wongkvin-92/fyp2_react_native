@@ -58,7 +58,7 @@ const studentService = new scheduleSyncServices.StudentScheduleSystem(sharedObj)
 class MainApp extends React.Component {
     storeData = async (key, value, onSuccess= () => {}) =>{
       	try {
-      	    console.log("Saving "+key);
+      	    console.log("Saving ",key);
                   await AsyncStorage.setItem('@MySuperStore:'+key, value);
                   if(onSuccess!=null)
       		onSuccess();
@@ -70,9 +70,10 @@ class MainApp extends React.Component {
 
     retrieveData = async (key, onRetrieved) => {
 	try {
-	    console.log("Loading "+key);
+	    console.log("Loading ",key);
             const value = await AsyncStorage.getItem('@MySuperStore:'+key);
-	    console.log("successfully loaded");
+            console.log("value = "+ value);
+      console.log("successfully loaded", JSON.parse(value) );
         //this.setState({myKey: value});
         onRetrieved(value);
       } catch (error) {
@@ -115,6 +116,7 @@ class MainApp extends React.Component {
     addEventListener(name, func){
         sharedObj['events'] = (typeof(sharedObj['events']) == "undefined")? {}: sharedObj['events'];
         sharedObj['events'][name] = func;
+        //console.log("Adding event listener ", name, sharedObj);
     }
 
     login = ()=>{

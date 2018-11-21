@@ -1,4 +1,4 @@
-const artisan = "192.168.0.81";
+const artisan = "192.168.0.86";
 const myHome = "192.168.0.189";
 const mcdKotaDam = "192.168.182.251";
 const mcdDamansara2 ="192.168.182.246";
@@ -10,7 +10,7 @@ const qi ="192.168.0.6";
 const srvHome = "192.168.0.142";
 const coffee = "192.168.0.198";
 const kpd = "10.100.193.102";
-const host = help;
+const host = artisan;
 
 const port = 80;
 const path = "fypBackEnd";

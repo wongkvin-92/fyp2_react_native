@@ -47,8 +47,8 @@ class LoginView extends React.Component{
   };
 
     componentWillReceiveProps(newProps){
-	if(newProps.isLoggedIn != this.props.isLoggedIn){
-	    this.setState({redirect: newProps.isLoggedIn});
+	if(newProps.loginStateReducer.isLoggedIn != this.props.loginStateReducer.isLoggedIn){
+	    this.setState({redirect: newProps.loginStateReducer.isLoggedIn});
 	}
     }
 
@@ -144,8 +144,13 @@ componentDidMount() {
         let credential = response.credentials;
         let period = response.sem;
 		    this.props.asyncStore('credentials', JSON.stringify(credential));
-		    this.props.asyncStore('period', JSON.stringify(response.sem));
-		    this.props.setPeriod(response.sem);
+
+        if( JSON.stringify(this.props.studentStateReducer.period) != JSON.stringify(response.sem) )
+        {
+          this.props.asyncStore('period', JSON.stringify(period));
+          this.props.setPeriod(response.sem);
+        }
+
 		    this.props.dispatchLogin(response.credentials);
         alert(response.msg);
 		}else{
@@ -355,7 +360,10 @@ const styles = StyleSheet.create({
   }
 });
 
-const mapStateToProps = (state) => state.loginStateReducer;
+const mapStateToProps = (state) => ({
+  loginStateReducer: state.loginStateReducer,
+  studentStateReducer: state.studentStateReducer
+});
 const mapDispatchToProps = (dispatch) => {
   return {
       dispatchLogin: (c) => dispatch({type: "LOGIN", credentials: c}),
