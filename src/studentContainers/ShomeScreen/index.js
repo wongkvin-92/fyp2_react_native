@@ -191,22 +191,23 @@ class ShomeScreen extends React.PureComponent{
           //UPDATE REDUX TREE tomorr       });
     }
 */
-/*componentWillMount(){
+componentWillMount(){
   console.log("MOUNTING STUDENT HOMESCREEN ", this.props);
-}*/
+  this.props.addEventListener('refreshSchedule', ()=>{
+    console.log("ComponentDidMount.refreshSchedule(): Downloading all subjects again...");
+    this.downloadAllSubjects(this.props.period, this.props.enrolledSubject, this.props.semesterChecksum);
+ });
+}
 
-/* componentDidMount(){
+componentDidMount(){
    if(this.props.period.start_date){
      this.setState({minDate: this.props.period.start_date, maxDate: this.props.period.end_date});
 
      console.log("Mounting, subject list is:", this.props.period, this.props.enrolledSubject);
      this.downloadAllSubjects(this.props.period, this.props.enrolledSubject, this.props.semesterChecksum);
-         this.props.addEventListener('refreshSchedule', ()=>{
-           console.log("ComponentDidMount.refreshSchedule(): Downloading all subjects again...");
-           this.downloadAllSubjects(this.props.period, this.props.enrolledSubject, this.props.semesterChecksum);
-        });
+
   }
-}*/
+}
 
 
     componentWillReceiveProps(newProps){

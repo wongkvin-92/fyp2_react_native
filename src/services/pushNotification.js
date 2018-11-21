@@ -23,7 +23,7 @@ const configure = (sharedObj) => {
        let func_names = Object.keys(sharedObj.events);
        func_names.forEach(name => sharedObj['events'][name](notification));
      }
-     //console.log("sharedObj", sharedObj);
+     console.log("sharedObj", sharedObj);
      notification.finish(PushNotificationIOS.FetchResult.NoData);
    },
 

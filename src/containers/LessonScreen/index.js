@@ -134,6 +134,14 @@ class LessonScreen extends React.PureComponent{
     this.downloadSchedule();
   }
 
+ componentWillMount(){
+   console.log("MOUNTING STUDENT HOMESCREEN ", this.props);
+   this.props.addEventListener('refreshLecturerSchedule', ()=>{
+     console.log("ComponentDidMount.refreshSchedule(): Downloading all subjects again...");
+     this.refreshSchedule();
+     //this.downloadAllSubjects(this.props.period, this.props.enrolledSubject, this.props.semesterChecksum);
+  });
+ }
 
 
   componentWillReceiveProps(newProps){
