@@ -24,7 +24,6 @@ import {LecturerAPI,UserAPI} from "../../API";
 import {Redirect} from 'react-router-native';
 import {connect} from 'react-redux';
 
-import { pushNotifications } from '../../services';
 
 /*const DB ={
   'studentTest' : Store.model('studentTest')
@@ -71,9 +70,7 @@ class LoginView extends React.Component{
 */
 
 componentDidMount() {
-/*
-  pushNotifications.localNotification();
-*/
+
   console.log("Im hhere");
   console.log(this.props);
     Animated.timing(                  // Animate over time
@@ -143,7 +140,7 @@ componentDidMount() {
 		//alert(response);
 		if(response.result == true){
 		    this.props.login();
-		    
+
         let credential = response.credentials;
         let period = response.sem;
 		    this.props.asyncStore('credentials', JSON.stringify(credential));

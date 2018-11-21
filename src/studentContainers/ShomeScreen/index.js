@@ -64,6 +64,7 @@ class ShomeScreen extends React.PureComponent{
     };
     this.isLoading=false;
     this.lastDayObj = null;
+
   }
 
     updateSubjectList = () => {
@@ -100,13 +101,17 @@ class ShomeScreen extends React.PureComponent{
 	      checksumData => {
 		  if(checksumData){
 		      console.log(checksum + " vs " + checksumData.key);
-		      if( checksum == null || (checksumData.key != checksum) ){
+		      if( (checksum == null && checksumData.key != null) || (checksumData.key != checksum && checksum != null) ){
       			  console.log("ShomeScreen: downloading subjects", subList, period);
 
       			  new StudentAPI().downloadAllSubjects(subList, r=> {
       			      scheduleSync.generateSchedule(r, period, e=> {
       				           this.props.setSchedule(e); //async
       				           this.props.setSemesterChecksum(checksumData.key);
+                         console.log("Downloaded data for checksum ", checksumData);
+                         //alert(checksumData.key);
+                         if(checksumData.key == null)
+                          checksumData.key = "null";
       				           this.props.asyncStore('semesterChecksum', checksumData.key);
       				           this.props.asyncStore('subjectList', JSON.stringify(e));
       			      });
@@ -189,8 +194,14 @@ class ShomeScreen extends React.PureComponent{
 
  componentDidMount(){
    if(this.props.period.start_date){
+     this.setState({minDate: this.props.period.start_date, maxDate: this.props.period.end_date});
+
      console.log("Mounting, subject list is:", this.period, this.props.enrolledSubject);
      this.downloadAllSubjects(this.props.period, this.props.enrolledSubject, this.props.semesterChecksum);
+         this.props.addEventListener('refreshSchedule', ()=>{
+           console.log("ComponentDidMount.refreshSchedule(): Downloading all subjects again...");
+           this.downloadAllSubjects(this.props.period, this.props.enrolledSubject, this.props.semesterChecksum);
+        });
   }
  }
 

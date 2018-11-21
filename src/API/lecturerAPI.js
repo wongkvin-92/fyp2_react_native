@@ -1,6 +1,5 @@
 import UserAPI from './user';
-//import { pushNotifications } from '../../services';
- 
+
 export class LecturerAPI extends UserAPI{
     login(username, password, onSuccess){
       let data = new FormData();
@@ -28,7 +27,7 @@ export class LecturerAPI extends UserAPI{
 	this.getRequest(action)
 	    .then(onSuccess)
 	    .catch(err => console.log("Schedule hash download failed", err));
-    }    
+    }
 
     deleteCancellationRequest(id, callback){
       this.deleteRequest("reschedule/"+id+"/cancel/remove/").
@@ -49,10 +48,10 @@ export class LecturerAPI extends UserAPI{
           .catch( err => console.log(err) );
     }
 
-    checkLoginState(onSuccess, onFailure){	
+    checkLoginState(onSuccess, onFailure){
         this.getRequest("login/lecturers/")
             .then(r=>r.json())
-	    .catch( err => 
+	    .catch( err =>
 		    {}
 		  )
         .then(r => {

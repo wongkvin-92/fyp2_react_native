@@ -3,7 +3,7 @@ import {StyleSheet} from 'react-native';
 export const styles = StyleSheet.create({
   containers: {
     height: "100%",
-
+    backgroundColor: 'rgba(243,129,129,0.9)',
   },
 
   bodyStyle: {
@@ -11,6 +11,9 @@ export const styles = StyleSheet.create({
 
   },
   pickerStyle:{
+
+  },
+  emptyContainers:{
 
   },
   pickerItemStyle:{

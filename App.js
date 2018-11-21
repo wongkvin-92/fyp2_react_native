@@ -97,6 +97,7 @@ class MainApp extends React.Component {
 
     constructor(p){
     	super(p);
+      sharedObj.onNotification = ()=>{console.log("Notification")}
     	this.state = {loading: false, token: null, myKey: null};
     }
 
@@ -106,9 +107,14 @@ class MainApp extends React.Component {
 	/*let g = new scheduleSyncServices.StudentScheduleSystem();
 	console.log("loading notification service ", pushNotifications);
 	console.log("loading student service", scheduleSyncServices);*/
-    	this.registerToken();
+    	//this.registerToken();
     	//this.storeData('enrolledKey', ["bit100"]);
     	//this.retrieveData('enrolledKey', r=>console.log(r));
+    }
+
+    addEventListener(name, func){
+        sharedObj['events'] = (typeof(sharedObj['events']) == "undefined")? {}: sharedObj['events'];
+        sharedObj['events'][name] = func;
     }
 
     login = ()=>{
@@ -134,12 +140,13 @@ class MainApp extends React.Component {
 			  onSuccess();
 		      }, ()=>alert("Logout failed"));
                   },
-		    asyncStore:this.storeData,
-		    asyncClear: this.clearData,
+		                asyncStore:this.storeData,
+		                 asyncClear: this.clearData,
                     asyncLoad:this.retrieveData,
+                    addEventListener: this.addEventListener,
                     setLogin: this.setLogin,
                     ...this.state,
-		    studentService: studentService
+		               studentService: studentService
               }}
              />
             </NativeRouter>

@@ -95,15 +95,15 @@ class LessonScreen extends React.PureComponent{
 
     //Download the schedule for the lecturer
     downloadSchedule(){
-	new LecturerAPI().downloadSchedule( schedule => 
-					    this.scheduleService.generateSchedule(schedule, {start_date: "2018-08-10", end_date: "2018-12-28" }, e => {
+	new LecturerAPI().downloadSchedule( schedule =>
+					    this.scheduleService.generateSchedule(schedule, {start_date: this.state.minDate, end_date: this.state.maxDate }, e => {
 						this.setState({items: e});
 						console.log("Schedule", e);
 					    })
 					  );
-					    
+
     }
-    
+
     componentDidMount(){
 	//new LecturerAPI().downloadScheduleHash( hash => {
 	//    console.log("Hash downloaded from server = ", hash);
@@ -123,12 +123,16 @@ class LessonScreen extends React.PureComponent{
 					       });*/
 	//				   }
       //				  );
-      
+
       //this.setState
   }
-    
 
-    
+  refreshSchedule(){
+    this.downloadSchedule();
+  }
+
+
+
   componentWillReceiveProps(newProps){
 
     if(newProps.period && newProps.period != this.props.period ){
@@ -277,7 +281,7 @@ class LessonScreen extends React.PureComponent{
     //console.log(dayObj.toDateString());
       //this.loadWeek(new Date(dayObj.timestamp));
 
-      
+
     //this.loadMonth(new Date(this.state.selectedDate));
   }
 
@@ -333,8 +337,9 @@ class LessonScreen extends React.PureComponent{
                textStyle = {styles.cancelBtnTextStyle}
                onPress={()=> {
                  confirmCancel(this.props.cancelList, ()=>{
-                   this.props.clearCancelList()
-                   this.props.force_reload();
+                   this.props.clearCancelList();
+                   this.refreshSchedule();
+                   //this.props.force_reload();
                  });
                }}
             />

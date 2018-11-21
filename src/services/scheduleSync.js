@@ -11,7 +11,7 @@ export class StudentScheduleSystem{
 
     _getDays(s, e) {
 	var a = [];
-	while(s < e) {
+	while(s <= e) {
 	    let x = s;
 	    let fixZero = e => Math.floor(e/10) ==0? "0"+ e:e +"";
 	    let m = x.getMonth()+1;
@@ -46,7 +46,7 @@ export class StudentScheduleSystem{
         //new function call it in componentdidmount
     //updateSubjectSem = (success) =>
     generateSchedule(allSchedule, period, success=null){
-	
+
 	let convertToDate = (strDate) => {
             let d = strDate.split("-").map(x => parseInt(x));
             return new Date(d[0], d[1]-1, d[2]);
@@ -58,14 +58,14 @@ export class StudentScheduleSystem{
             return weekDay[convertToDate(strDate).getDay()];
 	};
 
-	
+
 	if(period.start_date == null || period.end_date == null) { //bugfix
 	    return;
 	}
 
 	let startDate = convertToDate(period.start_date);
 	let endDate  = convertToDate(period.end_date);
-
+  //add 1 day to endDate
 
 	let dateArr = this._getDays(new Date(startDate), new Date(endDate));
 
