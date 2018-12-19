@@ -26,7 +26,7 @@ export const LessonCard = ({rescheduleID, title, subName, type, oriDate, oriDay,
   >
 
     <Text style={styles.cardContentContainerStyle}>
-      <Text style={styles.cardContentTitleStyle}>Subject Name: </Text>{subName}
+      <Text style={styles.cardContentTitleStyle}> Subject Name: </Text>{subName}
     </Text>
 
     <Text style={styles.cardContentContainerStyle}>

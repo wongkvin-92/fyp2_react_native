@@ -92,7 +92,7 @@ class ShomeScreen extends React.PureComponent{
     };
 
 
-      downloadAllSubjects(period, subList, checksum){
+      downloadAllSubjects(period, subList, checksum, failure){
           //let subList = this.props.studentStateReducer.enrolledSubject;
 	  let scheduleSync = this.scheduleService;
 	  console.log("Downloading schedule ", period, subList, checksum);
@@ -197,6 +197,10 @@ componentWillMount(){
     console.log("ComponentDidMount.refreshSchedule(): Downloading all subjects again...");
     this.downloadAllSubjects(this.props.period, this.props.enrolledSubject, this.props.semesterChecksum);
  });
+
+ console.log("TESINGGGGGGG " + this.props.period.start_date);
+ var startDay = this.formatDate(new Date());
+ console.log("TODAY's Date" + startDay);
 }
 
 componentDidMount(){
@@ -207,6 +211,8 @@ componentDidMount(){
      this.downloadAllSubjects(this.props.period, this.props.enrolledSubject, this.props.semesterChecksum);
 
   }
+
+
 }
 
 
@@ -331,6 +337,7 @@ if(hash(this.props.period) != hash(newProps.period)){
                 <Text style={styles.titleTextStyle}>Home</Text>
                 </View>
              </View>
+
 
              {this.props.enrolledSubject.length == 0?
 

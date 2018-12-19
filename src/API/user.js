@@ -13,10 +13,11 @@ export class UserAPI extends API{
        }
 			)
 	    .then(r => success(r))
-	    .catch(r => failure(r));
+      .catch(r => console.log("Cannot retrieve device"));
+
     }
 
-    login(username, password, onSuccess){
+    login(username, password, onSuccess, onFailure){
 	let data = new FormData();
 	data.append('email', username);
 	data.append('password', password);
@@ -27,15 +28,18 @@ export class UserAPI extends API{
 			     body: data,
 			     'Content-Type': 'multipart/form-data'
 			 })
-	    .then(r => onSuccess(r));
+	    .then(r => onSuccess(r))
+      .catch(onFailure);
+      //.catch(r => onFailure(r));
     }
 
-    logout(success, failure=()=>{console.log("Logout failed")}){
+    logout(success, failure=()=>{console.error("Logout failed")}){
       let action = "logout/";
 	fetch(this.host+action, {credentials: "same-origin"})
 	    .then(()=>{
 		success();
-	    }).catch(ex => failure());
+  }).catch(ex => failure())
+      ;
     }
 
 

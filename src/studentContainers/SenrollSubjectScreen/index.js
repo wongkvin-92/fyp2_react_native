@@ -120,7 +120,8 @@ searchSubject =(text) =>{
       let re = new RegExp(text.toLowerCase());
 
       return e.subjectID.match(re) != null ;
-    })});
+    })
+  });
     //  console.log(e.subjectID, e.subject.match(text));
     //c.filter(t => { var re = new RegExp(text); return t.match(re) != null; } )
 

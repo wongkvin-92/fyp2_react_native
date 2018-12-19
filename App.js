@@ -143,9 +143,9 @@ class MainApp extends React.Component {
                     login: this.login,
                     logout: (onSuccess, onFailure)=> {                   //success() - callback func
                       new UserAPI().logout( ()=>{
-			  this.onLogout();
-			  onSuccess();
-		      }, ()=>alert("Logout failed"));
+                			  this.onLogout();
+                			  onSuccess();
+                		      }, ()=>alert("logout Failed, Server is down!"));
                   },
 		                asyncStore:this.storeData,
 		                 asyncClear: this.clearData,

@@ -61,18 +61,18 @@ class ProfileScreen extends React.Component{
     }
 
     logout(){
-	console.log("Logout pressed");
-	this.props.logout ( () => {
-	    console.log("Logout successfull, clearing cache.");
+	     console.log("Logout pressed");
+	      this.props.logout ( () => {
+	         console.log("Logout successfull, clearing cache.");
 
 	    /*this.props.asyncClear('credentials', () => {
 	    }, ()=> alert("Failed to logout"));
 */
-      this.props.asyncStore('credentials', "null");
-      this.props.dispatchLogout();
-     this.setState({redirect: true});
+        this.props.asyncStore('credentials', "null");
+        this.props.dispatchLogout();
+        this.setState({redirect: true});
 
-	}, ()=>alert("Failed to logout, no network connectivity"));
+	     }, alert("Failed to logout, no network connectivity"));
   }
 
     componentWillMount(){

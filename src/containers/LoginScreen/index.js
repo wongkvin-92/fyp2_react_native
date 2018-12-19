@@ -31,8 +31,8 @@ import {connect} from 'react-redux';
 
 class LoginView extends React.Component{
   state={
-      email: "b1301746",
-      password: "ibrahim1746",
+      email: "",
+      password: "",
       loginState: "NONE",
       redirect: false,
       fadeAnim: new Animated.Value(0),
@@ -180,7 +180,16 @@ componentDidMount() {
     			});
 		     }
        }
-	    });
+
+     },
+     (response) => {
+       this.setState({
+           errorMsg:"",
+           errorMsg2: "Unable to connect to the server!",
+           error2: true
+       });
+     }
+   );
     }
 
 

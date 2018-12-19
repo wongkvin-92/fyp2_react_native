@@ -64,14 +64,15 @@ export class StudentAPI extends UserAPI{
      .then(r=>onSuccess(r));
    }
 
-   downloadAllSubjects(subjectList, onSuccess){
+   downloadAllSubjects(subjectList, onSuccess, onFailure){
     var action ="student/all/schedule/";
     this.postRequest(action,
          {
              body: JSON.stringify({subjectList:subjectList})
          }
         )
-        .then(r=>onSuccess(r));
+        .then(r=>onSuccess(r))
+        .catch(r=>onFailure(r));
    }
 
     downloadSemesterChecksum(subjectList, onSuccess){

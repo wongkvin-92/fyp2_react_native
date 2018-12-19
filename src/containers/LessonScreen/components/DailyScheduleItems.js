@@ -66,9 +66,15 @@ const DailyScheduleItemFunc = (props) => (
 		   />
 
 		   :
-		   <Text style={{color: "red", fontWeight:"900"}}>
-			 Cancelled
-		       </Text>		       
+       <Text>
+
+  		   <Text style={{color: "red", fontWeight:"900"}}>
+         Cancelled /
+          {props.replacementClass?
+         " Replacement class is "+props.replacementClass.newDateTime
+        :"No replacement"}
+  		   </Text>
+        </Text>
 		   :<Text style={{color: "blue", fontWeight:"800"}}>Replacement Class</Text>}
       </View>
      </Card>
