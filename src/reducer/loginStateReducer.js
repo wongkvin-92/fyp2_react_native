@@ -7,7 +7,8 @@ const INITIAL_STATE = {
 	type: "student"
     },
     loading: false,
-    isLoggedIn: false
+    isLoggedIn: false,
+    isConnected: false
 };
 
 //lecturerID: null,
@@ -21,6 +22,10 @@ export default (state = INITIAL_STATE, action) => {
         return {...state, isLoggedIn: true, credentials: action.credentials};
       case "LOGOUT":
         return {...state, isLoggedIn: false, credentials: null};
+      case "CONNECT_SERVER":
+        return {...state, isConnected: true};
+      case "DISCONNECT_SERVER":
+        return {...state, isConnected: false};
       default:
         return state;
     }

@@ -98,6 +98,7 @@ componentDidMount() {
     console.log(DB);
     console.log(this.state.studentTest);
     */
+    
 }
     /*
        handleOnPress = () => {

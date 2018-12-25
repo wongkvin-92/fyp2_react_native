@@ -145,6 +145,12 @@ export class UserAPI extends API{
         .catch( err => console.log(err) );
       }
 
+      checkServer(success, fail, any){
+        this.getRequest("semester/")
+        .then(success)
+        .catch(fail)
+        .done(any);
+      }
 }
 
 export default UserAPI;

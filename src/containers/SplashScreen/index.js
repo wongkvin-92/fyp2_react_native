@@ -8,6 +8,9 @@ import {Redirect} from 'react-router';
 
 import {connect} from 'react-redux';
 
+import {ServerStatus} from '../../action';
+
+
 /*new LecturerAPI().checkLoginState(
   () =>    this.setState({isLoggedIn: true, loading: false}),
   () =>     this.setState({isLoggedIn: false, loading: false})
@@ -170,9 +173,32 @@ class SplashScreen extends Component{
 	  }
       }
 
-
     componentDidMount(){
-			console.log("Splash screen component did mount");
+			console.log("Splash screen component did mount", this.props);
+
+			var isConnected = false;
+			
+		 const runMe = () => {
+				new UserAPI().checkServer(
+					()=> {
+						if(!isConnected)
+							this.props.server.connectServer();
+						isConnected = true;
+						},
+					(err)=>{
+						if(isConnected)
+							this.props.server.disconnectServer();
+						isConnected = false;
+						 console.log("Failed to connect", err);
+					 },
+					()=> setTimeout(runMe, 1800)
+				);
+			};
+
+			//setInterval(runMe, 1800);
+			runMe();
+
+
 			//console.log(this.props);
 
 			/*new UserAPI().startSyncSchedule(({schedule, period})=>{
@@ -246,18 +272,17 @@ const mapStateToProps = (state)=> {
     };
 };
 
-const mapDispatchToProps = dispatch => {
-    return {
+const mapDispatchToProps = dispatch => ({
         setCredentials: (c) => dispatch({type: "LOGIN", credentials: c}),
         gotoLogin: () => dispatch({type: "LOGOUT"}),
 	      setSubjectList: (data) => dispatch({type: "SET_SUBJECT", subject: data}),
 	      updateSchedule: data => dispatch({type: "UPDATE_SCHEDULE", subjectList: data}),
         setPeriod: data => dispatch({type: "SET_PERIOD", period: data}),
-	setSchedule: (data) => dispatch({type: "UPDATE_SCHEDULE", subjectList: data}),
-	setSemesterChecksum: data => dispatch({type: "SET_CHECKSUM", payload: data}),
-	sync: () => dispatch({type: "SYNC_DONE"})
-    };
-};
+				setSchedule: (data) => dispatch({type: "UPDATE_SCHEDULE", subjectList: data}),
+				setSemesterChecksum: data => dispatch({type: "SET_CHECKSUM", payload: data}),
+				sync: () => dispatch({type: "SYNC_DONE"}),
+				'server': ServerStatus.actions(dispatch)
+    });
 
 
 export default connect(mapStateToProps, mapDispatchToProps)(SplashScreen);
