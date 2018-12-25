@@ -10,14 +10,16 @@ const qi ="192.168.0.6";
 const srvHome = "192.168.0.142";
 const coffee = "192.168.0.198";
 const kpd = "10.100.193.102";
-const host = help;
+const remoteSrv = "create.huict.net";
+const host = remoteSrv;
 
-const port = 80;
+//const port = 80;
+const port = 443;
 const path = "fypBackEnd";
 
 export class API {
-  constructor(){
-    this.host =  "http://"+host+":"+port+"/"+path+"/";
+    constructor(){	
+    this.host =  "https://"+host+":"+port+"/"+path+"/";
     this.dir = "fypBackEnd";
     this.headers =  {credentials: "same-origin"};
   }
