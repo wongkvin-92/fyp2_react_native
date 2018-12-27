@@ -98,7 +98,7 @@ componentDidMount() {
     console.log(DB);
     console.log(this.state.studentTest);
     */
-    
+
 }
     /*
        handleOnPress = () => {
@@ -146,7 +146,8 @@ componentDidMount() {
         let period = response.sem;
 		    this.props.asyncStore('credentials', JSON.stringify(credential));
 
-        if( JSON.stringify(this.props.studentStateReducer.period) != JSON.stringify(response.sem) )
+
+        if(  (JSON.stringify(this.props.studentStateReducer.period) != JSON.stringify(response.sem)) )
         {
           this.props.asyncStore('period', JSON.stringify(period));
           this.props.setPeriod(response.sem);

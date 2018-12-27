@@ -30,9 +30,15 @@ state={
 class SplashScreen extends Component{
 	runLecturerStartup(){
 	    this.props.asyncLoad("semesterChecksum", c => {
-		console.log("SEMESTER CHECKSUM LOADED", c);
+				console.log("SEMESTER CHECKSUM LOADED", c);
+
 		//this.props.setSemesterChecksum(c);
 	    });
+
+			this.props.asyncLoad("period", p => {
+				let period = JSON.parse(p);
+				this.props.setLecturerPeriod(period);
+			});
 	}
 
 	runStudentStartup(){
@@ -63,50 +69,6 @@ class SplashScreen extends Component{
 				this.props.setPeriod(period);
 	    });
 
-	    //Load subjectList
-/*	    this.props.asyncLoad("subjectList", (storedSubjects) => {
-		let enrolledSubjects = [];
-		if(storedSubjects){
-		    this.props.updateSchedule(JSON.parse(storedSubjects));
-		    enrolledSubjects= JSON.parse(storedSubjects);
-
-		}
-		console.log("STORED SUBJECTS LOADED", enrolledSubjects);
-		//Load checksum
-		this.props.asyncLoad("semesterChecksum", storedChecksum => {
-
-		    //Load period from async storage and also
-		    // download All subjects if necessary
-		    this.props.asyncLoad('period', periodData => {
-			//load enrolled subject from async storage
-			this.props.asyncLoad("enrolledSubject", (enrolledSubjects) => {
-			    console.log("Enrolled subjects", enrolledSubjects);
-			    if(enrolledSubjects){
-				let period = JSON.parse(periodData);
-				this.props.setSubjectList(JSON.parse(enrolledSubjects));
-				this.props.setPeriod(period);
-				this.downloadAllSubjects(period, enrolledSubjects, storedChecksum, storedSubjects);
-			    }
-
-			    //Update the checksum in redux tree after all the above
-			    if(storedChecksum)
-				this.props.setSemesterChecksum(storedChecksum);
-			    this.props.sync();
-			});
-
-			  if(periodData){
-			      let period = JSON.parse(periodData);
-			      this.props.setPeriod(period);
-			      //this.downloadAllSubjects(period);
-			  }
-		    });
-
-
-		});
-	    });
-*/
-	//console.log("Student service");
-	//console.log(this.props.studentService);
 	}
 
 
@@ -177,7 +139,7 @@ class SplashScreen extends Component{
 			console.log("Splash screen component did mount", this.props);
 
 			var isConnected = false;
-			
+
 		 const runMe = () => {
 				new UserAPI().checkServer(
 					()=> {
@@ -267,8 +229,7 @@ class SplashScreen extends Component{
 const mapStateToProps = (state)=> {
     return {
 	loginStateReducer:   state.loginStateReducer,
-	studentStateReducer: state.studentStateReducer,
-	lecturerStateReducer: state.lecturerStateReducer
+	studentStateReducer: state.studentStateReducer
     };
 };
 
@@ -278,6 +239,7 @@ const mapDispatchToProps = dispatch => ({
 	      setSubjectList: (data) => dispatch({type: "SET_SUBJECT", subject: data}),
 	      updateSchedule: data => dispatch({type: "UPDATE_SCHEDULE", subjectList: data}),
         setPeriod: data => dispatch({type: "SET_PERIOD", period: data}),
+				setLecturerPeriod: (data) => dispatch({type: "SET_LECTURER_PERIOD", period: data}),
 				setSchedule: (data) => dispatch({type: "UPDATE_SCHEDULE", subjectList: data}),
 				setSemesterChecksum: data => dispatch({type: "SET_CHECKSUM", payload: data}),
 				sync: () => dispatch({type: "SYNC_DONE"}),

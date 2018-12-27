@@ -77,8 +77,8 @@ class LessonScreen extends React.PureComponent{
       checked: false,
       showCancelButton: false,
       doNothing: false,
-      minDate: "2018-10-07",
-      maxDate: "2018-12-11"
+      minDate: props.period.start_date,
+      maxDate: props.period.end_date
     };
     this.isLoading=false;
     this.lastDayObj = null;

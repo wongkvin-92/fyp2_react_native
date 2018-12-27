@@ -6,7 +6,8 @@ const INITIAL_STATE = {
   downloadingSchedule: false,
   itemsPending: 0,
   cancelList: {},
-  forceReload: false
+  forceReload: false,
+  period:{start_date: null, end_date: null}
 };
 
 /*
@@ -26,6 +27,8 @@ export default (state = INITIAL_STATE, action) => {
         return {...state, weekStart: action.weekStart};
       case "SET_SCHEDULE":
         return {...state, weeklySchedule: action.weeklySchedule};
+      case "SET_LECTURER_PERIOD":
+        return {...state, period: action.period};
       case "CHECK_SUBJECT":
         return {...state, subjectListChecked: Object.keys(state.cancelList).length !=0 };
       case "UNCHECK_SUBJECT":
