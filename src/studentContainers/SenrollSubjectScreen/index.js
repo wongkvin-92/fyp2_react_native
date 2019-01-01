@@ -34,24 +34,25 @@ const sampleData = [
 
 class EnrollScreen extends React.Component{
 
-  state={
-      redirect:false,
-      rawdata: [],
-      processedData: [],
-      fadeAnim: new Animated.Value(0)
-  };
-    
-    //filterOutSubjects = (d, localList) => d.filter(e=>localList.indexOf(e.subjectID)==-1);
+    state={
+	searchData: "",
+	redirect:false,
+	rawdata: [],
+	processedData: [],
+	fadeAnim: new Animated.Value(0)
+    };
 
+    //filterOutSubjects = (d, localList) => d.filter(e=>localList.indexOf(e.subjectID)==-1);
     setEnrolledState = (d, localList) => d.map(e => ({...e, enrolledStatus: localList.indexOf(e.subjectID)>=0}));
-    
+
   downloadList = ()=>{
     new StudentAPI().displaySubjectList(
         (d) => {
 	    //let filteredData = this.filterOutSubjects(d, this.props.enrolledSubject);
 	    this.setState({rawdata: d});
-	    //console.log("ENROLLED SUBJECT", this.props.enrolledSubject);	    
+	    //console.log("ENROLLED SUBJECT", this.props.enrolledSubject);
 	    this.updateSubjectList(d, this.props.enrolledSubject);
+
 	}
     );
   }
@@ -68,20 +69,22 @@ class EnrollScreen extends React.Component{
 	).start();
 
 	this.downloadList();
+
+
     }
 
-    
+
     updateSubjectList(rawdata, enrolledSubjects){
 	let processedData = this.setEnrolledState(rawdata, enrolledSubjects);
 	this.setState({processedData: processedData});
     };
 
     unenrollSubjectClick = (subjectId) => {
-	this.props.unenrollSubject(subjectId);
-	this.props.requestSync();
-	//this.updateSubjectList();	
+    	this.props.unenrollSubject(subjectId);
+      this.props.requestSync();
+    	//this.updateSubjectList();
     }
-    
+
     enrollSubjectClick = (subjectId) => {
 	//alert("Enrolling subject "+subjectId);
 	this.props.enrollSubject(subjectId);
@@ -89,24 +92,41 @@ class EnrollScreen extends React.Component{
 	//this.updateSubjectList();
 	/*
 	this.props.enrollSubject(subjectId);
- 
+
 	let data = this.filterOutSubjects(this.state.data, this.props.enrolledSubject);
-	this.setState({data: this.state.data.filter(e => e.subjectID != subjectId) });	
+	this.setState({data: this.state.data.filter(e => e.subjectID != subjectId) });
 	*/
     }
 
     componentWillReceiveProps(newProps){
-	
+
 	if ( newProps.enrolledSubject != this.props.enrolledSubject){
-	    console.log("enrolled subject updated", newProps.enrolledSubject);	    
+	    console.log("enrolled subject updated", newProps.enrolledSubject);
 	    newProps.asyncStore('enrolledSubject', JSON.stringify(newProps.enrolledSubject));
-	    
-	    let processedData = this.setEnrolledState(this.state.rawdata, newProps.enrolledSubject);	
+
+	    let processedData = this.setEnrolledState(this.state.rawdata, newProps.enrolledSubject);
 	    this.setState({processedData: processedData});
 
 	    //this.updateSubjectList(this.state.rawdata, newProps.enrolledSubject);
 	}
     }
+
+searchSubject =(text) =>{
+  let rawdata = this.state.rawdata;
+  let processedData = this.setEnrolledState(rawdata, this.props.enrolledSubject);
+
+    //Do filtering here
+    this.setState({processedData: processedData.filter(e => {
+      let re = new RegExp(text.toLowerCase());
+
+      return e.subjectID.match(re) != null ;
+    })
+  });
+    //  console.log(e.subjectID, e.subject.match(text));
+    //c.filter(t => { var re = new RegExp(text); return t.match(re) != null; } )
+
+  //this.setState({searchData: text});
+}
 
   render () {
 
@@ -122,7 +142,9 @@ class EnrollScreen extends React.Component{
                 <Text style={styles.titleTextStyle}>Subject Enroll</Text>
                 </View>
              </View>
-             <SearchSubject />
+             <SearchSubject
+	             onSearch={this.searchSubject}
+	           />
              <View style={{flex: 1}}>
              <Animated.View style={[{opacity: this.state.fadeAnim}]}>
              <ScrollView >

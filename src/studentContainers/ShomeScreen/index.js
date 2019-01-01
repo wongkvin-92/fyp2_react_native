@@ -64,12 +64,13 @@ class ShomeScreen extends React.PureComponent{
     };
     this.isLoading=false;
     this.lastDayObj = null;
+
   }
 
     updateSubjectList = () => {
     	console.log("Updating");
     	//console.log(this.props.subjectList);
-    	this.setState({data: this.props.subjectList});
+    	this.setState({data: this.props.studentStateReducer.subjectList});
     }
 
     _getDays(s, e) {
@@ -91,7 +92,7 @@ class ShomeScreen extends React.PureComponent{
     };
 
 
-      downloadAllSubjects(period, subList, checksum){
+      downloadAllSubjects(period, subList, checksum, failure){
           //let subList = this.props.studentStateReducer.enrolledSubject;
 	  let scheduleSync = this.scheduleService;
 	  console.log("Downloading schedule ", period, subList, checksum);
@@ -100,21 +101,24 @@ class ShomeScreen extends React.PureComponent{
 	      checksumData => {
 		  if(checksumData){
 		      console.log(checksum + " vs " + checksumData.key);
-		      if(checksumData.key != checksum){
-			  console.log("ShomeScreen: downloading subjects");
+		      if( (checksum == null && checksumData.key != null) || (checksumData.key != checksum && checksum != null) ){
+      			  console.log("ShomeScreen: downloading subjects", subList, period);
 
-			  new StudentAPI().downloadAllSubjects(subList, r=> {
+      			  new StudentAPI().downloadAllSubjects(subList, r=> {
+      			      scheduleSync.generateSchedule(r, period, e=> {
+      				           this.props.setSchedule(e); //async
+      				           this.props.setSemesterChecksum(checksumData.key);
+                         console.log("Downloaded data for checksum ", checksumData);
+                         //alert(checksumData.key);
+                         if(checksumData.key == null)
+                          checksumData.key = "null";
+      				           this.props.asyncStore('semesterChecksum', checksumData.key);
+      				           this.props.asyncStore('subjectList', JSON.stringify(e));
+      			      });
 
-			      scheduleSync.generateSchedule(r, period, e=> {
-				  this.props.setSchedule(e);
-				  this.props.setSemesterChecksum(checksumData.key);
-				  this.props.asyncStore('semesterChecksum', checksumData.key);
-				  this.props.asyncStore('subjectList', JSON.stringify(e));
-			      });
-
-			  });
+      			  });
 		      }else{
-			  console.log("Checksum same");
+			           console.log("Checksum same");
 		      }
 		  };
 	      });
@@ -123,7 +127,7 @@ class ShomeScreen extends React.PureComponent{
 
     componentDidUpdate(){
 	//console.log("COMPONENT DID UPDATE", this.props.period, this.props.subList, this.props.checksum);
-	let {period, enrolledSubject, semesterChecksum} = this.props;
+	let {period, enrolledSubject, semesterChecksum} = this.props.studentStateReducer;
 
 	if(period && enrolledSubject && semesterChecksum){
 	    console.log("COMPONENT DID UPDATE", period, enrolledSubject, semesterChecksum);
@@ -187,23 +191,45 @@ class ShomeScreen extends React.PureComponent{
           //UPDATE REDUX TREE tomorr       });
     }
 */
+componentWillMount(){
+  console.log("MOUNTING STUDENT HOMESCREEN ", this.props);
+  this.props.addEventListener('refreshSchedule', ()=>{
+    console.log("ComponentDidMount.refreshSchedule(): Downloading all subjects again...");
+    this.downloadAllSubjects(this.props.studentStateReducer.period, this.props.studentStateReducer.enrolledSubject, this.props.studentStateReducer.semesterChecksum);
+ });
+
+ console.log("TESINGGGGGGG " + this.props.studentStateReducer.period.start_date);
+ var startDay = this.formatDate(new Date());
+ console.log("TODAY's Date" + startDay);
+}
+
+componentDidMount(){
+   if(this.props.studentStateReducer.period.start_date){
+     this.setState({minDate: this.props.studentStateReducer.period.start_date, maxDate: this.props.studentStateReducer.period.end_date});
+
+     console.log("Mounting, subject list is:", this.props.studentStateReducer.period, this.props.studentStateReducer.enrolledSubject);
+     this.downloadAllSubjects(this.props.studentStateReducer.period, this.props.studentStateReducer.enrolledSubject, this.props.studentStateReducer.semesterChecksum);
+
+  }
+
+
+}
 
 
     componentWillReceiveProps(newProps){
-        if(newProps.period && newProps.period != this.props.period ){
-            console.log("Period changed");
-            console.log(newProps.period);
-        	    this.setState({minDate: newProps.period.start_date,
-        			   maxDate: newProps.period.end_date
+        if(newProps.studentStateReducer.period && newProps.studentStateReducer.period != this.props.studentStateReducer.period ){
+            console.log("Period changed", newProps.studentStateReducer.period);
+        	    this.setState({minDate: newProps.studentStateReducer.period.start_date,
+        			   maxDate: newProps.studentStateReducer.period.end_date
         			  });
           //TODO: Do this if hash comparison is successfull
-            //this.downloadAllSubjects(newProps.period);
+            this.downloadAllSubjects(newProps.studentStateReducer.period, this.props.studentStateReducer.enrolledSubject, this.props.studentStateReducer.semesterChecksum);
         }
 
-	if(newProps.enrolledSubject != this.props.enrolledSubject){
-	    if(this.props.period){
+	if(newProps.studentStateReducer.enrolledSubject != this.props.studentStateReducer.enrolledSubject){
+	    if(this.props.studentStateReducer.period){
 		//console.log("Schedule updated", this.props.period, newProps.enrolledSubject, this.props.semesterChecksum);
-		this.downloadAllSubjects(this.props.period, newProps.enrolledSubject, this.props.semesterChecksum);
+		this.downloadAllSubjects(this.props.studentStateReducer.period, newProps.studentStateReducer.enrolledSubject, this.props.studentStateReducer.semesterChecksum);
 	    }
 
 	}
@@ -311,30 +337,52 @@ if(hash(this.props.period) != hash(newProps.period)){
                 <Text style={styles.titleTextStyle}>Home</Text>
                 </View>
              </View>
+             {!this.props.loginStateReducer.isConnected?
+             <Text>Not connected to the server. Retrying...</Text>
+             :<View />}
+             
+             {
+
+             this.props.studentStateReducer.enrolledSubject.length == 0?
+
+                  <Card
+                    containerStyle={styles.cardPickerStlye}
+                  >
+                    <Text style={{color: "red", fontWeight:"900"}}>Please enroll a subject first</Text>
+                 </Card>
+               :
+               startDay < this.props.studentStateReducer.period.start_date  || startDay > this.props.studentStateReducer.period.end_date?
+               <Card
+                 containerStyle={styles.cardPickerStlye}
+               >
+                 <Text style={{color: "red", fontWeight:"900"}}>Out of Range of the Semester dates</Text>
+              </Card>
+              :
              <CustomAgenda
 
-		   doNothing={this.state.doNothing}
-		   style={{height: 30}}
-		   items={this.props.subjectList}
-		   loadItemsForMonth={this.loadItems.bind(this)}
-		   selected={this.state.selectedDate}
-		   onDayPress={(date)=>{this.setState({
-                       selectedDate :  new Date(date.year, date.month-1, date.day)
-		   });
+        		   doNothing={this.state.doNothing}
+        		   style={{height: 30}}
+        		   items={this.props.studentStateReducer.subjectList}
+        		   loadItemsForMonth={this.loadItems.bind(this)}
+        		   selected={this.state.selectedDate}
+        		   onDayPress={(date)=>{this.setState({
+                               selectedDate :  new Date(date.year, date.month-1, date.day)
+        		   });
              }}
              onDayChange = {(date) => {
                 this.setState({
-                  selectedDate: new Date(date.year, date.month-1, date.day),
+                  selectedDate: new Date(date.year, date.month-1, date.day)
                 });
               }}
                // Minimum date that can be selected, dates before minDate will be grayed out. Default = undefined
-               minDate={this.state.minDate}
+               minDate={this.props.studentStateReducer.period.start_date}
                // Maximum date that can be selected, dates after maxDate will be grayed out. Default = undefined
-               maxDate={this.state.maxDate}
+               maxDate={this.props.studentStateReducer.period.end_date}
                renderItem={(props)=> <DailyScheduleItem {...props} /> }
                renderEmptyDate={this.renderEmptyDate.bind(this)}
                rowHasChanged={this.rowHasChanged.bind(this)}
                // markingType={'period'}
+
                markingType={'multi-dot'}
                markedDates={{
                //    '2017-05-08': {textColor: '#666'},
@@ -365,6 +413,7 @@ if(hash(this.props.period) != hash(newProps.period)){
               todayTextColor:'#ffffff'
             }}
          />
+       }
 
         </View>
   );
@@ -373,7 +422,10 @@ if(hash(this.props.period) != hash(newProps.period)){
 
 
 //export default LessonScreen;
-const mapStateToProps = p => p.studentStateReducer;
+const mapStateToProps = p => ({
+  loginStateReducer: p.loginStateReducer,
+  studentStateReducer: p.studentStateReducer
+});
 
 const mapDispatchToProps = dispatch => ({
     setSchedule: (data) => dispatch({type: "UPDATE_SCHEDULE", subjectList: data}),

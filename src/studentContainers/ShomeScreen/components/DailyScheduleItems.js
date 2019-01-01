@@ -20,36 +20,23 @@ const DailyScheduleItemFunc = (props) => (
       containerStyle={[styles.item, {height: props.height}]}
     >
 
-      <Text style={styles.scheduleContentStyle}>{props.subjectName}</Text>
       <Text style={styles.scheduleContentStyle}>{props.type}</Text>
 
       <Text style={styles.scheduleContentStyle}>From {props.startTime} to {props.endTime}</Text>
       <Text> {props.newVenue}</Text>
       <View style={styles.canceBtnContainer}>
-
+	{props.isPermanant != false? <View />:
+    <Text>Replacement / original Date {props.oldDateTime}</Text>}
       {props.isCancelled==false?
-      <Text style={{color: "blue", fontWeight:"900"}}>
-            Normal
-
-      </Text>
-
+        <View />
         :
-        <View>
-          <Text style={{color: "red", fontWeight:"900"}}>
-            <Text>
-            Cancelled
-            </Text>
+        <Text style={{color: "red", fontWeight:"900"}}>
+          Cancelled /
+           {props.replacementClass?
+          " Replacement class is "+props.replacementClass.newDateTime
+         :"No replacement"}
         </Text>
-        <Text>
-          {props.newDateTime}
-        </Text>
-        <Text>
-
-        {props.newVenue}
-        </Text>
-      </View>
       }
-
       </View>
      </Card>
     </View>
@@ -58,7 +45,6 @@ const DailyScheduleItemFunc = (props) => (
 /*
 
 class DailyScheduleItem extends React.PureComponent{
-
   constructor(props){
     super(props);
     let subjKeys = ["classID", "type", "subjectID", "subjectName",

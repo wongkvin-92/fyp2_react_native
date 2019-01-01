@@ -3,15 +3,15 @@
 export class StudentScheduleSystem{
     constructor(sharedObj={}){
 	this.sharedObj = sharedObj;
-    }    
-    
-    configure(){	
+    }
+
+    configure(){
     }
 
 
     _getDays(s, e) {
 	var a = [];
-	while(s < e) {
+	while(s <= e) {
 	    let x = s;
 	    let fixZero = e => Math.floor(e/10) ==0? "0"+ e:e +"";
 	    let m = x.getMonth()+1;
@@ -28,7 +28,7 @@ export class StudentScheduleSystem{
     };
 
 
-
+    /*
     createEmptyDates(start, end){
 	let d1 = start.split("-").map(e=>parseInt(e));
         let d2 = end.split("-").map(e=>parseInt(e));
@@ -36,30 +36,36 @@ export class StudentScheduleSystem{
 
 	let startDate = new Date(d1[0], d1[1]-1, d1[2]);
         let endDate = new Date(d2[0], d2[1]-1, d2[2]+1);
-	
+
         let dateArr = this._getDays(new Date(startDate), new Date(endDate));
 	dateArr.forEach( el => emptySchedules[el]=[]);
 	return emptySchedules;
-    }
+    }*/
 
 
         //new function call it in componentdidmount
     //updateSubjectSem = (success) =>
     generateSchedule(allSchedule, period, success=null){
-	
+
 	let convertToDate = (strDate) => {
             let d = strDate.split("-").map(x => parseInt(x));
             return new Date(d[0], d[1]-1, d[2]);
 	};
 	let getWeekDay = (strDate) => {
-	    if(typeof(strDate) === "undefined")
-		return null;
+	    //if(typeof(strDate) === "undefined" || strDate == null)
+		//return null;
             let weekDay = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
             return weekDay[convertToDate(strDate).getDay()];
 	};
 
+
+	if(period.start_date == null || period.end_date == null) { //bugfix
+	    return;
+	}
+
 	let startDate = convertToDate(period.start_date);
-	let endDate  = period.end_date;
+	let endDate  = convertToDate(period.end_date);
+  //add 1 day to endDate
 
 	let dateArr = this._getDays(new Date(startDate), new Date(endDate));
 
@@ -76,14 +82,16 @@ export class StudentScheduleSystem{
 	dateArr.forEach(el => {
             permenantSchedule[el] = allSchedule.filter(d =>
 						       d.oldDateTime == null && d.day == getWeekDay(el)
-						      );
+						      ).map(e => ({...e, isPermanant: true}));
+
             replacementClasses[el] = allSchedule.filter(d =>
 							d.newDateTime != null && d.newDateTime == el  && d.status=="approved"
-						       );
+						       ).map(e => ({...e, isPermanant: false}));
 
             cancelledClasses[el] = allSchedule.filter(d =>
 						      d.oldDateTime != null && d.oldDateTime == el
 						     ).map(e => parseInt(e.classID));
+
 	}
 		       );
 	//let finalSchedule = {...permenantSchedule, ...replacementClasses};
@@ -94,11 +102,16 @@ export class StudentScheduleSystem{
 	    //finalSchedule[k]['isCancelled'] = true; //TODO
 	    finalSchedule[k] = Object.values(combinedSchedule).map( j => {
 		const jCopy = {...j};
-		let classID = j['classID']
+		let classID = j['classID'];
 		var isCancelled = cancelledClasses[k].includes(parseInt(classID));
 		//jCopy['isCancelled'] = cancelledClasses[k].includes(parseInt(classID));
 		jCopy['isCancelled'] = isCancelled;
 		jCopy['curDate'] = k;
+
+    if(finalSchedule[j['oldDateTime']] && finalSchedule[j['oldDateTime']].find(e => e.classID == j['classID']))
+      finalSchedule[j['oldDateTime']].find(e => e.classID == j['classID'])["replacementClass"] = j;
+  //  jCopy['hasReplacementClass'] = finalSchedule[j['oldDateTime']];// = "hasReplacementClass";
+
 		//let a = j;
 		//j['wKvin'] = 'here';
     		//finalSchedule[k][j]['isCancelled'] = cancelledClasses[k].indexOf(parseInt(finalSchedule[k][j]['classID'])) >= 0; // finalSchedule[k][j] in cancelledClasses;
@@ -107,7 +120,7 @@ export class StudentScheduleSystem{
 		return jCopy;
 	    });
 	});
-	
+
 	if(success != null)
 	    success(finalSchedule);
 	//this.props.setSchedule(finalSchedule);

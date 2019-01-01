@@ -1,18 +1,23 @@
 import API from './base';
+import DeviceInfo from 'react-native-device-info';
 
 export class UserAPI extends API{
-    registerToken(token, success, failure=(r)=>{console.err(r);}){
+    registerToken(token, success, failure=(r)=>{console.error(r);}){
 
-      console.log("Registering token");
-      console.log(token);
+      let postData = {token: token.token, devid: DeviceInfo.getUniqueID()};
+      console.log("Register post data", postData);
+
 	this.postRequest("device/",
-			 {body: JSON.stringify(token) }
+			 {
+         body: JSON.stringify(postData)
+       }
 			)
 	    .then(r => success(r))
-	    .catch(r => failure(r));
+      .catch(r => console.log("Cannot retrieve device"));
+
     }
 
-    login(username, password, onSuccess){
+    login(username, password, onSuccess, onFailure){
 	let data = new FormData();
 	data.append('email', username);
 	data.append('password', password);
@@ -23,18 +28,30 @@ export class UserAPI extends API{
 			     body: data,
 			     'Content-Type': 'multipart/form-data'
 			 })
-	    .then(r => onSuccess(r));
+	    .then(r => onSuccess(r))
+      .catch(onFailure);
+      //.catch(r => onFailure(r));
+    }
+
+    logout(success, failure=()=>{console.error("Logout failed")}){
+      let action = "logout/";
+	fetch(this.host+action, {credentials: "same-origin"})
+	    .then(()=>{
+		success();
+  }).catch(ex => failure())
+      ;
     }
 
 
-    checkLoginState(onSuccess, onFailure){
+
+    checkLoginState(onSuccess, onFailure = ()=>{}){
         this.getRequest("login/state/")
         .then(r => {
             if(r.result)
 		onSuccess(r);
             else
 		onFailure(r);
-        });
+        }).catch( (err) => onFailure(err));
     }
 
     _getDays(s, e) {
@@ -128,6 +145,12 @@ export class UserAPI extends API{
         .catch( err => console.log(err) );
       }
 
+      checkServer(success, fail, any){
+        this.getRequest("semester/")
+        .then(success)
+        .catch(fail)
+        .done(any);
+      }
 }
 
 export default UserAPI;

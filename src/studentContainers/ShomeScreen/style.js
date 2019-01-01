@@ -3,7 +3,7 @@ import {StyleSheet} from 'react-native';
 export const styles = StyleSheet.create({
   containers: {
     height: "100%",
-
+    backgroundColor: 'rgba(243,129,129,0.9)',
   },
 
   bodyStyle: {
@@ -13,10 +13,19 @@ export const styles = StyleSheet.create({
   pickerStyle:{
 
   },
+  emptyContainers:{
+
+  },
   pickerItemStyle:{
     backgroundColor: "red",
     color: "blue",
     fontSize:20,
+  },
+  cardPickerStlye: {
+      marginTop: 30,
+    borderRadius: 6,
+    padding: 10,
+    marginBottom: 10
   },
   titleStlye:{
     paddingTop: 16,

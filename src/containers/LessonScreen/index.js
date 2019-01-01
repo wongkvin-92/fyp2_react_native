@@ -19,10 +19,12 @@ import {
 import {Redirect, Link} from 'react-router-native';
 
 import { Calendar, CalendarList, Agenda } from 'react-native-calendars';
-import {LecturerAPI} from "../../API";
+import {LecturerAPI, StudentAPI} from "../../API";
 import {UserAPI} from "../../API";
 import {styles} from './style';
 import DailyScheduleItem from './components/DailyScheduleItems';
+
+import {scheduleSyncServices} from '../../services';
 
 const cancelLesson = (cancelList, callback) => {
   let dataList = Object.keys(cancelList).map(i => ({"classID": cancelList[i].classID, "cancelDate": cancelList[i].curDate}) )
@@ -65,7 +67,7 @@ const confirmCancel = (cancelList, callback) => {
 class LessonScreen extends React.PureComponent{
   constructor(props){
     super(props);
-
+      this.scheduleService = new scheduleSyncServices.StudentScheduleSystem({});
     let today = this.formatDate(new Date());
     this.state={
 
@@ -75,8 +77,8 @@ class LessonScreen extends React.PureComponent{
       checked: false,
       showCancelButton: false,
       doNothing: false,
-      minDate: "2018-01-01",
-      maxDate: "2018-02-02"
+      minDate: props.period.start_date,
+      maxDate: props.period.end_date
     };
     this.isLoading=false;
     this.lastDayObj = null;
@@ -90,10 +92,58 @@ class LessonScreen extends React.PureComponent{
       })
     )
   }
-  componentDidMount(){
-    this.downloadSemStartEnd();
-    //this.setState
+
+    //Download the schedule for the lecturer
+    downloadSchedule(){
+	     new LecturerAPI().downloadSchedule( schedule =>
+					    this.scheduleService.generateSchedule(schedule, {start_date: this.state.minDate, end_date: this.state.maxDate }, e => {
+						this.setState({items: e});
+						console.log("Schedule", e);
+					    })
+					  );
+
+    }
+
+    componentDidMount(){
+      this.props.addEventListener( 'updateLecSchedule', ()=>{
+        this.downloadSchedule();
+      });
+	//new LecturerAPI().downloadScheduleHash( hash => {
+	//    console.log("Hash downloaded from server = ", hash);
+	//});
+	this.downloadSchedule();
+      //this.downloadSemStartEnd();
+     // new StudentAPI().downloadAllSubjects(['bit100'],
+	//				   schedule =>
+	//				   {
+
+					       //console.log("schedule", schedule);
+
+					       /*
+					       this.scheduleService.generateSchedule(schedule, {start_date: "2018-08-10", end_date: "2018-12-28" }, e => {
+					       this.setState({items: e});
+					       console.log("Schedule", e);
+					       });*/
+	//				   }
+      //				  );
+
+      //this.setState
   }
+
+  refreshSchedule(){
+    this.downloadSchedule();
+  }
+
+ componentWillMount(){
+   console.log("MOUNTING STUDENT HOMESCREEN ", this.props);
+   this.props.addEventListener('refreshLecturerSchedule', ()=>{
+     console.log("ComponentDidMount.refreshSchedule(): Downloading all subjects again...");
+     this.refreshSchedule();
+     //this.downloadAllSubjects(this.props.period, this.props.enrolledSubject, this.props.semesterChecksum);
+  });
+ }
+
+
   componentWillReceiveProps(newProps){
 
     if(newProps.period && newProps.period != this.props.period ){
@@ -240,7 +290,9 @@ class LessonScreen extends React.PureComponent{
   loadItems(dayObj) {
     this.lastDayObj = dayObj;
     //console.log(dayObj.toDateString());
-    this.loadWeek(new Date(dayObj.timestamp));
+      //this.loadWeek(new Date(dayObj.timestamp));
+
+
     //this.loadMonth(new Date(this.state.selectedDate));
   }
 
@@ -296,8 +348,9 @@ class LessonScreen extends React.PureComponent{
                textStyle = {styles.cancelBtnTextStyle}
                onPress={()=> {
                  confirmCancel(this.props.cancelList, ()=>{
-                   this.props.clearCancelList()
-                   this.props.force_reload();
+                   this.props.clearCancelList();
+                   this.refreshSchedule();
+                   //this.props.force_reload();
                  });
                }}
             />
@@ -308,25 +361,24 @@ class LessonScreen extends React.PureComponent{
               doNothing={this.state.doNothing}
               style={{height: 30}}
                items={this.state.items}
-               loadItemsForMonth={this.loadItems.bind(this)}
+
                selected={this.state.selectedDate}
                onDayPress={(date)=>{this.setState({
                  selectedDate :  new Date(date.year, date.month-1, date.day)
                })
              }}
-             onDayChange = {(date) => {
-                this.setState({
-                  selectedDate: new Date(date.year, date.month-1, date.day),
-                });
+             onDayChange = {() => {
+
               }}
                // Minimum date that can be selected, dates before minDate will be grayed out. Default = undefined
-               minDate={this.props.period.start_date}
+               minDate={this.state.minDate}
                // Maximum date that can be selected, dates after maxDate will be grayed out. Default = undefined
-               maxDate={this.props.period.end_date}
+               maxDate={this.state.maxDate}
                renderItem={(props)=> <DailyScheduleItem {...props} /> }
                renderEmptyDate={this.renderEmptyDate.bind(this)}
                rowHasChanged={this.rowHasChanged.bind(this)}
                // markingType={'period'}
+
                markingType={'multi-dot'}
                markedDates={{
                //    '2017-05-08': {textColor: '#666'},

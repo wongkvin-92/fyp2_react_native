@@ -6,7 +6,6 @@ const configure = (sharedObj) => {
  PushNotification.configure({
    senderID: "144006346881",
 
-
    onRegister: function(token) {
        console.log( 'TOKEN:', token );
        //process token
@@ -17,8 +16,17 @@ const configure = (sharedObj) => {
    onNotification: function(notification) {
      // process the notification
      // required on iOS only
+    /*if(sharedObj.hasOwnProperty("onNotification")) {
+       sharedObj.onNotification(notification);
+     }*/
+     if(sharedObj.hasOwnProperty("events")){
+       let func_names = Object.keys(sharedObj.events);
+       func_names.forEach(name => sharedObj['events'][name](notification));
+     }
+     console.log("sharedObj", sharedObj);
      notification.finish(PushNotificationIOS.FetchResult.NoData);
    },
+
 // IOS ONLY (optional): default: all - Permissions to register.
    permissions: {
      alert: true,

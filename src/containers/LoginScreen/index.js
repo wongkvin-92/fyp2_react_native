@@ -24,7 +24,6 @@ import {LecturerAPI,UserAPI} from "../../API";
 import {Redirect} from 'react-router-native';
 import {connect} from 'react-redux';
 
-import { pushNotifications } from '../../services';
 
 /*const DB ={
   'studentTest' : Store.model('studentTest')
@@ -32,28 +31,28 @@ import { pushNotifications } from '../../services';
 
 class LoginView extends React.Component{
   state={
-    email: "b1301746",
-    password: "ibrahim1746",
-    loginState: "NONE",
-    redirect: false,
-    fadeAnim: new Animated.Value(0),
-    bbc:"black",
-    bbc2:"black",
-    error: false,
-    error2: false,
-    errorMsg:"",
+      email: "",
+      password: "",
+      loginState: "NONE",
+      redirect: false,
+      fadeAnim: new Animated.Value(0),
+      bbc:"black",
+      bbc2:"black",
+      error: false,
+      error2: false,
+      errorMsg:"",
       errorMsg2:"",
        studentTest: []
-  //  springAnim: new Animated.Value(0)
+      //  springAnim: new Animated.Value(0)
   };
 
-componentWillReceiveProps(newProps){
-  if(newProps.isLoggedIn != this.props.isLoggedIn){
-      this.setState({redirect: newProps.isLoggedIn});
-  }
-}
+    componentWillReceiveProps(newProps){
+	if(newProps.loginStateReducer.isLoggedIn != this.props.loginStateReducer.isLoggedIn){
+	    this.setState({redirect: newProps.loginStateReducer.isLoggedIn});
+	}
+    }
 
- /*
+    /*
 
     componentWillMount(){
       new LecturerAPI().checkLoginState(
@@ -71,9 +70,7 @@ componentWillReceiveProps(newProps){
 */
 
 componentDidMount() {
-/*
-  pushNotifications.localNotification();
-*/
+
   console.log("Im hhere");
   console.log(this.props);
     Animated.timing(                  // Animate over time
@@ -101,6 +98,7 @@ componentDidMount() {
     console.log(DB);
     console.log(this.state.studentTest);
     */
+
 }
     /*
        handleOnPress = () => {
@@ -143,30 +141,57 @@ componentDidMount() {
 		//alert(response);
 		if(response.result == true){
 		    this.props.login();
+
+        let credential = response.credentials;
+        let period = response.sem;
+		    this.props.asyncStore('credentials', JSON.stringify(credential));
+
+
+        if(  (JSON.stringify(this.props.studentStateReducer.period) != JSON.stringify(response.sem)) )
+        {
+          this.props.asyncStore('period', JSON.stringify(period));
+          this.props.setPeriod(response.sem);
+        }
+
 		    this.props.dispatchLogin(response.credentials);
+        alert(response.msg);
 		}else{
 		    if(this.state.email ==""){
-			this.wrongInputValidate();
-			this.setState({
-			    errorMsg: r.msg,
-			    error: true
-			});
-  }
-		    
-  else if(this.state.password ==""){
-      this.correctInputValidate();
-      this.wrongInputValidate2();
-      this.setState({
-    errorMsg:"",
-    errorMsg2: r.msg,
-    error2: true
-      })
-  }
-  else{
-      errorMsg2: r.msg;
-  }
-    }
-	    });
+    			this.wrongInputValidate();
+    			this.setState({
+    			    errorMsg: response.msg,
+    			    error: true
+			    });
+        }
+		    else if(this.state.password ==""){
+    			this.correctInputValidate();
+    			this.wrongInputValidate2();
+    			this.setState({
+    			    errorMsg:"",
+    			    errorMsg2: response.msg,
+    			    error2: true
+			   });
+		    }
+		    else{
+    			//console.log("ERROR", response);
+    			//errorMsg2: r.msg;
+    			this.setState({
+    			    errorMsg:"",
+    			    errorMsg2: response.msg,
+    			    error2: true
+    			});
+		     }
+       }
+
+     },
+     (response) => {
+       this.setState({
+           errorMsg:"",
+           errorMsg2: "Unable to connect to the server!",
+           error2: true
+       });
+     }
+   );
     }
 
 
@@ -346,10 +371,14 @@ const styles = StyleSheet.create({
   }
 });
 
-const mapStateToProps = (state) => state.loginStateReducer;
+const mapStateToProps = (state) => ({
+  loginStateReducer: state.loginStateReducer,
+  studentStateReducer: state.studentStateReducer
+});
 const mapDispatchToProps = (dispatch) => {
   return {
-      dispatchLogin: (c) => dispatch({type: "LOGIN", credentials: c})
+      dispatchLogin: (c) => dispatch({type: "LOGIN", credentials: c}),
+      setPeriod: data => dispatch({type: "SET_PERIOD", period: data})
   };
 }
 

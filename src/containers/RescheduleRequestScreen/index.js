@@ -20,7 +20,7 @@ class RescheduleRequest extends React.Component{
   let mtoday = this.formatDate(new Date());
   this.state = { datetime1: mtoday};
   }
-
+//  goBacktoHome.preventDefault();
     formatDate(date){
       let fixZero = e => Math.floor(e / 10) == 0? "0"+e:e+""
       let m = date.getMonth()+1;
@@ -78,7 +78,7 @@ class RescheduleRequest extends React.Component{
               buttonStyle= {styles.rescheduleBtnStyle}
               textStyle = {styles.cancelBtnTextStyle}
                 onPress={(goBacktoHome)=>{
-                  goBacktoHome.preventDefault();
+
                     let dateStr = this.state.datetime1;
                     let dtime = dateStr.split(' ');
                     let fdateString = dtime[0];
@@ -91,6 +91,7 @@ class RescheduleRequest extends React.Component{
                       fdateString, ftimeString,
                       (r) => {
                           alert(r.msg);
+
                       }
                     );
                 }}
